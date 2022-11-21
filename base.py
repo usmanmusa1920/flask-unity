@@ -1,5 +1,6 @@
 
 import os
+import sys
 import shlex
 import logging
 import argparse
@@ -24,7 +25,6 @@ from . import app_default_dummy
 
 formatter = "[+] [%(asctime)s] [%(levelname)s] %(message)s"
 logging.basicConfig(format = formatter)
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
@@ -45,23 +45,26 @@ class BaseStructure:
     return [i+".py" for i in fls_name]
   
   
+  def file_content(self, _exs, content=None, dir_togo=None):
+    with open(f"index{_exs}", "w") as pay_fls:
+      pay_fls.write(f"{content}")
+    os.chdir(dir_togo)
+    
+    
   def file_opt(self, _dir, _here=False):
     """make tree dir and get into it"""
     sp.run(["mkdir", "-p", _dir])
     if _here:
       os.chdir(os.path.join(_here, _dir))
-    
-    
+      
+      
   def into_file(self, fls, fls_cmd, file=None):
-    """
-    create files within current directory of '''self.file_opt()'''
-    """
+    """create files within current directory of '''self.file_opt()'''    """
     for _fls in fls:
       if _fls[:-3] == file:
         sp.run(shlex.split(f"{fls_cmd} {_fls}"))
         
-        # building the run module
-        with open(_fls, "w") as pay_fls:
+        with open(_fls, "w") as pay_fls: # building the run module
           pay_fls.write(f"# Your project {_fls} file\n\n{pro_default_dummy}")
           
           
@@ -71,10 +74,7 @@ class BaseStructure:
     dirs = [proj_name, f"{proj_name}/{proj_name}", "templates", "static"]
     fls_name = ["__init__", "config", "models", "routes", "tunder"]
     fls = self.append_exs_to_file(fls_name)
-    
-    # getting the directory that user run the initial command
-    # that make project default dirs trees and files
-    _here = os.getcwd()
+    _here = os.getcwd() # initial `cwd` where the project was created
     fls_cmd = "touch"
     
     # check if the project already exist
@@ -82,54 +82,35 @@ class BaseStructure:
       print(f"\nProject ({proj_name}) already exist in this directory\n\t" + os.path.realpath(proj_name))
       logger.info(_here)
       print()
-      
     else:
-      # making directories trees and their default files
+      # making directories trees and their default files in the loop
       for _dir in dirs:
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
-          
-          # to maker tunder file
-          self.into_file(fls, fls_cmd, file="tunder")
-          
-          # base dir of project
-          project_folder = os.getcwd()
+          self.into_file(fls, fls_cmd, file="tunder") # to maker tunder file
+          project_folder = os.getcwd() # base dir of project
           _exs = [".html", ".css", ".js"]
           
           # static folders
           for static_dir in dirs[2:]:
-            
-            # index.html
             if static_dir == dirs[2:][0]:
               self.file_opt(static_dir, _here=project_folder) # templates
-              
-              with open(f"index{_exs[0]}", "w") as pay_fls:
-                pay_fls.write(f"{_html}")
-              os.chdir(project_folder)
+              self.file_content(_exs[0], content=_html, dir_togo=project_folder) # create index.html
               
             if static_dir == dirs[2:][1]:
               self.file_opt(static_dir, _here=project_folder) # static
-              
               inn_static = os.getcwd() # base dir of static dir
+              
               self.file_opt(_exs[1][1:], _here=inn_static) # css
+              self.file_content(_exs[1], content=_css, dir_togo=inn_static) # create index.css
               
-              # index.css
-              with open(f"index{_exs[1]}", "w") as pay_fls:
-                pay_fls.write(f"{_css}")
-                
-              os.chdir(inn_static)
               self.file_opt(_exs[2][1:], _here=inn_static) # js
-              
-              # index.js
-              with open(f"index{_exs[2]}", "w") as pay_fls:
-                pay_fls.write(f"{_js}")
-              os.chdir(project_folder)
-              
+              self.file_content(_exs[2], content=_js, dir_togo=project_folder) # create index.js
           os.chdir(_here)
           
         if _dir == dirs[0] + "/" + dirs[0]:
           self.file_opt(_dir, _here=_here)
-          
+          # create default modules inside project sub dir
           for _fls in fls:
             if _fls[:-3] != "tunder":
               sp.run(shlex.split(f"{fls_cmd} {_fls}"))
@@ -139,32 +120,26 @@ class BaseStructure:
       print()
       logger.info(f"Project ({proj_name}) created successfully!")
       print()
-
-
+      
+      
 class AppStructure(BaseStructure):
   """base structure class"""
   
   def into_file(self, fls, fls_cmd, file=None):
-    """
-    create files within current directory of '''self.file_opt()'''
-    """
+    """create files within current directory of '''self.file_opt()'''    """
     for _fls in fls:
       sp.run(shlex.split(f"{fls_cmd} {_fls}"))
-      
-      # building the run module
-      with open(_fls, "w") as pay_fls:
+      with open(_fls, "w") as pay_fls: # building the run module
         pay_fls.write(f"# Your app {_fls} file\n\n{app_default_dummy}")
-  
+        
+        
   def dir_tree(self, proj_app_name=None):
     """create a directory tree where file will reserved as well as modules too"""
     
     dirs = [proj_app_name]
     fls_name = ["__init__", "views", "models", "routes"]
     fls = self.append_exs_to_file(fls_name)
-    
-    # getting the directory that user run the app initial command
-    # (inside project folder) that make app default dirs trees and files
-    _here_app = os.getcwd()
+    _here_app = os.getcwd()  # initial `inside project folder` where the project was created
     fls_cmd = "touch"
     
     # check if the app already exist
@@ -173,39 +148,32 @@ class AppStructure(BaseStructure):
       print(f"\nApp ({proj_app_name}) already exist in this project ({app_proj_name})\n\t" + os.path.realpath(proj_app_name))
       logger.info(_here_app)
       print()
-      
     else:
       # making directories trees and their default files
       for _dir in dirs:
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here_app)
-          
-          # to maker app default files
-          self.into_file(fls, fls_cmd)
-          
+          self.into_file(fls, fls_cmd) # to maker app default files
       print()
       logger.info(f"App ({proj_app_name}) created successfully! in {app_proj_name}")
       print()
-
-
+      
+      
 def create_app(app):
   """create project app"""
   AppStructure().dir_tree(app)
   
   
-def boot():
+def boot(action="create_app"):
   """boot up project operation and app operation"""
   # prog is the name of the program, default=sys.argv[0]
   parser = argparse.ArgumentParser(prog="create_app", description="This create an app in your project")
-  
   # metavar make the -help to look cleaan
   parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
-  parser.add_argument("--project", "-p", required=False, type=str, metavar="", help="What is the project name")
   parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
   args = parser.parse_args()
   
-  import sys
-  if "create_app" in sys.argv:
+  if action in sys.argv and sys.argv[1] == action:
     create_app(sys.argv[-1])
     print(args, sys.argv)
   else:
