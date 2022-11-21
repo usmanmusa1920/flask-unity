@@ -21,3 +21,4 @@ from . dummy import _css
 from . dummy import _html
 from . dummy import pro_default_dummy
 from . dummy import app_default_dummy
+from . base import boot

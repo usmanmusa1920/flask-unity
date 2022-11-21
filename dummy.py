@@ -34,12 +34,17 @@ _js = r"""// Hello world JS index
 """
 
 
-pro_default_dummy = r"""from flaskblog import create_app
+pro_default_dummy = r"""from flaskey import boot
 
-app = create_app()
+if __name__ == "__main__":
+    boot()
+    
+# from flaskblog import create_app
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# app = create_app()
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
     
 """
 
