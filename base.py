@@ -40,6 +40,11 @@ class BaseStructure:
     self.flaskey_software = flaskey_software
     
     
+  def append_exs_to_file(self, fls_name):
+    """append .py extension for files"""
+    return [i+".py" for i in fls_name]
+  
+  
   def file_opt(self, _dir, _here=False):
     """make tree dir and get into it"""
     sp.run(["mkdir", "-p", _dir])
@@ -65,7 +70,7 @@ class BaseStructure:
     
     dirs = [proj_name, f"{proj_name}/{proj_name}", "templates", "static"]
     fls_name = ["__init__", "config", "models", "routes", "tunder"]
-    fls = [i+".py" for i in fls_name]
+    fls = self.append_exs_to_file(fls_name)
     
     # getting the directory that user run the initial command
     # that make project default dirs trees and files
@@ -82,7 +87,7 @@ class BaseStructure:
       # making directories trees and their default files
       for _dir in dirs:
         if _dir == dirs[0]:
-          self.file_opt(_dir, _here)
+          self.file_opt(_dir, _here=_here)
           
           # to maker tunder file
           self.into_file(fls, fls_cmd, file="tunder")
@@ -96,28 +101,24 @@ class BaseStructure:
             
             # index.html
             if static_dir == dirs[2:][0]:
-              self.file_opt(static_dir)
-              os.chdir(os.path.join(project_folder, static_dir)) # templates
+              self.file_opt(static_dir, _here=project_folder) # templates
               
               with open(f"index{_exs[0]}", "w") as pay_fls:
                 pay_fls.write(f"{_html}")
               os.chdir(project_folder)
               
             if static_dir == dirs[2:][1]:
-              self.file_opt(static_dir)
-              os.chdir(os.path.join(project_folder, static_dir)) # static
+              self.file_opt(static_dir, _here=project_folder) # static
               
               inn_static = os.getcwd() # base dir of static dir
-              self.file_opt(_exs[1][1:])
-              os.chdir(os.path.join(inn_static, _exs[1][1:])) # css
+              self.file_opt(_exs[1][1:], _here=inn_static) # css
               
               # index.css
               with open(f"index{_exs[1]}", "w") as pay_fls:
                 pay_fls.write(f"{_css}")
                 
               os.chdir(inn_static)
-              self.file_opt(_exs[2][1:])
-              os.chdir(os.path.join(inn_static, _exs[2][1:])) # js
+              self.file_opt(_exs[2][1:], _here=inn_static) # js
               
               # index.js
               with open(f"index{_exs[2]}", "w") as pay_fls:
@@ -127,7 +128,7 @@ class BaseStructure:
           os.chdir(_here)
           
         if _dir == dirs[0] + "/" + dirs[0]:
-          self.file_opt(_dir, _here)
+          self.file_opt(_dir, _here=_here)
           
           for _fls in fls:
             if _fls[:-3] != "tunder":
@@ -148,7 +149,6 @@ class AppStructure(BaseStructure):
     create files within current directory of '''self.file_opt()'''
     """
     for _fls in fls:
-      # if _fls[:-3] == file:
       sp.run(shlex.split(f"{fls_cmd} {_fls}"))
       
       # building the run module
@@ -160,7 +160,7 @@ class AppStructure(BaseStructure):
     
     dirs = [proj_app_name]
     fls_name = ["__init__", "views", "models", "routes"]
-    fls = [i+".py" for i in fls_name]
+    fls = self.append_exs_to_file(fls_name)
     
     # getting the directory that user run the app initial command
     # (inside project folder) that make app default dirs trees and files
@@ -178,7 +178,7 @@ class AppStructure(BaseStructure):
       # making directories trees and their default files
       for _dir in dirs:
         if _dir == dirs[0]:
-          self.file_opt(_dir, _here_app)
+          self.file_opt(_dir, _here=_here_app)
           
           # to maker app default files
           self.into_file(fls, fls_cmd)
@@ -189,21 +189,25 @@ class AppStructure(BaseStructure):
 
 
 def create_app(app):
+  """create project app"""
   AppStructure().dir_tree(app)
-
+  
+  
 def boot():
+  """boot up project operation and app operation"""
   # prog is the name of the program, default=sys.argv[0]
-  parser = argparse.ArgumentParser(prog="create app", description="This create an app in your project")
+  parser = argparse.ArgumentParser(prog="create_app", description="This create an app in your project")
   
   # metavar make the -help to look cleaan
   parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
-  parser.add_argument("--bool", "-b", required=False, type=str, metavar="", help="What is the app name")
-  parser.add_argument(dest="app", default="app", type=str, metavar="", help="app are create inside your project")
+  parser.add_argument("--project", "-p", required=False, type=str, metavar="", help="What is the project name")
+  parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
   args = parser.parse_args()
   
   import sys
-  if "app" in sys.argv:
+  if "create_app" in sys.argv:
     create_app(sys.argv[-1])
+    print(args, sys.argv)
   else:
     print("Donn\'t create app", args, sys.argv)
 
