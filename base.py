@@ -45,17 +45,20 @@ class BaseStructure:
     return [i+".py" for i in fls_name]
   
   
-  def file_content(self, _exs, content=None, dir_togo=None):
-    with open(f"index{_exs}", "w") as pay_fls:
+  def file_content(self, _exs, content=None, file_name="index", dir_togo=None):
+    with open(f"{file_name}{_exs}", "w") as pay_fls:
       pay_fls.write(f"{content}")
     os.chdir(dir_togo)
     
     
-  def file_opt(self, _dir, _here=False):
+  def file_opt(self, _dir, tree=True, _here=False, _where=False):
     """make tree dir and get into it"""
-    sp.run(["mkdir", "-p", _dir])
+    if tree:
+      sp.run(["mkdir", "-p", _dir])
     if _here:
       os.chdir(os.path.join(_here, _dir))
+    if _where:
+      os.chdir(_where)
       
       
   def into_file(self, fls, fls_cmd, file=None):
@@ -102,7 +105,7 @@ class BaseStructure:
               inn_static = os.getcwd() # base dir of static dir
               
               self.file_opt(_exs[1][1:], _here=inn_static) # css
-              self.file_content(_exs[1], content=_css, dir_togo=inn_static) # create index.css
+              self.file_content(_exs[1], file_name="style", content=_css, dir_togo=inn_static) # create index.css
               
               self.file_opt(_exs[2][1:], _here=inn_static) # js
               self.file_content(_exs[2], content=_js, dir_togo=project_folder) # create index.js
@@ -124,8 +127,9 @@ class BaseStructure:
       
 class AppStructure(BaseStructure):
   """base structure class"""
+  app_store_name = None
   
-  def into_file(self, fls, fls_cmd, file=None):
+  def into_file(self, fls, fls_cmd, file=None, app_default_dummy=app_default_dummy):
     """create files within current directory of '''self.file_opt()'''    """
     for _fls in fls:
       sp.run(shlex.split(f"{fls_cmd} {_fls}"))
@@ -133,12 +137,26 @@ class AppStructure(BaseStructure):
         pay_fls.write(f"# Your app {_fls} file\n\n{app_default_dummy}")
         
         
+  def app_static_and_template(self, _dir_=False, file=False, app=False, cmd=False, _here_=False):
+    # _dir_ = False"template or static"
+    # file = ["index.html"]
+    # app = app name
+    # cmd = "touch"
+    # _here_ = # initial `inside project folder` where the project was created
+    
+    self.file_opt(_dir_, tree=False, _here=_here_) # back to template dir
+    self.file_opt(f"{app}", _where=app) # make app dir inside `template`
+    self.into_file(file, cmd, app_default_dummy=_html) # making app default file
+    
+    
   def dir_tree(self, proj_app_name=None):
     """create a directory tree where file will reserved as well as modules too"""
     
     dirs = [proj_app_name]
+    app_store_name = proj_app_name # store our app name
     fls_name = ["__init__", "views", "models", "routes"]
     fls = self.append_exs_to_file(fls_name)
+    roove_dir = ["templates", "static/css", "static/js"]
     _here_app = os.getcwd()  # initial `inside project folder` where the project was created
     fls_cmd = "touch"
     
@@ -154,6 +172,20 @@ class AppStructure(BaseStructure):
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here_app)
           self.into_file(fls, fls_cmd) # to maker app default files
+          
+      self.app_static_and_template(
+        _dir_=roove_dir[0], file=["index.html"], app=proj_app_name, cmd=fls_cmd, _here_=_here_app
+        )
+      
+      self.app_static_and_template(
+        _dir_=roove_dir[1], file=["style.css"], app=proj_app_name, cmd=fls_cmd, _here_=_here_app
+        )
+      
+      self.app_static_and_template(
+        _dir_=roove_dir[2], file=["index.js"], app=proj_app_name, cmd=fls_cmd, _here_=_here_app
+        )
+      
+      self.file_opt("do_nothing", tree=False, _where=_here_app) # back to project dir
       print()
       logger.info(f"App ({proj_app_name}) created successfully! in {app_proj_name}")
       print()
