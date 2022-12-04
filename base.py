@@ -38,6 +38,7 @@ class BaseStructure:
   def __init__(self, flaskey_software=False):
     """base structure class initializer"""
     self.flaskey_software = flaskey_software
+  fls_cmd = "touch"
     
     
   def append_exs_to_file(self, fls_name):
@@ -45,10 +46,15 @@ class BaseStructure:
     return [i+".py" for i in fls_name]
   
   
-  def file_content(self, _exs, content=None, file_name="index", dir_togo=None):
-    with open(f"{file_name}{_exs}", "w") as pay_fls:
-      pay_fls.write(f"{content}")
-    os.chdir(dir_togo)
+  def file_content(self, _exs=False, content=None, file_name="index", dir_togo=None, route_go=True):
+    if _exs:
+      with open(f"{file_name}{_exs}", "w") as pay_fls:
+        pay_fls.write(f"{content}")
+    else:
+      with open(f"{file_name}", "w") as pay_fls:
+        pay_fls.write(f"{content}")
+    if route_go:
+      os.chdir(dir_togo)
     
     
   def file_opt(self, _dir, tree=True, _here=False, _where=False):
@@ -67,18 +73,18 @@ class BaseStructure:
       if _fls[:-3] == file:
         sp.run(shlex.split(f"{fls_cmd} {_fls}"))
         
-        with open(_fls, "w") as pay_fls: # building the run module
-          pay_fls.write(f"# Your project {_fls} file\n\n{pro_default_dummy}")
-          
-          
+        self.file_content(
+          file_name=_fls,content=f"# Your project {_fls} file\n\n{pro_default_dummy}", route_go=False
+          ) # building the run module
+        
+        
   def dir_tree(self, proj_name=None):
     """create a directory tree where file will reserved as well as modules too"""
     
     dirs = [proj_name, f"{proj_name}/{proj_name}", "templates", "static"]
     fls_name = ["__init__", "config", "models", "routes", "tunder"]
     fls = self.append_exs_to_file(fls_name)
-    _here = os.getcwd() # initial `cwd` where the project was created
-    fls_cmd = "touch"
+    _here = os.getcwd() # initial `cwd` where the project was 
     
     # check if the project already exist
     if os.path.exists(os.path.join(_here, proj_name)):
@@ -90,7 +96,7 @@ class BaseStructure:
       for _dir in dirs:
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
-          self.into_file(fls, fls_cmd, file="tunder") # to maker tunder file
+          self.into_file(fls, self.fls_cmd, file="tunder") # to maker tunder file
           project_folder = os.getcwd() # base dir of project
           _exs = [".html", ".css", ".js"]
           
@@ -116,9 +122,10 @@ class BaseStructure:
           # create default modules inside project sub dir
           for _fls in fls:
             if _fls[:-3] != "tunder":
-              sp.run(shlex.split(f"{fls_cmd} {_fls}"))
-              with open(_fls, "w") as pay_fls:
-                pay_fls.write(f"# Hello world from {_fls}")
+              sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
+              self.file_content(
+                file_name=_fls, content=f"# Hello world from {_fls}", route_go=False
+                )
           os.chdir(_here)
       print()
       logger.info(f"Project ({proj_name}) created successfully!")
@@ -133,12 +140,11 @@ class AppStructure(BaseStructure):
     """create files within current directory of '''self.file_opt()'''    """
     for _fls in fls:
       sp.run(shlex.split(f"{fls_cmd} {_fls}"))
-      with open(_fls, "w") as pay_fls: # building the run module
-        pay_fls.write(f"# Your app {_fls} file\n\n{app_default_dummy}")
+      self.file_content(file_name=_fls, content=f"# Your app {_fls} file\n\n{app_default_dummy}", route_go=False) # building app default files
         
         
   def app_static_and_template(self, _dir_=False, file=False, app=False, cmd=False, _here_=False):
-    # _dir_ = False"template or static"
+    # _dir_ = "template or static"
     # file = ["index.html"]
     # app = app name
     # cmd = "touch"
@@ -158,7 +164,6 @@ class AppStructure(BaseStructure):
     fls = self.append_exs_to_file(fls_name)
     roove_dir = ["templates", "static/css", "static/js"]
     _here_app = os.getcwd()  # initial `inside project folder` where the project was created
-    fls_cmd = "touch"
     
     # check if the app already exist
     app_proj_name = _here_app.split("/")[-1]
@@ -171,18 +176,18 @@ class AppStructure(BaseStructure):
       for _dir in dirs:
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here_app)
-          self.into_file(fls, fls_cmd) # to maker app default files
+          self.into_file(fls, self.fls_cmd) # to maker app default files
           
       self.app_static_and_template(
-        _dir_=roove_dir[0], file=["index.html"], app=proj_app_name, cmd=fls_cmd, _here_=_here_app
+        _dir_=roove_dir[0], file=["index.html"], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       
       self.app_static_and_template(
-        _dir_=roove_dir[1], file=["style.css"], app=proj_app_name, cmd=fls_cmd, _here_=_here_app
+        _dir_=roove_dir[1], file=["style.css"], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       
       self.app_static_and_template(
-        _dir_=roove_dir[2], file=["index.js"], app=proj_app_name, cmd=fls_cmd, _here_=_here_app
+        _dir_=roove_dir[2], file=["index.js"], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       
       self.file_opt("do_nothing", tree=False, _where=_here_app) # back to project dir
@@ -209,5 +214,5 @@ def boot(action="create_app"):
     create_app(sys.argv[-1])
     print(args, sys.argv)
   else:
-    print("Donn\'t create app", args, sys.argv)
+    print("Don\'t create app", args, sys.argv)
 
