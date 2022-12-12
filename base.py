@@ -13,6 +13,7 @@ from . import _css
 from . import _html
 from . import pro_default_dummy
 from . import app_default_dummy
+from . import __title__
 
 """
   NOTSET    ---  0
@@ -35,9 +36,9 @@ ORIGIN = Path(__file__).resolve().parent.parent
 class BaseStructure:
   """base structure class"""
   
-  def __init__(self, flaskey_software=False):
+  def __init__(self, is_software=False):
     """base structure class initializer"""
-    self.flaskey_software = flaskey_software
+    self.is_software = is_software
     self.fls_cmd = "touch"
     self._exs_first = ["index", "style"]
     self._exs_last = [".html", ".css", ".js"]
@@ -103,7 +104,7 @@ class BaseStructure:
     """create a directory tree where file will reserved as well as modules too"""
     
     dirs = [proj_name, f"{proj_name}/{proj_name}", "templates", "static"]
-    fls_name = ["__init__", "config", "models", "routes", "tunder"]
+    fls_name = ["__init__", "config", "models", "routes", "thunder"]
     fls = self.append_exs_to_file(fls_name=fls_name)
     _here = os.getcwd() # initial `cwd` where the project was 
     
@@ -117,7 +118,7 @@ class BaseStructure:
       for _dir in dirs:
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
-          self.into_file(fls, self.fls_cmd, file="tunder") # to maker tunder file
+          self.into_file(fls, self.fls_cmd, file="thunder") # to maker thunder file
           project_folder = os.getcwd() # base dir of project
           _exs = [".html", ".css", ".js"]
           
@@ -142,7 +143,7 @@ class BaseStructure:
           self.file_opt(_dir, _here=_here)
           # create default modules inside project sub dir
           for _fls in fls:
-            if _fls[:-3] != "tunder":
+            if _fls[:-3] != "thunder":
               sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
               self.file_content(
                 file_name=_fls, content=f"# Hello world from {_fls}", route_go=False
@@ -164,7 +165,7 @@ class AppStructure(BaseStructure):
       if is_static_file:
         self.file_content(file_name=_fls, content=f"{app_default_dummy}", route_go=False) # building app default files
       else:
-        self.file_content(file_name=_fls, content=f"# from flaskey software, your app {_fls} file\n\n{app_default_dummy}", route_go=False) # building app default files
+        self.file_content(file_name=_fls, content=f"# from {__title__} software, your app {_fls} file\n\n{app_default_dummy}", route_go=False) # building app default files
         
         
   def app_static_and_template(self, file_dummy, top_comment=False, _dir_=False, file=False, app=False, cmd=False, _here_=False):
@@ -227,8 +228,8 @@ class AppStructure(BaseStructure):
       print()
       
       
-def create_app(app):
-  """create project app"""
+def app_init(app):
+  """initialize app in project"""
   AppStructure().dir_tree(app)
   
   
@@ -242,7 +243,7 @@ def boot(action="create_app"):
   args = parser.parse_args()
   
   if action in sys.argv and sys.argv[1] == action:
-    create_app(sys.argv[-1])
+    app_init(sys.argv[-1])
     print(args, sys.argv)
   else:
     print("Don\'t create app", args, sys.argv)
