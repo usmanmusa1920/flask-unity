@@ -11,7 +11,7 @@ from flaskey import project
 
 
 # to initiate a project
-project("kyaah")
+project("zaria")
 
 
 # to build an app, cd into your project dir that you create, and type:

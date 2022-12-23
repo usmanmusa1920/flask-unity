@@ -120,23 +120,22 @@ class BaseStructure:
           self.file_opt(_dir, _here=_here)
           self.into_file(fls, self.fls_cmd, file="thunder") # to maker thunder file
           project_folder = os.getcwd() # base dir of project
-          _exs = [".html", ".css", ".js"]
           
           # static folders
           for static_dir in dirs[2:]:
             if static_dir == dirs[2:][0]:
               self.file_opt(static_dir, _here=project_folder) # templates
-              self.file_content(_exs[0], content=_html, dir_togo=project_folder) # create index.html
+              self.file_content(self._exs_last[0], content=_html, dir_togo=project_folder) # create index.html
               
             if static_dir == dirs[2:][1]:
               self.file_opt(static_dir, _here=project_folder) # static
               inn_static = os.getcwd() # base dir of static dir
               
-              self.file_opt(_exs[1][1:], _here=inn_static) # css
-              self.file_content(_exs[1], file_name="style", content=_css, dir_togo=inn_static) # create index.css
+              self.file_opt(self._exs_last[1][1:], _here=inn_static) # css
+              self.file_content(self._exs_last[1], file_name="style", content=_css, dir_togo=inn_static) # create index.css
               
-              self.file_opt(_exs[2][1:], _here=inn_static) # js
-              self.file_content(_exs[2], content=_js, dir_togo=project_folder) # create index.js
+              self.file_opt(self._exs_last[2][1:], _here=inn_static) # js
+              self.file_content(self._exs_last[2], content=_js, dir_togo=project_folder) # create index.js
           os.chdir(_here)
           
         if _dir == dirs[0] + "/" + dirs[0]:
