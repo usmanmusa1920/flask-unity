@@ -11,8 +11,13 @@ from pathlib import Path
 from . import _js
 from . import _css
 from . import _html
-from . import pro_default_dummy
-from . import app_default_dummy
+
+from . import null
+from . import thunder_dummy
+from . import app_views_dummy
+from . import pro_init_dummy
+from . import pro_routes_dummy
+
 from . import __title__
 
 """
@@ -89,14 +94,14 @@ class BaseStructure:
       os.chdir(_where)
       
       
-  def into_file(self, fls, fls_cmd, file=None):
+  def into_file(self, fls, fls_cmd, file=None, proj_nm=None):
     """create files within current directory of '''self.file_opt()'''    """
     for _fls in fls:
       if _fls[:-3] == file:
         sp.run(shlex.split(f"{fls_cmd} {_fls}"))
         
         self.file_content(
-          file_name=_fls,content=f"# Your project {_fls} file\n\n{pro_default_dummy}", route_go=False
+          file_name=_fls,content=f"# Your project {_fls} file\n\n{thunder_dummy(proj_nm)}", route_go=False
           ) # building the run module
         
         
@@ -118,14 +123,14 @@ class BaseStructure:
       for _dir in dirs:
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
-          self.into_file(fls, self.fls_cmd, file="thunder") # to maker thunder file
+          self.into_file(fls, self.fls_cmd, file="thunder", proj_nm=proj_name) # to maker thunder file
           project_folder = os.getcwd() # base dir of project
           
           # static folders
           for static_dir in dirs[2:]:
             if static_dir == dirs[2:][0]:
               self.file_opt(static_dir, _here=project_folder) # templates
-              self.file_content(self._exs_last[0], content=_html, dir_togo=project_folder) # create index.html
+              self.file_content(self._exs_last[0], content=_html(proj_name, is_what=False), dir_togo=project_folder) # create index.html
               
             if static_dir == dirs[2:][1]:
               self.file_opt(static_dir, _here=project_folder) # static
@@ -135,7 +140,7 @@ class BaseStructure:
               self.file_content(self._exs_last[1], file_name="style", content=_css, dir_togo=inn_static) # create index.css
               
               self.file_opt(self._exs_last[2][1:], _here=inn_static) # js
-              self.file_content(self._exs_last[2], content=_js, dir_togo=project_folder) # create index.js
+              self.file_content(self._exs_last[2], content=_js(proj_name), dir_togo=project_folder) # create index.js
           os.chdir(_here)
           
         if _dir == dirs[0] + "/" + dirs[0]:
@@ -144,9 +149,14 @@ class BaseStructure:
           for _fls in fls:
             if _fls[:-3] != "thunder":
               sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
-              self.file_content(
-                file_name=_fls, content=f"# Hello world from {_fls}", route_go=False
-                )
+              if _fls == "__init__.py":
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{pro_init_dummy}", route_go=False) # building project default files
+              elif _fls == "config.py":
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{null}", route_go=False) # building project default files
+              elif _fls == "models.py":
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{null}", route_go=False) # building project default files
+              elif _fls == "routes.py":
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{pro_routes_dummy(proj_name)}", route_go=False) # building project default files
           os.chdir(_here)
       print()
       logger.info(f"Project ({proj_name}) created successfully!")
@@ -155,16 +165,27 @@ class BaseStructure:
       
 class AppStructure(BaseStructure):
   """base structure class"""
-  app_store_name = None
+  app_store_name = None # app name
+  proj_store_name = None # project name
   
-  def into_file(self, fls, fls_cmd, file=None, app_default_dummy=app_default_dummy, is_static_file=False):
+  def into_file(self, fls, fls_cmd, file=None, app_default_dummy=null, is_static_file=False):
     """create files within current directory of '''self.file_opt()'''    """
     for _fls in fls:
+      app_name = os.getcwd().split('/')[-1]
       sp.run(shlex.split(f"{fls_cmd} {_fls}"))
       if is_static_file:
         self.file_content(file_name=_fls, content=f"{app_default_dummy}", route_go=False) # building app default files
       else:
-        self.file_content(file_name=_fls, content=f"# from {__title__} software, your app {_fls} file\n\n{app_default_dummy}", route_go=False) # building app default files
+        if _fls == "__init__.py":
+          self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app default files
+        elif _fls == "forms.py":
+          self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app default files
+        elif _fls == "models.py":
+          self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app default files
+        elif _fls == "routes.py":
+          self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app default files
+        elif _fls == "views.py":
+          self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{app_views_dummy(self.proj_store_name, app_name)}", route_go=False) # building app default files
         
         
   def app_static_and_template(self, file_dummy, top_comment=False, _dir_=False, file=False, app=False, cmd=False, _here_=False):
@@ -191,13 +212,14 @@ class AppStructure(BaseStructure):
     
     dirs = [proj_app_name]
     app_store_name = proj_app_name # store our app name
-    fls_name = ["__init__", "views", "models", "routes"]
+    fls_name = ["__init__", "views", "models", "routes", "forms"]
     fls = self.append_exs_to_file(fls_name=fls_name)
     roove_dir = ["templates", "static/css", "static/js"]
     _here_app = os.getcwd()  # initial `inside project folder` where the project was created
     
     # check if the app already exist
     app_proj_name = _here_app.split("/")[-1]
+    self.proj_store_name = app_proj_name
     if os.path.exists(os.path.join(_here_app, proj_app_name)):
       print(f"\nApp ({proj_app_name}) already exist in this project ({app_proj_name})\n\t" + os.path.realpath(proj_app_name))
       logger.info(_here_app)
@@ -210,7 +232,7 @@ class AppStructure(BaseStructure):
           self.into_file(fls, self.fls_cmd) # to maker app default files
           
       self.app_static_and_template(
-        _html, top_comment="html", _dir_=roove_dir[0], file=[self.append_exs_to_file(_exs_=[])[0]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
+        _html(app_store_name), top_comment="html", _dir_=roove_dir[0], file=[self.append_exs_to_file(_exs_=[])[0]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       
       self.app_static_and_template(
@@ -218,7 +240,7 @@ class AppStructure(BaseStructure):
         )
       
       self.app_static_and_template(
-        _js, top_comment="js", _dir_=roove_dir[2], file=[self.append_exs_to_file(_exs_=[])[1]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
+        _js(proj_app_name), top_comment="js", _dir_=roove_dir[2], file=[self.append_exs_to_file(_exs_=[])[1]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       
       self.file_opt("do_nothing", tree=False, _where=_here_app) # back to project dir
@@ -230,20 +252,35 @@ class AppStructure(BaseStructure):
 def app_init(app):
   """initialize app in project"""
   AppStructure().dir_tree(app)
+  exit()
   
   
-def boot(action="create_app"):
-  """boot up project operation and app operation"""
-  # prog is the name of the program, default=sys.argv[0]
-  parser = argparse.ArgumentParser(prog="create_app", description="This create an app in your project")
-  # metavar make the -help to look cleaan
-  parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
-  parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
-  args = parser.parse_args()
-  
-  if action in sys.argv and sys.argv[1] == action:
-    app_init(sys.argv[-1])
-    print(args, sys.argv)
-  else:
-    print("Don\'t create app", args, sys.argv)
+def boot():
+  # try:
+    """boot up project operation and app operation"""
+    if sys.argv[1] == "create_app":
+      # prog is the name of the program, default=sys.argv[0]
+      parser = argparse.ArgumentParser(prog="create_app", description="This create an app in your project")
+      # metavar make the -help to look cleaan
+      parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
+      parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
+      args = parser.parse_args()
+      
+      app_init(args.app)
+    elif sys.argv[1] == "boot":
+      # prog is the name of the program, default=sys.argv[0]
+      parser = argparse.ArgumentParser(prog="boot", description="This boot up the server")
+      # metavar make the -help to look cleaan
+      parser.add_argument("--port", "-p", default=5000, required=False, type=int, metavar="", help="What is the port number?")
+      parser.add_argument("--install", "-i", required=False, type=str)
+      parser.add_argument(dest="boot", default="boot", type=str, metavar="", help="Put positional argument of `boot` to bring server up running")
+      args = parser.parse_args()
+
+      logger.info(f"Booting up your server on port {args.port}\n\tvisit: http://localhost:{args.port}")
+    else:
+      print()
+      logger.error(f"\nI do nothing at this moment now!\n{sys.argv}\n")
+  # except:
+  #     print()
+  #     logger.error(f"\nUse appropriet flag and positional argument\n{sys.argv}\n")
 
