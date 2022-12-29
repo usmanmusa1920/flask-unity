@@ -9,7 +9,7 @@ setup(
   name='flaskey',
   version='0.0.1',
   
-  description='Package flask application with ease',
+  description='An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs',
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
   long_description_content_type="text/markdown",
   

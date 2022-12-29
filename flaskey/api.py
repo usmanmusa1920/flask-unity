@@ -6,4 +6,5 @@ def project(name):
   BaseStructure().dir_tree(name)
   
 def delete_app():
+  """delete app"""
   pass

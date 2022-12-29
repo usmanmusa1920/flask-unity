@@ -1,14 +1,12 @@
 
-    ######  #         ##     ####   #    #  ######   #   #
-    #       #        #  #   #       #   #   #         # #
-    #####   #       #    #   ####   ####    #####      #
-    #       #       ######       #  #  #    #          #
-    #       #       #    #  #    #  #   #   #          #
-    #       ######  #    #   ####   #    #  ######     #
+       ____             _        __
+      /___  /    /|   /_  /    /    \/
+     /     /    /_|    / /_/  /__   /
+    /     /___ /  | /_/ /  / /__   /
 
 # flaskey
 
-An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other anoying stuffs
+An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs
 
 # How to use the library
 First create a virtual environment `python3 -m venv venv` and then activate it `source venv/bin/activate`
@@ -25,7 +23,7 @@ or create a file and paste the below codes which is equivalent of the above, and
 ```python
 from flaskey import project
 
-project("flaskey_todo)
+project("flaskey_todo")
 ```
 
 the command/code will create a project called `flaskey_todo` now cd into the `flaskey_todo` directory.
