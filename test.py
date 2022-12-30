@@ -1,4 +1,4 @@
-from flaskey import project
+from sakyum import project
 
-# create a project called flaskey_todo
-project("flaskey_todo")
+# create a project called sakyum_todo
+project("sakyum_todo")

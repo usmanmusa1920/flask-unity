@@ -23,11 +23,11 @@ def _html(name, static_url=None, is_what=True, f="{{", l="}}"):
 <body>
   <!-- write awesome code here! -->
   
-  <h1>Welcome to flaskey {name} ({_is})</h1>
+  <h1>Welcome to sakyum {name} ({_is})</h1>
   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam quidem in iure architecto, iste eius aperiam, ipsam ducimus commodi soluta ea earum quis eveniet illum fugiat voluptatibus voluptatem aspernatur tenetur?</p>
   <br>
   <p>
-    <a href="https://github.com/usmanmusa1920/flaskey" target="_blank">@{__title__} - v{__version__}</a>
+    <a href="https://github.com/usmanmusa1920/sakyum" target="_blank">@{__title__} - v{__version__}</a>
   </p>
 </body>
 </html>
@@ -65,7 +65,7 @@ null = r"""# write awesome code here!
 def thunder_dummy(project):
   return f"""import sys
 import argparse
-from flaskey import boot
+from sakyum import boot
 
 if sys.argv[1] == "boot":
   parser = argparse.ArgumentParser(prog="boot up server", description="This boot up the server")
@@ -95,7 +95,7 @@ app = Flask(__name__)
 def pro_routes_dummy(proj):
   return f"""from {proj} import app
 from flask import (render_template, Blueprint)
-from flaskey.utils import template_dir, static_dir
+from sakyum.utils import template_dir, static_dir
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
@@ -112,7 +112,7 @@ def index():
 def app_views_dummy(yourapplication, app):
   return f"""from {yourapplication} import app
 from flask import (render_template, Blueprint)
-from flaskey.utils import template_dir, static_dir
+from sakyum.utils import template_dir, static_dir
 
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
 

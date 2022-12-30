@@ -5,8 +5,8 @@ from setuptools import find_packages
 
 setup(
   
-  # name of the main package (flaskey)
-  name='flaskey',
+  # name of the main package (sakyum)
+  name='sakyum',
   version='0.0.1',
   
   description='An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs',
@@ -14,7 +14,7 @@ setup(
   long_description_content_type="text/markdown",
   
   # The URL of your package's (project) home page e.g. github link
-  url='https://github.com/usmanmusa1920/flaskey',
+  url='https://github.com/usmanmusa1920/sakyum',
   
   # Author details
   author='Usman Musa',
@@ -34,10 +34,10 @@ setup(
   ],
   
   # used when people are searching for a module, keywords separated with a space
-  keywords='flaskey',
+  keywords='sakyum',
   
   # The list of packages(directories) for your library
-  packages=find_packages(), # OR packages=['flaskey'] 
+  packages=find_packages(), # OR packages=['sakyum'] 
   
   # If your package is a single module, use this instead of 'packages':
   # py_modules=[''] # list of files (modules) that are not in any directory (at the root dir)

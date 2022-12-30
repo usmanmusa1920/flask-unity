@@ -1,20 +1,20 @@
 
 # =====================
-# @ flaskey software
+# @ sakyum software
 # =====================
 
-"""___________________________________
-       ____             _        __
-      /___  /    /|   /_  /    /    \/
-     /     /    /_|    / /_/  /__   /
-    /     /___ /  | /_/ /  / /__   /
-    
-    Abstract away complexity with `flaskey`
+"""______________________________
+        _
+      /_  /|   /   |/ /  / /\  /|
+       / /_|  /_/  / /  / /  \/ |
+    /_/ /  | /  | / /__/ /      |
+
+    Abstract away complexity with `sakyum`
     
     An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs
 """
 
-__title__ = "flaskey"
+__title__ = "sakyum"
 __version__ = "0.0.1"
 __author__ = "Usman Musa"
 __author_email__ = "usmanmusa1920@gmail.com"

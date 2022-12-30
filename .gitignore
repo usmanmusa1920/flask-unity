@@ -1,6 +1,6 @@
 # for pypi
 dist
-flaskey.egg-info
+sakyum.egg-info
 
 # Compiled Python files
 *.pyc
