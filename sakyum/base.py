@@ -11,14 +11,11 @@ from pathlib import Path
 from . import _js
 from . import _css
 from . import _html
-
 from . import null
 from . import thunder_dummy
-
 from . import pro_init_dummy
 from . import pro_routes_dummy
 from . import app_views_dummy
-
 from . import __title__
 from . import __version__
 
@@ -124,7 +121,7 @@ class BaseStructure:
         if _fls[:-3] == file:
           sp.run(shlex.split(f"{fls_cmd} {_fls}"))
           self.file_content(
-            file_name=_fls,content=f"# Your project {_fls} file\n\n{thunder_dummy(proj_nm)}", route_go=False
+            file_name=_fls,content=f"# Your project {_fls} file\n{thunder_dummy(proj_nm)}", route_go=False
             ) # building the run module
             
 
@@ -256,32 +253,50 @@ def app_init(app):
   exit()
   
 
-def boot():
+class Boot:
   """boot up project operation, app operation, and the server"""
-  
-  if len(sys.argv) == 1:
-    print()
-    logger.error(f"\n  please run the module with flag and positional argument\n")
-    exit()
-  if sys.argv[1] == "create_app":
-    # prog is the name of the program, default=sys.argv[0]
-    parser = argparse.ArgumentParser(prog="create_app", description="This create an app in your project")
-    # metavar make the -help to look cleaan
-    parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
-    parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
-    args = parser.parse_args()
-    
-    app_init(args.app)
-  elif sys.argv[1] == "boot":
-    # prog is the name of the program, default=sys.argv[0]
-    parser = argparse.ArgumentParser(prog="boot up server", description="This boot up the server")
-    # metavar make the -help to look cleaan
-    parser.add_argument("--port", "-p", default=5000, required=False, type=int, metavar="", help="What is the port number?")
-    parser.add_argument(dest="boot", default="boot", type=str, metavar="", help="Put positional argument of `boot` to bring server up running")
-    args = parser.parse_args()
-    
-    logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
-  else:
-    print()
-    logger.error(f"\n  use a valid flag and positional argument\n")
-    exit()
+  def __init__(self, p=None, d=False, h=None):
+    self.p = p # port
+    self.d = d # debug
+    self.h = h # host
+
+  def run(self):
+    if len(sys.argv) == 1:
+      print()
+      logger.error(f"please run the module with positional argument and flag if needed\n")
+      exit()
+
+    if sys.argv[1] == "create_app":
+      # prog is the name of the program, default=sys.argv[0]
+      parser = argparse.ArgumentParser(prog="create_app", description="This create an app in your project")
+      # metavar make the -help to look cleaan
+      parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
+      parser.add_argument("--debug", "-d", default=False, required=False, type=bool, metavar="", help="Do you want debug?")
+      parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
+      args = parser.parse_args()
+      self.d = args.debug
+      
+      if args.app.lower() == __title__:
+        print()
+        logger.error("Not allowed to use that name as an app name\n")
+        exit()
+      app_init(args.app)
+
+    elif sys.argv[1] == "boot":
+      # prog is the name of the program, default=sys.argv[0]
+      parser = argparse.ArgumentParser(prog="boot up server", description="This boot up the server")
+      # metavar make the -help to look cleaan
+      parser.add_argument("--port", "-p", default=5000, required=False, type=int, metavar="", help="What is the port number?")
+      parser.add_argument("--host", "-H", default=self.h, required=False, type=str, metavar="", help="What is the host?")
+      parser.add_argument("--debug", "-d", default=False, required=False, type=bool, metavar="", help="Do you want debug?")
+      parser.add_argument(dest="boot", default="boot", type=str, metavar="", help="Put positional argument of `boot` to bring server up running")
+      args = parser.parse_args()
+      self.p = args.port
+      self.h = args.host
+      self.d = args.debug
+      
+      # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
+    else:
+      print()
+      logger.error(f"use a valid positional argument and flag if needed\n")
+      exit()

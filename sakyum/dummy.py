@@ -63,18 +63,12 @@ null = r"""# write awesome code here!
 
 
 def thunder_dummy(project):
-  return f"""import sys
-import argparse
-from sakyum import boot
-
-if sys.argv[1] == "boot":
-  parser = argparse.ArgumentParser(prog="boot up server", description="This boot up the server")
-  parser.add_argument("--port", "-p", default=5000, required=False, type=int, metavar="", help="What is the port number?")
-  parser.add_argument(dest="boot", default="boot", type=str, metavar="", help="Put positional argument of `boot` to bring server up running")
-  _port_ = parser.parse_args()
+  return f"""from sakyum import Boot
+  
+boot = Boot()
 
 if __name__ == "__main__":
-  boot()
+  boot.run()
 
 from {project} import app
 from {project}.routes import base
@@ -83,7 +77,7 @@ from {project}.routes import base
 app.register_blueprint(base)
 # app.register_blueprint(<app_name>)
 
-app.run(debug=True, port=_port_.port)
+app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
 
 

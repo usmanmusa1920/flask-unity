@@ -58,6 +58,14 @@ this will bring the serve on port `7000` visit the localhost url with the port n
 
 this will take you to your app `index.html page` (todo_app). From there you are ready to go.
 
+Also, you can give your desire ip address/host by using `-H` or `--host` flag, e.g
+
+`python thunder.py boot -p 7000 -H 0.0.0.0` or `python thunder.py boot -p 7000 --host 0.0.0.0`
+
+For development server, you can give a debug value to True by specifying `-d` flag or `--debug` e.g
+
+`python thunder.py boot -p 7000 -d True` or `python thunder.py boot -p 7000 --debug True`
+
 # recommendation
 This software will not be compatible with `windows operating system` use other `OS` such as `linux` or `macOS`
 

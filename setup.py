@@ -7,7 +7,7 @@ setup(
   
   # name of the main package (sakyum)
   name='sakyum',
-  version='0.0.1',
+  version='0.0.2',
   
   description='An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs',
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
