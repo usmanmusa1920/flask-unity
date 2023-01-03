@@ -13,7 +13,7 @@ logger.setLevel(logging.DEBUG)
 def project(name):
   """create project"""
   if name.lower() == __title__:
-    logger.error("Not allowed to use that name as project name")
+    logger.error(f"Not allowed to use ({__title__}) package name as project name")
     return False
   BaseStructure().dir_tree(name)
   
