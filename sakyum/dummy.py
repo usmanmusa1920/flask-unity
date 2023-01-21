@@ -1,7 +1,10 @@
 
 from . import __title__
 from . import __version__
-from . utils import stylePage
+from . utils import stylePage, Security
+
+secret = Security()
+secure_app = secret.passcode_salt
 
 
 def _html(name, static_url=None, is_what=True, f="{{", l="}}", f_2="{", l_2="}"):
@@ -454,7 +457,7 @@ from .config import app
 """
 
 
-def pro_config_dummy():
+def pro_config_dummy(secure_app=secure_app):
   return f"""from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from pathlib import Path
@@ -463,7 +466,7 @@ from os import path
 db_ORIGIN = Path(__file__).resolve().parent.parent
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = '5f0a0a5d2d9557c3ef388da100ad931b2d2f6d3f'
+app.config['SECRET_KEY'] = '{secure_app}'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 db = SQLAlchemy(app)
 
@@ -579,7 +582,7 @@ def index():
 #         return redirect(url_for('{app}.index'))
 #   return render_template("{app}/register.html", form=form)
 
-# @{app}.route('/login')
+# @{app}.route('/login', methods=["GET", "POST"])
 # def login():
 #   form = LoginForm()
 #   if form.validate_on_submit():
