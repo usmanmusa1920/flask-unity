@@ -8,16 +8,20 @@ import subprocess as sp
 
 from pathlib import Path
 
-from . import _js
-from . import _css
-from . import _html
-from . import null
-from . import thunder_dummy
-from . import pro_init_dummy
-from . import pro_routes_dummy
-from . import app_views_dummy
+from . dummy import _js
+from . dummy import _css
+from . dummy import _html
+from . dummy import null
+from . dummy import thunder_dummy
+from . dummy import pro_init_dummy
+from . dummy import pro_routes_dummy
+from . dummy import pro_config_dummy
+from . dummy import app_views_dummy
+from . dummy import app_forms_dummy
+from . dummy import app_models_dummy
 from . import __title__
 from . import __version__
+from .utils import readIMG
 
 """
   NOTSET    ---  0
@@ -34,7 +38,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-ORIGIN = Path(__file__).resolve().parent.parent
+# used for relative path to default image to copy for a project (only)
+ORIGIN = Path(__file__).resolve().parent
+
 
 class BaseStructure:
   """base structure class"""
@@ -107,15 +113,15 @@ class BaseStructure:
           self.file_content(file_name=_fls, content=f"{app_default_dummy}", route_go=False) # building app default files
         else:
           if _fls == "__init__.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app `__init__.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{null}", route_go=False) # building app `__init__.py` default files
           elif _fls == "forms.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app `forms.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy()}", route_go=False) # building app `forms.py` default files
           elif _fls == "models.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app `models.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_models_dummy(self.proj_store_name)}", route_go=False) # building app `models.py` default files
           elif _fls == "routes.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{null}", route_go=False) # building app `routes.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{null}", route_go=False) # building app `routes.py` default files
           elif _fls == "views.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n\n{app_views_dummy(self.proj_store_name, app_name)}", route_go=False) # building app `views.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(self.proj_store_name, app_name)}", route_go=False) # building app `views.py` default files
     else:
       for _fls in fls:
         if _fls[:-3] == file:
@@ -149,13 +155,13 @@ class BaseStructure:
             if _fls[:-3] != "thunder":
               sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
               if _fls == "__init__.py":
-                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{pro_init_dummy}", route_go=False) # building project `__init__.py` default files
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_init_dummy}", route_go=False) # building project `__init__.py` default files
               elif _fls == "config.py":
-                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{null}", route_go=False) # building project `config.py` default files
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_config_dummy()}", route_go=False) # building project `config.py` default files
               elif _fls == "models.py":
-                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{null}", route_go=False) # building project `models.py` default files
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{null}", route_go=False) # building project `models.py` default files
               elif _fls == "routes.py":
-                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n\n{pro_routes_dummy(proj_name)}", route_go=False) # building project `routes.py` default files
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_routes_dummy(proj_name)}", route_go=False) # building project `routes.py` default files
           os.chdir(_here)
           
         if _dir == dirs[0]:
@@ -167,16 +173,26 @@ class BaseStructure:
             if static_dir == dirs[2:][0]: # templates
               self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into
               # create index.html and bact to project base dir path
-              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} index.html page -->\n\n"+_html(proj_name, is_what=False), dir_togo=project_folder)
+              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_what=False), dir_togo=project_folder)
               
             if static_dir == dirs[2:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
               
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
               self.file_opt(proj_name, _where=os.getcwd()+"/"+proj_name)
-              self.file_content(self._exs_last[1], file_name="style", content=_css(), route_go=False) # create index.css
+              # :storing the project static dir path before creating and cd into media for alert.png creation
+              s_p_dir = os.getcwd()
+              self.file_opt("media", _where="media") # make media dir for project
+              # :copy default projects images (favicon and alert)
+              img_paths = [str(ORIGIN)+"/static/alert.png", str(ORIGIN)+"/static/favicon.ico"]
+              for img_path in img_paths:
+                with open(img_path.split("/")[-1], "wb") as rite:
+                  rite.write(readIMG(img_path))
+              # :going back with one step after creating alert.png
+              self.file_opt(proj_name, tree=False, _where=s_p_dir)
+              self.file_content(self._exs_last[1], file_name="style", content=f"/* @{__title__}, {proj_name} (project) style.css file */\n"+_css(), route_go=False) # create index.css
               
-              self.file_content(self._exs_last[2], content=_js(proj_name), dir_togo=project_folder) # create index.js and bact to project base dir path
+              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=project_folder) # create index.js and bact to project base dir path
           os.chdir(_here)
       print()
       logger.info(f"Project ({proj_name}) created successfully!")
@@ -189,24 +205,23 @@ class AppStructure(BaseStructure):
   proj_store_name = None # project name
   
   def app_static_and_template(self, file_dummy, top_comment=False, _dir_=False, file=False, app=False, cmd=False, _here_=False):
-    # _dir_ = "template or static"
-    # file = ["index.html"]
-    # app = app name
-    # cmd = "touch"
-    # _here_ = # initial `inside project folder` where the project was created
-    
+    # :_dir_ = "template or static"
+    # :file = ["index.html"]
+    # :app = app name
+    # :cmd = "touch"
+    # :_here_ = # initial `inside project folder` where the project was created
     if top_comment == "html":
-      top_comment = f"<!-- @{__title__}, {app} {file[0]} page -->\n\n"
+      top_comment = f"<!-- @{__title__}, {app} {file[0]} page -->\n"
     if top_comment == "css":
-      top_comment = f"/* @{__title__}, {app} {file[0]} file */\n\n"
+      top_comment = f"/* @{__title__}, {app} {file[0]} file */\n"
     if top_comment == "js":
-      top_comment = f"// @{__title__}, {app} {file[0]} file\n\n"
+      top_comment = f"// @{__title__}, {app} {file[0]} file\n"
       
     self.file_opt(_dir_, tree=False, _here=_here_) # back to template dir
     self.file_opt(f"{app}", _where=app) # make app dir inside `template`
     self.into_file(file, cmd, is_static_file=True, app_default_dummy=f"{top_comment}{file_dummy}", is_app=True) # making app default file
     
-
+    
   def dir_tree(self, proj_app_name=None):
     """create a directory tree where file will reserved as well as modules too"""
     
@@ -241,6 +256,7 @@ class AppStructure(BaseStructure):
       self.app_static_and_template(
         _js(proj_app_name), top_comment="js", _dir_=roove_dir[2], file=[self.append_exs_to_file(_exs_=[])[1]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
+      self.file_opt("media") # an app media folder
       self.file_opt("do_nothing", tree=False, _where=_here_app) # back to project dir
       print()
       logger.info(f"App ({proj_app_name}) created successfully! in {app_proj_name}")
@@ -275,10 +291,15 @@ class Boot:
       parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
       args = parser.parse_args()
       self.d = args.debug
+      the_proj = os.getcwd().split('/')[-1]
       
       if args.app.lower() == __title__:
         print()
-        logger.error("Not allowed to use that name as an app name\n")
+        logger.error(f"Not allowed to use ({__title__}) package name as an app name\n")
+        exit()
+      elif args.app == the_proj:
+        print()
+        logger.error(f"Not allowed to use your ({the_proj}) project name as an app name\n")
         exit()
       app_init(args.app)
 
