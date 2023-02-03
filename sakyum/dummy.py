@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 
 from . import __title__
 from . import __version__
-from . utils import stylePage, Security
+from .utils import stylePage, Security
+
 
 secret = Security()
 secure_app = secret.passcode_salt

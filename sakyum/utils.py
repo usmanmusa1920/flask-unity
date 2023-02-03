@@ -1,5 +1,10 @@
+# -*- coding: utf-8 -*-
 
 import os
+import base64
+import random
+import hashlib
+
 
 def static_dir(app):
   """relative path to static files"""
@@ -10,7 +15,7 @@ def template_dir():
   return os.getcwd() + "/templates"
 
 def readIMG(p):
-  """read default alert image, for sure static file work"""
+  """read default alert image and favicon.ico, for sure static file work"""
   with open(p, "rb") as i:
     r = i.read()
   return r
@@ -22,16 +27,11 @@ def stylePage(name, _is):
   border = "=" * len(desc_center)
   return [desc_center, border]
 
-
-import hashlib
-import random
-import base64
-
-
+  
 class Security:
   """
-  Passcode class for suggesting user passcode iteration, generating salt, and
-  creating secure passcode for every user
+  Passcode class for suggesting user passcode iteration,
+  generating salt, and creating secure passcode for every user
   """
   
   """

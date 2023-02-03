@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -8,17 +9,17 @@ import subprocess as sp
 
 from pathlib import Path
 
-from . dummy import _js
-from . dummy import _css
-from . dummy import _html
-from . dummy import null
-from . dummy import thunder_dummy
-from . dummy import pro_init_dummy
-from . dummy import pro_routes_dummy
-from . dummy import pro_config_dummy
-from . dummy import app_views_dummy
-from . dummy import app_forms_dummy
-from . dummy import app_models_dummy
+from .dummy import _js
+from .dummy import _css
+from .dummy import _html
+from .dummy import null
+from .dummy import thunder_dummy
+from .dummy import pro_init_dummy
+from .dummy import pro_routes_dummy
+from .dummy import pro_config_dummy
+from .dummy import app_views_dummy
+from .dummy import app_forms_dummy
+from .dummy import app_models_dummy
 from . import __title__
 from . import __version__
 from .utils import readIMG
@@ -36,7 +37,6 @@ formatter = "[+] [%(asctime)s] [%(levelname)s] %(message)s"
 logging.basicConfig(format = formatter)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-
 
 # used for relative path to default image to copy for a project (only)
 ORIGIN = Path(__file__).resolve().parent
