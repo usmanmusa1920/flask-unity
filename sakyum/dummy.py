@@ -452,30 +452,30 @@ app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
 
 
-pro_init_dummy = r"""# from flask import Flask
-# app = Flask(__name__)
-from .routes import base
+pro_init_dummy = r"""from .routes import base
 from .config import app
 """
 
 
-def pro_config_dummy(secure_app=secure_app):
+def pro_config_dummy(secure_app=secure_app, long_comment='"""'):
   return f"""from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from pathlib import Path
 from os import path
 
 db_ORIGIN = Path(__file__).resolve().parent.parent
+
 app = Flask(__name__)
 app.app_context().push()
 app.config['SECRET_KEY'] = '{secure_app}'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
+
 db = SQLAlchemy(app)
 
 if path.exists(str(db_ORIGIN) + '/default.db'):
   pass # if default.db exist just pass
 else:
-  # You will need to import models themselves before issuing `db.create_all`
+  {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
   # from <app_name>.models import <app_model>
   db.create_all() # create db file
 # db.init_app(app)
