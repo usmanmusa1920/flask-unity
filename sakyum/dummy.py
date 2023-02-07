@@ -4,13 +4,12 @@ from . import __title__
 from . import __version__
 from .utils import stylePage, Security
 
-
 secret = Security()
 secure_app = secret.passcode_salt
 
 
-def _html(name, static_url=None, is_what=True, f="{{", l="}}", f_2="{", l_2="}"):
-  if is_what:
+def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}"):
+  if is_base:
     _is = "application"
     static_url = name
   else:
@@ -24,6 +23,9 @@ def _html(name, static_url=None, is_what=True, f="{{", l="}}", f_2="{", l_2="}")
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{f} url_for('base.static', filename='/media/favicon.ico') {l}" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="{f} url_for('{static_url}.static', filename='style.css') {l}">
+  {f_2}% block head %{l_2}
+    <!-- child css file link -->
+  {f_2}% endblock head %{l_2}
   <script type="text/javascript" src="{f} url_for('{static_url}.static', filename='index.js') {l}"></script>
   <script src="main.js"></script>
   <title>Sakyum - {name}</title>
@@ -97,78 +99,23 @@ def _html(name, static_url=None, is_what=True, f="{{", l="}}", f_2="{", l_2="}")
 """
   page_desc = stylePage(name, _is)
   return f"""{f_2}% extends "index.html" %{l_2}
+
+{f_2}% block head %{l_2}
+  <link rel="stylesheet" type="text/css" href="{f} url_for('{name}.static', filename='style.css') {l}">
+{f_2}% endblock head %{l_2}
+
 {f_2}% block main %{l_2}
-  <h1><pre>({name})
+  <h3><pre>({name})
 {page_desc[1]}
 {page_desc[0]}
-{page_desc[1]}</pre></h1>
+{page_desc[1]}</pre></h3>
 {f_2}% endblock main %{l_2}
 """
-  return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{f} url_for('base.static', filename='/media/favicon.ico') {l}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="{f} url_for('{static_url}.static', filename='style.css') {l}">
-  <script type="text/javascript" src="{f} url_for('{static_url}.static', filename='index.js') {l}"></script>
-  <script src="main.js"></script>
-  <title>Sakyum - {name}</title>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="header_col">
-        <div class="head_left">
-          <h1 class="logo">
-            <a href="#">Sakyum</a>
-          </h1>
-        </div>
-
-        <div class="head_right">
-          <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
-          <a class="link_1">|</a>
-          <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
-          <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_3" target="_blank">Install</a>
-          <a onclick="test()" class="alert">
-            <img src="{f} url_for('base.static', filename='/media/alert.png') {l}" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="main">
-      <div class="main_column">
-        <div class="mini">
-          <div class="mini_column">
-            <p><pre>{page_desc[1]}
-{page_desc[0]}
-{page_desc[1]}</pre></p>
-          </div>
-        </div>
-
-        <div class="three_col">
-          <div>
-            <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p><pre>============================
- @ {__title__} software - v{__version__}
-============================</pre></p>
-    </div>
-  </div>
-</body>
-</html>
-"""
 
 
-def _css(f="{", l="}"):
-  return f"""* {f}
+def _css(f="{", l="}", is_base=True):
+  if is_base:
+    return f"""* {f}
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -333,13 +280,6 @@ body{f}
   {l}
 {l}
 
-.mini_column h1{f}
-  font-size: 2.5rem;
-  font-weight: lighter;
-  margin-top: 15px;
-  text-align: center;
-{l}
-
 .mini_column p{f}
   max-width: 80%;
   text-align: center;
@@ -419,6 +359,14 @@ body{f}
     margin-top: 5px;
   {l}
 {l}
+  """
+  return f"""
+.mini_column h3{f}
+  /* font-size: 2.5rem; */
+  font-weight: lighter;
+  margin-top: 15px;
+  text-align: center;
+{l}
 """
 
 
@@ -452,7 +400,8 @@ app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
 
 
-pro_init_dummy = r"""from .routes import base
+def pro_init_dummy():
+  return f"""from .routes import base
 from .config import app
 """
 
@@ -483,20 +432,6 @@ else:
 
 
 def pro_routes_dummy(proj, f="{", l="}"):
-#   return f"""from {proj} import app
-# from flask import (render_template, Blueprint)
-# from sakyum.utils import template_dir, static_dir
-
-# base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
-
-# # @base.route('/')
-# # def index():
-# #   return "<h1>base index page</h1>"
-
-# @base.route('/')
-# def index():
-#   return render_template("index.html")
-# """
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
 # from blogy.forms import RegistrationForm, LoginForm
@@ -596,6 +531,7 @@ def index():
 #   return render_template("{app}/login.html", form=form)
 """
 
+
 def app_forms_dummy():
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
@@ -620,6 +556,7 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 """
+
 
 def app_models_dummy(your_application, f="{", l="}"):
   return f"""from datetime import datetime
