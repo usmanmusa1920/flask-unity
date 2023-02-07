@@ -11,6 +11,7 @@ f1 = "{"
 l1 = "}"
 f2 = "{{"
 l2 = "}}"
+long_comment = "\"\"\""
 
 
 def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
@@ -367,7 +368,6 @@ body{f1}
   """
   return f"""
 .mini_column h3{f1}
-  /* font-size: 2.5rem; */
   font-weight: lighter;
   margin-top: 15px;
   text-align: center;
@@ -411,7 +411,7 @@ from .config import app
 """
 
 
-def pro_config_dummy(secure_app=secure_app, long_comment='"""'):
+def pro_config_dummy(secure_app=secure_app, long_comment=long_comment):
   return f"""from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from pathlib import Path
