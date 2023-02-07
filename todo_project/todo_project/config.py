@@ -9,7 +9,7 @@ db_ORIGIN = Path(__file__).resolve().parent.parent
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = 'nUxoxfrMvtlFhJIlPc986DkN7PNgTQisaR98enjMXA3zCqVwWm6YXTO'
+app.config['SECRET_KEY'] = 'wcQG2NTLXVJt4o7Wjs09apHBeDFuAKCR2I0k8k5'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 
 # set optional bootswatch theme
@@ -23,5 +23,5 @@ db.create_all() # method to create the tables and database
 
 # Flask and Flask-SQLAlchemy initialization here
 
-admin = Admin(app, name='sakyum', template_mode='bootstrap3')
+admin = Admin(app, name='todo_project', template_mode='bootstrap3')
 admin.add_view(ModelView(TodoListModel, db.session))
