@@ -8,7 +8,7 @@ db_ORIGIN = Path(__file__).resolve().parent.parent
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = 'V4y3LIBY4AiPzO2GlRjv0fbcKJN1i7EB9aKo'
+app.config['SECRET_KEY'] = 'Ekf9k38aN402QDZPP70AtpVvxgxi5sdawy'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 
 db = SQLAlchemy(app)
