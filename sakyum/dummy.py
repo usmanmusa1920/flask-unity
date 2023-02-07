@@ -372,17 +372,24 @@ body{f1}
   margin-top: 15px;
   text-align: center;
 {l1}
+
+@media only screen and (max-width: 700px){f1}
+  .mini_column h3{f1}
+    font-size: 12px;
+  {l1}
+{l1}
 """
 
 
 def _js(name, f1=f1, l1=l1):
   return f"""function test(){f1}
-  alert('I am sakyum test alert for ({name})')
+  alert('I am {__title__} test alert for ({name}) index page')
 {l1}
 """
 
 
-null = r"""# write awesome code here!
+def null(long_comment=long_comment):
+  return f"""{long_comment} write awesome code here! {long_comment}
 """
 
 
