@@ -1,0 +1,13 @@
+<!-- @sakyum, todo_app index.html page -->
+{% extends "index.html" %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('todo_app.static', filename='style.css') }}">
+{% endblock head %}
+
+{% block main %}
+  <h3><pre>(todo_app)
+=============================================
+   Your todo_app application default pages   
+=============================================</pre></h3>
+{% endblock main %}
