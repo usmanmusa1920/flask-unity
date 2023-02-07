@@ -4,6 +4,7 @@ import os
 import base64
 import random
 import hashlib
+import secrets
 
 
 def static_dir(app):
@@ -123,6 +124,12 @@ class Security:
     
     # return types of the list is string all, access it by print(self.get_hash.__annotations__)
     return [hash_result, secure_ingredient]
+
+
+  def secret(self):
+    r = random.randint(32, 52)
+    secret = secrets.token_hex(r)
+    return secret
     
 
   def __str__(self):

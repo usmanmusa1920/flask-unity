@@ -422,7 +422,6 @@ def pro_config_dummy(secure_app=secure_app, long_comment=long_comment):
   return f"""from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from pathlib import Path
-from os import path
 
 db_ORIGIN = Path(__file__).resolve().parent.parent
 
@@ -433,73 +432,20 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db
 
 db = SQLAlchemy(app)
 
-if path.exists(str(db_ORIGIN) + '/default.db'):
-  pass # if default.db exist just pass
-else:
-  {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
-  # from <app_name>.models import <app_model>
-  db.create_all() # create db file
-# db.init_app(app)
+{long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
+# from <app_name>.models import <model_name>
+db.create_all() # method to create the tables and database
 """
 
 
 def pro_routes_dummy(proj, f1=f1, l1=l1):
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
-# from blogy.forms import RegistrationForm, LoginForm
-from flask import render_template, url_for, flash, redirect
-from datetime import datetime
-from .config import db
+# from <app_name>.forms import <form_name>
+from flask import render_template
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(20), unique=True, nullable=False)
-#     email = db.Column(db.String(120), unique=True, nullable=False)
-#     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-#     password = db.Column(db.String(60), nullable=False)
-#     posts = db.relationship('Post', backref='author', lazy=True)
-
-#     def __repr__(self):
-#         return f"User('{f1}self.username{l1}', '{f1}self.email{l1}', '{f1}self.image_file{l1}')"
-
-
-# class Post(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(100), nullable=False)
-#     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#     content = db.Column(db.Text, nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-#     def __repr__(self):
-#         return f"Post('{f1}self.title{l1}', '{f1}self.date_posted{l1}')"
-
-
-# @base.route("/register", methods=['GET', 'POST'])
-# def register():
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         flash(f'Account created for {f1}form.username.data{l1}!', 'success')
-#         return redirect(url_for('home'))
-#     return render_template('register.html', title='Register', form=form)
-
-
-# @base.route("/login", methods=['GET', 'POST'])
-# def login():
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         if form.email.data == 'admin@blog.com' and form.password.data == 'password':
-#             flash('You have been logged in!', 'success')
-#             return redirect(url_for('base.index'))
-#         else:
-#             flash('Login Unsuccessful. Please check username and password', 'danger')
-#     return render_template('login.html', title='Login', form=form)
-
-
-# @base.route('/')
-# def index():
-#   return "<h1>base index page</h1>"
 
 @base.route('/')
 def index():
@@ -507,116 +453,90 @@ def index():
 """
 
 
-def app_views_dummy(your_application, app, f1=f1, l1=l1):
-  return f"""from {your_application} import app
-from flask import (render_template, Blueprint, url_for, flash, redirect)
+def app_views_dummy(your_application, app):
+  """
+  # :your_application is the entire project name,
+    the `your_application` it does nothing now, but it might be useful for feature veersion
+  """
+  return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
-# from .forms import RegistrationForm, LoginForm
+from .models import TodoListModel
+# from .forms import <model_form>
 
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
 
-# @{app}.route('/')
-# def index():
-#   return "<h1>{app} index page</h1>"
 
-@{app}.route('/{app}')
+@{app}.route('/{app}', methods=["GET", "POST"])
 def index():
-  return render_template("{app}/index.html")
-
-# @{app}.route('/register', methods=["GET", "POST"])
-# def register():
-#   form = RegistrationForm()
-#   if form.validate_on_submit():
-#         flash(f'Account created for {f1}form.username.data{l1}!', 'success')
-#         return redirect(url_for('{app}.index'))
-#   return render_template("{app}/register.html", form=form)
-
-# @{app}.route('/login', methods=["GET", "POST"])
-# def login():
-#   form = LoginForm()
-#   if form.validate_on_submit():
-#         if form.email.data == 'admin@blog.com' and form.password.data == 'password':
-#             flash('You have been logged in!', 'success')
-#             return redirect(url_for('{app}.index'))
-#         else:
-#             flash('Login Unsuccessful. Please check username and password', 'danger')
-#   return render_template("{app}/login.html", form=form)
+  todo_list = TodoListModel.query.all()
+  return render_template("{app}/index.html", todo_list=todo_list)
 """
 
 
 def app_forms_dummy():
   return f"""from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms import StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Length
 
 
-class RegistrationForm(FlaskForm):
-    username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Sign Up')
-
-
-class LoginForm(FlaskForm):
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+class TodoListForm(FlaskForm):
+  name = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+  content = TextAreaField('Content', validators=[DataRequired()])
+  submit = SubmitField('create todo')
 """
 
 
-def app_models_dummy(your_application, f1=f1, l1=l1):
+def app_models_dummy(your_application, f1=f1, l1=l1, app_name=False, long_comment=long_comment):
   return f"""from datetime import datetime
 from {your_application}.config import db
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.String(60), nullable=False)
-    posts = db.relationship('Post', backref='author', lazy=True)
-    
-    # the `Post` is the post model class below
-    # the `author` is the attribute that we can use to get author who created the post
-    # the `lazy` argument just define when sqlalchemy loads the data from the database
+{long_comment}
+when ever you create a model, make sure you import it in your
+project config.py file before you run your application to avoid error
+{long_comment}
 
-    def __repr__(self):
-        return f"User('{f1}self.username{l1}', '{f1}self.email{l1}', '{f1}self.image_file{l1}')"
-
-
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __repr__(self):
-        return f"Post('{f1}self.title{l1}', '{f1}self.date_posted{l1}')"
-# db.create_all()
+# class User(db.Model):
+#   id = db.Column(db.Integer, primary_key=True)
+#   username = db.Column(db.String(20), unique=True, nullable=False)
+#   email = db.Column(db.String(120), unique=True, nullable=False)
+#   image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+#   password = db.Column(db.String(60), nullable=False)
+#   posts = db.relationship('Post', backref='author', lazy=True)
+  
+#   the `Post` is the post model class below
+#   the `author` is the attribute that we can use to get author who created the post
+#   the `lazy` argument just define when sqlalchemy loads the data from the database
 
 
-# move on to terminal and paste the following command
-# python
-# from zaria.config import db
-# db.create_all()
+# class Post(db.Model):
+#   id = db.Column(db.Integer, primary_key=True)
+#   title = db.Column(db.String(100), nullable=False)
+#   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#   content = db.Column(db.Text, nullable=False)
+#   user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-# from blogy.models import User, Post
-# u = User(username="user_1", email="user_1@email.com", password="1234")
-# p = Post(title="post one", content="Lorem lipsum doler", user_id=u.id)
+class TodoListModel(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(100), nullable=False, unique=True)
+  date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+  content = db.Column(db.Text, nullable=False)
 
-# db.session_add(u)
-# db.session_add(p)
+  def __repr__(self):
+    return f"Todo list of ('{f1}self.name{l1}', '{f1}self.date_posted{l1}')"
+
+
+# move on to terminal and paste the following command, ( in python interpreter )
+# make sure you are within that your virtual environment
+
+# from {your_application}.config import db
+# from {app_name}.models import TodoListModel
+
+# db.create_all() # method to create the tables and database
+# r = TodoListModel(name='{__title__}', content='An extension of flask web framework')
+
+# db.session_add(r)
 # db.commit()
+# TodoListModel.query.all()
 
-# User.query.all() # show all users
-# Post.query.all() # show all post of users
-
-# dir(User.query) # to see many other method
+# dir(TodoListModel.query) # to see many other method
 """
