@@ -11,7 +11,9 @@ First create a virtual environment `python3 -m venv venv` and then activate it `
 
 Once that finish now install the library by
 
-`pip install sakyum`
+```py
+pip install sakyum
+```
 
 wait for the installation basically the library was uploaded using `sdist` (Source Distribution)
 
