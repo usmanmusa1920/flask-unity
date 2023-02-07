@@ -1,4 +1,4 @@
 from sakyum import project
 
-# create a project called sakyum_todo
-project("sakyum_todo")
+# create a project called todo_project
+project("todo_project")
