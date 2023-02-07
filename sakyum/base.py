@@ -166,7 +166,7 @@ class BaseStructure:
 
               elif _fls == "config.py":
                 # building project `config.py` default files
-                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_config_dummy()}", route_go=False)
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_config_dummy(proj_name)}", route_go=False)
 
               elif _fls == "routes.py":
                 # building project `routes.py` default files

@@ -50,7 +50,7 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
           <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
           <a class="link_1">|</a>
           <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
-          <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_3" target="_blank">Install</a>
+          <a href="/admin" class="link_3" target="_blank">Admin</a>
           <a onclick="test()" class="alert">
             <img src="{f2} url_for('base.static', filename='/media/alert.png') {l2}" alt="">
           </a>
@@ -418,8 +418,10 @@ from .config import app
 """
 
 
-def pro_config_dummy(secure_app=secure_app, long_comment=long_comment):
-  return f"""from flask_sqlalchemy import SQLAlchemy
+def pro_config_dummy(proj_name, secure_app=secure_app, long_comment=long_comment):
+  return f"""from flask_admin.contrib.sqla import ModelView
+from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin
 from flask import Flask
 from pathlib import Path
 
@@ -430,11 +432,19 @@ app.app_context().push()
 app.config['SECRET_KEY'] = '{secure_app}'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 
+# set optional bootswatch theme
+app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+
 db = SQLAlchemy(app)
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
 # from <app_name>.models import <model_name>
 db.create_all() # method to create the tables and database
+
+# Flask and Flask-SQLAlchemy initialization here
+
+admin = Admin(app, name='{proj_name}', template_mode='bootstrap3')
+# admin.add_view(ModelView(<model_name>, db.session))
 """
 
 
