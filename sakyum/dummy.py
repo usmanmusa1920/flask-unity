@@ -7,8 +7,13 @@ from .utils import stylePage, Security
 secret = Security()
 secure_app = secret.passcode_salt
 
+f1 = "{"
+l1 = "}"
+f2 = "{{"
+l2 = "}}"
 
-def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}"):
+
+def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
   if is_base:
     _is = "application"
     static_url = name
@@ -21,12 +26,12 @@ def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}")
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{f} url_for('base.static', filename='/media/favicon.ico') {l}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="{f} url_for('{static_url}.static', filename='style.css') {l}">
-  {f_2}% block head %{l_2}
+  <link rel="shortcut icon" href="{f2} url_for('base.static', filename='/media/favicon.ico') {l2}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="{f2} url_for('{static_url}.static', filename='style.css') {l2}">
+  {f1}% block head %{l1}
     <!-- child css file link -->
-  {f_2}% endblock head %{l_2}
-  <script type="text/javascript" src="{f} url_for('{static_url}.static', filename='index.js') {l}"></script>
+  {f1}% endblock head %{l1}
+  <script type="text/javascript" src="{f2} url_for('{static_url}.static', filename='index.js') {l2}"></script>
   <script src="main.js"></script>
   <title>Sakyum - {name}</title>
 </head>
@@ -46,7 +51,7 @@ def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}")
           <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
           <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_3" target="_blank">Install</a>
           <a onclick="test()" class="alert">
-            <img src="{f} url_for('base.static', filename='/media/alert.png') {l}" alt="">
+            <img src="{f2} url_for('base.static', filename='/media/alert.png') {l2}" alt="">
           </a>
         </div>
       </div>
@@ -56,15 +61,15 @@ def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}")
       <div class="main_column">
         <div class="mini">
         <!--
-        {f_2}% with messages = get_flashed_messages(with_categories=true) %{l_2}
-            {f_2}% if messages %{l_2}
-              {f_2}% for category, message in messages %{l_2}
-                <div class="alert alert-{f} category {l}">
-                  {f} message {l}
+        {f1}% with messages = get_flashed_messages(with_categories=true) %{l1}
+            {f1}% if messages %{l1}
+              {f1}% for category, message in messages %{l1}
+                <div class="alert alert-{f2} category {l2}">
+                  {f2} message {l2}
                 </div>
-              {f_2}% endfor %{l_2}
-            {f_2}% endif %{l_2}
-          {f_2}% endwith %{l_2}
+              {f1}% endfor %{l1}
+            {f1}% endif %{l1}
+          {f1}% endwith %{l1}
         -->
           <div class="mini_column">
             <p><pre>  ...........................
@@ -74,9 +79,9 @@ def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}")
 /_/ /  | /  | / /__/ /      |
 .............................</pre></p>
             <p>Your project ({name}) default page</p>
-            {f_2}% block main %{l_2}
+            {f1}% block main %{l1}
               <!-- main content -->
-            {f_2}% endblock main %{l_2}
+            {f1}% endblock main %{l1}
           </div>
         </div>
 
@@ -98,28 +103,28 @@ def _html(name, static_url=None, is_base=True, f="{{", l="}}", f_2="{", l_2="}")
 </html>
 """
   page_desc = stylePage(name, _is)
-  return f"""{f_2}% extends "index.html" %{l_2}
+  return f"""{f1}% extends "index.html" %{l1}
 
-{f_2}% block head %{l_2}
-  <link rel="stylesheet" type="text/css" href="{f} url_for('{name}.static', filename='style.css') {l}">
-{f_2}% endblock head %{l_2}
+{f1}% block head %{l1}
+  <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}">
+{f1}% endblock head %{l1}
 
-{f_2}% block main %{l_2}
+{f1}% block main %{l1}
   <h3><pre>({name})
 {page_desc[1]}
 {page_desc[0]}
 {page_desc[1]}</pre></h3>
-{f_2}% endblock main %{l_2}
+{f1}% endblock main %{l1}
 """
 
 
-def _css(f="{", l="}", is_base=True):
+def _css(f1=f1, l1=l1, is_base=True):
   if is_base:
-    return f"""* {f}
+    return f"""* {f1}
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-{l}
+{l1}
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -132,28 +137,28 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {f}
+time, mark, audio, video {f1}
   outline:0;
   /* font-size:100%; */
   vertical-align:baseline;
   background:transparent;
-{l}
+{l1}
 
-body{f}
+body{f1}
   background: lightgrey;
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 15px;
   font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
-{l}
+{l1}
 
-.container{f}
+.container{f1}
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-{l}
+{l1}
 
-.header{f}
+.header{f1}
   top: 0;
   width: 100%;
   height: 11.5vh;
@@ -163,103 +168,103 @@ body{f}
   display: flex;
   align-items: center;
   justify-content: center;
-{l}
+{l1}
 
-.header_col{f}
+.header_col{f1}
   width: 90%;
   padding: 20px 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .header_col{f}
+@media only screen and (max-width: 700px){f1}
+  .header_col{f1}
     padding: 18px 5px;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.head_left{f}
+.head_left{f1}
   width: 45%;
   height: 100%;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .logo{f}
+@media only screen and (max-width: 700px){f1}
+  .logo{f1}
     font-size: 20px;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.logo a{f}
+.logo a{f1}
   color: white;
   text-decoration: none;
   width: fit-content;
-{l}
+{l1}
 
-.head_right{f}
+.head_right{f1}
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-{l}
+{l1}
 
-.head_right a{f}
+.head_right a{f1}
   color: white;
   margin-left: 15px;
   font-size: 18px;
   text-decoration: none;
-{l}
+{l1}
 
-.head_right a:hover{f}
+.head_right a:hover{f1}
   text-decoration: underline solid 3px;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .link_0, .link_1, .link_2, .link_3{f}
+@media only screen and (max-width: 700px){f1}
+  .link_0, .link_1, .link_2, .link_3{f1}
     display: none;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.head_right a img{f}
+.head_right a img{f1}
   width: 40px;
   height: 40px;
   margin-left: 15px;
-{l}
+{l1}
 
-.alert{f}
+.alert{f1}
   display: block;
   position: relative;
-{l}
+{l1}
 
-.main{f}
+.main{f1}
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 12vh;
-{l}
+{l1}
 
-.main_column{f}
+.main_column{f1}
   width: 90%;
   padding: 10px 70px;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .main_column{f}
+@media only screen and (max-width: 700px){f1}
+  .main_column{f1}
     width: 100%;
     padding: 0;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.mini{f}
+.mini{f1}
   width: 100%;
   min-height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
-{l}
+{l1}
 
-.mini_column{f}
+.mini_column{f1}
   width: 80%;
   max-width: 1024px;
   height: 45vh;
@@ -269,111 +274,111 @@ body{f}
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .mini_column{f}
+@media only screen and (max-width: 700px){f1}
+  .mini_column{f1}
     max-width: 100%;
     width: 90%;
     height: 60vh;
     padding: 0;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.mini_column p{f}
+.mini_column p{f1}
   max-width: 80%;
   text-align: center;
   font-weight: lighter;
   font-size: 1rem;
-{l}
+{l1}
 
-.three_col{f}
+.three_col{f1}
   margin: 20px 0;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .three_col{f}
+@media only screen and (max-width: 700px){f1}
+  .three_col{f1}
     margin: 10px 0;
     flex-direction: column;
     align-items: space-evenly;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.three_col div{f}
+.three_col div{f1}
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 100%;
   min-width: 50%;
-{l}
+{l1}
 
-.three_col div p{f}
+.three_col div p{f1}
   max-width: 80%;
   font-size: 1.1rem;
   line-height: 35px;
   text-align: center;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .three_col div p{f}
+@media only screen and (max-width: 700px){f1}
+  .three_col div p{f1}
     max-width: 90%;
     font-size: 1rem;
     line-height: 25px;
     margin-top: 5px;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.footer{f}
+.footer{f1}
   margin: 20px 0;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-top: solid black 1px;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .footer{f}
+@media only screen and (max-width: 700px){f1}
+  .footer{f1}
     margin: 10px 0;
     flex-direction: column;
     align-items: center;
     align-items: center;
-  {l}
-{l}
+  {l1}
+{l1}
 
-.footer p{f}
+.footer p{f1}
   max-width: 80%;
   font-size: 1.1rem;
   line-height: 35px;
   text-align: center;
-{l}
+{l1}
 
-@media only screen and (max-width: 700px){f}
-  .footer p{f}
+@media only screen and (max-width: 700px){f1}
+  .footer p{f1}
     max-width: 90%;
     font-size: 1rem;
     line-height: 25px;
     margin-top: 5px;
-  {l}
-{l}
+  {l1}
+{l1}
   """
   return f"""
-.mini_column h3{f}
+.mini_column h3{f1}
   /* font-size: 2.5rem; */
   font-weight: lighter;
   margin-top: 15px;
   text-align: center;
-{l}
+{l1}
 """
 
 
-def _js(name, f="{", l="}"):
-  return f"""function test(){f}
+def _js(name, f1=f1, l1=l1):
+  return f"""function test(){f1}
   alert('I am sakyum test alert for ({name})')
-{l}
+{l1}
 """
 
 
@@ -431,7 +436,7 @@ else:
 """
 
 
-def pro_routes_dummy(proj, f="{", l="}"):
+def pro_routes_dummy(proj, f1=f1, l1=l1):
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
 # from blogy.forms import RegistrationForm, LoginForm
@@ -450,7 +455,7 @@ base = Blueprint("base", __name__, template_folder=template_dir(), static_folder
 #     posts = db.relationship('Post', backref='author', lazy=True)
 
 #     def __repr__(self):
-#         return f"User('{f}self.username{l}', '{f}self.email{l}', '{f}self.image_file{l}')"
+#         return f"User('{f1}self.username{l1}', '{f1}self.email{l1}', '{f1}self.image_file{l1}')"
 
 
 # class Post(db.Model):
@@ -461,14 +466,14 @@ base = Blueprint("base", __name__, template_folder=template_dir(), static_folder
 #     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 #     def __repr__(self):
-#         return f"Post('{f}self.title{l}', '{f}self.date_posted{l}')"
+#         return f"Post('{f1}self.title{l1}', '{f1}self.date_posted{l1}')"
 
 
 # @base.route("/register", methods=['GET', 'POST'])
 # def register():
 #     form = RegistrationForm()
 #     if form.validate_on_submit():
-#         flash(f'Account created for {f}form.username.data{l}!', 'success')
+#         flash(f'Account created for {f1}form.username.data{l1}!', 'success')
 #         return redirect(url_for('home'))
 #     return render_template('register.html', title='Register', form=form)
 
@@ -495,7 +500,7 @@ def index():
 """
 
 
-def app_views_dummy(your_application, app, f="{", l="}"):
+def app_views_dummy(your_application, app, f1=f1, l1=l1):
   return f"""from {your_application} import app
 from flask import (render_template, Blueprint, url_for, flash, redirect)
 from sakyum.utils import template_dir, static_dir
@@ -515,7 +520,7 @@ def index():
 # def register():
 #   form = RegistrationForm()
 #   if form.validate_on_submit():
-#         flash(f'Account created for {f}form.username.data{l}!', 'success')
+#         flash(f'Account created for {f1}form.username.data{l1}!', 'success')
 #         return redirect(url_for('{app}.index'))
 #   return render_template("{app}/register.html", form=form)
 
@@ -558,7 +563,7 @@ class LoginForm(FlaskForm):
 """
 
 
-def app_models_dummy(your_application, f="{", l="}"):
+def app_models_dummy(your_application, f1=f1, l1=l1):
   return f"""from datetime import datetime
 from {your_application}.config import db
 
@@ -575,7 +580,7 @@ class User(db.Model):
     # the `lazy` argument just define when sqlalchemy loads the data from the database
 
     def __repr__(self):
-        return f"User('{f}self.username{l}', '{f}self.email{l}', '{f}self.image_file{l}')"
+        return f"User('{f1}self.username{l1}', '{f1}self.email{l1}', '{f1}self.image_file{l1}')"
 
 
 class Post(db.Model):
@@ -586,7 +591,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"Post('{f}self.title{l}', '{f}self.date_posted{l}')"
+        return f"Post('{f1}self.title{l1}', '{f1}self.date_posted{l1}')"
 # db.create_all()
 
 
