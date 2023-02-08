@@ -443,7 +443,7 @@ db.create_all() # method to create the tables and database
 
 # Flask and Flask-SQLAlchemy initialization here
 
-admin = Admin(app, name='{proj_name}', template_mode='bootstrap3')
+admin = Admin(app, name='{proj_name}')
 # admin.add_view(ModelView(<model_name>, db.session))
 """
 
