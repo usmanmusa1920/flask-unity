@@ -46,5 +46,5 @@ setup(
   include_package_data = True, # include files listed in MANIFEST.in
   
   # List of other python modules which this module depends on.  For example RPi.GPIO
-  install_requires=['flask']
+  install_requires=['flask', 'Flask-Admin>=1.6.0']
 )
