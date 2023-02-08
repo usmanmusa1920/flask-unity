@@ -23,5 +23,5 @@ db.create_all() # method to create the tables and database
 
 # Flask and Flask-SQLAlchemy initialization here
 
-admin = Admin(app, name='todo_project', template_mode='bootstrap3')
+admin = Admin(app, name='todo_project')
 admin.add_view(ModelView(TodoListModel, db.session))
