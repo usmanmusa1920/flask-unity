@@ -556,14 +556,29 @@ class TodoListModel(db.Model):
 # make sure you are within that your virtual environment
 
 # from {your_application}.config import db
-# from {app_name}.models import TodoListModel
+# from todo_app.models import Question, Choice
 
-# db.create_all() # method to create the tables and database
-# r = TodoListModel(name='{__title__}', content='An extension of flask web framework')
+# db.create_all() # method to create the tables and database, if it doesn't create db file
 
-# db.session_add(r)
-# db.commit()
-# TodoListModel.query.all()
+# q = Question(question_text='{__title__}: An extension of flask web framework')
+# db.session.add(q)
+# db.session.commit()
+# the_q = Question.query.get_or_404(1)
 
-# dir(TodoListModel.query) # to see many other method
+#  c1 = Choice(choice_text='Is '{__title__} good', question_id=the_q.id)
+#  c2 = Choice(choice_text='Is '{__title__} good', question_id=the_q.id)
+# db.session.add(c1)
+# db.session.add(c2)
+# db.session.commit()
+
+# to see all our questions
+# Question.query.all()
+# dir(Question.query) # to see many other method
+
+# to see choices related to our question
+# Question.query.get_or_404(1).choices
+
+# to see all our choices
+# Choice.query.all()
+# dir(Choice.query) # to see many other method
 """
