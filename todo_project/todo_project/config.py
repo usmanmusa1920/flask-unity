@@ -9,7 +9,7 @@ db_ORIGIN = Path(__file__).resolve().parent.parent
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = 'wcQG2NTLXVJt4o7Wjs09apHBeDFuAKCR2I0k8k5'
+app.config['SECRET_KEY'] = 'gjF8jHsUOb35rVyXDg6WDu87Tvt1cSfW2tKwdGXRsSY'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 
 # set optional bootswatch theme
@@ -18,10 +18,11 @@ app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
 
 """ You will need to import models themselves before issuing `db.create_all` """
-from todo_app.models import TodoListModel
+from todo_app.models import Question, Choice
 db.create_all() # method to create the tables and database
 
 # Flask and Flask-SQLAlchemy initialization here
 
 admin = Admin(app, name='todo_project')
-admin.add_view(ModelView(TodoListModel, db.session))
+admin.add_view(ModelView(Question, db.session))
+admin.add_view(ModelView(Choice, db.session))
