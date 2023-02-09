@@ -119,7 +119,7 @@ class BaseStructure:
 
           elif _fls == "forms.py":
             # building app `forms.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy()}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy(app_name)}", route_go=False)
 
           elif _fls == "models.py":
             # building app `models.py` default files

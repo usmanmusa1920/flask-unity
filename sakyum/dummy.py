@@ -441,7 +441,10 @@ db = SQLAlchemy(app)
 # from <app_name>.models import <model_name>
 db.create_all() # method to create the tables and database
 
-# Flask and Flask-SQLAlchemy initialization here
+{long_comment}
+  Model views allow you to add a dedicated set of admin
+  pages for managing any model in your database
+{long_comment}
 
 admin = Admin(app, name='{proj_name}')
 # admin.add_view(ModelView(<model_name>, db.session))
@@ -492,16 +495,20 @@ def index():
 """
 
 
-def app_forms_dummy():
+def app_forms_dummy(app_name):
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
-class TodoListForm(FlaskForm):
-  name = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
-  content = TextAreaField('Content', validators=[DataRequired()])
-  submit = SubmitField('create todo')
+class {app_name.capitalize()}_QuestionForm(FlaskForm):
+  question_text = TextAreaField('Question_Text', validators=[DataRequired()])
+  submit = SubmitField('create')
+
+class {app_name.capitalize()}_ChoiceForm(FlaskForm):
+  question_id = StringField('Question_Id', validators=[DataRequired()])
+  choice_text = StringField('Choice_Text', validators=[DataRequired(), Length(min=2, max=20)])
+  submit = SubmitField('create')
 """
 
 
@@ -514,7 +521,7 @@ when ever you create a model, make sure you import it in your
 project config.py file before you run your application to avoid error
 {long_comment}
 
-class Question(db.Model):
+class {app_name.capitalize()}_QuestionModel(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   question_text = db.Column(db.Text, nullable=False)
@@ -527,7 +534,7 @@ class Question(db.Model):
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
 
-class Choice(db.Model):
+class {app_name.capitalize()}_ChoiceModel(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
@@ -545,7 +552,7 @@ class Choice(db.Model):
 
 
 from {your_application}.config import db
-from todo_app.models import Question, Choice
+from todo_app.models import {app_name.capitalize()}_QuestionModel, {app_name.capitalize()}Choice
 
 
 # :method to create the tables and database, if it doesn't create db file,
@@ -553,23 +560,23 @@ run the below command. But if it create just ignore
 db.create_all()
 
 
-q1 = Question(question_text="Is sakyum an extension of flask web framework?")
-q2 = Question(question_text="Is flask better with sakyum")
+q1 = {app_name.capitalize()}_QuestionModel(question_text="Is sakyum an extension of flask web framework?")
+q2 = {app_name.capitalize()}_QuestionModel(question_text="Is flask better with sakyum")
 
 db.session.add(q1)
 db.session.add(q2)
 db.session.commit()
 
-the_q1 = Question.query.get_or_404(1)
-the_q2 = Question.query.get_or_404(2)
+the_q1 = {app_name.capitalize()}_QuestionModel.query.get_or_404(1)
+the_q2 = {app_name.capitalize()}_QuestionModel.query.get_or_404(2)
 
-c1_1 = Choice(choice_text="Yes, it is", question_id=the_q1.id)
-c1_2 = Choice(choice_text="No, it is not", question_id=the_q1.id)
-c1_3 = Choice(choice_text="I don't no", question_id=the_q1.id)
+c1_1 = {app_name.capitalize()}_ChoiceModel(choice_text="Yes, it is", question_id=the_q1.id)
+c1_2 = {app_name.capitalize()}_ChoiceModel(choice_text="No, it is not", question_id=the_q1.id)
+c1_3 = {app_name.capitalize()}_ChoiceModel(choice_text="I don't no", question_id=the_q1.id)
 
-c2_1 = Choice(choice_text="Yes for sure", question_id=the_q2.id)
-c2_2 = Choice(choice_text="Always the best", question_id=the_q2.id)
-c2_3 = Choice(choice_text="All the time", question_id=the_q2.id)
+c2_1 = {app_name.capitalize()}_ChoiceModel(choice_text="Yes for sure", question_id=the_q2.id)
+c2_2 = {app_name.capitalize()}_ChoiceModel(choice_text="Always the best", question_id=the_q2.id)
+c2_3 = {app_name.capitalize()}_ChoiceModel(choice_text="All the time", question_id=the_q2.id)
 
 db.session.add(c1_1)
 db.session.add(c1_2)
@@ -582,17 +589,17 @@ db.session.add(c2_3)
 db.session.commit()
 
 # to see all our questions
-Question.query.all()
-dir(Question.query) # to see many other method
+{app_name.capitalize()}_QuestionModel.query.all()
+dir({app_name.capitalize()}_QuestionModel.query) # to see many other method
 
 # to see choices related to our question number 1
-Question.query.get_or_404(1).choices
+{app_name.capitalize()}_QuestionModel.query.get_or_404(1).choices
 
 # to see all our choices
-Choice.query.all()
-dir(Choice.query) # to see many other method
+{app_name.capitalize()}_ChoiceModel.query.all()
+dir({app_name.capitalize()}_ChoiceModel.query) # to see many other method
 
-for i in Choice.query.all():
+for i in {app_name.capitalize()}_ChoiceModel.query.all():
   i.selector.question_text, i.choice_text
 
 {long_comment}
