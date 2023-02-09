@@ -470,7 +470,7 @@ def app_views_dummy(your_application, app):
   """
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
-from .models import TodoListModel
+# from .models import <model_name>
 # from .forms import <model_form>
 
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
@@ -478,8 +478,17 @@ from .models import TodoListModel
 
 @{app}.route('/{app}', methods=["GET", "POST"])
 def index():
-  todo_list = TodoListModel.query.all()
-  return render_template("{app}/index.html", todo_list=todo_list)
+  
+  {long_comment}
+    if you want to access your db data in html page, replace `<model_name>` with
+    the name of your model and then pass it as a keyword argument in the `render_template`
+    in our case we call it `model_list`:e.g
+
+      # :model_list = <model_name>.query.all()
+      # :return render_template("{app}/index.html", model_list=model_list)
+
+  {long_comment}
+  return render_template("{app}/index.html")
 """
 
 
@@ -534,7 +543,9 @@ class Choice(db.Model):
 # from {your_application}.config import db
 # from todo_app.models import Question, Choice
 
-# db.create_all() # method to create the tables and database, if it doesn't create db file
+{long_comment} method to create the tables and database, if it doesn't create db file,
+run the below command. But if it create just ignore {long_comment}
+# db.create_all()
 
 # q1 = Question(question_text='Is sakyum an extension of flask web framework?')
 # q2 = Question(question_text='Is flask better with sakyum')
