@@ -525,6 +525,23 @@ project config.py file before you run your application to avoid error
 #   content = db.Column(db.Text, nullable=False)
 #   user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+class Question(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+  question_text = db.Column(db.Text, nullable=False)
+  choices = db.relationship('Choice', backref='selector', lazy=True)
+  
+  # image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+  # the `Choice` is the choice model class below
+  # the `selector` is the attribute that we can use to get selector who choose the choice
+  # the `lazy` argument just define when sqlalchemy loads the data from the database
+  
+class Choice(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+  question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+  choice_text = db.Column(db.String(100), nullable=False)
+  
 class TodoListModel(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100), nullable=False, unique=True)
