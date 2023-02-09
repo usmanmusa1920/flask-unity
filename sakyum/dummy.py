@@ -505,51 +505,27 @@ when ever you create a model, make sure you import it in your
 project config.py file before you run your application to avoid error
 {long_comment}
 
-# class User(db.Model):
-#   id = db.Column(db.Integer, primary_key=True)
-#   username = db.Column(db.String(20), unique=True, nullable=False)
-#   email = db.Column(db.String(120), unique=True, nullable=False)
-#   image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-#   password = db.Column(db.String(60), nullable=False)
-#   posts = db.relationship('Post', backref='author', lazy=True)
-  
-#   the `Post` is the post model class below
-#   the `author` is the attribute that we can use to get author who created the post
-#   the `lazy` argument just define when sqlalchemy loads the data from the database
-
-
-# class Post(db.Model):
-#   id = db.Column(db.Integer, primary_key=True)
-#   title = db.Column(db.String(100), nullable=False)
-#   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#   content = db.Column(db.Text, nullable=False)
-#   user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
 class Question(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   question_text = db.Column(db.Text, nullable=False)
   choices = db.relationship('Choice', backref='selector', lazy=True)
-  
-  # image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+
+  def __repr__(self):
+    return f"Question number ('{f1}self.id{l1}', posted on: '{f1}self.date_posted{l1}')"
+    
   # the `Choice` is the choice model class below
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
-  
 class Choice(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+  # you can pass a keyword argument of `unique=True` in the below choice_text field
   choice_text = db.Column(db.String(100), nullable=False)
-  
-class TodoListModel(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(100), nullable=False, unique=True)
-  date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-  content = db.Column(db.Text, nullable=False)
 
   def __repr__(self):
-    return f"Todo list of ('{f1}self.name{l1}', '{f1}self.date_posted{l1}')"
+    return f"Choice of ('{f1}self.question_id{l1}', '{f1}self.date_posted{l1}')"
 
 
 # move on to terminal and paste the following command, ( in python interpreter )
