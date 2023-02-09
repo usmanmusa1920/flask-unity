@@ -501,12 +501,12 @@ from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
-class {app_name.capitalize()}_QuestionForm(FlaskForm):
+class QuestionForm(FlaskForm):
   {long_comment} {app_name.capitalize()} default Question form {long_comment}
   question_text = TextAreaField('Question_Text', validators=[DataRequired()])
   submit = SubmitField('create')
 
-class {app_name.capitalize()}_ChoiceForm(FlaskForm):
+class ChoiceForm(FlaskForm):
   {long_comment} {app_name.capitalize()} default Choice form {long_comment}
   question_id = StringField('Question_Id', validators=[DataRequired()])
   choice_text = StringField('Choice_Text', validators=[DataRequired(), Length(min=2, max=20)])

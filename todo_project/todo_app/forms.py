@@ -4,12 +4,12 @@ from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
-class Todo_app_QuestionForm(FlaskForm):
+class QuestionForm(FlaskForm):
   """ Todo_app default Question form """
   question_text = TextAreaField('Question_Text', validators=[DataRequired()])
   submit = SubmitField('create')
 
-class Todo_app_ChoiceForm(FlaskForm):
+class ChoiceForm(FlaskForm):
   """ Todo_app default Choice form """
   question_id = StringField('Question_Id', validators=[DataRequired()])
   choice_text = StringField('Choice_Text', validators=[DataRequired(), Length(min=2, max=20)])
