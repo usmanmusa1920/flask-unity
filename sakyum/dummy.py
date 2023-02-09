@@ -536,25 +536,45 @@ class Choice(db.Model):
 
 # db.create_all() # method to create the tables and database, if it doesn't create db file
 
-# q = Question(question_text='{__title__}: An extension of flask web framework')
-# db.session.add(q)
-# db.session.commit()
-# the_q = Question.query.get_or_404(1)
+# q1 = Question(question_text='Is sakyum an extension of flask web framework?')
+# q2 = Question(question_text='Is flask better with sakyum')
 
-#  c1 = Choice(choice_text='Is '{__title__} good', question_id=the_q.id)
-#  c2 = Choice(choice_text='Is '{__title__} good', question_id=the_q.id)
-# db.session.add(c1)
-# db.session.add(c2)
+# db.session.add(q1)
+# db.session.add(q2)
+# db.session.commit()
+
+# the_q1 = Question.query.get_or_404(1)
+# the_q2 = Question.query.get_or_404(2)
+
+# c1_1 = Choice(choice_text='Yes, it is', question_id=the_q1.id)
+# c1_2 = Choice(choice_text='No, it is not', question_id=the_q1.id)
+# c1_3 = Choice(choice_text='I don\'t no', question_id=the_q1.id)
+
+# c2_1 = Choice(choice_text='Yes for sure', question_id=the_q2.id)
+# c2_2 = Choice(choice_text='Always the best', question_id=the_q2.id)
+# c2_3 = Choice(choice_text='All the time', question_id=the_q2.id)
+
+# db.session.add(c1_1)
+# db.session.add(c1_2)
+# db.session.add(c1_3)
+
+# db.session.add(c2_1)
+# db.session.add(c2_2)
+# db.session.add(c2_3)
+
 # db.session.commit()
 
 # to see all our questions
 # Question.query.all()
 # dir(Question.query) # to see many other method
 
-# to see choices related to our question
+# to see choices related to our question number 1
 # Question.query.get_or_404(1).choices
 
 # to see all our choices
 # Choice.query.all()
 # dir(Choice.query) # to see many other method
+
+# for i in Choice.query.all():
+#   i.selector.question_text, i.choice_text
 """
