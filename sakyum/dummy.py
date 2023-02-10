@@ -80,6 +80,52 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
 /_/ /  | /  | / /__/ /      |
 .............................</pre></p>
             <p>Your project ({name}) default page</p>
+            <div class="urls">
+              {f1}% if urls_list|length > 1 %{l1}
+                <p>List of urls</p>
+              {f1}% endif %{l1}
+              
+              {f1}% for url in urls_list %{l1}
+                {f1}% if url.name == "base" %{l1}
+                  <!-- pass -->
+                {f1}% else %{l1}
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}1</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                  </br>
+                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}0</a>
+                  </br>
+                {f1}% endif %{l1}
+              {f1}% endfor %{l1}
+            </div>
             {f1}% block main %{l1}
               <!-- main content -->
             {f1}% endblock main %{l1}
@@ -293,6 +339,32 @@ body{f1}
   font-size: 1rem;
 {l1}
 
+.urls{f1}
+  height: 50%;
+  width: 200px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  background: white;
+{l1}
+
+@media only screen and (max-width: 700px){f1}
+  .urls{f1}
+    height: 30%;
+    width: 70%;
+    padding: 5px;
+    overflow-y: scroll;
+    background: white;
+  {l1}
+{l1}
+
+.urls a{f1}
+  text-decoration: none;
+  color: dodgerblue;
+{l1}
+
 .three_col{f1}
   margin: 20px 0;
   width: 100%;
@@ -402,11 +474,10 @@ if __name__ == "__main__":
   boot.run()
 
 from {project} import app
-from {project}.routes import base
-# from <app_name>.views import <app_name>
+from {project}.routes import urls
 
-app.register_blueprint(base)
-# app.register_blueprint(<app_name>)
+for url in urls:
+  app.register_blueprint(url)
 
 app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
@@ -447,22 +518,31 @@ db.create_all() # method to create the tables and database
 {long_comment}
 
 admin = Admin(app, name='{proj_name}')
-# admin.add_view(ModelView(<model_name>, db.session))
+
+{long_comment} pass every model that you want to manage in admin page in the below list (reg_models) {long_comment}
+reg_models = []
+
+for reg_model in reg_models:
+  admin.add_view(ModelView(reg_model, db.session))
 """
 
 
 def pro_routes_dummy(proj, f1=f1, l1=l1):
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
-# from <app_name>.forms import <form_name>
 from flask import render_template
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
+# from <app_name>.views import <app_name>
+{long_comment} pass (append) your app blueprint that you import into the `urls` list below,
+  :warning  -->  don\'t ommit the base blueprint {long_comment}
+urls = [base]
 
 @base.route('/')
 def index():
-  return render_template("index.html")
+  urls_list = urls
+  return render_template("index.html", urls_list=urls_list)
 """
 
 
@@ -496,6 +576,8 @@ def index():
 
 
 def app_forms_dummy(app_name):
+  if app_name != "todo_app":
+    return f""""""
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
