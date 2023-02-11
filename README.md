@@ -40,13 +40,13 @@ For you to start an app within your project (`todo_project`), run the following 
 this will create an app within your project (`todo_project`), the `-a` flag is for the app name in this example it is called `todo_app`
 
 ## Run flask server
-once the app is created open the `thunder.py` file of your project and import your app `views.py` file
+once the app is created open the folder in your project folder with the same name of the parent folder example, let say we have a project called `todo_project`, in the todo_project folder you will see a sub folder called also `todo_project` that is the one we mean, (`project_name/project_name/routes.py`) file of your project and import your app `views.py` file
 
 `from todo_app.views import todo_app`
 
-after that, register it to the blueprint template by
+after that, append it in the list `urls` provided in the `routes.py` file by
 
-`app.register_blueprint(todo_app)`
+`urls = [base, your_app]`
 
 once you register the app, boot up the flask webser by
 
@@ -69,6 +69,9 @@ Also, you can give your desire ip address/host by using `-H` or `--host` flag, e
 For development server, you can give a debug value to True by specifying `-d` flag or `--debug` e.g
 
 `python thunder.py boot -p 7000 -d True` or `python thunder.py boot -p 7000 --debug True`
+
+# Register model to admin page
+To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Down below the file you will see a list called `reg_models = []`, above it import your app model that you want to register, then it append it in the `reg_models = []` list. That will register your model in the admin page and you will see it if you vist the admin page
 
 # Recommendation
 This software will not be compatible with `windows operating system` use other `OS` such as `linux` or `macOS`
