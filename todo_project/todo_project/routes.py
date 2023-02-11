@@ -8,11 +8,14 @@ base = Blueprint("base", __name__, template_folder=template_dir(), static_folder
 errors = Blueprint("errors", __name__, template_folder=template_dir(temp_from_pkg=True))
 
 
-from todo_app.views import todo_app
-""" register your app, by passing (append) your app blueprint
-    that you import into the `reg_blueprints` list below,
-      :warning  -->  don't ommit the base blueprint, and the errors blueprint """
-reg_blueprints = [base, errors, todo_app]
+"""
+register your app after importing it blueprint from the app views.py file,
+by passing (append) your app blueprint that you import
+into the `reg_blueprints` list below,
+  :warning  -->  don't ommit the base blueprint, and the errors blueprint
+"""
+# from <app_name>.views import <app_name>
+reg_blueprints = [base, errors]
 
 
 @base.route('/')

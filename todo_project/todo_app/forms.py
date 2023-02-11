@@ -9,6 +9,7 @@ class QuestionForm(FlaskForm):
   question_text = TextAreaField('Question_Text', validators=[DataRequired()])
   submit = SubmitField('create')
 
+
 class ChoiceForm(FlaskForm):
   """ Todo_app default Choice form """
   question_id = StringField('Question_Id', validators=[DataRequired()])

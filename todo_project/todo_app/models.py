@@ -2,10 +2,12 @@
 from datetime import datetime
 from todo_project.config import db
 
+
 """
 when ever you create a model, make sure you import it in your
-project config.py file before you run your application to avoid error
+project config.py file in other to see it in admin page
 """
+
 
 class QuestionModel(db.Model):
   """ Todo_app default Question model """
@@ -14,12 +16,16 @@ class QuestionModel(db.Model):
   question_text = db.Column(db.Text, nullable=False)
   choices = db.relationship('ChoiceModel', backref='selector', lazy=True)
 
+  def __str__(self):
+    return f"Question {self.id}: {self.question_text}"
+
   def __repr__(self):
-    return f"Question number ('{self.id}', posted on: '{self.date_posted}')"
+    return f"Question {self.id}: {self.question_text}"
     
   # the `ChoiceModel` is the choice model class below
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
+
 
 class ChoiceModel(db.Model):
   """ Todo_app default Choice model """
@@ -30,8 +36,11 @@ class ChoiceModel(db.Model):
   # that will make it unique across the entire table of choice
   choice_text = db.Column(db.String(100), nullable=False)
 
+  def __str__(self):
+    return f"{self.choice_text} of {self.question_id}"
+
   def __repr__(self):
-    return f"Choice of ('{self.question_id}', '{self.date_posted}')"
+    return f"{self.choice_text} of {self.question_id}"
 
 
 """
@@ -44,7 +53,7 @@ from todo_app.models import QuestionModel, ChoiceModel
 
 
 # :method to create the tables and database, if it doesn't create db file,
-run the below command. But if it create just ignore
+# :run the below command. But if it create just ignore
 db.create_all()
 
 
@@ -89,5 +98,6 @@ dir(ChoiceModel.query) # to see many other method
 
 for i in ChoiceModel.query.all():
   i.selector.question_text, i.choice_text
+
 
 """

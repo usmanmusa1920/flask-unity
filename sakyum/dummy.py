@@ -436,7 +436,6 @@ def thunder_dummy(project):
   return f"""from sakyum import Boot
   
 boot = Boot()
-
 if __name__ == "__main__":
   boot.run()
 
@@ -445,7 +444,6 @@ from {project}.routes import reg_blueprints
 
 for reg_blueprint in reg_blueprints:
   app.register_blueprint(reg_blueprint)
-
 app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
 
@@ -474,22 +472,24 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
 
+
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
 # from <app_name>.models import <model_name>
 db.create_all() # method to create the tables and database
 
+
 {long_comment}
-  Model views allow you to add a dedicated set of admin
-  pages for managing any model in your database
+Model views allow you to add a dedicated set of admin
+pages for managing any model in your database
 {long_comment}
 admin = Admin(app, name='{proj_name}')
 
+
 {long_comment}
-  Register your model, by passing every model that you want
-  to manage in admin page in the below list (reg_models)
+Register your model, by passing every model that you want
+to manage in admin page in the below list (reg_models)
 {long_comment}
 reg_models = []
-
 for reg_model in reg_models:
   admin.add_view(ModelView(reg_model, db.session))
 """
@@ -505,10 +505,13 @@ base = Blueprint("base", __name__, template_folder=template_dir(), static_folder
 errors = Blueprint("errors", __name__, template_folder=template_dir(temp_from_pkg=True))
 
 
+{long_comment}
+register your app after importing it blueprint from the app views.py file,
+by passing (append) your app blueprint that you import
+into the `reg_blueprints` list below,
+  :warning  -->  don\'t ommit the base blueprint, and the errors blueprint
+{long_comment}
 # from <app_name>.views import <app_name>
-{long_comment} register your app, by passing (append) your app blueprint
-    that you import into the `reg_blueprints` list below,
-      :warning  -->  don\'t ommit the base blueprint, and the errors blueprint {long_comment}
 reg_blueprints = [base, errors]
 
 
@@ -554,16 +557,6 @@ from sakyum.utils import template_dir, static_dir
 
 @{app}.route('/{app}', methods=["GET", "POST"])
 def index():
-  
-  {long_comment}
-    if you want to access your db data in html page, replace `<model_name>` with
-    the name of your model and then pass it as a keyword argument in the `render_template`
-    in our case we call it `model_list`:e.g
-
-      # :model_list = <model_name>.query.all()
-      # :return render_template("{app}/index.html", model_list=model_list)
-
-  {long_comment}
   return render_template("{app}/index.html")
 """
 
@@ -579,6 +572,7 @@ class QuestionForm(FlaskForm):
   question_text = TextAreaField('Question_Text', validators=[DataRequired()])
   submit = SubmitField('create')
 
+
 class ChoiceForm(FlaskForm):
   {long_comment} {app_name.capitalize()} default Choice form {long_comment}
   question_id = StringField('Question_Id', validators=[DataRequired()])
@@ -591,10 +585,12 @@ def app_models_dummy(your_application, f1=f1, l1=l1, app_name=False, long_commen
   return f"""from datetime import datetime
 from {your_application}.config import db
 
+
 {long_comment}
 when ever you create a model, make sure you import it in your
-project config.py file before you run your application to avoid error
+project config.py file in other to see it in admin page
 {long_comment}
+
 
 class QuestionModel(db.Model):
   {long_comment} {app_name.capitalize()} default Question model {long_comment}
@@ -603,12 +599,16 @@ class QuestionModel(db.Model):
   question_text = db.Column(db.Text, nullable=False)
   choices = db.relationship('ChoiceModel', backref='selector', lazy=True)
 
+  def __str__(self):
+    return f"Question {f1}self.id{l1}: {f1}self.question_text{l1}"
+
   def __repr__(self):
-    return f"Question number ('{f1}self.id{l1}', posted on: '{f1}self.date_posted{l1}')"
+    return f"Question {f1}self.id{l1}: {f1}self.question_text{l1}"
     
   # the `ChoiceModel` is the choice model class below
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
+
 
 class ChoiceModel(db.Model):
   {long_comment} {app_name.capitalize()} default Choice model {long_comment}
@@ -619,8 +619,11 @@ class ChoiceModel(db.Model):
   # that will make it unique across the entire table of choice
   choice_text = db.Column(db.String(100), nullable=False)
 
+  def __str__(self):
+    return f"{f1}self.choice_text{l1} of {f1}self.question_id{l1}"
+
   def __repr__(self):
-    return f"Choice of ('{f1}self.question_id{l1}', '{f1}self.date_posted{l1}')"
+    return f"{f1}self.choice_text{l1} of {f1}self.question_id{l1}"
 
 
 {long_comment}
@@ -633,7 +636,7 @@ from todo_app.models import QuestionModel, ChoiceModel
 
 
 # :method to create the tables and database, if it doesn't create db file,
-run the below command. But if it create just ignore
+# :run the below command. But if it create just ignore
 db.create_all()
 
 
@@ -678,6 +681,7 @@ dir(ChoiceModel.query) # to see many other method
 
 for i in ChoiceModel.query.all():
   i.selector.question_text, i.choice_text
+
 
 {long_comment}
 """
