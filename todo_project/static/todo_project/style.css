@@ -1,0 +1,272 @@
+/* @sakyum, todo_project (project) style.css file */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  outline:0;
+  /* font-size:100%; */
+  vertical-align:baseline;
+  background:transparent;
+}
+
+body{
+  background: lightgrey;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 15px;
+  font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
+}
+
+.container{
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.header{
+  top: 0;
+  width: 100%;
+  height: 11.5vh;
+  position: fixed;
+  background: rgb(50, 50, 63);
+  border-bottom: solid black 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header_col{
+  width: 90%;
+  padding: 20px 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 700px){
+  .header_col{
+    padding: 18px 5px;
+  }
+}
+
+.head_left{
+  width: 45%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 700px){
+  .logo{
+    font-size: 20px;
+  }
+}
+
+.logo a{
+  color: white;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.head_right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.head_right a{
+  color: white;
+  margin-left: 15px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.head_right a:hover{
+  text-decoration: underline solid 3px;
+}
+
+@media only screen and (max-width: 700px){
+  .link_0, .link_1, .link_2, .link_3{
+    display: none;
+  }
+}
+
+.head_right a img{
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+}
+
+.alert{
+  display: block;
+  position: relative;
+}
+
+.main{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 12vh;
+}
+
+.main_column{
+  width: 90%;
+  padding: 10px 70px;
+}
+
+@media only screen and (max-width: 700px){
+  .main_column{
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.mini{
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini_column{
+  width: 80%;
+  max-width: 1024px;
+  height: 45vh;
+  border-radius: 7px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 700px){
+  .mini_column{
+    max-width: 100%;
+    width: 90%;
+    height: 60vh;
+    padding: 0;
+  }
+}
+
+.mini_column p{
+  max-width: 80%;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 1rem;
+}
+
+.blueprint_list{
+  height: 50%;
+  width: 200px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  background: white;
+}
+
+@media only screen and (max-width: 700px){
+  .blueprint_list{
+    height: 30%;
+    width: 70%;
+    padding: 5px;
+    overflow-y: scroll;
+    background: white;
+  }
+}
+
+.blueprint_list a{
+  text-decoration: none;
+  color: dodgerblue;
+}
+
+.three_col{
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 700px){
+  .three_col{
+    margin: 10px 0;
+    flex-direction: column;
+    align-items: space-evenly;
+  }
+}
+
+.three_col div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  min-width: 50%;
+}
+
+.three_col div p{
+  max-width: 80%;
+  font-size: 1.1rem;
+  line-height: 35px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 700px){
+  .three_col div p{
+    max-width: 90%;
+    font-size: 1rem;
+    line-height: 25px;
+    margin-top: 5px;
+  }
+}
+
+.footer{
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: solid black 1px;
+}
+
+@media only screen and (max-width: 700px){
+  .footer{
+    margin: 10px 0;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+  }
+}
+
+.footer p{
+  max-width: 80%;
+  font-size: 1.1rem;
+  line-height: 35px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 700px){
+  .footer p{
+    max-width: 90%;
+    font-size: 1rem;
+    line-height: 25px;
+    margin-top: 5px;
+  }
+}
+  

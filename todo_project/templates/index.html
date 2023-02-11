@@ -1,0 +1,95 @@
+<!-- @sakyum, todo_project (project) index.html page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ url_for('base.static', filename='/media/favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('base.static', filename='style.css') }}">
+  {% block head %}
+    <!-- child css file link -->
+  {% endblock head %}
+  <script type="text/javascript" src="{{ url_for('base.static', filename='index.js') }}"></script>
+  <script src="main.js"></script>
+  <title>Sakyum - todo_project</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header_col">
+        <div class="head_left">
+          <h1 class="logo">
+            <a href="/">Sakyum</a>
+          </h1>
+        </div>
+
+        <div class="head_right">
+          <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
+          <a class="link_1">|</a>
+          <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
+          <a href="/admin" class="link_3" target="_blank">Admin</a>
+          <a onclick="test()" class="alert">
+            <img src="{{ url_for('base.static', filename='/media/alert.png') }}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="main">
+      <div class="main_column">
+        <div class="mini">
+        <!--
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        -->
+          <div class="mini_column">
+            <p><pre>  ...........................
+    _
+  /_  /|   / / |/ /  / /\  /|
+   / /_|  /_/  / /  / /  \/ |
+/_/ /  | /  | / /__/ /      |
+.............................</pre></p>
+            <p>Your project (todo_project) default page</p>
+            {% if blueprints_list|length > 1 %}
+              <div class="blueprint_list">
+                <p>List of blueprints</p>
+                {% for blueprint in blueprints_list %}
+                  {% if blueprint.name == "base" %}
+                    <!-- pass -->
+                  {% else %}
+                    <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
+                    </br>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% block main %}
+              <!-- main content -->
+            {% endblock main %}
+          </div>
+        </div>
+
+        <div class="three_col">
+          <div>
+            <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><pre>============================
+ @ sakyum software - v0.0.2
+============================</pre></p>
+    </div>
+  </div>
+</body>
+</html>
