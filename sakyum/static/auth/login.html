@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block main %}
+  <h1>Login</h1>
+  <div>
+      <form method="post" action="">
+        {{ form.hidden_tag() }}
+        {{ form.email.label(class="form-control-label") }}
+        {{ form.email(class="form-control form-control-lg is-invalid") }}
+        <br>
+        {{ form.password.label(class="form-control-label") }}
+        {{ form.password(class="form-control form-control-lg is-invalid") }}
+        <br>
+        {{ form.remember.label(class="form-control-label") }}
+        {{ form.remember(class="form-control form-control-lg is-invalid") }}
+        <br>
+        {{ form.submit.label(class="form-control-label") }}
+        {{ form.submit(class="form-control form-control-lg is-invalid") }}
+        <br>
+        <small>Don't have an account <a href="{{ url_for('blogy.register') }}">register</a></small>
+      </form>
+  </div>
+{% endblock main %}
