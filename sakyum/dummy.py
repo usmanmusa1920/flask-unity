@@ -80,14 +80,14 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
 /_/ /  | /  | / /__/ /      |
 .............................</pre></p>
             <p>Your project ({name}) default page</p>
-            {f1}% if urls_list|length > 1 %{l1}
-              <div class="urls">
-                <p>List of urls</p>
-                {f1}% for url in urls_list %{l1}
-                  {f1}% if url.name == "base" %{l1}
+            {f1}% if blueprints_list|length > 1 %{l1}
+              <div class="blueprint_list">
+                <p>List of blueprints</p>
+                {f1}% for blueprint in blueprints_list %{l1}
+                  {f1}% if blueprint.name == "base" %{l1}
                     <!-- pass -->
                   {f1}% else %{l1}
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    <a href="/{f2}blueprint.name{l2}">{f2}blueprint.name{l2}</a>
                     </br>
                   {f1}% endif %{l1}
                 {f1}% endfor %{l1}
@@ -306,7 +306,7 @@ body{f1}
   font-size: 1rem;
 {l1}
 
-.urls{f1}
+.blueprint_list{f1}
   height: 50%;
   width: 200px;
   padding: 5px;
@@ -318,7 +318,7 @@ body{f1}
 {l1}
 
 @media only screen and (max-width: 700px){f1}
-  .urls{f1}
+  .blueprint_list{f1}
     height: 30%;
     width: 70%;
     padding: 5px;
@@ -327,7 +327,7 @@ body{f1}
   {l1}
 {l1}
 
-.urls a{f1}
+.blueprint_list a{f1}
   text-decoration: none;
   color: dodgerblue;
 {l1}
@@ -441,10 +441,10 @@ if __name__ == "__main__":
   boot.run()
 
 from {project} import app
-from {project}.routes import urls
+from {project}.routes import reg_blueprints
 
-for url in urls:
-  app.register_blueprint(url)
+for reg_blueprint in reg_blueprints:
+  app.register_blueprint(reg_blueprint)
 
 app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
@@ -472,7 +472,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db
 
 # set optional bootswatch theme
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-
 db = SQLAlchemy(app)
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
@@ -483,10 +482,12 @@ db.create_all() # method to create the tables and database
   Model views allow you to add a dedicated set of admin
   pages for managing any model in your database
 {long_comment}
-
 admin = Admin(app, name='{proj_name}')
 
-{long_comment} Register your model, by passing every model that you want to manage in admin page in the below list (reg_models) {long_comment}
+{long_comment}
+  Register your model, by passing every model that you want
+  to manage in admin page in the below list (reg_models)
+{long_comment}
 reg_models = []
 
 for reg_model in reg_models:
@@ -494,29 +495,54 @@ for reg_model in reg_models:
 """
 
 
-def pro_routes_dummy(proj, f1=f1, l1=l1):
+def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
 from flask import render_template
 
+
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
+errors = Blueprint("errors", __name__, template_folder=template_dir(temp_from_pkg=True))
+
 
 # from <app_name>.views import <app_name>
-{long_comment} register your app, by passing (append) your app blueprint that you import into the `urls` list below,
-  :warning  -->  don\'t ommit the base blueprint {long_comment}
-urls = [base]
+{long_comment} register your app, by passing (append) your app blueprint
+    that you import into the `reg_blueprints` list below,
+      :warning  -->  don\'t ommit the base blueprint, and the errors blueprint {long_comment}
+reg_blueprints = [base, errors]
+
 
 @base.route('/')
 def index():
-  urls_list = urls
-  return render_template("index.html", urls_list=urls_list)
+  {long_comment} removing error pages in app pages list, if it exist {long_comment}
+  if errors in reg_blueprints:
+    # finding the index of the errors blueprint in the list
+    err_index = reg_blueprints.index(errors)
+    # removing it from the list using it index number
+    reg_blueprints.pop(err_index)
+  blueprints_list = reg_blueprints
+  return render_template("index.html", blueprints_list=blueprints_list)
+  
+  
+@errors.app_errorhandler(404)
+def error_404(error):
+  return render_template('404.html'), 404
+
+
+@errors.app_errorhandler(403)
+def error_403(error):
+  return render_template('403.html'), 403
+
+
+@errors.app_errorhandler(500)
+def error_500(error):
+  return render_template('500.html'), 500
 """
 
 
-def app_views_dummy(your_application, app):
+def app_views_dummy(app):
   """
-  # :your_application is the entire project name,
-    the `your_application` it does nothing now, but it might be useful for feature veersion
+  # :app is the application name that you create within your project
   """
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import template_dir, static_dir
@@ -543,8 +569,6 @@ def index():
 
 
 def app_forms_dummy(app_name):
-  if app_name != "todo_app":
-    return f""""""
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
