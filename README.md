@@ -32,8 +32,14 @@ project("todo_project")
 
 the command you type on terminal or the code you paste in a file will create a project called `todo_project` now cd into the `todo_project` directory.
 
+
+# Server
+Now you can boot up the flask server, by cd into the your project base folder (todo_project), and run the below command:
+`python thunder.py boot`
+
+
 ## Create flask project app
-For you to start an app within your project (`todo_project`), run the following command by giving the name you want your app to be, in our case we will call our app `todo_app`
+For you to start an app within your project (`todo_project`) run the following command, in that working directory (todo_project) by giving the name you want your app to be, in our case we will call our app `todo_app`
 
 `python3 thunder.py create_app -a todo_app`
 
