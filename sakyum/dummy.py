@@ -80,52 +80,51 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
 /_/ /  | /  | / /__/ /      |
 .............................</pre></p>
             <p>Your project ({name}) default page</p>
-            <div class="urls">
-              {f1}% if urls_list|length > 1 %{l1}
+            {f1}% if urls_list|length > 1 %{l1}
+              <div class="urls">
                 <p>List of urls</p>
-              {f1}% endif %{l1}
-              
-              {f1}% for url in urls_list %{l1}
-                {f1}% if url.name == "base" %{l1}
-                  <!-- pass -->
-                {f1}% else %{l1}
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}1</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                  </br>
-                  <a href="/{f2}url.name{l2}">{f2}url.name{l2}0</a>
-                  </br>
-                {f1}% endif %{l1}
-              {f1}% endfor %{l1}
-            </div>
+                {f1}% for url in urls_list %{l1}
+                  {f1}% if url.name == "base" %{l1}
+                    <!-- pass -->
+                  {f1}% else %{l1}
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}1</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
+                    </br>
+                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}0</a>
+                    </br>
+                  {f1}% endif %{l1}
+                {f1}% endfor %{l1}
+              </div>
+            {f1}% endif %{l1}
             {f1}% block main %{l1}
               <!-- main content -->
             {f1}% endblock main %{l1}
@@ -519,7 +518,7 @@ db.create_all() # method to create the tables and database
 
 admin = Admin(app, name='{proj_name}')
 
-{long_comment} pass every model that you want to manage in admin page in the below list (reg_models) {long_comment}
+{long_comment} Register your model, by passing every model that you want to manage in admin page in the below list (reg_models) {long_comment}
 reg_models = []
 
 for reg_model in reg_models:
@@ -535,7 +534,7 @@ from flask import render_template
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
 # from <app_name>.views import <app_name>
-{long_comment} pass (append) your app blueprint that you import into the `urls` list below,
+{long_comment} register your app, by passing (append) your app blueprint that you import into the `urls` list below,
   :warning  -->  don\'t ommit the base blueprint {long_comment}
 urls = [base]
 
