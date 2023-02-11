@@ -2,7 +2,6 @@ from setuptools import setup
 from setuptools import find_packages
 
 
-
 setup(
   
   # name of the main package (sakyum)
@@ -46,5 +45,5 @@ setup(
   include_package_data = True, # include files listed in MANIFEST.in
   
   # List of other python modules which this module depends on.  For example RPi.GPIO
-  install_requires=['flask', 'Flask-Admin>=1.6.0']
+  install_requires=['blinker==1.5', 'click==8.1.3', 'dnspython==2.2.1', 'email-validator==1.3.0', 'Flask==2.2.2', 'Flask-Admin==1.6.0', 'Flask-Mail==0.9.1', 'Flask-SQLAlchemy==3.0.2', 'Flask-WTF==1.0.1', 'greenlet==2.0.1', 'idna==3.4', 'importlib-metadata==6.0.0', 'itsdangerous==2.1.2', 'Jinja2==3.1.2', 'MarkupSafe==2.1.1', 'SQLAlchemy==1.4.45', 'Werkzeug==2.2.2', 'WTForms==3.0.1', 'zipp==3.11.0']
 )
