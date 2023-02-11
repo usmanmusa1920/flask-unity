@@ -171,7 +171,7 @@ body{
   font-size: 1rem;
 }
 
-.urls{
+.blueprint_list{
   height: 50%;
   width: 200px;
   padding: 5px;
@@ -183,7 +183,7 @@ body{
 }
 
 @media only screen and (max-width: 700px){
-  .urls{
+  .blueprint_list{
     height: 30%;
     width: 70%;
     padding: 5px;
@@ -192,7 +192,7 @@ body{
   }
 }
 
-.urls a{
+.blueprint_list a{
   text-decoration: none;
   color: dodgerblue;
 }

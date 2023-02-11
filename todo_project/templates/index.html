@@ -58,46 +58,14 @@
 /_/ /  | /  | / /__/ /      |
 .............................</pre></p>
             <p>Your project (todo_project) default page</p>
-            {% if urls_list|length > 1 %}
-              <div class="urls">
-                <p>List of urls</p>
-                {% for url in urls_list %}
-                  {% if url.name == "base" %}
+            {% if blueprints_list|length > 1 %}
+              <div class="blueprint_list">
+                <p>List of blueprints</p>
+                {% for blueprint in blueprints_list %}
+                  {% if blueprint.name == "base" %}
                     <!-- pass -->
                   {% else %}
-                    <a href="/{{url.name}}">{{url.name}}1</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}</a>
-                    </br>
-                    <a href="/{{url.name}}">{{url.name}}0</a>
+                    <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
                     </br>
                   {% endif %}
                 {% endfor %}

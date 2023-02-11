@@ -7,9 +7,9 @@ if __name__ == "__main__":
   boot.run()
 
 from todo_project import app
-from todo_project.routes import urls
+from todo_project.routes import reg_blueprints
 
-for url in urls:
-  app.register_blueprint(url)
+for reg_blueprint in reg_blueprints:
+  app.register_blueprint(reg_blueprint)
 
 app.run(debug=boot.d, port=boot.p, host=boot.h)
