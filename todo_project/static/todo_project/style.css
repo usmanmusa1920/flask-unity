@@ -171,6 +171,32 @@ body{
   font-size: 1rem;
 }
 
+.urls{
+  height: 50%;
+  width: 200px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  background: white;
+}
+
+@media only screen and (max-width: 700px){
+  .urls{
+    height: 30%;
+    width: 70%;
+    padding: 5px;
+    overflow-y: scroll;
+    background: white;
+  }
+}
+
+.urls a{
+  text-decoration: none;
+  color: dodgerblue;
+}
+
 .three_col{
   margin: 20px 0;
   width: 100%;

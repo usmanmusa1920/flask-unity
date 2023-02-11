@@ -87,39 +87,7 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
                   {f1}% if url.name == "base" %{l1}
                     <!-- pass -->
                   {f1}% else %{l1}
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}1</a>
-                    </br>
                     <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}</a>
-                    </br>
-                    <a href="/{f2}url.name{l2}">{f2}url.name{l2}0</a>
                     </br>
                   {f1}% endif %{l1}
                 {f1}% endfor %{l1}

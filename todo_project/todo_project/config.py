@@ -9,7 +9,7 @@ db_ORIGIN = Path(__file__).resolve().parent.parent
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = 'Mj7haL5lNAUuZbVkkOhqRsyBKci0TXHPFpDfrHd3m1c'
+app.config['SECRET_KEY'] = 'efMUyOXb6aOGPCBIk3DLYZsBt6vvrCZTD7'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 
 # set optional bootswatch theme
@@ -27,5 +27,9 @@ db.create_all() # method to create the tables and database
 """
 
 admin = Admin(app, name='todo_project')
-admin.add_view(ModelView(QuestionModel, db.session))
-admin.add_view(ModelView(ChoiceModel, db.session))
+
+""" Register your model, by passing every model that you want to manage in admin page in the below list (reg_models) """
+reg_models = [QuestionModel, ChoiceModel]
+
+for reg_model in reg_models:
+  admin.add_view(ModelView(reg_model, db.session))
