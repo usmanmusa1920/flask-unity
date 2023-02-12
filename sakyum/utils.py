@@ -109,14 +109,6 @@ def template_dir(temp_from_pkg=False):
   if temp_from_pkg:
     return str(rel_path) + "/static/errors"
   return os.getcwd() + "/templates"
-<<<<<<< HEAD
-
-def readIMG(p):
-  """read default alert image, for sure static file work"""
-  with open(p, "rb") as i:
-    r = i.read()
-  return r
-=======
   
 
 def readIMG(p):
@@ -125,16 +117,12 @@ def readIMG(p):
     r = i.read()
   return r
   
->>>>>>> version-0.0.2
 
 def stylePage(name, _is):
   """function for styling project application description default page"""
   desc = "Your " + name + " " + _is + " default pages"
   desc_center = desc.center(len(desc) + 6)
   border = "=" * len(desc_center)
-<<<<<<< HEAD
-  return [desc_center, border]
-=======
   return [desc_center, border]
   
 
@@ -272,4 +260,3 @@ def security(_passwd, r_min=260000, r_max=400000, r_step=7) -> list:
 
   #      [salt,     iteration, hashed_pwd,  ingredients]
   return [pwd_salt, pwd_itter, pwd_hash[0], pwd_hash[1]]
->>>>>>> version-0.0.2

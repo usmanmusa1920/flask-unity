@@ -2,11 +2,7 @@
 
 from . import __title__
 from . import __version__
-<<<<<<< HEAD
-from . utils import stylePage
-=======
 from .utils import stylePage, Security
->>>>>>> version-0.0.2
 
 secret = Security()
 secure_app = secret.passcode_salt
@@ -26,92 +22,17 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
     _is = "project"
     static_url = "base"
     return f"""<!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{f} url_for('base.static', filename='/media/favicon.ico') {l}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="{f} url_for('{static_url}.static', filename='style.css') {l}">
-  <script type="text/javascript" src="{f} url_for('{static_url}.static', filename='index.js') {l}"></script>
-  <script src="main.js"></script>
-  <title>Sakyum - {name}</title>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="header_col">
-        <div class="head_left">
-          <h1 class="logo">
-            <a href="#">Sakyum</a>
-          </h1>
-        </div>
-
-        <div class="head_right">
-          <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
-          <a class="link_1">|</a>
-          <a href="#" class="link_2" target="_blank">Docs</a>
-          <a href="#" class="link_3" target="_blank">Install</a>
-          <a onclick="test()" class="alert">
-            <img src="{f} url_for('base.static', filename='/media/alert.png') {l}" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="main">
-      <div class="main_column">
-        <div class="mini">
-          <div class="mini_column">
-            <p><pre>  ...........................
-    _
-  /_  /|   / / |/ /  / /\  /|
-   / /_|  /_/  / /  / /  \/ |
-/_/ /  | /  | / /__/ /      |
-.............................</pre></p>
-            <p>Your project ({name}) default page</p>
-          </div>
-        </div>
-
-        <div class="three_col">
-          <div>
-            <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p><pre>============================
- @ {__title__} software - v{__version__}
-============================</pre></p>
-    </div>
-  </div>
-</body>
-</html>
-"""
-  page_desc = stylePage(name, _is)
-  return f"""<!DOCTYPE html>
-=======
->>>>>>> version-0.0.2
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <link rel="shortcut icon" href="{f} url_for('base.static', filename='/media/favicon.ico') {l}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="{f} url_for('{static_url}.static', filename='style.css') {l}">
-  <script type="text/javascript" src="{f} url_for('{static_url}.static', filename='index.js') {l}"></script>
-=======
   <link rel="shortcut icon" href="{f2} url_for('base.static', filename='/media/favicon.ico') {l2}" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="{f2} url_for('{static_url}.static', filename='style.css') {l2}">
   {f1}% block head %{l1}
     <!-- child css file link -->
   {f1}% endblock head %{l1}
   <script type="text/javascript" src="{f2} url_for('{static_url}.static', filename='index.js') {l2}"></script>
->>>>>>> version-0.0.2
   <script src="main.js"></script>
   <title>Sakyum - {name}</title>
 </head>
@@ -121,28 +42,17 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
       <div class="header_col">
         <div class="head_left">
           <h1 class="logo">
-<<<<<<< HEAD
-            <a href="#">Sakyum</a>
-=======
             <a href="/">Sakyum</a>
->>>>>>> version-0.0.2
           </h1>
         </div>
 
         <div class="head_right">
           <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
           <a class="link_1">|</a>
-<<<<<<< HEAD
-          <a href="#" class="link_2" target="_blank">Docs</a>
-          <a href="#" class="link_3" target="_blank">Install</a>
-          <a onclick="test()" class="alert">
-            <img src="{f} url_for('base.static', filename='/media/alert.png') {l}" alt="">
-=======
           <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
           <a href="/admin" class="link_3" target="_blank">Admin</a>
           <a onclick="test()" class="alert">
             <img src="{f2} url_for('base.static', filename='/media/alert.png') {l2}" alt="">
->>>>>>> version-0.0.2
           </a>
         </div>
       </div>
@@ -151,12 +61,6 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
     <div class="main">
       <div class="main_column">
         <div class="mini">
-<<<<<<< HEAD
-          <div class="mini_column">
-            <p><pre>{page_desc[1]}
-{page_desc[0]}
-{page_desc[1]}</pre></p>
-=======
         <!--
         {f1}% with messages = get_flashed_messages(with_categories=true) %{l1}
             {f1}% if messages %{l1}
@@ -192,7 +96,6 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
             {f1}% block main %{l1}
               <!-- main content -->
             {f1}% endblock main %{l1}
->>>>>>> version-0.0.2
           </div>
         </div>
 
@@ -220,14 +123,6 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
   <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}">
 {f1}% endblock head %{l1}
 
-<<<<<<< HEAD
-def _css(f="{", l="}"):
-  return f"""* {f}
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-{l}
-=======
 {f1}% block main %{l1}
   <h3><pre>({name})
 {page_desc[1]}
@@ -244,7 +139,6 @@ def _css(f1=f1, l1=l1, is_base=True):
   padding: 0;
   box-sizing: border-box;
 {l1}
->>>>>>> version-0.0.2
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -257,40 +151,19 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section, summary,
-<<<<<<< HEAD
-time, mark, audio, video {f}
-=======
 time, mark, audio, video {f1}
->>>>>>> version-0.0.2
   outline:0;
   /* font-size:100%; */
   vertical-align:baseline;
   background:transparent;
-<<<<<<< HEAD
-{l}
-
-body{f}
-=======
 {l1}
 
 body{f1}
->>>>>>> version-0.0.2
   background: lightgrey;
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 15px;
   font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
-<<<<<<< HEAD
-{l}
-
-.container{f}
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-{l}
-
-.header{f}
-=======
 {l1}
 
 .container{f1}
@@ -300,7 +173,6 @@ body{f1}
 {l1}
 
 .header{f1}
->>>>>>> version-0.0.2
   top: 0;
   width: 100%;
   height: 11.5vh;
@@ -310,48 +182,14 @@ body{f1}
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
-{l}
-
-.header_col{f}
-=======
 {l1}
 
 .header_col{f1}
->>>>>>> version-0.0.2
   width: 90%;
   padding: 20px 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-<<<<<<< HEAD
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .header_col{f}
-    padding: 18px 5px;
-  {l}
-{l}
-
-.head_left{f}
-  width: 45%;
-  height: 100%;
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .logo{f}
-    font-size: 20px;
-  {l}
-{l}
-
-.logo a{f}
-  color: white;
-  text-decoration: none;
-  width: fit-content;
-{l}
-
-.head_right{f}
-=======
 {l1}
 
 @media only screen and (max-width: 700px){f1}
@@ -378,51 +216,18 @@ body{f1}
 {l1}
 
 .head_right{f1}
->>>>>>> version-0.0.2
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-<<<<<<< HEAD
-{l}
-
-.head_right a{f}
-=======
 {l1}
 
 .head_right a{f1}
->>>>>>> version-0.0.2
   color: white;
   margin-left: 15px;
   font-size: 18px;
   text-decoration: none;
-<<<<<<< HEAD
-{l}
-
-.head_right a:hover{f}
-  text-decoration: underline solid 3px;
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .link_0, .link_1, .link_2, .link_3{f}
-    display: none;
-  {l}
-{l}
-
-.head_right a img{f}
-  width: 40px;
-  height: 40px;
-  margin-left: 15px;
-{l}
-
-.alert{f}
-  display: block;
-  position: relative;
-{l}
-
-.main{f}
-=======
 {l1}
 
 .head_right a:hover{f1}
@@ -447,28 +252,10 @@ body{f1}
 {l1}
 
 .main{f1}
->>>>>>> version-0.0.2
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 12vh;
-<<<<<<< HEAD
-{l}
-
-.main_column{f}
-  width: 90%;
-  padding: 10px 70px;
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .main_column{f}
-    width: 100%;
-    padding: 0;
-  {l}
-{l}
-
-.mini{f}
-=======
 {l1}
 
 .main_column{f1}
@@ -484,21 +271,14 @@ body{f1}
 {l1}
 
 .mini{f1}
->>>>>>> version-0.0.2
   width: 100%;
   min-height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
-{l}
-
-.mini_column{f}
-=======
 {l1}
 
 .mini_column{f1}
->>>>>>> version-0.0.2
   width: 80%;
   max-width: 1024px;
   height: 45vh;
@@ -508,48 +288,22 @@ body{f1}
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-<<<<<<< HEAD
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .mini_column{f}
-=======
 {l1}
 
 @media only screen and (max-width: 700px){f1}
   .mini_column{f1}
->>>>>>> version-0.0.2
     max-width: 100%;
     width: 90%;
     height: 60vh;
     padding: 0;
-<<<<<<< HEAD
-  {l}
-{l}
-
-.mini_column h1{f}
-  font-size: 2.5rem;
-  font-weight: lighter;
-  margin-top: 15px;
-  text-align: center;
-{l}
-
-.mini_column p{f}
-=======
   {l1}
 {l1}
 
 .mini_column p{f1}
->>>>>>> version-0.0.2
   max-width: 80%;
   text-align: center;
   font-weight: lighter;
   font-size: 1rem;
-<<<<<<< HEAD
-{l}
-
-.three_col{f}
-=======
 {l1}
 
 .blueprint_list{f1}
@@ -579,24 +333,10 @@ body{f1}
 {l1}
 
 .three_col{f1}
->>>>>>> version-0.0.2
   margin: 20px 0;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-<<<<<<< HEAD
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .three_col{f}
-    margin: 10px 0;
-    flex-direction: column;
-    align-items: space-evenly;
-  {l}
-{l}
-
-.three_col div{f}
-=======
 {l1}
 
 @media only screen and (max-width: 700px){f1}
@@ -608,99 +348,44 @@ body{f1}
 {l1}
 
 .three_col div{f1}
->>>>>>> version-0.0.2
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 100%;
   min-width: 50%;
-<<<<<<< HEAD
-{l}
-
-.three_col div p{f}
-=======
 {l1}
 
 .three_col div p{f1}
->>>>>>> version-0.0.2
   max-width: 80%;
   font-size: 1.1rem;
   line-height: 35px;
   text-align: center;
-<<<<<<< HEAD
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .three_col div p{f}
-=======
 {l1}
 
 @media only screen and (max-width: 700px){f1}
   .three_col div p{f1}
->>>>>>> version-0.0.2
     max-width: 90%;
     font-size: 1rem;
     line-height: 25px;
     margin-top: 5px;
-<<<<<<< HEAD
-  {l}
-{l}
-
-.footer{f}
-=======
   {l1}
 {l1}
 
 .footer{f1}
->>>>>>> version-0.0.2
   margin: 20px 0;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-top: solid black 1px;
-<<<<<<< HEAD
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .footer{f}
-=======
 {l1}
 
 @media only screen and (max-width: 700px){f1}
   .footer{f1}
->>>>>>> version-0.0.2
     margin: 10px 0;
     flex-direction: column;
     align-items: center;
     align-items: center;
-<<<<<<< HEAD
-  {l}
-{l}
-
-.footer p{f}
-  max-width: 80%;
-  font-size: 1.1rem;
-  line-height: 35px;
-  text-align: center;
-{l}
-
-@media only screen and (max-width: 700px){f}
-  .footer p{f}
-    max-width: 90%;
-    font-size: 1rem;
-    line-height: 25px;
-    margin-top: 5px;
-  {l}
-{l}
-"""
-
-
-def _js(name, f="{", l="}"):
-  return f"""function test(){f}
-  alert('I am sakyum test alert for ({name})')
-{l}
-=======
   {l1}
 {l1}
 
@@ -739,7 +424,6 @@ def _js(name, f1=f1, l1=l1):
   return f"""function test(){f1}
   alert('I am {__title__} test alert for ({name}) index page')
 {l1}
->>>>>>> version-0.0.2
 """
 
 
