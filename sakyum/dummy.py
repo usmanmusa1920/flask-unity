@@ -627,6 +627,8 @@ class ChoiceModel(db.Model):
 
 
 {long_comment}
+# *** PLAY WITH API ***
+
 # :move on to terminal and paste the following command,
 # :( in python interpreter ) make sure you are within that your virtual environment
 
