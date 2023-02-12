@@ -14,8 +14,8 @@ by passing (append) your app blueprint that you import
 into the `reg_blueprints` list below,
   :warning  -->  don't ommit the base blueprint, and the errors blueprint
 """
-# from <app_name>.views import <app_name>
-reg_blueprints = [base, errors]
+from todo_app.views import todo_app
+reg_blueprints = [base, errors, todo_app]
 
 
 @base.route('/')

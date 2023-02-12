@@ -5,9 +5,10 @@ import base64
 import random
 import hashlib
 import secrets
+from pathlib import Path
 
 # relative path to the package static folder
-rel_path = os.path.abspath(__file__)
+rel_path = Path(__file__).resolve().parent
 _status_codes = {
   # Informational.
   100: ("continue",),
@@ -106,13 +107,7 @@ def template_dir(temp_from_pkg=False):
         package static folder or not
   """
   if temp_from_pkg:
-    # spliting the path with / which will make it list
-    rel_path_lst = rel_path.split("/")
-    # removing the last index which is `utils.py`
-    rel_path_rem_last = rel_path_lst[:-1]
-    # converting the `rel_path_lst` list into string, by append / between each item of the list
-    rel_path_str = "/".join(rel_path_rem_last)
-    return rel_path_str + "/static/errors"
+    return str(rel_path) + "/static/errors"
   return os.getcwd() + "/templates"
 <<<<<<< HEAD
 

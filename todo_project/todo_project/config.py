@@ -9,7 +9,7 @@ db_ORIGIN = Path(__file__).resolve().parent.parent
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = 'GoxBi74lN1FQYswkjHcPnMpE189tWZm2etg0V6JZwd6VRc8SfqbzhpExfCvaB'
+app.config['SECRET_KEY'] = '7bFpuW36SLkmFHYhr2uTUiOD5j4ogsVZSdyvYBzwhnX28aC'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
 
 # set optional bootswatch theme

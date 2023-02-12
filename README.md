@@ -1,10 +1,12 @@
 
+# Sakyum
+
+An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
+
         _
       /_  /|   / / |/ /  / /\  /|
        / /_|  /_/  / /  / /  \/ |
     /_/ /  | /  | / /__/ /      |
-
-An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs
 
 ## Installation
 
@@ -16,7 +18,7 @@ Once that finish now install the library by
 pip install sakyum
 ```
 
-wait for the installation basically the library was uploaded using `sdist` (Source Distribution) and This software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` or `macOS`
+wait for the installation basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
 
 ## Create your first flask project using sakyum
 
@@ -34,17 +36,17 @@ from sakyum import project
 project("todo_project")
 ```
 
-the command you type on terminal or the code you paste in a file will create a project called `todo_project` now cd into the `todo_project` directory.
+the command you type on terminal or the code you paste in a file (after running the file) will create a project called `todo_project` now cd into the `todo_project` directory, if you do `ls` you will see a module called `thunder.py`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `todo_project`.
 
-Now you can boot up the flask server, by cd into the your project base folder (todo_project), and run the below command:
+You can boot up the flask server, after you cd into the project folder (todo_project), and run the below command:
 
 ```py
 python3 thunder.py boot
 ```
 
-This will show you index page of your project
+Now visit the local url `127.0.0.1:5000` this will show you index page of your project. And if you do `ls` in that same dir you will see it create a `default.db` file (an sqlite file)
 
-## Create flask project app
+## Create flask project app using sakyum
 
 For you to start an app within your project (`todo_project`) run the following command, in that working directory (todo_project) by giving the name you want your app to be, in our case we will call our app `todo_app`
 
@@ -52,11 +54,17 @@ For you to start an app within your project (`todo_project`) run the following c
 python3 thunder.py create_app -a todo_app
 ```
 
-this will create an app within your project (`todo_project`), the `-a` flag is for the app name in this example it is called `todo_app`
+or
 
-## Run flask server
+```py
+python3 thunder.py create_app --app todo_app
+```
 
-once the app is created open the folder in your project folder with the same name of the parent folder example, let say we have a project called `todo_project`, in the todo_project folder you will see a sub folder called also `todo_project` that is the one we mean, (`todo_project/todo_project/routes.py`) file of your project and import your app `views.py` file
+this will create an app within your project (`todo_project`), the `-a` flag is equivalent to `--app` for the app name in this example it is called `todo_app`
+
+## Register an app
+
+Once the app is created open a file called `routes.py` in the folder with the same name of your project in our case it is called `todo_project`, (`todo_project/routes.py`) file of your project and import your app blueprint which is in your app `views.py` file (above `reg_blueprints` list) in the `routes.py` file
 
 ```py
 from todo_app.views import todo_app
@@ -68,16 +76,22 @@ after that, append it in the list `reg_blueprints` provided in the `routes.py` f
 reg_blueprints = [base, errors, todo_app]
 ```
 
-once you register the app, boot up the flask webser by
+once you register the app, boot up the flask webserver by
 
 ```py
 python3 thunder.py boot
 ```
 
-This will bring the flask development server on port `5000` you can give it a different port by including a `-p` flag which is for port number:
+This will bring the flask development server on port `5000` you can give it a different port by including a `-p` or `--port` flag which is for port number:
 
 ```py
 python3 thunder.py boot -p 7000
+```
+
+or
+
+```py
+python3 thunder.py boot --port 7000
 ```
 
 this will bring the serve on port `7000` visit the localhost url with the port number, it will show you your project `index.html page` (todo_project). To get to your app default page (todo_app), visit the url with your app name in our case:
@@ -94,7 +108,7 @@ python3 thunder.py boot -p 7000 -H 0.0.0.0
 or
 
 ```py
-python3 thunder.py boot -p 7000 --host 0.0.0.0
+python3 thunder.py boot --port 7000 --host 0.0.0.0
 ```
 
 For development server, you can give a debug value to True by specifying `-d` flag or `--debug` e.g
@@ -105,14 +119,12 @@ python3 thunder.py boot -p 7000 -d True
 or
 
 ```py
-python3 thunder.py boot -p 7000 --debug True
+python3 thunder.py boot --port 7000 --debug True
 ```
 
 ## Register model to admin page
 
-To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Down below the file you will see a list called `reg_models = []`, above it import your app model that you want to register, then it append it in the `reg_models = []` list. That will register your model in the admin page and you will see it if you vist the admin page
-
-This software will not be compatible with `windows operating system` use other `OS` such as `linux` or `macOS`
+To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Import your app model that you want to register, above the method that will create the tables and database `db.create_all()` and you will see a commented prototype above it, then append it in the `reg_models = []` list below. That will register your model in the admin page and you will see it if you vist the admin page
 
 ## Github repository:
 
