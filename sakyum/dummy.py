@@ -35,7 +35,7 @@ def _html(name, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
           <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
           </br>
         {f1}% endfor %{l1}
-        <a href="/login">login</a>
+        <a href="/admin/login">login</a>
         </br>
       </div>
     </div>

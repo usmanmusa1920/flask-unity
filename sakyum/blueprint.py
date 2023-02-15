@@ -28,7 +28,7 @@ auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="d
 """
 
 
-@auth.route('/login/')
+@auth.route('/admin/login/')
 def index():
   """
     the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
