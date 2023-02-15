@@ -13,118 +13,54 @@ f2 = "{{"
 l2 = "}}"
 long_comment = "\"\"\""
 
-
-def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
+def _html(name, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
   if is_base:
     _is = "application"
     static_url = name
   else:
     _is = "project"
     static_url = "base"
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{f2} url_for('base.static', filename='/media/favicon.ico') {l2}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="{f2} url_for('{static_url}.static', filename='style.css') {l2}">
-  {f1}% block head %{l1}
-    <!-- child css file link -->
-  {f1}% endblock head %{l1}
-  <script type="text/javascript" src="{f2} url_for('{static_url}.static', filename='index.js') {l2}"></script>
-  <script src="main.js"></script>
-  <title>Sakyum - {name}</title>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="header_col">
-        <div class="head_left">
-          <h1 class="logo">
-            <a href="/">Sakyum</a>
-          </h1>
-        </div>
+    return f"""{f1}% extends "default_index.html" %{l1}
 
-        <div class="head_right">
-          <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
-          <a class="link_1">|</a>
-          <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
-          <a href="/admin" class="link_3" target="_blank">Admin</a>
-          <a onclick="test()" class="alert">
-            <img src="{f2} url_for('base.static', filename='/media/alert.png') {l2}" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="main">
-      <div class="main_column">
-        <div class="mini">
-        <!--
-        {f1}% with messages = get_flashed_messages(with_categories=true) %{l1}
-            {f1}% if messages %{l1}
-              {f1}% for category, message in messages %{l1}
-                <div class="alert alert-{f2} category {l2}">
-                  {f2} message {l2}
-                </div>
-              {f1}% endfor %{l1}
-            {f1}% endif %{l1}
-          {f1}% endwith %{l1}
-        -->
-          <div class="mini_column">
-            <p><pre>  ...........................
-    _
-  /_  /|   / / |/ /  / /\  /|
-   / /_|  /_/  / /  / /  \/ |
-/_/ /  | /  | / /__/ /      |
-.............................</pre></p>
-            <p>Your project ({name}) default page</p>
-            {f1}% if blueprints_list|length > 1 %{l1}
-              <div class="blueprint_list">
-                <p>List of blueprints</p>
-                {f1}% for blueprint in blueprints_list %{l1}
-                  {f1}% if blueprint.name == "base" %{l1}
-                    <!-- pass -->
-                  {f1}% else %{l1}
-                    <a href="/{f2}blueprint.name{l2}">{f2}blueprint.name{l2}</a>
-                    </br>
-                  {f1}% endif %{l1}
-                {f1}% endfor %{l1}
-              </div>
-            {f1}% endif %{l1}
-            {f1}% block main %{l1}
-              <!-- main content -->
-            {f1}% endblock main %{l1}
-          </div>
-        </div>
-
-        <div class="three_col">
-          <div>
-            <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p><pre>============================
- @ {__title__} software - v{__version__}
-============================</pre></p>
-    </div>
-  </div>
-</body>
-</html>
-"""
-  page_desc = stylePage(name, _is)
-  return f"""{f1}% extends "index.html" %{l1}
-
-{f1}% block head %{l1}
-  <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}">
-{f1}% endblock head %{l1}
+{f1}% block short_info %{l1}
+  <p>Your project ({name}) default page</p>
+{f1}% endblock short_info %{l1}
 
 {f1}% block main %{l1}
-  <h3><pre>({name})
+  {f1}% if blueprints_list|length > 1 %{l1}
+    <div class="blueprint_list_wrapper">
+      <div class="blueprint_list">
+        <p>Routes</p>
+        {f1}% for blueprint in blueprints_list %{l1}
+          <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
+          </br>
+        {f1}% endfor %{l1}
+        <a href="/login">login</a>
+        </br>
+      </div>
+    </div>
+  {f1}% endif %{l1}
+
+  <div class="pkg_desc">
+    <div>
+      <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
+    </div>
+  </div>
+{f1}% endblock main %{l1}
+"""
+  page_desc = stylePage(name, _is)
+  return f"""{f1}% extends "{project_name}/index.html" %{l1}
+
+{f1}% block head_css %{l1}
+  <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}"> -->
+{f1}% endblock head_css %{l1}
+
+{f1}% block head_title %{l1}
+  <title>Sakyum - {f2}head_title{l2}</title>
+{f1}% endblock head_title %{l1}
+
+{f1}% block main %{l1}
+  <h3><pre>({name}) app
 {page_desc[1]}
 {page_desc[0]}
 {page_desc[1]}</pre></h3>
@@ -132,9 +68,9 @@ def _html(name, static_url=None, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
 """
 
 
-def _css(f1=f1, l1=l1, is_base=True):
-  if is_base:
-    return f"""* {f1}
+def _css(f1=f1, l1=l1):
+  return f"""
+* {f1}
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -158,264 +94,11 @@ time, mark, audio, video {f1}
   background:transparent;
 {l1}
 
-body{f1}
-  background: lightgrey;
+body {f1}
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 15px;
   font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
-{l1}
-
-.container{f1}
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-{l1}
-
-.header{f1}
-  top: 0;
-  width: 100%;
-  height: 11.5vh;
-  position: fixed;
-  background: rgb(50, 50, 63);
-  border-bottom: solid black 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-{l1}
-
-.header_col{f1}
-  width: 90%;
-  padding: 20px 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .header_col{f1}
-    padding: 18px 5px;
-  {l1}
-{l1}
-
-.head_left{f1}
-  width: 45%;
-  height: 100%;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .logo{f1}
-    font-size: 20px;
-  {l1}
-{l1}
-
-.logo a{f1}
-  color: white;
-  text-decoration: none;
-  width: fit-content;
-{l1}
-
-.head_right{f1}
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-{l1}
-
-.head_right a{f1}
-  color: white;
-  margin-left: 15px;
-  font-size: 18px;
-  text-decoration: none;
-{l1}
-
-.head_right a:hover{f1}
-  text-decoration: underline solid 3px;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .link_0, .link_1, .link_2, .link_3{f1}
-    display: none;
-  {l1}
-{l1}
-
-.head_right a img{f1}
-  width: 40px;
-  height: 40px;
-  margin-left: 15px;
-{l1}
-
-.alert{f1}
-  display: block;
-  position: relative;
-{l1}
-
-.main{f1}
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 12vh;
-{l1}
-
-.main_column{f1}
-  width: 90%;
-  padding: 10px 70px;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .main_column{f1}
-    width: 100%;
-    padding: 0;
-  {l1}
-{l1}
-
-.mini{f1}
-  width: 100%;
-  min-height: 50vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-{l1}
-
-.mini_column{f1}
-  width: 80%;
-  max-width: 1024px;
-  height: 45vh;
-  border-radius: 7px;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .mini_column{f1}
-    max-width: 100%;
-    width: 90%;
-    height: 60vh;
-    padding: 0;
-  {l1}
-{l1}
-
-.mini_column p{f1}
-  max-width: 80%;
-  text-align: center;
-  font-weight: lighter;
-  font-size: 1rem;
-{l1}
-
-.blueprint_list{f1}
-  height: 50%;
-  width: 200px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-y: scroll;
-  background: white;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .blueprint_list{f1}
-    height: 30%;
-    width: 70%;
-    padding: 5px;
-    overflow-y: scroll;
-    background: white;
-  {l1}
-{l1}
-
-.blueprint_list a{f1}
-  text-decoration: none;
-  color: dodgerblue;
-{l1}
-
-.three_col{f1}
-  margin: 20px 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .three_col{f1}
-    margin: 10px 0;
-    flex-direction: column;
-    align-items: space-evenly;
-  {l1}
-{l1}
-
-.three_col div{f1}
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100%;
-  min-width: 50%;
-{l1}
-
-.three_col div p{f1}
-  max-width: 80%;
-  font-size: 1.1rem;
-  line-height: 35px;
-  text-align: center;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .three_col div p{f1}
-    max-width: 90%;
-    font-size: 1rem;
-    line-height: 25px;
-    margin-top: 5px;
-  {l1}
-{l1}
-
-.footer{f1}
-  margin: 20px 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: solid black 1px;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .footer{f1}
-    margin: 10px 0;
-    flex-direction: column;
-    align-items: center;
-    align-items: center;
-  {l1}
-{l1}
-
-.footer p{f1}
-  max-width: 80%;
-  font-size: 1.1rem;
-  line-height: 35px;
-  text-align: center;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .footer p{f1}
-    max-width: 90%;
-    font-size: 1rem;
-    line-height: 25px;
-    margin-top: 5px;
-  {l1}
-{l1}
-  """
-  return f"""
-.mini_column h3{f1}
-  font-weight: lighter;
-  margin-top: 15px;
-  text-align: center;
-{l1}
-
-@media only screen and (max-width: 700px){f1}
-  .mini_column h3{f1}
-    font-size: 12px;
-  {l1}
 {l1}
 """
 
@@ -497,49 +180,54 @@ for reg_model in reg_models:
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
+from sakyum import version_style_desc, version_style_border
 from sakyum.utils import template_dir, static_dir
+from sakyum.blueprint import default, errors, auth
 from flask import render_template
+# from <app_name>.views import <app_name>
 
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
-errors = Blueprint("errors", __name__, template_folder=template_dir(temp_from_pkg=True))
 
 
 {long_comment}
-register your app after importing it blueprint from the app views.py file,
-by passing (append) your app blueprint that you import
-into the `reg_blueprints` list below,
-  :warning  -->  don\'t ommit the base blueprint, and the errors blueprint
+  register your app after importing it blueprint from the app views.py file,
+  by passing (append) your app blueprint that you import
+  into the `reg_blueprints` list below,
+  
+  warning:
+      don\'t ommit the registered blueprint you see in  the list (default, errors, auth, base) blueprints
 {long_comment}
-# from <app_name>.views import <app_name>
-reg_blueprints = [base, errors]
+
+reg_blueprints = [
+  default,
+  errors,
+  auth,
+  base,
+]
+
+def rem_blueprint(lst_blue):
+  # these are blueprint that we don't want to show on the
+  # default page so we are removing them from the list
+
+  rem_blue = [default, errors, auth, base]
+  for blue in rem_blue:
+    if blue in lst_blue:
+      # finding the index of the `blue` item blueprint in the list
+      err_index = lst_blue.index(blue)
+      # removing it `blue` item from the list using it index number
+      lst_blue.pop(err_index)
+  blueprints_list = lst_blue
+  return blueprints_list
 
 
-@base.route('/')
+@default.route('/')
 def index():
-  {long_comment} removing error pages in app pages list, if it exist {long_comment}
-  if errors in reg_blueprints:
-    # finding the index of the errors blueprint in the list
-    err_index = reg_blueprints.index(errors)
-    # removing it from the list using it index number
-    reg_blueprints.pop(err_index)
-  blueprints_list = reg_blueprints
-  return render_template("index.html", blueprints_list=blueprints_list)
+  # the default_base.html below is located in the sakyum package (templates/default_page) folder
+  return render_template("default_base.html", project_name="{proj}", blueprints_list=rem_blueprint(reg_blueprints), version_style_desc=version_style_desc, version_style_border=version_style_border)
   
   
-@errors.app_errorhandler(404)
-def error_404(error):
-  return render_template('404.html'), 404
-
-
-@errors.app_errorhandler(403)
-def error_403(error):
-  return render_template('403.html'), 403
-
-
-@errors.app_errorhandler(500)
-def error_500(error):
-  return render_template('500.html'), 500
+{long_comment} overwrite error pages here {long_comment}
 """
 
 
@@ -548,6 +236,7 @@ def app_views_dummy(app):
   # :app is the application name that you create within your project
   """
   return f"""from flask import (render_template, Blueprint)
+from sakyum import version_style_desc, version_style_border
 from sakyum.utils import template_dir, static_dir
 # from .models import <model_name>
 # from .forms import <model_form>
@@ -555,9 +244,16 @@ from sakyum.utils import template_dir, static_dir
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
 
 
-@{app}.route('/{app}', methods=["GET", "POST"])
+@{app}.route('/{app}/', methods=["GET", "POST"])
 def index():
-  return render_template("{app}/index.html")
+  head_title = "{app}"
+  {long_comment}
+    the {app}/index.html pass below is the html file in your project templates/{app} base dir
+    inherited (extended) from `sakyum/templates/default_page/default_index.html`
+    you can edit it and give it a different css and js file to your desire
+  {long_comment}
+
+  return render_template("{app}/index.html", head_title=head_title, version_style_desc=version_style_desc, version_style_border=version_style_border)
 """
 
 

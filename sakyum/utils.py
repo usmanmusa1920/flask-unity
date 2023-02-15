@@ -5,10 +5,15 @@ import base64
 import random
 import hashlib
 import secrets
-from pathlib import Path
 
-# relative path to the package static folder
+from pathlib import Path
+from sakyum import __title__
+from sakyum import __version__
+
+
+# relative path to the package folder (sakyum)
 rel_path = Path(__file__).resolve().parent
+
 _status_codes = {
   # Informational.
   100: ("continue",),
@@ -93,39 +98,57 @@ _status_codes = {
 }
 
 
-def static_dir(app):
-  """relative path to static files"""
+def os_name(lin=False, win=False, name=os.name):
+  """detect os name"""
+  if lin and name == "posix":
+    pass
+  elif win and name == "nt":
+    pass
+
+
+def static_dir(app, static_from_pkg=False):
+  
+  """
+    relative path to static files
+    
+    # :static_from_pkg:
+        is the directory name that is in the library package which is `static`
+  """
+  if static_from_pkg:
+    return str(rel_path) + "/static/" + app
   return os.getcwd() + "/static/" + app
   
 
 def template_dir(temp_from_pkg=False):
+
   """
     relative path to html page
 
     # :temp_from_pkg:
-        this detect wheather if the html file will link to the
-        package static folder or not
+        is the directory name that is in the library package which is `templates`
   """
   if temp_from_pkg:
-    return str(rel_path) + "/static/errors"
+    return str(rel_path) + "/templates/" + temp_from_pkg
   return os.getcwd() + "/templates"
   
 
-def readIMG(p):
-  """read default alert image and favicon.ico, for sure static file work"""
-  with open(p, "rb") as i:
-    r = i.read()
-  return r
-  
+def stylePage(name, _is, version=False):
+  """function for styling project/app description default pages"""
 
-def stylePage(name, _is):
-  """function for styling project application description default page"""
+  if version:
+    # it will style the description in the footer
+    desc = "@ " + __title__ + " software - v" + __version__
+    desc_center = desc.center(len(desc) + 2)
+    border = "=" * len(desc_center)
+    return [desc_center, border]
+
+  # it will style the description of default app pages
   desc = "Your " + name + " " + _is + " default pages"
   desc_center = desc.center(len(desc) + 6)
   border = "=" * len(desc_center)
   return [desc_center, border]
-  
 
+  
 class Security:
   """
   Passcode class for suggesting user passcode iteration,

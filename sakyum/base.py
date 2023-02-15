@@ -20,9 +20,9 @@ from .dummy import pro_config_dummy
 from .dummy import app_views_dummy
 from .dummy import app_forms_dummy
 from .dummy import app_models_dummy
+
 from . import __title__
 from . import __version__
-from .utils import readIMG
 
 """
   NOTSET    ---  0
@@ -180,9 +180,13 @@ class BaseStructure:
           
           for static_dir in dirs[2:]: # templates & static
             if static_dir == dirs[2:][0]: # templates
-              self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into
+              self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into it
               
-              # create index.html and bact to project base dir path
+              templates_folder = os.getcwd() # base dir path of templates folder
+              # make project dir in templates and cd into it 
+              self.file_opt(proj_name, _here=templates_folder)
+
+              # create project index.html and back to project base dir path
               self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_base=False), dir_togo=project_folder)
               
             if static_dir == dirs[2:][1]: # static
@@ -191,28 +195,20 @@ class BaseStructure:
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
               self.file_opt(proj_name, _where=os.getcwd()+"/"+proj_name)
 
-              # :storing the project static dir path before creating and cd into media
-              # for alert.png and favicon.ico creation
+              # storing the project static dir path before creating any thing and cd into media
               s_p_dir = os.getcwd()
               self.file_opt("media", _where="media") # make media dir for project
-
-              # :copy default projects images (favicon and alert)
-              img_paths = [str(ORIGIN)+"/static/alert.png", str(ORIGIN)+"/static/favicon.ico"]
-              for img_path in img_paths:
-                with open(img_path.split("/")[-1], "wb") as rite:
-                  rite.write(readIMG(img_path))
-
-              self.file_opt("not_a_directory", tree=False, _where=s_p_dir)
+              self.file_opt("do_nothing", tree=False, _where=s_p_dir)
               """
-              :going back with one step after creating alert.png and favicon.ico
+              # :going back with one step
 
-              we pass `not_a_directory` as a directory name here, to avoid any
+              we pass `do_nothing` as a directory name here, to avoid any
               error even though it do nothing if we give it a real directory name
               """
 
               self.file_content(self._exs_last[1], file_name="style", content=f"/* @{__title__}, {proj_name} (project) style.css file */\n"+_css(), route_go=False) # create style.css
               
-              # create index.js and back to project base dir path
+              # create index.js and back to project static base dir path
               self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=project_folder)
 
           os.chdir(_here)
@@ -270,10 +266,10 @@ class AppStructure(BaseStructure):
           self.into_file(fls, self.fls_cmd, is_app=True) # to maker app default files
           
       self.app_static_and_template(
-        _html(app_store_name), top_comment="html", _dir_=roove_dir[0], file=[self.append_exs_to_file(_exs_=[])[0]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
+        _html(app_store_name, project_name=self.proj_store_name), top_comment="html", _dir_=roove_dir[0], file=[self.append_exs_to_file(_exs_=[])[0]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       self.app_static_and_template(
-        _css(is_base=False), top_comment="css", _dir_=roove_dir[1], file=[self.append_exs_to_file(_exs_=[])[2]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
+        _css(), top_comment="css", _dir_=roove_dir[1], file=[self.append_exs_to_file(_exs_=[])[2]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       self.app_static_and_template(
         _js(proj_app_name), top_comment="js", _dir_=roove_dir[2], file=[self.append_exs_to_file(_exs_=[])[1]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
