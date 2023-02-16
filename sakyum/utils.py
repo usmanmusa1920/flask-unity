@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 import base64
 import random
 import hashlib
 import secrets
 
 from pathlib import Path
+from getpass import getpass
 from sakyum import __title__
 from sakyum import __version__
 
@@ -147,8 +149,74 @@ def stylePage(name, _is, version=False):
   desc_center = desc.center(len(desc) + 6)
   border = "=" * len(desc_center)
   return [desc_center, border]
-
   
+
+class AuthCredentials:
+  def __init__(self, username=None, email=None, password=None):
+    self.username = username
+    self.email = email
+    self.password = password
+
+    while self.username == None or self.username == "" or len(self.username) < 5:
+      if self.username == None:
+        self.username = input("Enter username: ")
+        print()
+      elif self.username == "":
+        print("username can't be empty")
+        self.username = input("Enter username: ")
+        print()
+      elif len((self.username)) < 5:
+        print("username must be not less than 5 character")
+        self.username = input("Enter username: ")
+        print()
+        
+    while self.email == None or self.email == "" or len(self.email) < 12:
+      if self.email == None:
+        self.email = input("Enter email: ")
+        print()
+      elif self.email == "":
+        print("email can't be empty")
+        self.email = input("Enter email: ")
+        print()
+      elif len((self.email)) < 12:
+        print("email must be not less than 12 character")
+        self.email = input("Enter email: ")
+        print()
+        
+    while self.password == None or self.password == "" or len(self.password) < 8:
+      if self.password == None:
+        self.password = getpass("Enter password: ")
+        print()
+      elif self.password == "":
+        print("password can't be empty")
+        self.password = getpass("Enter password: ")
+        print()
+      elif len((self.password)) < 8:
+        print("password must be not less than 8 character")
+        self.password = getpass("Enter password: ")
+        print()
+        
+  @property
+  def validate_username(self):
+    return self.username
+
+  @property
+  def validate_email(self):
+    pattern = re.compile(r"^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+")
+    if re.match(pattern, self.email):
+      return self.email
+    raise ValueError("The email format is invalid")
+
+  @property
+  def validate_password(self):
+    return self.password
+
+  @property
+  def result(self):
+    auth_list = [self.validate_username, self.validate_email, self.validate_password]
+    return auth_list
+
+    
 class Security:
   """
   Passcode class for suggesting user passcode iteration,

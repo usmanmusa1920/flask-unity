@@ -394,14 +394,18 @@ class Boot:
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
     elif sys.argv[1] == "su":
-      username = input("Enter username: ")
-      email = input("Enter email address: ")
-      password = input("Enter password: ")
+      from .utils import AuthCredentials
+
+      auth_class = AuthCredentials().result
+      username = auth_class[0]
+      email = auth_class[1]
+      password = auth_class[2]
+
       u = self.model(username=username, email=email, password=password)
 
       self.db.session.add(u)
       self.db.session.commit()
-      print(self.model.query.all())
+      logger.info(f"One record added ({username})")
       exit()
     else:
       print()
