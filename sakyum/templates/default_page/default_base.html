@@ -2,6 +2,13 @@
 
 {% block short_info %}
   <p>Your project ({{project_name}}) default page</p>
+  <p>
+    {% if current_user.is_authenticated %}
+      Hi {{ current_user.username }}!
+    {% else %}
+      please login
+    {% endif %}
+  </p>
 {% endblock short_info %}
 
 {% block main %}
@@ -11,9 +18,13 @@
         <p>Routes</p>
         {% for blueprint in blueprints_list %}
           <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
-          </br>
         {% endfor %}
-        <a href="/admin/login">login</a>
+        {% if current_user.is_authenticated %}
+          <a href="/admin/logout">logout</a>
+        {% else %}
+          <a href="/admin/login">login</a>
+          <a href="/admin/register">register</a>
+        {% endif %}
         </br>
       </div>
     </div>

@@ -2,13 +2,14 @@
 
 {% block main %}
   <div class="pkg_desc">
-    <h1>Login to admin</h1>
+    <h1>Register user to admin</h1>
   </div>
   <div class="admin_login">
     <form action="" method="POST">
       <input type="text" name="username" placeholder="Enter username" required>
+      <input type="email" name="email" placeholder="Enter email" required>
       <input type="password" name="password" placeholder="Enter password" required>
-      <button type="submit">login</button>
+      <button type="submit">register</button>
     </form>
   </div>
 {% endblock main %}

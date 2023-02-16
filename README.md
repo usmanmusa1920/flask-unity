@@ -126,6 +126,16 @@ python3 thunder.py boot --port 7000 --debug True
 
 To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Import your app model that you want to register, above the method that will create the tables and database `db.create_all()` and you will see a commented prototype above it, then append it in the `reg_models = []` list below. That will register your model in the admin page and you will see it if you vist the admin page
 
+## Super user
+
+You can create a super user of your application user model, by running the following command
+
+```py
+python3 thunder.py su
+```
+
+once you run it, a prompt will come up to input your information
+
 ## Github repository:
 
 - https://github.com/usmanmusa1920/sakyum

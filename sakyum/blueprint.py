@@ -28,22 +28,27 @@ auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="d
 """
 
 
-@auth.route('/admin/login/')
-def index():
-  """
-    the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
-  """
-  return render_template("admin_login.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
-  
+# @auth.route('/admin/login/')
+# def index():
+#   """
+#     the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
+#   """
+#   return render_template("admin_login.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
 
-@errors.app_errorhandler(404)
-def error_404(error):
-  return render_template('404.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 404
+
+@errors.app_errorhandler(401)
+def error_401(error):
+  return render_template('401.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 401
   
 
 @errors.app_errorhandler(403)
 def error_403(error):
   return render_template('403.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 403
+  
+
+@errors.app_errorhandler(404)
+def error_404(error):
+  return render_template('404.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 404
   
 
 @errors.app_errorhandler(500)

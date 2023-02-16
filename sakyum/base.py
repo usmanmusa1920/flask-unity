@@ -20,6 +20,10 @@ from .dummy import pro_config_dummy
 from .dummy import app_views_dummy
 from .dummy import app_forms_dummy
 from .dummy import app_models_dummy
+from .dummy import auth_init_dummy
+from .dummy import auth_forms_dummy
+from .dummy import auth_models_dummy
+from .dummy import auth_routes_dummy
 
 from . import __title__
 from . import __version__
@@ -139,7 +143,11 @@ class BaseStructure:
 
   def dir_tree(self, proj_name=None):
     """create a directory tree where file will reserved as well as modules too"""
-    dirs = [proj_name, f"{proj_name}/{proj_name}", "templates", "static"]
+    dirs = [proj_name, f"{proj_name}/{proj_name}", f"{proj_name}/auth", "templates", "static"]
+
+    # default files of project auth folder, which is for project base dir
+    auth_models = ["__init__", "models", "forms", "routes"]
+    auth_fls = self.append_exs_to_file(fls_name=auth_models)
     
     # default files of project sub folder, except `thunder` which is for project base dir
     fls_name = ["__init__", "config", "routes", "thunder"]
@@ -172,14 +180,36 @@ class BaseStructure:
                 # building project `routes.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_routes_dummy(proj_name)}", route_go=False)
           os.chdir(_here)
-          
+
+         
+        if _dir == dirs[2]:
+          self.file_opt(_dir, _here=_here)
+          # create default modules inside project auth dir
+          for _fls in auth_fls:
+            sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
+            if _fls == "__init__.py":
+              # building project `__init__.py` default files
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_init_dummy()}", route_go=False)
+
+            elif _fls == "forms.py":
+              # building project `forms.py` default files
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_forms_dummy()}", route_go=False)
+
+            elif _fls == "models.py":
+              # building project `models.py` default files
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_models_dummy(proj_name)}", route_go=False)
+
+            elif _fls == "routes.py":
+              # building project `routes.py` default files
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_routes_dummy(proj_name)}", route_go=False)
+          os.chdir(_here) 
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
           self.into_file(fls, self.fls_cmd, file="thunder", proj_nm=proj_name) # to maker thunder file
           project_folder = os.getcwd() # base dir path of 
           
-          for static_dir in dirs[2:]: # templates & static
-            if static_dir == dirs[2:][0]: # templates
+          for static_dir in dirs[3:]: # templates & static
+            if static_dir == dirs[3:][0]: # templates
               self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into it
               
               templates_folder = os.getcwd() # base dir path of templates folder
@@ -189,7 +219,7 @@ class BaseStructure:
               # create project index.html and back to project base dir path
               self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_base=False), dir_togo=project_folder)
               
-            if static_dir == dirs[2:][1]: # static
+            if static_dir == dirs[3:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
               
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
@@ -289,10 +319,12 @@ def app_init(app):
 
 class Boot:
   """boot up project operation, app operation, and the server"""
-  def __init__(self, p=None, d=False, h=None):
+  def __init__(self, p=None, d=False, h=None, db=None, model=None):
     self.p = p # port
     self.d = d # debug
     self.h = h # host
+    self.db = db
+    self.model = model
 
   def run(self):
     """run method for creating app and booting up server"""
@@ -361,6 +393,16 @@ class Boot:
       self.d = args.debug
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
+    elif sys.argv[1] == "su":
+      username = input("Enter username: ")
+      email = input("Enter email address: ")
+      password = input("Enter password: ")
+      u = self.model(username=username, email=email, password=password)
+
+      self.db.session.add(u)
+      self.db.session.commit()
+      print(self.model.query.all())
+      exit()
     else:
       print()
       logger.error(f"use a valid positional argument and flag if needed\n{error_ref_2}")

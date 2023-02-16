@@ -18,8 +18,3 @@ def project(name):
     logger.error(f"Not allowed to use ({__title__}) package name as project name\n")
     return False
   BaseStructure().dir_tree(name)
-  
-  
-def delete_app():
-  """delete app"""
-  pass

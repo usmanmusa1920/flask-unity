@@ -110,6 +110,7 @@ def _js(name, f1=f1, l1=l1):
 """
 
 
+
 def null(long_comment=long_comment):
   return f"""{long_comment} write awesome code here! {long_comment}
 """
@@ -117,13 +118,15 @@ def null(long_comment=long_comment):
 
 def thunder_dummy(project):
   return f"""from sakyum import Boot
-  
-boot = Boot()
+from auth.models import User
+from {project} import app, db
+from {project}.routes import reg_blueprints
+
+
+boot = Boot(db=db, model=User)
 if __name__ == "__main__":
   boot.run()
 
-from {project} import app
-from {project}.routes import reg_blueprints
 
 for reg_blueprint in reg_blueprints:
   app.register_blueprint(reg_blueprint)
@@ -132,8 +135,9 @@ app.run(debug=boot.d, port=boot.p, host=boot.h)
 
 
 def pro_init_dummy():
-  return f"""from .routes import base
-from .config import app
+  return f"""import auth
+from .routes import base
+from .config import app, db
 """
 
 
@@ -143,6 +147,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask import Flask
 from pathlib import Path
+from flask_login import LoginManager
 
 db_ORIGIN = Path(__file__).resolve().parent.parent
 
@@ -154,9 +159,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db
 # set optional bootswatch theme
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
+login_manager = LoginManager(app)
 
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
+from auth.models import User
 # from <app_name>.models import <model_name>
 db.create_all() # method to create the tables and database
 
@@ -172,7 +179,9 @@ admin = Admin(app, name='{proj_name}')
 Register your model, by passing every model that you want
 to manage in admin page in the below list (reg_models)
 {long_comment}
-reg_models = []
+reg_models = [
+  User,
+]
 for reg_model in reg_models:
   admin.add_view(ModelView(reg_model, db.session))
 """
@@ -229,6 +238,7 @@ def index():
   
 {long_comment} overwrite error pages here {long_comment}
 """
+
 
 
 def app_views_dummy(app):
@@ -288,12 +298,12 @@ project config.py file in other to see it in admin page
 {long_comment}
 
 
-class QuestionModel(db.Model):
+class {app_name.capitalize()}QuestionModel(db.Model):
   {long_comment} {app_name.capitalize()} default Question model {long_comment}
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   question_text = db.Column(db.Text, nullable=False)
-  choices = db.relationship('ChoiceModel', backref='selector', lazy=True)
+  choices = db.relationship('{app_name.capitalize()}ChoiceModel', backref='selector', lazy=True)
 
   def __str__(self):
     return f"Question {f1}self.id{l1}: {f1}self.question_text{l1}"
@@ -301,16 +311,16 @@ class QuestionModel(db.Model):
   def __repr__(self):
     return f"Question {f1}self.id{l1}: {f1}self.question_text{l1}"
     
-  # the `ChoiceModel` is the choice model class below
+  # the `{app_name.capitalize()}ChoiceModel` is the choice model class below
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
 
 
-class ChoiceModel(db.Model):
+class {app_name.capitalize()}ChoiceModel(db.Model):
   {long_comment} {app_name.capitalize()} default Choice model {long_comment}
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-  question_id = db.Column(db.Integer, db.ForeignKey('question_model.id'), nullable=False)
+  question_id = db.Column(db.Integer, db.ForeignKey('{app_name.lower()}_question_model.id'), nullable=False)
   # you can pass a keyword argument of `unique=True` in the below choice_text field
   # that will make it unique across the entire table of choice
   choice_text = db.Column(db.String(100), nullable=False)
@@ -330,7 +340,7 @@ class ChoiceModel(db.Model):
 
 
 from {your_application}.config import db
-from todo_app.models import QuestionModel, ChoiceModel
+from {app_name}.models import {app_name.capitalize()}QuestionModel, {app_name.capitalize()}ChoiceModel
 
 
 # :method to create the tables and database, if it doesn't create db file,
@@ -338,23 +348,23 @@ from todo_app.models import QuestionModel, ChoiceModel
 db.create_all()
 
 
-q1 = QuestionModel(question_text="Is sakyum an extension of flask web framework?")
-q2 = QuestionModel(question_text="Is flask better with sakyum")
+q1 = {app_name.capitalize()}QuestionModel(question_text="Is sakyum an extension of flask web framework?")
+q2 = {app_name.capitalize()}QuestionModel(question_text="Is flask better with sakyum")
 
 db.session.add(q1)
 db.session.add(q2)
 db.session.commit()
 
-the_q1 = QuestionModel.query.get_or_404(1)
-the_q2 = QuestionModel.query.get_or_404(2)
+the_q1 = {app_name.capitalize()}QuestionModel.query.get_or_404(1)
+the_q2 = {app_name.capitalize()}QuestionModel.query.get_or_404(2)
 
-c1_1 = ChoiceModel(choice_text="Yes, it is", question_id=the_q1.id)
-c1_2 = ChoiceModel(choice_text="No, it is not", question_id=the_q1.id)
-c1_3 = ChoiceModel(choice_text="I don't no", question_id=the_q1.id)
+c1_1 = {app_name.capitalize()}ChoiceModel(choice_text="Yes, it is", question_id=the_q1.id)
+c1_2 = {app_name.capitalize()}ChoiceModel(choice_text="No, it is not", question_id=the_q1.id)
+c1_3 = {app_name.capitalize()}ChoiceModel(choice_text="I don't no", question_id=the_q1.id)
 
-c2_1 = ChoiceModel(choice_text="Yes for sure", question_id=the_q2.id)
-c2_2 = ChoiceModel(choice_text="Always the best", question_id=the_q2.id)
-c2_3 = ChoiceModel(choice_text="All the time", question_id=the_q2.id)
+c2_1 = {app_name.capitalize()}ChoiceModel(choice_text="Yes for sure", question_id=the_q2.id)
+c2_2 = {app_name.capitalize()}ChoiceModel(choice_text="Always the best", question_id=the_q2.id)
+c2_3 = {app_name.capitalize()}ChoiceModel(choice_text="All the time", question_id=the_q2.id)
 
 db.session.add(c1_1)
 db.session.add(c1_2)
@@ -367,19 +377,167 @@ db.session.add(c2_3)
 db.session.commit()
 
 # to see all our questions
-QuestionModel.query.all()
-dir(QuestionModel.query) # to see many other method
+{app_name.capitalize()}QuestionModel.query.all()
+dir({app_name.capitalize()}QuestionModel.query) # to see many other method
 
 # to see choices related to our question number 1
-QuestionModel.query.get_or_404(1).choices
+{app_name.capitalize()}QuestionModel.query.get_or_404(1).choices
 
 # to see all our choices
-ChoiceModel.query.all()
-dir(ChoiceModel.query) # to see many other method
+{app_name.capitalize()}ChoiceModel.query.all()
+dir({app_name.capitalize()}ChoiceModel.query) # to see many other method
 
-for i in ChoiceModel.query.all():
+for i in {app_name.capitalize()}ChoiceModel.query.all():
   i.selector.question_text, i.choice_text
 
 
 {long_comment}
+"""
+
+
+
+def auth_init_dummy():
+  return f"""from . import routes
+"""
+
+
+def auth_forms_dummy():
+  return f"""from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_login import current_user
+from .models import User
+
+
+class RegistrationForm(FlaskForm):
+  username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+  email = StringField('Email', validators=[DataRequired(), Email()])
+  password = PasswordField('Password', validators=[DataRequired()])
+  confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+  submit = SubmitField('Sign Up')
+  
+  def validate_username(self, username):
+    user = User.query.filter_by(username=username.data).first()
+    if user:
+      raise ValidationError('That username is taken. Please choose a different one.')
+      
+  def validate_email(self, email):
+    user = User.query.filter_by(email=email.data).first()
+    if user:
+      raise ValidationError('That email is taken. Please choose a different one.')
+      
+
+class LoginForm(FlaskForm):
+  email = StringField('Email', validators=[DataRequired(), Email()])
+  password = PasswordField('Password', validators=[DataRequired()])
+  remember = BooleanField('Remember Me')
+  submit = SubmitField('Login')
+  
+
+class UpdateAccountForm(FlaskForm):
+  username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+  email = StringField('Email', validators=[DataRequired(), Email()])
+  picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+  submit = SubmitField('Update')
+
+  def validate_username(self, username):
+    if username.data != current_user.username:
+      user = User.query.filter_by(username=username.data).first()
+      if user:
+        raise ValidationError('That username is taken. Please choose a different one.')
+
+  def validate_email(self, email):
+    if email.data != current_user.email:
+      user = User.query.filter_by(email=email.data).first()
+      if user:
+        raise ValidationError('That email is taken. Please choose a different one.')
+        
+
+class RequestResetForm(FlaskForm):
+  email = StringField('Email', validators=[DataRequired(), Email()])
+  submit = SubmitField('Request Password Reset')
+
+  def validate_email(self, email):
+    user = User.query.filter_by(email=email.data).first()
+    if user is None:
+      raise ValidationError('There is no account with that email. You must register first.')
+      
+
+class ResetPasswordForm(FlaskForm):
+  password = PasswordField('Password', validators=[DataRequired()])
+  confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+  submit = SubmitField('Reset Password')
+"""
+
+
+def auth_models_dummy(proj_name):
+  return f"""from flask import current_app
+from {proj_name}.config import db, login_manager
+from flask_login import UserMixin
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(20), unique=True, nullable=False)
+  email = db.Column(db.String(120), unique=True, nullable=False)
+  password = db.Column(db.String(60), nullable=False)
+
+  def __repr__(self):
+    return f"User('{f1}self.username{l1}', '{f1}self.email{l1}'"
+"""
+
+
+def auth_routes_dummy(proj_name):
+  return f"""from flask import render_template, request, redirect, url_for
+from flask_login import login_user, current_user, logout_user
+from sakyum import version_style_desc, version_style_border
+from sakyum.blueprint import auth
+from {proj_name}.config import db
+from .models import User
+import datetime
+
+
+@auth.route('/admin/login/', methods=["POST", "GET"])
+def adminLogin():
+  {long_comment}
+    the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
+  {long_comment}
+  if request.method == "POST":
+    username = request.form["username"]
+    password = request.form["password"]
+    user = User.query.filter_by(username=username).first()
+    if user and user.username == username and user.password == password:
+      login_user(user, remember=True)
+      # if current_user.is_authenticated:
+      #   return redirect(url_for("default.index"))
+      return redirect(url_for("admin.index"))
+  return render_template("admin_login.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
+
+
+@auth.route('/admin/register/', methods=["POST", "GET"])
+def adminRegister():
+  {long_comment}
+    the `admin_register.html` below is located in the sakyum package (static/default_page/admin_register.html)
+  {long_comment}
+  if request.method == "POST":
+    username  = request.form["username"]
+    email  = request.form["email"]
+    password = request.form["password"]
+    user_obj = User(username=username, email=email, password=password)
+    db.session.add(user_obj)
+    db.session.commit()
+    return redirect(url_for("auth.adminLogin"))
+  return render_template("admin_register.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
+
+
+@auth.route('/admin/logout/', methods=["POST", "GET"])
+def adminLogout():
+  logout_user()
+  return redirect(url_for("auth.adminLogin"))
 """
