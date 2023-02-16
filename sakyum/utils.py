@@ -170,16 +170,12 @@ class AuthCredentials:
         self.username = input("Enter username: ")
         print()
         
-    while self.email == None or self.email == "" or len(self.email) < 12:
+    while self.email == None or self.email == "":
       if self.email == None:
         self.email = input("Enter email: ")
         print()
       elif self.email == "":
         print("email can't be empty")
-        self.email = input("Enter email: ")
-        print()
-      elif len((self.email)) < 12:
-        print("email must be not less than 12 character")
         self.email = input("Enter email: ")
         print()
         
@@ -205,7 +201,11 @@ class AuthCredentials:
     pattern = re.compile(r"^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+")
     if re.match(pattern, self.email):
       return self.email
-    raise ValueError("The email format is invalid")
+    while not re.match(pattern, self.email):
+      print("Put a valid email: ")
+      self.email = input("Enter email: ")
+      print()
+    return self.email
 
   @property
   def validate_password(self):
@@ -215,8 +215,8 @@ class AuthCredentials:
   def result(self):
     auth_list = [self.validate_username, self.validate_email, self.validate_password]
     return auth_list
-
     
+
 class Security:
   """
   Passcode class for suggesting user passcode iteration,
