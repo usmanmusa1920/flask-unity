@@ -121,6 +121,7 @@ def thunder_dummy(project):
 from auth.models import User
 from {project} import app, db
 from {project}.routes import reg_blueprints
+from {project}.config import admin_runner
 
 
 boot = Boot(db=db, model=User)
@@ -130,6 +131,7 @@ if __name__ == "__main__":
 
 for reg_blueprint in reg_blueprints:
   app.register_blueprint(reg_blueprint)
+admin_runner()
 app.run(debug=boot.d, port=boot.p, host=boot.h)
 """
 
@@ -168,22 +170,23 @@ from auth.models import User
 db.create_all() # method to create the tables and database
 
 
-{long_comment}
-Model views allow you to add a dedicated set of admin
-pages for managing any model in your database
-{long_comment}
-admin = Admin(app, name='{proj_name}')
+def admin_runner():
+  {long_comment}
+  Model views allow you to add a dedicated set of admin
+  pages for managing any model in your database
+  {long_comment}
+  admin = Admin(app, name='{proj_name}')
 
 
-{long_comment}
-Register your model, by passing every model that you want
-to manage in admin page in the below list (reg_models)
-{long_comment}
-reg_models = [
-  User,
-]
-for reg_model in reg_models:
-  admin.add_view(ModelView(reg_model, db.session))
+  {long_comment}
+  Register your model, by passing every model that you want
+  to manage in admin page in the below list (reg_models)
+  {long_comment}
+  reg_models = [
+    User,
+  ]
+  for reg_model in reg_models:
+    admin.add_view(ModelView(reg_model, db.session))
 """
 
 
