@@ -124,7 +124,7 @@ python3 thunder.py boot --port 7000 --debug True
 
 ## Register model to admin page
 
-To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Import your app model that you want to register, above the method that will create the tables and database `db.create_all()` and you will see a commented prototype above it, then append it in the `reg_models = []` list below. That will register your model in the admin page and you will see it if you vist the admin page
+To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Import your app model that you want to register, above the method that will create the tables and database `db.create_all()` and you will see a commented prototype above it, then append it in the `reg_models = []` list within `admin_runner` function. That will register your model in the admin page and you will see it if you vist the admin page
 
 ## Admin user
 

@@ -1,0 +1,28 @@
+<!-- @sakyum, todo_project (project) index.html page -->
+{% extends "default_index.html" %}
+
+{% block short_info %}
+  <p>Your project (todo_project) default page</p>
+{% endblock short_info %}
+
+{% block main %}
+  {% if blueprints_list|length > 1 %}
+    <div class="blueprint_list_wrapper">
+      <div class="blueprint_list">
+        <p>Routes</p>
+        {% for blueprint in blueprints_list %}
+          <a href="/{blueprint.name}">{blueprint.name}</a>
+          </br>
+        {% endfor %}
+        <a href="/admin/login">login</a>
+        </br>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="pkg_desc">
+    <div>
+      <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
+    </div>
+  </div>
+{% endblock main %}
