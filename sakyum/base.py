@@ -213,11 +213,16 @@ class BaseStructure:
               self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into it
               
               templates_folder = os.getcwd() # base dir path of templates folder
+              
               # make project dir in templates and cd into it 
               self.file_opt(proj_name, _here=templates_folder)
+              # create project index.html and back to templates base dir path
+              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_base=False), dir_togo=templates_folder)
 
-              # create project index.html and back to project base dir path
-              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_base=False), dir_togo=project_folder)
+              # make project dir in templates and cd into it 
+              self.file_opt("admin", _here=templates_folder)
+              # create project admin index.html and back to project base dir path
+              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) admin index.html page -->\n"+_html("do_nothing", admin=True, project_name=proj_name), dir_togo=project_folder)
               
             if static_dir == dirs[3:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
@@ -393,7 +398,7 @@ class Boot:
       self.d = args.debug
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
-    elif sys.argv[1] == "su":
+    elif sys.argv[1] == "create_user":
       from .utils import AuthCredentials
 
       auth_class = AuthCredentials().result

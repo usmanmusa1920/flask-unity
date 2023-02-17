@@ -13,7 +13,13 @@ f2 = "{{"
 l2 = "}}"
 long_comment = "\"\"\""
 
-def _html(name, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
+def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
+  if admin:
+    return f"""{f1}% extends 'admin/master.html' %{l1}
+{f1}% block body %{l1}
+  <a href="/">Go to {project_name} home page</a>
+{f1}% endblock body %{l1}
+"""
   if is_base:
     _is = "application"
     static_url = name
