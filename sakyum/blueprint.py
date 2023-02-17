@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template
-from sakyum import footer_style
-from sakyum.utils import template_dir, static_dir
+from sakyum.utils import footer_style, template_dir, static_dir
 
 
 default = Blueprint("default", __name__, template_folder=template_dir(temp_from_pkg="default_page"), static_folder=static_dir("default_style", static_from_pkg=True))

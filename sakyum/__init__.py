@@ -25,6 +25,3 @@ __copyright__ = "Copyright (C) 2022 - 2023 Usman Musa"
 
 from .base import Boot
 from .api import project
-from .utils import stylePage
-
-footer_style = stylePage(__title__, "do_nothing", version=__version__)

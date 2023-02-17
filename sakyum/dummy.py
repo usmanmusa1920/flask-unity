@@ -198,8 +198,7 @@ def admin_runner():
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
-from sakyum import footer_style
-from sakyum.utils import template_dir, static_dir
+from sakyum.utils import footer_style, template_dir, static_dir
 from sakyum.blueprint import default, errors, auth
 from flask import render_template
 # from <app_name>.views import <app_name>
@@ -255,8 +254,7 @@ def app_views_dummy(app):
   # :app is the application name that you create within your project
   """
   return f"""from flask import (render_template, Blueprint)
-from sakyum import footer_style
-from sakyum.utils import template_dir, static_dir
+from sakyum.utils import footer_style, template_dir, static_dir
 # from .models import <model_name>
 # from .forms import <model_form>
 
@@ -505,7 +503,7 @@ class User(db.Model, UserMixin):
 def auth_routes_dummy(proj_name):
   return f"""from flask import render_template, request, redirect, url_for
 from flask_login import login_user, current_user, logout_user
-from sakyum import footer_style
+from sakyum.utils import footer_style
 from sakyum.blueprint import auth
 from {proj_name}.config import db
 from .models import User

@@ -9,6 +9,8 @@ import secrets
 
 from pathlib import Path
 from getpass import getpass
+from . import __title__
+from . import __version__
 
 
 # relative path to the package folder (sakyum)
@@ -148,6 +150,9 @@ def stylePage(name, _is, version=False):
   border = "=" * len(desc_center)
   return [desc_center, border]
   
+  
+footer_style = stylePage(__title__, "do_nothing", version=__version__)
+
 
 class AuthCredentials:
   def __init__(self, username=None, email=None, password=None):
