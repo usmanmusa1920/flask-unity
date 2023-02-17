@@ -35,21 +35,50 @@ auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="d
 #   return render_template("admin_login.html", footer_style=footer_style)
 
 
+@errors.app_errorhandler(400)
+def error_400(error):
+  return render_template('400.html', footer_style=footer_style), 400
+
 @errors.app_errorhandler(401)
 def error_401(error):
   return render_template('401.html', footer_style=footer_style), 401
-  
 
 @errors.app_errorhandler(403)
 def error_403(error):
   return render_template('403.html', footer_style=footer_style), 403
-  
 
 @errors.app_errorhandler(404)
 def error_404(error):
   return render_template('404.html', footer_style=footer_style), 404
-  
+
+@errors.app_errorhandler(406)
+def error_406(error):
+  return render_template('406.html', footer_style=footer_style), 406
+
+@errors.app_errorhandler(415)
+def error_415(error):
+  return render_template('415.html', footer_style=footer_style), 415
+
+@errors.app_errorhandler(429)
+def error_429(error):
+  return render_template('429.html', footer_style=footer_style), 429
 
 @errors.app_errorhandler(500)
 def error_500(error):
   return render_template('500.html', footer_style=footer_style), 500
+
+@errors.app_errorhandler(501)
+def error_501(error):
+  return render_template('501.html', footer_style=footer_style), 501
+
+@errors.app_errorhandler(502)
+def error_502(error):
+  return render_template('502.html', footer_style=footer_style), 502
+
+@errors.app_errorhandler(503)
+def error_503(error):
+  return render_template('503.html', footer_style=footer_style), 503
+
+@errors.app_errorhandler(504)
+def error_504(error):
+  return render_template('504.html', footer_style=footer_style), 504
