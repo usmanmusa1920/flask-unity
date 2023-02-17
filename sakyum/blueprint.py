@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template
-from sakyum import version_style_desc, version_style_border
+from sakyum import footer_style
 from sakyum.utils import template_dir, static_dir
 
 
@@ -33,24 +33,24 @@ auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="d
 #   """
 #     the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
 #   """
-#   return render_template("admin_login.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
+#   return render_template("admin_login.html", footer_style=footer_style)
 
 
 @errors.app_errorhandler(401)
 def error_401(error):
-  return render_template('401.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 401
+  return render_template('401.html', footer_style=footer_style), 401
   
 
 @errors.app_errorhandler(403)
 def error_403(error):
-  return render_template('403.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 403
+  return render_template('403.html', footer_style=footer_style), 403
   
 
 @errors.app_errorhandler(404)
 def error_404(error):
-  return render_template('404.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 404
+  return render_template('404.html', footer_style=footer_style), 404
   
 
 @errors.app_errorhandler(500)
 def error_500(error):
-  return render_template('500.html', version_style_desc=version_style_desc, version_style_border=version_style_border), 500
+  return render_template('500.html', footer_style=footer_style), 500

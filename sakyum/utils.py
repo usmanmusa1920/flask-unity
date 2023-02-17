@@ -9,8 +9,6 @@ import secrets
 
 from pathlib import Path
 from getpass import getpass
-from sakyum import __title__
-from sakyum import __version__
 
 
 # relative path to the package folder (sakyum)
@@ -139,7 +137,7 @@ def stylePage(name, _is, version=False):
 
   if version:
     # it will style the description in the footer
-    desc = "@ " + __title__ + " software - v" + __version__
+    desc = "@ " + name + " software - v" + version
     desc_center = desc.center(len(desc) + 2)
     border = "=" * len(desc_center)
     return [desc_center, border]

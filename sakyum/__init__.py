@@ -27,6 +27,4 @@ from .base import Boot
 from .api import project
 from .utils import stylePage
 
-version_style = stylePage("do_nothing", "do_nothing", version=True)
-version_style_desc = version_style[0]
-version_style_border = version_style[1]
+footer_style = stylePage(__title__, "do_nothing", version=__version__)

@@ -189,7 +189,7 @@ for reg_model in reg_models:
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
-from sakyum import version_style_desc, version_style_border
+from sakyum import footer_style
 from sakyum.utils import template_dir, static_dir
 from sakyum.blueprint import default, errors, auth
 from flask import render_template
@@ -233,7 +233,7 @@ def rem_blueprint(lst_blue):
 @default.route('/')
 def index():
   # the default_base.html below is located in the sakyum package (templates/default_page) folder
-  return render_template("default_base.html", project_name="{proj}", blueprints_list=rem_blueprint(reg_blueprints), version_style_desc=version_style_desc, version_style_border=version_style_border)
+  return render_template("default_base.html", project_name="{proj}", blueprints_list=rem_blueprint(reg_blueprints), footer_style=footer_style)
   
   
 {long_comment} overwrite error pages here {long_comment}
@@ -246,7 +246,7 @@ def app_views_dummy(app):
   # :app is the application name that you create within your project
   """
   return f"""from flask import (render_template, Blueprint)
-from sakyum import version_style_desc, version_style_border
+from sakyum import footer_style
 from sakyum.utils import template_dir, static_dir
 # from .models import <model_name>
 # from .forms import <model_form>
@@ -263,7 +263,7 @@ def index():
     you can edit it and give it a different css and js file to your desire
   {long_comment}
 
-  return render_template("{app}/index.html", head_title=head_title, version_style_desc=version_style_desc, version_style_border=version_style_border)
+  return render_template("{app}/index.html", head_title=head_title, footer_style=footer_style)
 """
 
 
@@ -496,7 +496,7 @@ class User(db.Model, UserMixin):
 def auth_routes_dummy(proj_name):
   return f"""from flask import render_template, request, redirect, url_for
 from flask_login import login_user, current_user, logout_user
-from sakyum import version_style_desc, version_style_border
+from sakyum import footer_style
 from sakyum.blueprint import auth
 from {proj_name}.config import db
 from .models import User
@@ -517,7 +517,7 @@ def adminLogin():
       # if current_user.is_authenticated:
       #   return redirect(url_for("default.index"))
       return redirect(url_for("admin.index"))
-  return render_template("admin_login.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
+  return render_template("admin_login.html", footer_style=footer_style)
 
 
 @auth.route('/admin/register/', methods=["POST", "GET"])
@@ -533,7 +533,7 @@ def adminRegister():
     db.session.add(user_obj)
     db.session.commit()
     return redirect(url_for("auth.adminLogin"))
-  return render_template("admin_register.html", version_style_desc=version_style_desc, version_style_border=version_style_border)
+  return render_template("admin_register.html", footer_style=footer_style)
 
 
 @auth.route('/admin/logout/', methods=["POST", "GET"])
