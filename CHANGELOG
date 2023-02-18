@@ -1,6 +1,10 @@
 Change Log
 ==========
 
-0.0.3 (12/february/2023)
+0.0.3 (18/february/2023)
 ------------------
 - Third Release
+
+In this release I handle how we can customise the admin html page by inheriting (extends) it in our project templates/admin directory. Also I refactor other libraries that this package needs with their corresponding versions in the setup.py and requirements.txt files.
+
+Some error pages, default page were added but still you can customise it in your project sub folder (the package with the same name of your project in your project directory). Also an admin directory within your project templates folder is added too!

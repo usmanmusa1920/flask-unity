@@ -14,7 +14,7 @@ setup(
   # name of the main package (base folder)
   name=__title__,
   version=__version__,
-  description='An extension of flask web framework that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs',
+  description='An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs',
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
   long_description_content_type="text/markdown",
   python_requires='>=3.6',
