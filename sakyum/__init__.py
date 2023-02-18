@@ -8,10 +8,8 @@
     /_  /|   / / |/ /  / /\  /|
      / /_|  /_/  / /  / /  \/ |
   /_/ /  | /  | / /__/ /      |
-
-  Abstract away complexity with `sakyum`
   
-  An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs
+  An extension of flask web framework that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs
 """
 
 
@@ -20,6 +18,7 @@ __version__ = "0.0.3"
 __author__ = "Usman Musa"
 __author_email__ = "usmanmusa1920@gmail.com"
 __author_website__ = "https://usmanmusa1920.github.io"
+__repository__ = "https://github.com/usmanmusa1920/sakyum"
 __copyright__ = "Copyright (C) 2022 - 2023 Usman Musa"
 
 
