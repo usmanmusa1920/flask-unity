@@ -168,6 +168,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
+# login_manager.session_protection = "strong"
 
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
@@ -494,6 +495,24 @@ class User(db.Model, UserMixin):
   username = db.Column(db.String(20), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.String(60), nullable=False)
+  # authenticated = db.Column(db.Boolean, default=False)
+  # is_superuser = db.Column(db.Boolean, default=False)
+
+  # def is_active(self):
+  #   {long_comment}True, as all users are active.{long_comment}
+  #   return True
+
+  # def get_id(self):
+  #   {long_comment}Return the user id to satisfy Flask-Login's requirements.{long_comment}
+  #   return self.user
+
+  # def is_authenticated(self):
+  #   {long_comment}Return True if the user is authenticated.{long_comment}
+  #   return self.authenticated
+
+  # def is_anonymous(self):
+  #   {long_comment}False, as anonymous users aren't supported.{long_comment}
+  #   return False
 
   def __repr__(self):
     return f"User('{f1}self.username{l1}', '{f1}self.email{l1}'"
