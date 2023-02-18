@@ -2,11 +2,7 @@
 
 from setuptools import setup
 from setuptools import find_packages
-from sakyum import __title__
-from sakyum import __version__
-from sakyum import __author__
-from sakyum import __author_email__
-from sakyum import __repository__
+from sakyum import (__title__, __version__, __author__, __author_email__, __repository__)
 
 
 setup(
@@ -34,6 +30,7 @@ setup(
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3'
+    'Programming Language :: Python :: 3.8'
   ],
   
   # used when people are searching for a module, keywords separated with a space

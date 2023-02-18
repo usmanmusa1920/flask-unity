@@ -310,6 +310,9 @@ class {app_name.capitalize()}QuestionModel(db.Model):
   {long_comment} {app_name.capitalize()} default Question model {long_comment}
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+  # the user field is the user who create the question and he is in the `User` models of auth
+  user = db.relationship("User", backref="user")
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   question_text = db.Column(db.Text, nullable=False)
   choices = db.relationship('{app_name.capitalize()}ChoiceModel', backref='selector', lazy=True)
 
@@ -495,24 +498,24 @@ class User(db.Model, UserMixin):
   username = db.Column(db.String(20), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.String(60), nullable=False)
-  # authenticated = db.Column(db.Boolean, default=False)
-  # is_superuser = db.Column(db.Boolean, default=False)
+  authenticated = db.Column(db.Boolean, default=False)
+  is_superuser = db.Column(db.Boolean, default=False)
 
-  # def is_active(self):
-  #   {long_comment}True, as all users are active.{long_comment}
-  #   return True
+  def is_active(self):
+    {long_comment}True, as all users are active.{long_comment}
+    return True
 
-  # def get_id(self):
-  #   {long_comment}Return the user id to satisfy Flask-Login's requirements.{long_comment}
-  #   return self.user
+  def get_id(self):
+    {long_comment}Return the user id to satisfy Flask-Login's requirements.{long_comment}
+    return self.user
 
-  # def is_authenticated(self):
-  #   {long_comment}Return True if the user is authenticated.{long_comment}
-  #   return self.authenticated
+  def is_authenticated(self):
+    {long_comment}Return True if the user is authenticated.{long_comment}
+    return self.authenticated
 
-  # def is_anonymous(self):
-  #   {long_comment}False, as anonymous users aren't supported.{long_comment}
-  #   return False
+  def is_anonymous(self):
+    {long_comment}False, as anonymous users aren't supported.{long_comment}
+    return False
 
   def __repr__(self):
     return f"User('{f1}self.username{l1}', '{f1}self.email{l1}'"
