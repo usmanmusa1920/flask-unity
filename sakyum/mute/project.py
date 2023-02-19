@@ -61,11 +61,14 @@ def admin_runner():
   for reg_model in reg_models:
     admin.add_view(ModelView(reg_model, db.session))
     
+  {long_comment}
+    register your custom admin here, like we register `QuestionChoiceAdminView`
+    if you are stuck visit:
+      https://flask-admin.readthedocs.io/en/latest/introduction/#getting-started
+  {long_comment}
+
   # admin.add_view(QuestionChoiceAdminView(Todo_appQuestionModel, db.session, name="Questions", category="Question-Choice"))
   # admin.add_view(QuestionChoiceAdminView(Todo_appChoiceModel, db.session, name="Choices", category="Question-Choice"))
-  # admin.add_sub_category(name="Links", parent_name="Team")
-  # admin.add_link(MenuLink(name='Home Page', url='/', category='Links'))
-
 """
 
 

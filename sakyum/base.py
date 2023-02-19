@@ -9,22 +9,22 @@ import subprocess as sp
 
 from pathlib import Path
 
-from .dummy import _js
-from .dummy import _css
-from .dummy import _html
-from .dummy import null
-from .dummy import thunder_dummy
-from .dummy import pro_init_dummy
-from .dummy import pro_routes_dummy
-from .dummy import pro_config_dummy
-from .dummy import app_views_dummy
-from .dummy import app_forms_dummy
-from .dummy import app_models_dummy
-from .dummy import auth_init_dummy
-from .dummy import auth_forms_dummy
-from .dummy import auth_models_dummy
-from .dummy import auth_routes_dummy
-
+from .mute import null
+from .mute import thunder_dummy
+from .mute.page import _js
+from .mute.page import _css
+from .mute.page import _html
+from .mute.app import app_admin_dummy
+from .mute.app import app_forms_dummy
+from .mute.app import app_models_dummy
+from .mute.app import app_views_dummy
+from .mute.project import pro_init_dummy
+from .mute.project import pro_config_dummy
+from .mute.project import pro_routes_dummy
+from .mute.auth import auth_init_dummy
+from .mute.auth import auth_forms_dummy
+from .mute.auth import auth_models_dummy
+from .mute.auth import auth_routes_dummy
 from . import __title__
 from . import __version__
 
@@ -132,6 +132,10 @@ class BaseStructure:
           elif _fls == "views.py":
             # building app `views.py` default files
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(app_name)}", route_go=False)
+            
+          elif _fls == "admin.py":
+            # building app `admin.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_admin_dummy(app=app_name)}", route_go=False)
     else:
       for _fls in fls:
         if _fls[:-3] == file:
@@ -280,7 +284,7 @@ class AppStructure(BaseStructure):
     
     dirs = [proj_app_name]
     app_store_name = proj_app_name # store our app name
-    fls_name = ["__init__", "views", "models", "forms"]
+    fls_name = ["__init__", "views", "models", "forms", "admin"]
     fls = self.append_exs_to_file(fls_name=fls_name)
     roove_dir = ["templates", "static", "static"]
     _here_app = os.getcwd()  # initial `inside project folder` where the project was created
