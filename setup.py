@@ -2,7 +2,7 @@
 
 from setuptools import setup
 from setuptools import find_packages
-from sakyum import (__title__, __version__, __author__, __author_email__, __repository__)
+from sakyum import (__title__, __version__, __author__, __author_email__, __repository__, __website__)
 
 
 setup(
@@ -16,7 +16,8 @@ setup(
   python_requires='>=3.6',
   
   # The URL of your package's (project) home page e.g. github link
-  url=__repository__,
+  url=__website__,
+  repo=__repository__,
   author=__author__,
   author_email=__author_email__,
   License='MIT',

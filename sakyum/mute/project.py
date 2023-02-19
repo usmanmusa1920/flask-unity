@@ -2,10 +2,11 @@
 
 from sakyum.utils import Security
 
+
 secret = Security()
 secure_app = secret.passcode_salt
-
 long_comment = "\"\"\""
+
 
 def pro_init_dummy():
   return f"""import auth
@@ -22,8 +23,8 @@ from flask import Flask
 from pathlib import Path
 from flask_login import LoginManager
 
-db_ORIGIN = Path(__file__).resolve().parent.parent
 
+db_ORIGIN = Path(__file__).resolve().parent.parent
 app = Flask(__name__)
 app.app_context().push()
 app.config['SECRET_KEY'] = '{secure_app}'
@@ -34,6 +35,8 @@ app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 # login_manager.session_protection = "strong"
+login_manager.login_view = 'auth.adminLogin'
+login_manager.login_message_category = 'info'
 
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
@@ -44,29 +47,30 @@ db.create_all() # method to create the tables and database
 
 
 def admin_runner():
-  {long_comment}
-  Model views allow you to add a dedicated set of admin
-  pages for managing any model in your database
-  {long_comment}
+  {long_comment} Model views allow you to add a dedicated set of admin
+    pages for managing any model in your database {long_comment}
   admin = Admin(app, name='{proj_name}')
 
 
-  {long_comment}
-  Register your model, by passing every model that you want
-  to manage in admin page in the below list (reg_models)
-  {long_comment}
+  {long_comment} Register your model, by passing every model that you want
+    to manage in admin page in the below list (reg_models) {long_comment}
   reg_models = [
     User,
   ]
   for reg_model in reg_models:
     admin.add_view(ModelView(reg_model, db.session))
     
-  {long_comment}
-    register your custom admin here, like we register `QuestionChoiceAdminView`
-    if you are stuck visit:
-      https://flask-admin.readthedocs.io/en/latest/introduction/#getting-started
-  {long_comment}
 
+  {long_comment} If you want to customise how your model is going to be, don't put (pass) it in the
+    above `reg_models` list. Instead create a model view class in your app admin.py
+    file and import it (in this module) `config.py` above the `db.create_all()` then come
+    below this comment and register it just like the way we did for the commented ones
+
+    register your custom admin model view here, like we register `QuestionChoiceAdminView`
+    if you are stuck visit:
+      https://flask-admin.readthedocs.io/en/latest/introduction/#getting-started {long_comment}
+
+      
   # admin.add_view(QuestionChoiceAdminView(Todo_appQuestionModel, db.session, name="Questions", category="Question-Choice"))
   # admin.add_view(QuestionChoiceAdminView(Todo_appChoiceModel, db.session, name="Choices", category="Question-Choice"))
 """

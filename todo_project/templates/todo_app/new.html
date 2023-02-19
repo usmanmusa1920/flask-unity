@@ -1,0 +1,28 @@
+{% extends "todo_project/index.html" %}
+
+{% block main %}
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Post</legend>
+      <div class="form-group">
+        {{ form.question_text.label(class="form-control-label") }}
+        {% if form.question_text.errors %}
+          {{ form.question_text(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.question_text.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.question_text(class="form-control form-control-lg") }}
+        {% endif %}
+      </div>
+    </fieldset>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+  </form>
+</div>
+{% endblock main %}

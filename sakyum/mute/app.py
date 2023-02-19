@@ -11,8 +11,9 @@ def app_views_dummy(app):
   """
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir
-# from .models import <model_name>
 # from .forms import <model_form>
+from <project_name>.config import db
+from .models import <app_models>
 
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
 
@@ -56,8 +57,8 @@ from {your_application}.config import db
 
 
 {long_comment}
-when ever you create a model, make sure you import it in your
-project config.py file in other to see it in admin page
+when ever you create a model, make sure you import it in your project config.py
+file and register it to the admin page in other to see it in admin page
 {long_comment}
 
 
