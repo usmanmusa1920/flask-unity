@@ -4,20 +4,13 @@ Sakyum
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
-        _
-      /_  /|   / / |/ /  / /\  /|
-       / /_|  /_/  / /  / /  \/ |
-    /_/ /  | /  | / /__/ /      |
-
 ## Installation
 
 First create a virtual environment `python3 -m venv venv` and then activate it `source venv/bin/activate`
 
 Once that finish now install the library by
 
-```py
-pip install sakyum
-```
+  pip install sakyum
 
 wait for the installation basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
 
