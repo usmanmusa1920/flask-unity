@@ -45,7 +45,7 @@ For you to start an app within your project (**todo_project**) run the following
 
     python3 thunder.py create_app -a todo_app
 
-or::
+    or
 
     python3 thunder.py create_app --app todo_app
 
@@ -74,7 +74,7 @@ This will bring the flask development server on port **5000** you can give it a 
 
     python3 thunder.py boot -p 7000
 
-or::
+    or
 
     python3 thunder.py boot --port 7000
 
@@ -84,21 +84,21 @@ this will bring the serve on port **7000** visit the localhost url with the port
 
 this will take you to your app **index.html page** (todo_app). From there you are ready to go.
 
-Also, you can give your desire ip address/host by using **-H** or **--host** flag, e.g
+Also, you can give your desire ip address/host by using **-H** or **--host** flag, e.g::
 
-- python3 thunder.py boot -p 7000 -H 0.0.0.0
+    - python3 thunder.py boot -p 7000 -H 0.0.0.0
 
-or::
+        or
 
-- python3 thunder.py boot --port 7000 --host 0.0.0.0
+    - python3 thunder.py boot --port 7000 --host 0.0.0.0
 
 For development server, you can give a debug value to True by specifying **-d** flag or **--debug** e.g::
 
-- python3 thunder.py boot -p 7000 -d True
-    
-or::
+    - python3 thunder.py boot -p 7000 -d True
+        
+        or
 
-- python3 thunder.py boot --port 7000 --debug True
+    - python3 thunder.py boot --port 7000 --debug True
 
 Register model to admin page
 ============================
