@@ -16,7 +16,7 @@ from . import __version__
 # relative path to the package folder (sakyum)
 rel_path = Path(__file__).resolve().parent
 
-_status_codes = {
+status_codes = {
   # Informational.
   100: ("continue",),
   101: ("switching_protocols",),
