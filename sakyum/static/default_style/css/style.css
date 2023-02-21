@@ -22,6 +22,10 @@ time, mark, audio, video {
   background:transparent;
 }
 
+.a_links{
+  color: dodgerblue;
+}
+
 body{
   background: lightgrey;
   overflow-x: hidden;
@@ -115,11 +119,39 @@ body{
   position: relative;
 }
 
-.notification{
+.notification_success{
   margin-top: 12vh;
   display: flex;
   justify-content: center;
   background: lightgreen;
+}
+
+.notification_info{
+  margin-top: 12vh;
+  display: flex;
+  justify-content: center;
+  background: lightgreen;
+}
+
+.notification_error{
+  margin-top: 12vh;
+  display: flex;
+  justify-content: center;
+  background: red;
+}
+
+.notification_debug{
+  margin-top: 12vh;
+  display: flex;
+  justify-content: center;
+  background: red;
+}
+
+.notification_warning{
+  margin-top: 12vh;
+  display: flex;
+  justify-content: center;
+  background: yellow;
 }
 
 .main{
@@ -145,6 +177,15 @@ body{
   display: flex;
   justify-content: center;
   text-align: center;
+}
+
+@media only screen and (max-width: 700px){
+  .main_column h3{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+  }
 }
 
 .mini{
@@ -219,14 +260,14 @@ body{
   color: dodgerblue;
 }
 
-.admin_login{
+.admin_auth_form{
   width: 100%;
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
 
-.admin_login form{
+.admin_auth_form form{
   width: 60%;
   display: flex;
   flex-direction: column;
@@ -236,7 +277,7 @@ body{
 }
 
 @media only screen and (max-width: 700px){
-  .admin_login form{
+  .admin_auth_form form{
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -246,7 +287,7 @@ body{
   }
 }
 
-.admin_login form input{
+.admin_auth_form form input{
   width: 80%;
   height: 30px;
   padding-left: 5px;
@@ -255,7 +296,7 @@ body{
   border-radius: 3px;
 }
 
-.admin_login form button{
+.admin_auth_form form button{
   width: 60%;
   height: 30px;
   padding-left: 5px;
@@ -267,7 +308,7 @@ body{
 }
 
 .pkg_desc{
-  margin: 20px 0;
+  margin: 0 0 20px 0;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -275,7 +316,7 @@ body{
 
 @media only screen and (max-width: 700px){
   .pkg_desc{
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     flex-direction: column;
     align-items: space-evenly;
   }
