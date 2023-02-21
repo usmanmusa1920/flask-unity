@@ -1,15 +1,19 @@
-{% extends "default_index.html" %}
+<!-- default user registration page (admin) -->
+{% extends "default.html" %}
 
-{% block main %}
+{% block auth %}
   <div class="pkg_desc">
     <h1>Register user to admin</h1>
   </div>
-  <div class="admin_login">
+  <div class="admin_auth_form">
     <form action="" method="POST">
       <input type="text" name="username" placeholder="Enter username" required>
       <input type="email" name="email" placeholder="Enter email" required>
       <input type="password" name="password" placeholder="Enter password" required>
       <button type="submit">register</button>
+      <p>
+        <a href="/admin/login" class="a_links">login</a>
+      </p>
     </form>
   </div>
-{% endblock main %}
+{% endblock auth %}
