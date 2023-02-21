@@ -404,13 +404,17 @@ class Boot:
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
     elif sys.argv[1] == "create_user":
       from .utils import AuthCredentials
+      from .utils import security
 
       auth_class = AuthCredentials().result
       username = auth_class[0]
       email = auth_class[1]
-      password = auth_class[2]
+      raw_password = auth_class[2]
+      
+      passwd_data = security(_passwd=raw_password, r_min=100, r_max=300, r_step=7)
+      hashed_password = passwd_data
 
-      u = self.model(username=username, email=email, password=password)
+      u = self.model(username=username, email=email, password=hashed_password)
 
       self.db.session.add(u)
       self.db.session.commit()

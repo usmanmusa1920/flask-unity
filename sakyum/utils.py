@@ -9,8 +9,8 @@ import secrets
 
 from pathlib import Path
 from getpass import getpass
-from . import __title__
-from . import __version__
+from sakyum import __title__
+from sakyum import __version__
 
 
 # relative path to the package folder (sakyum)
@@ -160,7 +160,7 @@ class AuthCredentials:
     self.email = email
     self.password = password
 
-    while self.username == None or self.username == "" or len(self.username) < 5:
+    while self.username == None or self.username == "" or len(self.username) < 3:
       if self.username == None:
         self.username = input("Enter username: ")
         print()
@@ -168,8 +168,8 @@ class AuthCredentials:
         print("username can't be empty")
         self.username = input("Enter username: ")
         print()
-      elif len((self.username)) < 5:
-        print("username must be not less than 5 character")
+      elif len((self.username)) < 3:
+        print("username must be not less than 3 character")
         self.username = input("Enter username: ")
         print()
         
@@ -182,7 +182,7 @@ class AuthCredentials:
         self.email = input("Enter email: ")
         print()
         
-    while self.password == None or self.password == "" or len(self.password) < 8:
+    while self.password == None or self.password == "" or len(self.password) < 6:
       if self.password == None:
         self.password = getpass("Enter password: ")
         print()
@@ -190,8 +190,8 @@ class AuthCredentials:
         print("password can't be empty")
         self.password = getpass("Enter password: ")
         print()
-      elif len((self.password)) < 8:
-        print("password must be not less than 8 character")
+      elif len((self.password)) < 6:
+        print("password must be not less than 6 character")
         self.password = getpass("Enter password: ")
         print()
         
@@ -261,10 +261,10 @@ class Security:
     
     By using the random sample method, where we make:
       population = self.token_generate
-      k = random.randint(32, 64)
+      k = random.randint(20, 50)
     """
 
-    salt = "".join(random.sample(self.token_generate, random.randint(32, 64)))
+    salt = "".join(random.sample(self.token_generate, random.randint(20, 50)))
     return salt # return type is string
     
 
@@ -349,8 +349,45 @@ def security(_passwd, r_min=260000, r_max=400000, r_step=7) -> list:
   pwd_salt = pwd.passcode_salt # salting method
   pwd_itter = pwd.passcode_iteration(r_min=r_min, r_max=r_max, r_step=r_step) # passwd iteration
 
+  # randint which will be our stepping
+  rand_int = random.randint(1, 9)
+  # r variable that we will append in the end of iteration
+  r = random.randrange(10, 50, rand_int)
+
+  # divide r by it stepping number
+  r_div_step = r / rand_int
+
+  # the binary value of `r`
+  r_bin = bin(r)
+
+  # r bit_length (length of the binary)
+  r_bit_length = r.bit_length()
+
+  # bin value of
+
   # passwod hash (a list of hashed_pwd and password ingredients)
   pwd_hash = pwd.get_hash(pwd_salt, pwd_itter, _passwd)
 
   #      [salt,     iteration, hashed_pwd,  ingredients]
-  return [pwd_salt, pwd_itter, pwd_hash[0], pwd_hash[1]]
+  # auth_list_1 = [pwd_salt + str(r_bit_length), str(pwd_itter) + str(r), pwd_hash[0], pwd_hash[1] + str(r_div_step)]
+  auth_list_1 = [pwd_salt, str(pwd_itter) + str(r), pwd_hash[0], pwd_hash[1]]
+  auth_list_2 = auth_list_1[:3]
+  return "$".join(auth_list_2)
+
+# from cryptography.fernet import Fernet
+# ff = security('password')
+# # put this some where safe!
+# key = Fernet.generate_key()
+# f = Fernet(key)
+
+# token_public = f.encrypt(ff.encode("utf-8"))
+# token_private = f.decrypt(token_public)
+
+# print(key)
+# print(token_public)
+# print(token_private.decode())
+
+def check_security(hashed):
+  return
+# print(security('password'))
+# print(type(security('password')))

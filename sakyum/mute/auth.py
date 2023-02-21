@@ -95,7 +95,8 @@ class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(20), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
-  password = db.Column(db.String(60), nullable=False)
+  # password = db.Column(db.String(60), nullable=False)
+  password = db.Column(db.text, nullable=False)
   authenticated = db.Column(db.Boolean, default=False)
   is_superuser = db.Column(db.Boolean, default=False)
 
@@ -121,13 +122,12 @@ class User(db.Model, UserMixin):
 
 
 def auth_routes_dummy(proj_name):
-  return f"""from flask import render_template, request, redirect, url_for
+  return f"""from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user
 from sakyum.utils import footer_style
 from sakyum.blueprint import auth
 from {proj_name}.config import db
 from .models import User
-import datetime
 
 
 @auth.route('/admin/login/', methods=["POST", "GET"])
@@ -143,7 +143,10 @@ def adminLogin():
       login_user(user, remember=True)
       # if current_user.is_authenticated:
       #   return redirect(url_for("default.index"))
+      flash('You are now logged in!', 'success')
       return redirect(url_for("admin.index"))
+    else:
+      flash('Cross check your login credentials!', 'error')
   return render_template("admin_login.html", footer_style=footer_style)
 
 
@@ -155,10 +158,13 @@ def adminRegister():
   if request.method == "POST":
     username  = request.form["username"]
     email  = request.form["email"]
-    password = request.form["password"]
-    user_obj = User(username=username, email=email, password=password)
+    raw_password = request.form["password"]
+    
+    hashed_password = security(_passwd=raw_password, r_min=100, r_max=300, r_step=7)
+    user_obj = User(username=username, email=email, password=hashed_password)
     db.session.add(user_obj)
     db.session.commit()
+    flash(f'Account for {f1}username{l1} has been created!', 'info')
     return redirect(url_for("auth.adminLogin"))
   return render_template("admin_register.html", footer_style=footer_style)
 
@@ -166,5 +172,6 @@ def adminRegister():
 @auth.route('/admin/logout/', methods=["POST", "GET"])
 def adminLogout():
   logout_user()
+  flash('You logged out!', 'info')
   return redirect(url_for("auth.adminLogin"))
 """
