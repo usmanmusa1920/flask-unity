@@ -1,68 +1,10 @@
-<!-- base index file for default pages -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{{ url_for('default.static', filename='media/favicon.ico') }}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('default.static', filename='css/style.css') }}">
-  {% block head_css %}
-    <!-- child css file link -->
-  {% endblock head_css %}
-  <script type="text/javascript" src="{{ url_for('default.static', filename='js/index.js') }}"></script>
-  {% block head_js %}
-    <!-- child js file link -->
-  {% endblock head_js %}
-  
-  {% if head_title %}
-    {% block head_title %}
-      <!-- child title file link -->
-    {% endblock head_title %}
-  {% else %}
-    <title>Sakyum</title>
-  {% endif %}
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="header_col">
-        <div class="head_left">
-          <h1 class="logo">
-            <a href="/">Sakyum</a>
-          </h1>
-        </div>
+<!-- default index page for your project and app (they `app and project` will inherite it) -->
+{% extends "default.html" %}
 
-        <div class="head_right">
-          <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
-          <a class="link_1">|</a>
-          <a href="https://github.com/usmanmusa1920/sakyum#readme" class="link_2" target="_blank">Docs</a>
-          <a href="/admin" class="link_3">Admin</a>
-          <a onclick="test()" class="alert">
-            <img src="{{ url_for('default.static', filename='media/alert.png') }}" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- <div class="notification">
-      notifications -->
-      <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="alert alert-{ category }">
-                { message }
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %} -->
-    <!-- </div> -->
-    
-    <div class="main">
-      <div class="main_column">
-        <div class="mini">
-          <div class="mini_column">
-            <p><pre>  ...........................
+{% block logo %}
+  <div class="mini">
+    <div class="mini_column">
+      <p><pre>  ...........................
     _
   /_  /|   / / |/ /  / /\  /|
    / /_|  /_/  / /  / /  \/ |
@@ -70,32 +12,9 @@
 .............................
 
 </pre></p>
-            {% block short_info %}
-              <!-- short_info -->
-            {% endblock short_info %}
-          </div>
-        </div>
-
-        {% block main %}
-          <!-- main content -->
-        {% endblock main %}
-      </div>
-    </div>
-
-    <div class="footer_margin_top"></div>
-    <div class="footer">
-      <p><pre>{{footer_style[1]}}
-{{footer_style[0]}}
-{{footer_style[1]}}</pre>
-        <div>
-          <a href="https://github.com/usmanmusa1920/sakyum" target="_blank">Github</a>
-          <a>|</a>
-          <a href="https://github.com/usmanmusa1920/sakyum#readme" target="_blank">Docs</a>
-          <a>|</a>
-          <a href="/admin" target="_blank">Admin</a>
-        </div>
-      </p>
+      {% block short_info %}
+        <!-- short_info -->
+      {% endblock short_info %}
     </div>
   </div>
-</body>
-</html>
+{% endblock logo %}

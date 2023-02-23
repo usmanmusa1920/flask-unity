@@ -46,21 +46,23 @@ setup(
   
   # List of other python modules which this module depends on.  For example RPi.GPIO
   install_requires = [
-    "click==8.1.3"
-    "Flask==2.2.3"
-    "Flask-Admin==1.6.0"
-    "Flask-Login==0.6.2"
-    "Flask-SQLAlchemy==3.0.3"
-    "Flask-WTF==1.1.1"
-    "greenlet==2.0.2"
-    "importlib-metadata==6.0.0"
-    "itsdangerous==2.1.2"
-    "Jinja2==3.1.2"
-    "MarkupSafe==2.1.2"
-    "SQLAlchemy==1.4.45"
-    "typing-extensions==4.5.0"
-    "Werkzeug==2.2.3"
-    "WTForms==3.0.1"
-    "zipp==3.13.0"
+    "bcrypt==4.0.1",
+    "click==8.1.3",
+    "Flask==2.2.3",
+    "Flask-Admin==1.6.0",
+    "Flask-Bcrypt==1.0.1",
+    "Flask-Login==0.6.2",
+    "Flask-SQLAlchemy==3.0.3",
+    "Flask-WTF==1.1.1",
+    "greenlet==2.0.2",
+    "importlib-metadata==6.0.0",
+    "itsdangerous==2.1.2",
+    "Jinja2==3.1.2",
+    "MarkupSafe==2.1.2",
+    "SQLAlchemy==1.4.45",
+    "typing-extensions==4.5.0",
+    "Werkzeug==2.2.3",
+    "WTForms==3.0.1",
+    "zipp==3.13.0",
   ]
 )
