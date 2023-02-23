@@ -14,7 +14,15 @@ def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=
   if admin:
     return f"""{f1}% extends 'admin/master.html' %{l1}
 {f1}% block body %{l1}
-  <a href="/">Go to {project_name} home page</a>
+  <a href="/">Go to kakana home page</a>
+  <br>
+  {f1}% if current_user.is_authenticated %{l1}
+    <a href="/admin/logout">logout</a>
+  {f1}% else %{l1}
+    <a href="/admin/login">login</a>
+    <br>
+    <a href="/admin/register">register</a>
+  {f1}% endif %{l1}
 {f1}% endblock body %{l1}
 """
   if is_base:

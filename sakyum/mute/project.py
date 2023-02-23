@@ -9,9 +9,7 @@ long_comment = "\"\"\""
 
 
 def pro_init_dummy():
-  return f"""import auth
-from .routes import base
-from .config import app, db
+  return f"""from .config import app, db
 """
 
 
@@ -22,6 +20,7 @@ from flask_admin import Admin
 from flask import Flask
 from pathlib import Path
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 
 db_ORIGIN = Path(__file__).resolve().parent.parent
@@ -33,6 +32,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+str(db_ORIGIN)+'/default.db
 # set optional bootswatch theme
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 # login_manager.session_protection = "strong"
 login_manager.login_view = 'auth.adminLogin'

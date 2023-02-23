@@ -328,12 +328,13 @@ def app_init(app):
 
 class Boot:
   """boot up project operation, app operation, and the server"""
-  def __init__(self, p=None, d=False, h=None, db=None, model=None):
+  def __init__(self, p=None, d=False, h=None, db=None, model=None, pwd_hash=None):
     self.p = p # port
     self.d = d # debug
     self.h = h # host
     self.db = db
     self.model = model
+    self.pwd_hash = pwd_hash
 
   def run(self):
     """run method for creating app and booting up server"""
@@ -404,19 +405,14 @@ class Boot:
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
     elif sys.argv[1] == "create_user":
       from .utils import AuthCredentials
-      from .utils import security
 
       auth_class = AuthCredentials().result
       username = auth_class[0]
       email = auth_class[1]
       raw_password = auth_class[2]
-      
-      passwd_data = security(_passwd=raw_password, r_min=100, r_max=300, r_step=7)
-      hashed_password = passwd_data
-
-      u = self.model(username=username, email=email, password=hashed_password)
-
-      self.db.session.add(u)
+      hashed_password = self.pwd_hash.generate_password_hash(raw_password).decode('utf-8')
+      user = self.model(username=username, email=email, password=hashed_password)
+      self.db.session.add(user)
       self.db.session.commit()
       logger.info(f"One record added ({username})")
       exit()

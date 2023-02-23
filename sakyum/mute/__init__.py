@@ -12,10 +12,10 @@ def thunder_dummy(project):
 from auth.models import User
 from {project} import app, db
 from {project}.routes import reg_blueprints
-from {project}.config import admin_runner
+from {project}.config import admin_runner, bcrypt
 
 
-boot = Boot(db=db, model=User)
+boot = Boot(db=db, model=User, pwd_hash=bcrypt)
 if __name__ == "__main__":
   boot.run()
 

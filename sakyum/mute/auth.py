@@ -81,8 +81,7 @@ class ResetPasswordForm(FlaskForm):
 
 
 def auth_models_dummy(proj_name):
-  return f"""from flask import current_app
-from {proj_name}.config import db, login_manager
+  return f"""from {proj_name}.config import db, login_manager
 from flask_login import UserMixin
 
 
@@ -95,8 +94,7 @@ class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(20), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
-  # password = db.Column(db.String(60), nullable=False)
-  password = db.Column(db.text, nullable=False)
+  password = db.Column(db.String(255), nullable=False)
   authenticated = db.Column(db.Boolean, default=False)
   is_superuser = db.Column(db.Boolean, default=False)
 
@@ -126,7 +124,7 @@ def auth_routes_dummy(proj_name):
 from flask_login import login_user, current_user, logout_user
 from sakyum.utils import footer_style
 from sakyum.blueprint import auth
-from {proj_name}.config import db
+from {proj_name}.config import db, bcrypt
 from .models import User
 
 
@@ -139,7 +137,7 @@ def adminLogin():
     username = request.form["username"]
     password = request.form["password"]
     user = User.query.filter_by(username=username).first()
-    if user and user.username == username and user.password == password:
+    if user and bcrypt.check_password_hash(user.password, password):
       login_user(user, remember=True)
       # if current_user.is_authenticated:
       #   return redirect(url_for("default.index"))
@@ -160,7 +158,7 @@ def adminRegister():
     email  = request.form["email"]
     raw_password = request.form["password"]
     
-    hashed_password = security(_passwd=raw_password, r_min=100, r_max=300, r_step=7)
+    hashed_password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
     user_obj = User(username=username, email=email, password=hashed_password)
     db.session.add(user_obj)
     db.session.commit()

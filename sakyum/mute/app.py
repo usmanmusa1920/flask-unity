@@ -106,17 +106,28 @@ class {app_name.capitalize()}ChoiceModel(db.Model):
 # :( in python interpreter ) make sure you are within that your virtual environment
 
 
-from {your_application}.config import db
+from {your_application}.config import db, bcrypt
 from {app_name}.models import {app_name.capitalize()}QuestionModel, {app_name.capitalize()}ChoiceModel
+from auth.models import User
 
 
 # :method to create the tables and database, if it doesn't create db file,
 # :run the below command. But if it create just ignore
 db.create_all()
 
+user1_hashed_pwd = bcrypt.generate_password_hash("12345678").decode('utf-8')
+user1 = User(username="backend-developer", email="developer@backend.com", password=user1_hashed_pwd)
 
-q1 = {app_name.capitalize()}QuestionModel(question_text="Is sakyum an extension of flask web framework?")
-q2 = {app_name.capitalize()}QuestionModel(question_text="Is flask better with sakyum")
+user2_hashed_pwd = bcrypt.generate_password_hash("12345678").decode('utf-8')
+user2 = User(username="front-developer", email="developer@front.com", password=user2_hashed_pwd)
+
+db.session.add(user1)
+db.session.add(user2)
+db.session.commit()
+
+
+q1 = {app_name.capitalize()}QuestionModel(question_text="Is sakyum an extension of flask web framework?", user=user1)
+q2 = {app_name.capitalize()}QuestionModel(question_text="Is flask better with sakyum", user=user2)
 
 db.session.add(q1)
 db.session.add(q2)
