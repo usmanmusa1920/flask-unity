@@ -1,5 +1,5 @@
 
-Sakyum
+Over view
 ###########
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
@@ -39,7 +39,7 @@ You can boot up the flask server, after you cd into the project folder (todo_pro
 Now visit the local url **127.0.0.1:5000** this will show you index page of your project. And if you do `ls` in that same dir you will see it create a **default.db** file (an sqlite file)
 
 Create flask project app using sakyum
-=====================================
+#####################################
 
 For you to start an app within your project (**todo_project**) run the following command, in that working directory (todo_project) by giving the name you want your app to be, in our case we will call our app **todo_app**::
 
