@@ -34,9 +34,10 @@ app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-# login_manager.session_protection = "strong"
+login_manager.session_protection = "strong"
 login_manager.login_view = 'auth.adminLogin'
 login_manager.login_message_category = 'info'
+login_manager.login_message = u"You must login, in other to get access to that page"
 
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}

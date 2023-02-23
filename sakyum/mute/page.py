@@ -18,6 +18,8 @@ def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=
   <br>
   {f1}% if current_user.is_authenticated %{l1}
     <a href="/admin/logout">logout</a>
+    <br>
+    <a href="/admin/change/pass">change password</a>
   {f1}% else %{l1}
     <a href="/admin/login">login</a>
     <br>
