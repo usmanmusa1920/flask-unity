@@ -1,6 +1,6 @@
 
-Over view
-###########
+Overview
+########
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
@@ -13,7 +13,7 @@ Once that finish now install the library by::
 
   pip install sakyum
 
-wait for the installation basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**
+wait for the installation to finish, basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**
 
 Create your first flask project using sakyum
 ============================================
@@ -36,7 +36,7 @@ You can boot up the flask server, after you cd into the project folder (todo_pro
 
     python3 thunder.py boot
 
-Now visit the local url **127.0.0.1:5000** this will show you index page of your project. And if you do `ls` in that same dir you will see it create a **default.db** file (an sqlite file)
+Now visit the local url **http://127.0.0.1:5000** this will show you index page of your project. And if you do `ls` in that same directory you will see it create a **default.db** file (an sqlite file)
 
 Create flask project app using sakyum
 #####################################
@@ -45,7 +45,7 @@ For you to start an app within your project (**todo_project**) run the following
 
     python3 thunder.py create_app -a todo_app
 
-    or
+        or
 
     python3 thunder.py create_app --app todo_app
 
@@ -64,7 +64,11 @@ after that, append it in the list **reg_blueprints** provided in the **routes.py
 
 .. code-block:: python
 
-    reg_blueprints = [base, errors, todo_app]
+    reg_blueprints = [
+        base,
+        errors,
+        todo_app,
+    ]
 
 once you register the app, boot up the flask webserver by::
 
@@ -74,7 +78,7 @@ This will bring the flask development server on port **5000** you can give it a 
 
     python3 thunder.py boot -p 7000
 
-    or
+        or
 
     python3 thunder.py boot --port 7000
 
@@ -86,11 +90,11 @@ this will take you to your app **index.html page** (todo_app). From there you ar
 
 Also, you can give your desire ip address/host by using **-H** or **--host** flag, e.g::
 
-    - python3 thunder.py boot -p 7000 -H 0.0.0.0
+    python3 thunder.py boot -p 7000 -H 0.0.0.0
 
         or
 
-    - python3 thunder.py boot --port 7000 --host 0.0.0.0
+    python3 thunder.py boot --port 7000 --host 0.0.0.0
 
 For development server, you can give a debug value to True by specifying **-d** flag or **--debug** e.g::
 
@@ -117,8 +121,7 @@ In other to register your model directly, open your sub project folder and open 
 
 see more documentationon how to write model view class of group of models get look at flask admin documentation `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_
 
-Admin user
-==========
+.. _Admin user
 
 You can create an admin user of your application user model, by running the following command::
 
@@ -129,8 +132,8 @@ once you run it, a prompt will come up to input your information
 .. toctree::
    :maxdepth: 2
 
-   example
    admin/index
+   example
    
 - `Repository <https://github.com/usmanmusa1920/sakyum>`_
 
