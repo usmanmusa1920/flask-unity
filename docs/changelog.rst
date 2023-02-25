@@ -1,0 +1,13 @@
+Changelog
+=========
+
+0.0.4
+-----
+
+- Fourth Release
+
+In this release I handle how we can customise the admin html page by inheriting (extends) it in our project templates/admin directory, and the admin page on how to bind models in the admin. Also I refactor other libraries that this package needs with their corresponding versions in the setup.py and requirements.txt files.
+
+Some error pages, default page were added but still you can customise it in your project sub folder (the package with the same name of your project in your project directory). Also an admin directory within your project templates folder is added too!
+
+* SQLAlchemy 1.4.45 compatibility fixes
