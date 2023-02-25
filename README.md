@@ -51,7 +51,7 @@ from todo_app.views import todo_app
 
 registering blueprint
 
-`
+```
 reg_blueprints = [
   default,
   errors,
@@ -59,7 +59,7 @@ reg_blueprints = [
   base,
   todo_app,
 ]
-`
+```
 
 once you register the app, boot up the flask webserver again by
 
