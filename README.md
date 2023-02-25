@@ -51,7 +51,7 @@ from todo_app.views import todo_app
 
 registering blueprint
 
-```
+```py
 reg_blueprints = [
   default,
   errors,

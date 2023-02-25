@@ -4,20 +4,20 @@ Overview
 
 Welcome to Sakyum’s documentation. An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
-The main reason behind the development of `sakyum` is to combine **`flask <"https://flask.palletsprojects.com">`_** and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to connect those extensions with flask, or import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you will only focus on writing your application views the way you want.
+The main reason behind the development of `sakyum` is to combine **`flask <https://flask.palletsprojects.com>`_** and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to connect those extensions with flask, or import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you only focus on writing your application views the way you want.
 
-Sakyum depends on (come with) the following flask popular and useful extensions, these include: **`flask-admin <"https://flask-admin.readthedocs.io">`_** where you can manage your models in the admin page, **`flask-bcrypt <"https://flask-bcrypt.readthedocs.io">`_** that will hash user password and other security issues, **`flask-login <"https://flask-login.readthedocs.io">`_** for login/logout session and other security tricks to make sure user cookie is safe, **`flask-sqlalchemy <"https://flask-sqlalchemy.palletsprojects.com">`_** for creating/inserting and other database management command, **`flask-wtf <"https://flask-wtf.readthedocs.io">`_** representing html page in the form of class. And possibly some other extensions.
+Sakyum depends on (come with) the following flask popular and useful extensions, these include: **`flask-admin <https://flask-admin.readthedocs.io>`_** where you can manage your models in the admin page, **`flask-bcrypt <https://flask-bcrypt.readthedocs.io>`_** that will hash user password and other security issues, **`flask-login <https://flask-login.readthedocs.io>`_** for login/logout session and other security tricks to make sure user cookie is safe, **`flask-sqlalchemy <https://flask-sqlalchemy.palletsprojects.com>`_** for creating/inserting and other database management command, **`flask-wtf <https://flask-wtf.readthedocs.io>`_** representing html page in the form of class. And possibly some other extensions.
 
 Installation
 ============
 
-First create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) with your other system libraries (this is just a recomendation, it still work even if you install it without virtualenvironment)
+First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtualenvironment
 
-**python -m venv venv** and then activate it**source venv/bin/activate** once that finish now install the library, you notice we use `--upgrade` this will make sure it install the latest release from <a href="https://pypi.org/project/sakyum" target="blank">pypi</a> (in case you have a version which is not the latest version)::
+Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
+
+you will notice we use `--upgrade` this will make sure it install the latest release from `pypi <https://pypi.org/project/sakyum>`_ (in case you have a version which is not the latest version), you can ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
   pip install --upgrade sakyum
-
-wait for the installation to finish, basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**
 
 Create your first flask project using sakyum
 ============================================
@@ -34,9 +34,9 @@ or create a file and paste the below codes which is equivalent of the above, and
 
     project("todo_project")
 
-the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
+Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package)**auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
 
-The tree structure look like
+Tree structure of your project look like
 
 .. code-block::
 
@@ -64,17 +64,16 @@ The tree structure look like
 
     8 directories, 12 files
 
-
-You can boot up the flask server, after you cd into the project folder (todo_project), and run the below command::
+Boot up the flask server by running the below command::
 
     python thunder.py boot
 
-Now visit the local url **http://127.0.0.1:5000** this will show you index page of your project. And if you do `ls` in that same directory you will see it create a **default.db** file (an sqlite file)
+Now visit the local url **http://127.0.0.1:5000** this will show you index page of your project
 
 Create flask project app using sakyum
 #####################################
 
-For you to start an app within your project (**todo_project**) run the following command, in that working directory (todo_project) by giving the name you want your app to be, in our case we will call our app **todo_app**::
+For you to start an app within your project (**todo_project**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file). Now run the following command in  other to create your app, by giving the name you want your app to be, in our case we will call our app **todo_app**::
 
     python thunder.py create_app -a todo_app
 
@@ -82,12 +81,57 @@ For you to start an app within your project (**todo_project**) run the following
 
     python thunder.py create_app --app todo_app
 
-this will create an app within your project (**todo_project**), the **-a** flag is equivalent to **--app** for the app name in this example it is called **todo_app**
+this will create an app (a new package called **todo_app**) within your project (**todo_project**), the **-a** flag is equivalent to **--app** which is for the app name in this example it is called **todo_app**
+
+Tree structure of your project after creating **todo_app** look like
+
+.. code-block::
+
+    .
+    ├── auth
+    │   ├── forms.py
+    │   ├── __init__.py
+    │   ├── models.py
+    │   └── routes.py
+    ├── default.db
+    ├── static
+    │   ├── todo_app
+    │   │   ├── index.js
+    │   │   ├── media
+    │   │   └── style.css
+    │   └── todo_project
+    │       ├── index.js
+    │       ├── media
+    │       └── style.css
+    ├── templates
+    │   ├── admin
+    │   │   └── index.html
+    │   ├── todo_app
+    │   │   └── index.html
+    │   └── todo_project
+    │       └── index.html
+    ├── thunder.py
+    ├── todo_app
+    │   ├── admin.py
+    │   ├── forms.py
+    │   ├── __init__.py
+    │   ├── models.py
+    │   └── views.py
+    └── todo_project
+        ├── config.py
+        ├── __init__.py
+        └── routes.py
+
+    12 directories, 21 files
+
+You notice it create a package name with thesame name of your app (**todo_app**), also a directory inside **templates** and **static** folder
 
 Register an app
 ===============
 
-Once the app is created open a file called **routes.py** in the folder with the same name of your project in our case it is called **todo_project**, (**todo_project/routes.py**) file of your project and import your app blueprint which is in your app **views.py** file (above **reg_blueprints** list) in the **routes.py** file
+Once the app is created open a file called **todo_project/routes.py** and import your **todo_app** blueprint which is in (**todo_app/views.py**), default name given to an app blueprint, is the app name so our **todo_app** blueprint name is **todo_app**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **todo_project/routes.py**
+
+importing blueprint
 
 .. code-block:: python
 
@@ -95,27 +139,33 @@ Once the app is created open a file called **routes.py** in the folder with the 
 
 after that, append it in the list **reg_blueprints** provided in the **routes.py** file by
 
+registering blueprint
+
 .. code-block:: python
 
     reg_blueprints = [
-        base,
-        errors,
-        todo_app,
+      default,
+      errors,
+      auth,
+      base,
+      todo_app,
     ]
 
-once you register the app, boot up the flask webserver by::
+once you register the app, boot up the flask webserver again by::
 
     python thunder.py boot
 
-This will bring the flask development server on port **5000** you can give it a different port by including a **-p** or **--port** flag which is for port number::
+This will bring the flask development server on port **5000** you can give it a different port by including a flag **-p** or **--port** flag which is for port number::
 
     python thunder.py boot -p 7000
 
-        or
+or
+
+.. code-block::
 
     python thunder.py boot --port 7000
 
-this will bring the serve on port **7000** visit the localhost url with the port number, it will show you your project **index.html page** (todo_project). To get to your app default page (todo_app), visit the url with your app name in our case:
+The above command will bring the serve on port **7000** visit the localhost url with the port number, it will show you your project **index.html page** (todo_project). To get to your app default page (todo_app), visit the url with your app name in our case:
 
 **http://127.0.0.1:7000/todo_app**
 
