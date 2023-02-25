@@ -3,13 +3,13 @@
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
-The main reason behind the development of `sakyum` is to combine <strong><a href="https://flask.palletsprojects.com/" target="blank">flask</a></strong> and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you will only focus on writing your application views the way you want.
+The main reason behind the development of `sakyum` is to combine <strong><a href="https://flask.palletsprojects.com/" target="_blank">flask</a></strong> and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you will only focus on writing your application views the way you want.
 
-Sakyum mainly come with the following flask popular and useful extensions, these include: <a href="https://flask-admin.palletsprojects.com/" target="blank">flask-admin</a> where you can manage your models in the admin page, <a href="https://flask-bcrypt.palletsprojects.com/" target="blank">flask-bcrypt</a> that will hash user password and other security issues, <a href="https://flask-login.palletsprojects.com/" target="blank">flask-login</a> for login/logout session and other security tricks to make sure cookie user is safe, <a href="https://flask-sqlalchemy.palletsprojects.com/" target="blank">flask-sqlalchemy</a> for creating/inserting and other database management command, <a href="https://flask-wtf.palletsprojects.com/" target="blank">flask-wtf</a> representing html page in the form of class. And possibly some other extensions
+Sakyum mainly come with the following flask popular and useful extensions, these include: <a href="https://flask-admin.readthedocs.io/" target="_blank">flask-admin</a> where you can manage your models in the admin page, <a href="https://flask-bcrypt.readthedocs.io" target="_blank">flask-bcrypt</a> that will hash user password and other security issues, <a href="https://flask-login.readthedocs.io" target="_blank">flask-login</a> for login/logout session and other security tricks to make sure cookie user is safe, <a href="https://flask-sqlalchemy.palletsprojects.com" target="_blank">flask-sqlalchemy</a> for creating/inserting and other database management command, <a href="https://flask-wtf.readthedocs.io" target="_blank">flask-wtf</a> representing html page in the form of class. And possibly some other extensions
 
 <h3><strong>Installation</strong></h3>
 
-Install and update the latest release from <a href="https://pypi.org/project/sakyum" target="blank">pypi</a>
+Install and update the latest release from <a href="https://pypi.org/project/sakyum" target="_blank">pypi</a>
 
 ```py
 pip install --upgrade sakyum
