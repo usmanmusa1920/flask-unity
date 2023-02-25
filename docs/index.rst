@@ -4,14 +4,18 @@ Overview
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
+The main reason behind the development of `sakyum` is to combine **`flask <"https://flask.palletsprojects.com">`_** and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to connect those extensions with flask, or import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you will only focus on writing your application views the way you want.
+
+Sakyum come with the following flask popular and useful extensions, these include: **`flask-admin <"https://flask-admin.readthedocs.io">`_** where you can manage your models in the admin page, **`flask-bcrypt <"https://flask-bcrypt.readthedocs.io">`_** that will hash user password and other security issues, **`flask-login <"https://flask-login.readthedocs.io">`_** for login/logout session and other security tricks to make sure user cookie is safe, **`flask-sqlalchemy <"https://flask-sqlalchemy.palletsprojects.com">`_** for creating/inserting and other database management command, **`flask-wtf <"https://flask-wtf.readthedocs.io">`_** representing html page in the form of class. And possibly some other extensions.
+
 Installation
 ============
 
-First create a virtual environment **python -m venv venv** and then activate it **source venv/bin/activate**
+First create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) with your other system libraries (this is just a recomendation, it still work even if you install it without virtualenvironment)
 
-Once that finish now install the library by::
+**python -m venv venv** and then activate it**source venv/bin/activate** once that finish now install the library, you notice we use `--upgrade` this will make sure it install the latest release from <a href="https://pypi.org/project/sakyum" target="blank">pypi</a> (in case you have a version which is not the latest version)::
 
-  pip install sakyum
+  pip install --upgrade sakyum
 
 wait for the installation to finish, basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**
 
@@ -30,7 +34,36 @@ or create a file and paste the below codes which is equivalent of the above, and
 
     project("todo_project")
 
-the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** you will see a module called **thunder.py**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
+the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
+
+The tree structure look like
+
+.. code-block:: python
+
+    todo_project
+    ├── auth
+    │   ├── forms.py
+    │   ├── __init__.py
+    │   ├── models.py
+    │   └── routes.py
+    ├── static
+    │   └── todo_project
+    │       ├── index.js
+    │       ├── media
+    │       └── style.css
+    ├── templates
+    │   ├── admin
+    │   │   └── index.html
+    │   └── todo_project
+    │       └── index.html
+    ├── thunder.py
+    └── todo_project
+        ├── config.py
+        ├── __init__.py
+        └── routes.py
+
+    8 directories, 12 files
+
 
 You can boot up the flask server, after you cd into the project folder (todo_project), and run the below command::
 
