@@ -15,7 +15,7 @@ First create a virtual environment `python -m venv venv` and then activate it `s
 Once that finish now install the library by
 
 ```py
-pip install sakyum
+pip install --upgrade sakyum
 ```
 
 wait for the installation basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
@@ -136,8 +136,11 @@ python thunder.py create_user
 
 once you run it, a prompt will come up to input your information
 
-## Github repository:
+## Useful links
 
-- https://github.com/usmanmusa1920/sakyum
+- Documentation: https://github.com/usmanmusa1920/sakyum
+- Repository: https://github.com/usmanmusa1920/sakyum
+- PYPI Release: https://github.com/usmanmusa1920/sakyum
+- Website: https://readthedocs.org/projects/sakyum
 
 Pull requests are welcome
