@@ -1,7 +1,7 @@
 
 # Sakyum
 
-An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs. <a href="https://sakyum.readthedocs.io">Read more</a>
+An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
 ## Installation
 
@@ -78,6 +78,5 @@ visit `http://127.0.0.1:5000/todo_app` this will take you to admin page. From th
 - Documentation: https://sakyum.readthedocs.io
 - Repository: https://github.com/usmanmusa1920/sakyum
 - PYPI Release: https://pypi.org/projects/sakyum
-- Website: https://readthedocs.org/projects/sakyum
 
 Pull requests are welcome

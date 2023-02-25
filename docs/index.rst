@@ -1,6 +1,6 @@
 
-Overview
-########
+Sakyum
+######
 
 Welcome to Sakyum’s documentation. An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
@@ -27,22 +27,13 @@ Table of content
    email
    testing
    deployment
-   example/index.rst
-   changelog
+   example/index
 
-Support
--------
-
-****
-
-Python 3.8 or higher.
 
 Useful links:
 -------------
    
 - `Repository <https://github.com/usmanmusa1920/sakyum>`_
-
-- `Documentation <https://sakyum.readthedocs.io>`_
 
 - `PYPI Release <https://pypi.org/project/sakyum>`_
 
