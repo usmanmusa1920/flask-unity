@@ -3,24 +3,21 @@
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
-        _
-      /_  /|   / / |/ /  / /\  /|
-       / /_|  /_/  / /  / /  \/ |
-    /_/ /  | /  | / /__/ /      |
+The main reason behind the development of `sakyum` is to combine <strong><a href="https://flask.palletsprojects.com/" target="blank">flask</a></strong> and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you will only focus on writing your application views the way you want.
 
-## Installation
+Sakyum mainly come with the following flask popular and useful extensions, these include: <a href="https://flask-admin.palletsprojects.com/" target="blank">flask-admin</a> where you can manage your models in the admin page, <a href="https://flask-bcrypt.palletsprojects.com/" target="blank">flask-bcrypt</a> that will hash user password and other security issues, <a href="https://flask-login.palletsprojects.com/" target="blank">flask-login</a> for login/logout session and other security tricks to make sure cookie user is safe, <a href="https://flask-sqlalchemy.palletsprojects.com/" target="blank">flask-sqlalchemy</a> for creating/inserting and other database management command, <a href="https://flask-wtf.palletsprojects.com/" target="blank">flask-wtf</a> representing html page in the form of class. And possibly some other extensions
 
-First create a virtual environment `python -m venv venv` and then activate it `source venv/bin/activate`
+<h3><strong>Installation</strong></h3>
 
-Once that finish now install the library by
+Install and update the latest release from <a href="https://pypi.org/project/sakyum" target="blank">pypi</a>
 
 ```py
 pip install --upgrade sakyum
 ```
 
-wait for the installation basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
+Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
 
-## Create your first flask project using sakyum
+<h3><strong>Create your first flask project using sakyum</strong></h3>
 
 After the installation paste the following command on your termianl
 
@@ -36,105 +33,57 @@ from sakyum import project
 project("todo_project")
 ```
 
-the command you type on terminal or the code you paste in a file (after running the file) will create a project called `todo_project` now cd into the `todo_project` directory, if you do `ls` you will see a module called `thunder.py`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `todo_project`.
+the command you type on terminal or the code you paste in a file (after running the file) will create a project called `todo_project` now cd into the `todo_project` directory, if you do `ls` within the directory you just enter, you will see a module called `thunder.py`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `todo_project`.
 
-You can boot up the flask server, after you cd into the project folder (todo_project), and run the below command:
+Boot up the flask server, after entering into the project folder `todo_project`, and run the below command
 
 ```py
 python thunder.py boot
 ```
 
-Now visit the local url `127.0.0.1:5000` this will show you index page of your project. And if you do `ls` in that same dir you will see it create a `default.db` file (an sqlite file)
+Now visit the local url `http://127.0.0.1:5000` this will show you index page of your project
 
-## Create flask project app using sakyum
+<h3><strong>Create flask project app using sakyum</strong></h3>
 
-For you to start an app within your project (`todo_project`) run the following command, in that working directory (todo_project) by giving the name you want your app to be, in our case we will call our app `todo_app`
+For you to start an app within your project `todo_project` shutdown the flask development server by pressing ( CTRL+C ) and then run the following command, in that working directory `(todo_project)` by giving the name you want your app to be, in our case we will call our app `todo_app`
 
 ```py
 python thunder.py create_app -a todo_app
 ```
 
-or
+this will create an app (a new package called `todo_app`) within your project `(todo_project)`
 
-```py
-python thunder.py create_app --app todo_app
-```
+<h3><strong>Register an app</strong></h3>
 
-this will create an app within your project (`todo_project`), the `-a` flag is equivalent to `--app` for the app name in this example it is called `todo_app`
+Once the app is created open a file called `todo_project/routes.py` and import your `todo_app` blueprint which is in (`todo_app/views.py`), default name given to an app blueprint, is the app name so our `todo_app` blueprint name is `todo_app`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `todo_project/routes.py`
 
-## Register an app
-
-Once the app is created open a file called `routes.py` in the folder with the same name of your project in our case it is called `todo_project`, (`todo_project/routes.py`) file of your project and import your app blueprint which is in your app `views.py` file (above `reg_blueprints` list) in the `routes.py` file
+importing blueprint
 
 ```py
 from todo_app.views import todo_app
 ```
 
-after that, append it in the list `reg_blueprints` provided in the `routes.py` file by
+registering blueprint
 
 ```py
-reg_blueprints = [base, errors, todo_app]
+reg_blueprints = [
+  default,
+  errors,
+  auth,
+  base,
+  todo_app,
+]
 ```
 
-once you register the app, boot up the flask webserver by
+once you register the app, boot up the flask webserver again by
 
 ```py
 python thunder.py boot
 ```
 
-This will bring the flask development server on port `5000` you can give it a different port by including a `-p` or `--port` flag which is for port number:
+visit <strong>`http://127.0.0.1:5000`</strong>  which is your project landing page
 
-```py
-python thunder.py boot -p 7000
-```
-
-or
-
-```py
-python thunder.py boot --port 7000
-```
-
-this will bring the serve on port `7000` visit the localhost url with the port number, it will show you your project `index.html page` (todo_project). To get to your app default page (todo_app), visit the url with your app name in our case:
-
-`http://127.0.0.1:7000/todo_app`
-
-this will take you to your app `index.html page` (todo_app). From there you are ready to go.
-
-Also, you can give your desire ip address/host by using `-H` or `--host` flag, e.g
-
-```py
-python thunder.py boot -p 7000 -H 0.0.0.0
-```
-or
-
-```py
-python thunder.py boot --port 7000 --host 0.0.0.0
-```
-
-For development server, you can give a debug value to True by specifying `-d` flag or `--debug` e.g
-
-```py
-python thunder.py boot -p 7000 -d True
-```
-or
-
-```py
-python thunder.py boot --port 7000 --debug True
-```
-
-## Register model to admin page
-
-To register your model in the admin page, open your sub project folder and open the `config.py` file you see there. Import your app model that you want to register, above the method that will create the tables and database `db.create_all()` and you will see a commented prototype above it, then append it in the `reg_models = []` list within `admin_runner` function. That will register your model in the admin page and you will see it if you vist the admin page
-
-## Admin user
-
-You can create an admin user of your application user model, by running the following command
-
-```py
-python thunder.py create_user
-```
-
-once you run it, a prompt will come up to input your information
+visit <strong>`http://127.0.0.1:5000/todo_app`</strong> this will take you to your app `index.html page` (todo_app). From there you are ready to go.
 
 ## Useful links
 
