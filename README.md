@@ -1,13 +1,9 @@
 
 # Sakyum
 
-An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
+An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs. <a href="https://sakyum.readthedocs.io">Read more</a>
 
-The main reason behind the development of `sakyum` is to combine <a href="https://flask.palletsprojects.com">flask</a> and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to connect those extensions with flask, or import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases, `sakyum` take care of all these so that you will only focus on writing your application views the way you want.
-
-Sakyum come with the following flask popular and useful extensions, these include: <a href="https://flask-admin.readthedocs.io">flask-admin</a> where you can manage your models in the admin page, <a href="https://flask-bcrypt.readthedocs.io">flask-bcrypt</a> that will hash user password and other security issues, <a href="https://flask-login.readthedocs.io">flask-login</a> for login/logout session and other security tricks to make sure user cookie is safe, <a href="https://flask-sqlalchemy.palletsprojects.com">flask-sqlalchemy</a> for creating/inserting and other database management command, <a href="https://flask-wtf.readthedocs.io">flask-wtf</a> representing html page in the form of class. And possibly some other extensions.
-
-<h3><Installation</h3>
+<h3>Installation</h3>
 
 Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>
 
