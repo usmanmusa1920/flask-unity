@@ -32,6 +32,7 @@ setup(
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.8'
+    'Programming Language :: Python :: 3.10'
   ],
   
   # used when people are searching for a module, keywords separated with a space

@@ -42,8 +42,8 @@ login_manager.login_message = u"You must login, in other to get access to that p
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
 from auth.models import User
-# from todo_app.models import Todo_appQuestionModel, Todo_appChoiceModel
-# from todo_app.admin import QuestionChoiceAdminView
+# from <app_name>.models import <app_name_uppercase>QuestionModel, <app_name_uppercase>ChoiceModel
+# from <app_name>.admin import QuestionChoiceAdminView
 db.create_all() # method to create the tables and database
 
 
@@ -57,6 +57,8 @@ def admin_runner():
     to manage in admin page in the below list (reg_models) {long_comment}
   reg_models = [
     User,
+    # <app_name_uppercase>QuestionModel,
+    # <app_name_uppercase>ChoiceModel,
   ]
   for reg_model in reg_models:
     admin.add_view(ModelView(reg_model, db.session))
@@ -72,8 +74,8 @@ def admin_runner():
       https://flask-admin.readthedocs.io/en/latest/introduction/#getting-started {long_comment}
 
       
-  # admin.add_view(QuestionChoiceAdminView(Todo_appQuestionModel, db.session, name="Questions", category="Question-Choice"))
-  # admin.add_view(QuestionChoiceAdminView(Todo_appChoiceModel, db.session, name="Choices", category="Question-Choice"))
+  # admin.add_view(QuestionChoiceAdminView(<app_name_uppercase>QuestionModel, db.session, name="Questions", category="Question-Choice"))
+  # admin.add_view(QuestionChoiceAdminView(<app_name_uppercase>ChoiceModel, db.session, name="Choices", category="Question-Choice"))
 """
 
 
@@ -102,6 +104,7 @@ reg_blueprints = [
   errors,
   auth,
   base,
+  # <app_name>,
 ]
 
 def rem_blueprint(lst_blue):
