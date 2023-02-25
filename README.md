@@ -41,7 +41,7 @@ this will create an app (a new package called `todo_app`) within your project `(
 
 <h3>Register an app</h3>
 
-Once the app is created open a file called `todo_project/routes.py` and import your `todo_app` blueprint which is in (`todo_app/views.py`), default name given to an app blueprint, is the app name so our `todo_app` blueprint name is `todo_app`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in thatsame file of `todo_project/routes.py`
+Once the app is created open a file called `todo_project/routes.py` and import your `todo_app` blueprint which is in (`todo_app/views.py`), default name given to an app blueprint, is the app name so our `todo_app` blueprint name is `todo_app`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `todo_project/routes.py`
 
 importing blueprint
 
@@ -51,7 +51,7 @@ from todo_app.views import todo_app
 
 registering blueprint
 
-```py
+`
 reg_blueprints = [
   default,
   errors,
@@ -59,7 +59,7 @@ reg_blueprints = [
   base,
   todo_app,
 ]
-```
+`
 
 once you register the app, boot up the flask webserver again by
 
@@ -71,7 +71,7 @@ visit `http://127.0.0.1:5000` which is your project landing page
 
 visit `http://127.0.0.1:5000/todo_app` this will take you to your app landing page (todo_app)
 
-visit `http://127.0.0.1:5000/todo_app` this will take you to admin page. From there you are ready to go. See more documentations and exmples <a href="https://sakyum.readthedocs.io">sakyum</a>
+visit `http://127.0.0.1:5000/todo_app` this will take you to admin page. From there you are ready to go. See more documentations and exmples <a href="https://sakyum.readthedocs.io">here</a>
 
 ## Useful links
 
