@@ -5,13 +5,11 @@ An extension of flask web framework that erase the complexity of structuring fla
 
 <h3>Installation</h3>
 
-Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>
+Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
 
 ```py
 pip install --upgrade sakyum
 ```
-
-Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
 
 <h3>Create your first flask project using sakyum</h3>
 
