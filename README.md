@@ -16,12 +16,12 @@ pip install --upgrade sakyum
 After the installation paste the following command on your termianl
 
 ```
-python -c "from sakyum import project; project('todo_project')"
+python -c "from sakyum import project; project('Schoolsite')"
 ```
 
-this will create a project (directory) called `todo_project` now cd into the `todo_project` directory, if you do `ls` within the directory you just enter, you will see a module called `thunder.py` and some directories (some in the form of package) `auth`, `static`, `templates` and a directory with thesame name of your base directory name, in our case it is `todo_project`.
+this will create a project (directory) called `Schoolsite` now cd into the `Schoolsite` directory, if you do `ls` within the directory you just enter, you will see a module called `thunder.py` and some directories (some in the form of package) `auth`, `static`, `templates` and a directory with thesame name of your base directory name, in our case it is `Schoolsite`.
 
-Boot up the flask server by running the below command
+Now cd into `Schoolsite`, and boot up the flask server by running the below command
 
 ```
 python thunder.py boot
@@ -29,24 +29,24 @@ python thunder.py boot
 
 Now visit the local url `http://127.0.0.1:5000` this will show you index page of your project
 
-## Create flask app within your project (todo_project)
+## Create flask app within your project (Schoolsite)
 
-For you to start an app within your project `todo_project` shutdown the flask development server by pressing ( CTRL+C ) and then run the following command, by giving the name you want your app to be, in our case we will call our app `todo_app`
+For you to start an app within your project `Schoolsite` shutdown the flask development server by pressing ( CTRL+C ) and then run the following command, by giving the name you want your app to be, in our case we will call our app `exam`
 
 ```
-python thunder.py create_app -a todo_app
+python thunder.py create_app -a exam
 ```
 
-this will create an app (a new package called `todo_app`) within your project `(todo_project)`
+this will create an app (a new package called `exam`) within your project `(Schoolsite)`
 
 ## Register an app
 
-Once the app is created open a file called `todo_project/routes.py` and import your `todo_app` blueprint which is in (`todo_app/views.py`), default name given to an app blueprint, is the app name so our `todo_app` blueprint name is `todo_app`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `todo_project/routes.py`
+Once the app is created open a file called `Schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `Schoolsite/routes.py`
 
 importing blueprint
 
 ```py
-from todo_app.views import todo_app
+from exam.views import exam
 ```
 
 registering blueprint
@@ -57,7 +57,7 @@ reg_blueprints = [
   errors,
   auth,
   base,
-  todo_app,
+  exam,
 ]
 ```
 
@@ -69,9 +69,9 @@ python thunder.py boot
 
 visit `http://127.0.0.1:5000` which is your project landing page
 
-visit `http://127.0.0.1:5000/todo_app` this will take you to your app landing page (todo_app)
+visit `http://127.0.0.1:5000/exam` this will take you to your app landing page (exam)
 
-visit `http://127.0.0.1:5000/todo_app` this will take you to admin page. From there you are ready to go. See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
+visit `http://127.0.0.1:5000/exam` this will take you to admin page. From there you are ready to go. See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 
 ## Useful links
 

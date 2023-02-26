@@ -19,7 +19,7 @@ Create your first flask project using sakyum
 
 After the installation paste the following command on your termianl::
 
-  python -c "from sakyum import project; project('todo_project')"
+  python -c "from sakyum import project; project('Schoolsite')"
 
 or create a file and paste the below codes which is equivalent of the above, and then run the file
 
@@ -27,43 +27,43 @@ or create a file and paste the below codes which is equivalent of the above, and
 
     from sakyum import project
 
-    project("todo_project")
+    project("Schoolsite")
 
-Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
+Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **Schoolsite** now cd into the **Schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **Schoolsite**.
 
 Tree structure of your project look like (after using the below command)
 
 .. code-block::
 
-    tree todo_project
+    tree Schoolsite
 
 .. code-block::
 
-    todo_project
+    Schoolsite
     ├── auth
     │   ├── forms.py
     │   ├── __init__.py
     │   ├── models.py
     │   └── routes.py
+    ├── Schoolsite
+    │   ├── config.py
+    │   ├── __init__.py
+    │   └── routes.py
     ├── static
-    │   └── todo_project
+    │   └── Schoolsite
     │       ├── index.js
     │       ├── media
     │       └── style.css
     ├── templates
     │   ├── admin
     │   │   └── index.html
-    │   └── todo_project
+    │   └── Schoolsite
     │       └── index.html
-    ├── thunder.py
-    └── todo_project
-        ├── config.py
-        ├── __init__.py
-        └── routes.py
+    └── thunder.py
 
     8 directories, 12 files
 
-Boot up the flask server by running the below command::
+Now cd into `Schoolsite`, and boot up the flask server by running the below command::
 
     python thunder.py boot
 
@@ -72,19 +72,19 @@ Now visit the local url **http://127.0.0.1:5000** this will show you index page 
 Create flask project app using sakyum
 =====================================
 
-For you to start an app within your project (**todo_project**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file). Now run the following command in  other to create your app, by giving the name you want your app to be, in our case we will call our app **todo_app**::
+For you to start an app within your project (**Schoolsite**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file). Now run the following command in  other to create your app, by giving the name you want your app to be, in our case we will call our app **exam**::
 
-    python thunder.py create_app -a todo_app
+    python thunder.py create_app -a exam
 
 or
 
 .. code-block::
 
-    python thunder.py create_app --app todo_app
+    python thunder.py create_app --app exam
 
-this will create an app (a new package called **todo_app**) within your project (**todo_project**), the **-a** flag is equivalent to **--app** which is for the app name in this example it is called **todo_app**
+this will create an app (a new package called **exam**) within your project (**Schoolsite**), the **-a** flag is equivalent to **--app** which is for the app name in this example it is called **exam**
 
-Now the tree structure of your project after creating **todo_app** look like (after using the below command)
+Now the tree structure of your project after creating **exam** look like (after using the below command)
 
 .. code-block::
 
@@ -99,42 +99,42 @@ Now the tree structure of your project after creating **todo_app** look like (af
     │   ├── models.py
     │   └── routes.py
     ├── default.db
+    ├── exam
+    │   ├── admin.py
+    │   ├── forms.py
+    │   ├── __init__.py
+    │   ├── models.py
+    │   └── views.py
+    ├── Schoolsite
+    │   ├── config.py
+    │   ├── __init__.py
+    │   └── routes.py
     ├── static
-    │   ├── todo_app
+    │   ├── exam
     │   │   ├── index.js
     │   │   ├── media
     │   │   └── style.css
-    │   └── todo_project
+    │   └── Schoolsite
     │       ├── index.js
     │       ├── media
     │       └── style.css
     ├── templates
     │   ├── admin
     │   │   └── index.html
-    │   ├── todo_app
+    │   ├── exam
     │   │   └── index.html
-    │   └── todo_project
+    │   └── Schoolsite
     │       └── index.html
-    ├── thunder.py
-    ├── todo_app
-    │   ├── admin.py
-    │   ├── forms.py
-    │   ├── __init__.py
-    │   ├── models.py
-    │   └── views.py
-    └── todo_project
-        ├── config.py
-        ├── __init__.py
-        └── routes.py
+    └── thunder.py
 
     12 directories, 21 files
 
-You notice it create a package name with thesame name of your app (**todo_app**), a **default.db** file, also a directory inside **templates** and **static** folder
+You notice it create a package name with thesame name of your app (**exam**), a **default.db** file, also a directory inside **templates** and **static** folder
 
 Register an app
 ===============
 
-Once the app is created open a file called **todo_project/routes.py** and import your **todo_app** blueprint which is in (**todo_app/views.py**), default name given to an app blueprint, is the app name so our **todo_app** blueprint name is **todo_app**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **todo_project/routes.py**
+Once the app is created open a file called **Schoolsite/routes.py** and import your **exam** blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
 
 **warning:** `don't ommit the registered blueprint you see in the list **(default, errors, auth, base)** blueprints` just append your app blueprint
 
@@ -142,7 +142,7 @@ importing blueprint
 
 .. code-block:: python
 
-    from todo_app.views import todo_app
+    from exam.views import exam
 
 after that, append it in the list **reg_blueprints** provided in the **routes.py** file by
 
@@ -155,7 +155,7 @@ registering blueprint
       errors,
       auth,
       base,
-      todo_app,
+      exam,
     ]
 
 once you register the app, boot up the flask webserver again by::
@@ -172,11 +172,11 @@ or
 
     python thunder.py boot --port 7000
 
-The above command will bring the serve on port **7000** visit the localhost url with the port number, it will show you your project **index page** (todo_project). To get to your app default page (todo_app), visit the url with your app name in our case:
+The above command will bring the serve on port **7000** visit the localhost url with the port number, it will show you your project **index page** (Schoolsite). To get to your app default page (exam), visit the url with your app name in our case:
 
-**http://127.0.0.1:7000/todo_app**
+**http://127.0.0.1:7000/exam**
 
-this will take you to your app **index page** (todo_app). From there you are ready to go.
+this will take you to your app **index page** (exam). From there you are ready to go.
 
 Also, you can give your desire ip address/host by using **-H** or **--host** flag, e.g::
 

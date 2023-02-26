@@ -28,6 +28,7 @@ Table of content
    testing
    deployment
    example/index
+   advance/index
 
 
 Useful links:
