@@ -29,6 +29,8 @@ once you run it, a prompt will come up to input your information
 Model api
 =========
 
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed voluptate dicta ut harum, unde quisquam blanditiis libero, dolorem aut natus, debitis cupiditate accusamus ducimus adipisci accusantium quam dignissimos pariatur. Alias?
+
 Admin custome model
 ===================
 

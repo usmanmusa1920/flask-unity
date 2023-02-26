@@ -33,6 +33,8 @@ Both the command you type on terminal or the code you paste in a file (after run
 
 Tree structure of your project look like (after using the below command)
 
+.. code-block::
+
     tree todo_project
 
 .. code-block::
@@ -83,6 +85,8 @@ or
 this will create an app (a new package called **todo_app**) within your project (**todo_project**), the **-a** flag is equivalent to **--app** which is for the app name in this example it is called **todo_app**
 
 Now the tree structure of your project after creating **todo_app** look like (after using the below command)
+
+.. code-block::
 
     tree .
 

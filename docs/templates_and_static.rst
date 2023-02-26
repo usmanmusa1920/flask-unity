@@ -8,6 +8,8 @@ Documentations of this page is under development (very soon) it will be availabl
 File system storage
 ===================
 
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed voluptate dicta ut harum, unde quisquam blanditiis libero, dolorem aut natus, debitis cupiditate accusamus ducimus adipisci accusantium quam dignissimos pariatur. Alias?
+
 Customise admin page
 ====================
 
