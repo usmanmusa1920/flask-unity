@@ -8,9 +8,9 @@ Installation
 
 First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtualenvironment
 
-Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
+Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**
 
-you will notice we use `--upgrade` this will make sure it install the latest release from `pypi <https://pypi.org/project/sakyum>`_ (in case you have a version which is not the latest version), you can ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
+you will notice we use **--upgrade** this will make sure it install the latest release from pypi (in case you have a version which is not the latest version), you can ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
   pip install --upgrade sakyum
 
@@ -29,9 +29,11 @@ or create a file and paste the below codes which is equivalent of the above, and
 
     project("todo_project")
 
-Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package)**auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
+Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **todo_project** now cd into the **todo_project** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **todo_project**.
 
-Tree structure of your project look like
+Tree structure of your project look like (after using the below command)
+
+    tree todo_project
 
 .. code-block::
 
@@ -72,13 +74,17 @@ For you to start an app within your project (**todo_project**) shutdown the flas
 
     python thunder.py create_app -a todo_app
 
-        or
+or
+
+.. code-block::
 
     python thunder.py create_app --app todo_app
 
 this will create an app (a new package called **todo_app**) within your project (**todo_project**), the **-a** flag is equivalent to **--app** which is for the app name in this example it is called **todo_app**
 
-Tree structure of your project after creating **todo_app** look like
+Now the tree structure of your project after creating **todo_app** look like (after using the below command)
+
+    tree .
 
 .. code-block::
 
@@ -119,7 +125,7 @@ Tree structure of your project after creating **todo_app** look like
 
     12 directories, 21 files
 
-You notice it create a package name with thesame name of your app (**todo_app**), also a directory inside **templates** and **static** folder
+You notice it create a package name with thesame name of your app (**todo_app**), a **default.db** file, also a directory inside **templates** and **static** folder
 
 Register an app
 ===============
@@ -185,3 +191,5 @@ or
 .. code-block::
 
     python thunder.py boot --port 7000 --debug True
+
+With this, you can do many and many project now!
