@@ -5,7 +5,7 @@ An extension of flask web framework that erase the complexity of structuring fla
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
+Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
 ```
 pip install --upgrade sakyum
@@ -19,9 +19,9 @@ After the installation paste the following command on your termianl
 python -c "from sakyum import project; project('Schoolsite')"
 ```
 
-this will create a project (directory) called `Schoolsite` now cd into the `Schoolsite` directory, if you do `ls` within the directory you just enter, you will see a module called `thunder.py` and some directories (some in the form of package) `auth`, `static`, `templates` and a directory with thesame name of your base directory name, in our case it is `Schoolsite`.
+this will create a project called **Schoolsite** now cd into the **Schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **Schoolsite**.
 
-Now cd into `Schoolsite`, and boot up the flask server by running the below command
+Boot up the flask server by running the below command
 
 ```
 python thunder.py boot
@@ -41,7 +41,7 @@ this will create an app (a new package called `exam`) within your project `(Scho
 
 ## Register an app
 
-Once the app is created open a file called `Schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `Schoolsite/routes.py`
+Once the app is created open a file `Schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `Schoolsite/routes.py`
 
 importing blueprint
 

@@ -154,6 +154,20 @@ def stylePage(name, _is, version=False):
 footer_style = stylePage(__title__, "do_nothing", version=__version__)
 
 
+def rem_blueprint(lst_blue=None, rem_blue=None):
+  # these are blueprint that we don't want to show on the
+  # default page so we are removing them from the list
+
+  for blue in rem_blue:
+    if blue in lst_blue:
+      # finding the index of the `blue` item blueprint in the list
+      err_index = lst_blue.index(blue)
+      # removing it `blue` item from the list using it index number
+      lst_blue.pop(err_index)
+  blueprints_list = lst_blue
+  return blueprints_list
+
+
 class AuthCredentials:
   def __init__(self, username=None, email=None, password=None):
     self.username = username

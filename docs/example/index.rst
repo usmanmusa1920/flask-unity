@@ -12,3 +12,6 @@ Schoolsite
    :maxdepth: 2
 
    create_app
+   create_models
+   app_views
+   app_forms

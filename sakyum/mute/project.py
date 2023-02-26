@@ -42,7 +42,7 @@ login_manager.login_message = u"You must login, in other to get access to that p
 
 {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
 from auth.models import User
-# from <app_name>.models import <app_name_uppercase>QuestionModel, <app_name_uppercase>ChoiceModel
+# from <app_name>.models import <app_model>
 # from <app_name>.admin import QuestionChoiceAdminView
 db.create_all() # method to create the tables and database
 
@@ -57,8 +57,7 @@ def admin_runner():
     to manage in admin page in the below list (reg_models) {long_comment}
   reg_models = [
     User,
-    # <app_name_uppercase>QuestionModel,
-    # <app_name_uppercase>ChoiceModel,
+    # <app_model>,
   ]
   for reg_model in reg_models:
     admin.add_view(ModelView(reg_model, db.session))
@@ -71,7 +70,7 @@ def admin_runner():
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
-from sakyum.utils import footer_style, template_dir, static_dir
+from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
 from sakyum.blueprint import default, errors, auth
 from flask import render_template
 # from <app_name>.views import <app_name>
@@ -79,7 +78,7 @@ from flask import render_template
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
-
+rem_blue = [default, errors, auth, base]
 reg_blueprints = [
   default,
   errors,
@@ -88,25 +87,11 @@ reg_blueprints = [
   # <app_name>,
 ]
 
-def rem_blueprint(lst_blue):
-  # these are blueprint that we don't want to show on the
-  # default page so we are removing them from the list
-
-  rem_blue = [default, errors, auth, base]
-  for blue in rem_blue:
-    if blue in lst_blue:
-      # finding the index of the `blue` item blueprint in the list
-      err_index = lst_blue.index(blue)
-      # removing it `blue` item from the list using it index number
-      lst_blue.pop(err_index)
-  blueprints_list = lst_blue
-  return blueprints_list
-
 
 @default.route('/')
 def index():
   # the default_base.html below is located in the sakyum package (templates/default_page) folder
-  return render_template("default_base.html", project_name="{proj}", blueprints_list=rem_blueprint(reg_blueprints), footer_style=footer_style)
+  return render_template("default_base.html", project_name="{proj}", blueprints_list=rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue), footer_style=footer_style)
   
   
 {long_comment} overwrite error pages here {long_comment}
