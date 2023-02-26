@@ -136,6 +136,8 @@ Register an app
 
 Once the app is created open a file called **todo_project/routes.py** and import your **todo_app** blueprint which is in (**todo_app/views.py**), default name given to an app blueprint, is the app name so our **todo_app** blueprint name is **todo_app**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **todo_project/routes.py**
 
+**warning:** `don't ommit the registered blueprint you see in the list **(default, errors, auth, base)** blueprints` just append your app blueprint
+
 importing blueprint
 
 .. code-block:: python

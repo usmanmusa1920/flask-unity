@@ -63,17 +63,7 @@ def admin_runner():
   for reg_model in reg_models:
     admin.add_view(ModelView(reg_model, db.session))
     
-
-  {long_comment} If you want to customise how your model is going to be, don't put (pass) it in the
-    above `reg_models` list. Instead create a model view class in your app admin.py
-    file and import it (in this module) `config.py` above the `db.create_all()` then come
-    below this comment and register it just like the way we did for the commented ones
-
-    register your custom admin model view here, like we register `QuestionChoiceAdminView`
-    if you are stuck visit:
-      https://flask-admin.readthedocs.io/en/latest/introduction/#getting-started {long_comment}
-
-      
+    
   # admin.add_view(QuestionChoiceAdminView(<app_name_uppercase>QuestionModel, db.session, name="Questions", category="Question-Choice"))
   # admin.add_view(QuestionChoiceAdminView(<app_name_uppercase>ChoiceModel, db.session, name="Choices", category="Question-Choice"))
 """
@@ -89,15 +79,6 @@ from flask import render_template
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
-
-{long_comment}
-  register your app after importing it blueprint from the app views.py file,
-  by passing (append) your app blueprint that you import
-  into the `reg_blueprints` list below,
-  
-  warning:
-      don\'t ommit the registered blueprint you see in  the list (default, errors, auth, base) blueprints
-{long_comment}
 
 reg_blueprints = [
   default,
