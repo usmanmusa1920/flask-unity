@@ -3,15 +3,11 @@
 Tutorial
 ########
 
-This page will take you and show you tutorial on developed using **sakyum** software
+This tutorial will walk you through creating project called `mystory` and a basic blog application called `storyblog` in the project. Users will be able to register, log in, create posts, and edit or delete their own posts. All using **sakyum**. You will be able to clone it on github `<https://github.com/usmanmusa1920/sakyum.git>`_.
 
-todo_app
-========
-
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed voluptate dicta ut harum, unde quisquam blanditiis libero, dolorem aut natus, debitis cupiditate accusamus ducimus adipisci accusantium quam dignissimos pariatur. Alias?
+The **mystory** project will contain two apps **storyblog** and **todo_app**
 
 .. toctree::
    :maxdepth: 2
 
    create_app
-  
