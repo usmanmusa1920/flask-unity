@@ -19,6 +19,7 @@ from .mute.app import app_forms_dummy
 from .mute.app import app_models_dummy
 from .mute.app import app_views_dummy
 from .mute.project import pro_init_dummy
+from .mute.project import pro_secret_dummy
 from .mute.project import pro_config_dummy
 from .mute.project import pro_routes_dummy
 from .mute.auth import auth_init_dummy
@@ -154,7 +155,7 @@ class BaseStructure:
     auth_fls = self.append_exs_to_file(fls_name=auth_models)
     
     # default files of project sub folder, except `thunder` which is for project base dir
-    fls_name = ["__init__", "config", "routes", "thunder"]
+    fls_name = ["__init__", "secret", "config", "routes", "thunder"]
     fls = self.append_exs_to_file(fls_name=fls_name) # appending extensions to files
     _here = os.getcwd() # initial `cwd` where the project was e.g `Desktop`
     
@@ -175,6 +176,10 @@ class BaseStructure:
               if _fls == "__init__.py":
                 # building project `__init__.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_init_dummy()}", route_go=False)
+
+              elif _fls == "secret.py":
+                # building project `secret.py` default files
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_secret_dummy()}", route_go=False)
 
               elif _fls == "config.py":
                 # building project `config.py` default files

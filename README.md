@@ -11,7 +11,7 @@ Install and update the latest release from <a href="https://pypi.org/project/sak
 pip install --upgrade sakyum
 ```
 
-## Create your first flask project using sakyum
+## Create flask project using sakyum
 
 After the installation paste the following command on your termianl
 

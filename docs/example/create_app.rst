@@ -11,7 +11,7 @@ you will notice we use **--upgrade** in the installation command, this will make
 
   pip install --upgrade sakyum
 
-Create your first flask project using sakyum
+Create flask project using sakyum
 ============================================
 
 After the installation paste the following command on your termianl::

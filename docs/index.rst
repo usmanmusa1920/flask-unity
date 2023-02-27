@@ -16,6 +16,8 @@ Table of content
    :maxdepth: 2
 
    quick_start
+   example/index
+   advance/index
    views
    html_forms
    models
@@ -27,8 +29,6 @@ Table of content
    email
    testing
    deployment
-   example/index
-   advance/index
 
 
 Useful links:
