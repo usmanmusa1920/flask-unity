@@ -16,9 +16,10 @@
     <!-- child js file link -->
   {% endblock head_js %}
 
-  {% if head_title %}
+  {% if context.head_title %}
     {% block head_title %}
-      <!-- child title file link -->
+      <!-- title can be change to any page also -->
+      <title>Sakyum - {{context.head_title}}</title>
     {% endblock head_title %}
   {% else %}
     <title>Sakyum</title>
@@ -83,9 +84,9 @@
 
     <div class="footer_margin_top"></div>
     <div class="footer">
-      <p><pre>{{footer_style[1]}}
-{{footer_style[0]}}
-{{footer_style[1]}}</pre>
+      <p><pre>{{context.footer_style[1]}}
+{{context.footer_style[0]}}
+{{context.footer_style[1]}}</pre>
         <div>
           <a href="https://github.com/usmanmusa1920/sakyum" target="_blank">Github</a>
           <a>|</a>

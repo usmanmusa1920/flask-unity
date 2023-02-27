@@ -2,22 +2,24 @@
 {% extends "default_index.html" %}
 
 {% block short_info %}
-  <p>Your project ({{project_name}}) default page</p>
+  {% if context.project_name %}
+    <p>Your project ({{context.project_name}}) default page</p>
+  {% endif %}
   <p>
     {% if current_user.is_authenticated %}
       Hi {{ current_user.username }}!
     {% else %}
-      please login
+      login to take action
     {% endif %}
   </p>
 {% endblock short_info %}
 
 {% block main %}
-  {% if blueprints_list|length > -1 %}
+  {% if context.blueprints_list|length > -1 %}
     <div class="blueprint_list_wrapper">
       <div class="blueprint_list">
         <p>Routes</p>
-        {% for blueprint in blueprints_list %}
+        {% for blueprint in context.blueprints_list %}
           <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
         {% endfor %}
         {% if current_user.is_authenticated %}

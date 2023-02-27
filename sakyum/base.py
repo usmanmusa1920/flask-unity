@@ -221,7 +221,7 @@ class BaseStructure:
               # make project dir in templates and cd into it 
               self.file_opt(proj_name, _here=templates_folder)
               # create project index.html and back to templates base dir path
-              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_base=False), dir_togo=templates_folder)
+              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_landing=True), dir_togo=templates_folder)
 
               # make project dir in templates and cd into it 
               self.file_opt("admin", _here=templates_folder)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template
+from flask_admin.contrib.sqla import ModelView
 from sakyum.utils import footer_style, template_dir, static_dir
 
 
@@ -9,6 +10,10 @@ errors = Blueprint("errors", __name__, template_folder=template_dir(temp_from_pk
 auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="default_page"))
 
 
+def adminModelRegister(admin, reg_models, db):
+  for reg_model in reg_models:
+    admin.add_view(ModelView(reg_model, db.session))
+    
 """
 
   the `default` blueprint above is the blueprint that we will be extending
@@ -37,48 +42,96 @@ auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="d
 
 @errors.app_errorhandler(400)
 def error_400(error):
-  return render_template('400.html', footer_style=footer_style), 400
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('400.html', context=context), 400
 
 @errors.app_errorhandler(401)
 def error_401(error):
-  return render_template('401.html', footer_style=footer_style), 401
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('401.html', context=context), 401
 
 @errors.app_errorhandler(403)
 def error_403(error):
-  return render_template('403.html', footer_style=footer_style), 403
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('403.html', context=context), 403
 
 @errors.app_errorhandler(404)
 def error_404(error):
-  return render_template('404.html', footer_style=footer_style), 404
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('404.html', context=context), 404
 
 @errors.app_errorhandler(406)
 def error_406(error):
-  return render_template('406.html', footer_style=footer_style), 406
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('406.html', context=context), 406
 
 @errors.app_errorhandler(415)
 def error_415(error):
-  return render_template('415.html', footer_style=footer_style), 415
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('415.html', context=context), 415
 
 @errors.app_errorhandler(429)
 def error_429(error):
-  return render_template('429.html', footer_style=footer_style), 429
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('429.html', context=context), 429
 
 @errors.app_errorhandler(500)
 def error_500(error):
-  return render_template('500.html', footer_style=footer_style), 500
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('500.html', context=context), 500
 
 @errors.app_errorhandler(501)
 def error_501(error):
-  return render_template('501.html', footer_style=footer_style), 501
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('501.html', context=context), 501
 
 @errors.app_errorhandler(502)
 def error_502(error):
-  return render_template('502.html', footer_style=footer_style), 502
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('502.html', context=context), 502
 
 @errors.app_errorhandler(503)
 def error_503(error):
-  return render_template('503.html', footer_style=footer_style), 503
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('503.html', context=context), 503
 
 @errors.app_errorhandler(504)
 def error_504(error):
-  return render_template('504.html', footer_style=footer_style), 504
+  context = {
+    "head_title": "error page",
+    "footer_style": footer_style,
+  }
+  return render_template('504.html', context=context), 504

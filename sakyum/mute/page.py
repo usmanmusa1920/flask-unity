@@ -10,16 +10,19 @@ f2 = "{{"
 l2 = "}}"
 
 
-def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
+def _html(name, is_landing=False, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
+  if is_landing:
+    return f"""{f1}% extends 'default_base.html' %{l1}
+"""
   if admin:
     return f"""{f1}% extends 'admin/master.html' %{l1}
 {f1}% block body %{l1}
-  <a href="/">Go to kakana home page</a>
+  <a href="/">Go to {project_name} home page</a>
   <br>
   {f1}% if current_user.is_authenticated %{l1}
     <a href="/admin/logout">logout</a>
     <br>
-    <a href="/admin/change/pass">change password</a>
+    <a href="/admin/change/password">change password</a>
   {f1}% else %{l1}
     <a href="/admin/login">login</a>
     <br>
@@ -40,11 +43,11 @@ def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=
 {f1}% endblock short_info %{l1}
 
 {f1}% block main %{l1}
-  {f1}% if blueprints_list|length > 1 %{l1}
+  {f1}% if context.blueprints_list|length > 1 %{l1}
     <div class="blueprint_list_wrapper">
       <div class="blueprint_list">
         <p>Routes</p>
-        {f1}% for blueprint in blueprints_list %{l1}
+        {f1}% for blueprint in context.blueprints_list %{l1}
           <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
           </br>
         {f1}% endfor %{l1}
@@ -68,9 +71,21 @@ def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=
   <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}"> -->
 {f1}% endblock head_css %{l1}
 
-{f1}% block head_title %{l1}
-  <title>Sakyum - {f2}head_title{l2}</title>
-{f1}% endblock head_title %{l1}
+
+{f1}% block short_info %{l1}
+  {f1}% if current_user.is_authenticated %{l1}
+    <p>
+      <a href="/admin/logout" class="a_links">logout</a>
+    </p>
+  {f1}% else %{l1}
+    <p>
+      <a href="/admin/login" class="a_links">login</a>
+      or
+      <a href="/admin/register" class="a_links">register</a>
+    </p>
+  {f1}% endif %{l1}
+{f1}% endblock short_info %{l1}
+
 
 {f1}% block main %{l1}
   <h3><pre>({name}) app

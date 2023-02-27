@@ -145,7 +145,7 @@ Lastly let us make a loop over all choices and their questions::
 Register our models to admin
 ----------------------------
 
-In other to register our model, we are to open a sub project folder and open the **config.py** file we see there **(Schoolsite/config.py)**, and import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register, above the method that will create the tables and database **db.create_all()** and we will see a commented prototype above it, then we will append the models in the **reg_models = []** list within **admin_runner** function. That will register our model in the admin page and we will be able to see it if we vist the admin page
+In other to register our model, we are to open a sub project folder and open the **config.py** file we see there **(Schoolsite/config.py)**, within create_app function in the file, we are to import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register, above the method that will create the tables and database **db.create_all()** and we will see a commented prototype above it, then we will append the models in the **reg_models = []** list within **admin_runner** function (inner function of the create_app function). That will register our model in the admin page and we will be able to see it if we vist the admin page
 
 Register model in the form of model view
 ----------------------------------------
@@ -161,24 +161,24 @@ To create these model view we have to go into our app admin.py **exam/admin.py**
 Now below we are to start defining our model view, I will call the model view **QuestionChoiceAdminView** which will look like::
 
     class QuestionChoiceAdminView(ModelView):
-    can_delete = False  # disable model deletion
-    can_create = True
-    can_edit = True
-    page_size = 50  # the number of entries to display on the list view
+        can_delete = False  # disable model deletion
+        can_create = True
+        can_edit = True
+        page_size = 50  # the number of entries to display on the list view
 
-    # def is_accessible(self):
-    #   return current_user.is_authenticated
+        # def is_accessible(self):
+        #   return current_user.is_authenticated
 
-    # def inaccessible_callback(self, name, **kwargs):
-    #   # redirect to login page if user doesn't have access
-    #   return redirect(url_for('login', next=request.url))
+        # def inaccessible_callback(self, name, **kwargs):
+        #   # redirect to login page if user doesn't have access
+        #   return redirect(url_for('login', next=request.url))
 
-In other to register our model view, open your sub project folder and open the **config.py** file you see there **(Schoolsite/config.py)**, and import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register and also the model view of our model, above the method that will create the tables and database **db.create_all()**::
+In other to register our model view, open your sub project folder and open the **config.py** file you see there **(Schoolsite/config.py)**, within create_app function in the file, we are to import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register and also the model view of our model, above the method that will create the tables and database **db.create_all()**::
 
     from exam.models import ExamQuestionModel, ExamChoiceModel
     from exam.admin import QuestionChoiceAdminView
 
-and we will see a commented prototype above it, now instead of append it in the **reg_models = []** list within **admin_runner** function, you are to go below the for loop in (within admin_runner function) out side the loop and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="my_models_view". That will register your model in the admin page and you will see it if you vist the admin page::
+and we will see a commented prototype above it, now instead of append it in the **reg_models = []** list within **admin_runner** function (inner function of the create_app function), you are to go below the function we call **adminModelRegister** in (within admin_runner function) and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="my_models_view". That will register your model in the admin page and you will see it if you vist the admin page::
 
     admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Questions", category="Question-Choice"))
     admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Choices", category="Question-Choice"))

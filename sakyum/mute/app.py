@@ -5,7 +5,7 @@ l1 = "}"
 long_comment = "\"\"\""
 
 
-def app_views_dummy(app):
+def app_views_dummy(app, f1=f1, l1=l1):
   """
   # :app is the application name that you create within your project
   """
@@ -20,14 +20,17 @@ from sakyum.utils import footer_style, template_dir, static_dir
 
 @{app}.route('/{app}/', methods=["GET", "POST"])
 def index():
-  head_title = "{app}"
   {long_comment}
     the {app}/index.html pass below is the html file in your project templates/{app} base dir
     inherited (extended) from `sakyum/templates/default_page/default_index.html`
     you can edit it and give it a different css and js file to your desire
   {long_comment}
+  context = {f1}
+    "head_title": "{app}",
+    "footer_style": footer_style,
+  {l1}
 
-  return render_template("{app}/index.html", head_title=head_title, footer_style=footer_style)
+  return render_template("{app}/index.html", context=context)
 """
 
 
@@ -54,8 +57,7 @@ file and register it to the admin page in other to see it in admin page
 """
 
 def app_admin_dummy(app=None):
-  return f"""
-from flask_login import current_user
+  return f"""from flask_login import current_user
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
 

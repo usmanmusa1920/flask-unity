@@ -119,7 +119,7 @@ class User(db.Model, UserMixin):
 """
 
 
-def auth_routes_dummy(proj_name):
+def auth_routes_dummy(proj_name, f1=f1, l1=l1):
   return f"""from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
 from sakyum.utils import footer_style
@@ -148,7 +148,11 @@ def adminLChangePassword():
       return redirect(url_for("auth.adminLogin"))
     else:
       flash("Cross check your login credentials!", "error")
-  return render_template("admin_change_pass.html", footer_style=footer_style)
+  context = {f1}
+    "head_title": "admin change password",
+    "footer_style": footer_style,
+  {l1}
+  return render_template("admin_change_password.html", context=context)
 
 
 @auth.route("/admin/login/", methods=["POST", "GET"])
@@ -180,7 +184,11 @@ def adminLogin():
       return redirect(url_for("admin.index"))
     else:
       flash("Cross check your login credentials!", "error")
-  return render_template("admin_login.html", footer_style=footer_style)
+  context = {f1}
+    "head_title": "admin login",
+    "footer_style": footer_style,
+  {l1}
+  return render_template("admin_login.html", context=context)
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
@@ -199,7 +207,11 @@ def adminRegister():
     db.session.commit()
     flash(f"Account for {f1}username{l1} has been created!", "info")
     return redirect(url_for("auth.adminLogin"))
-  return render_template("admin_register.html", footer_style=footer_style)
+  context = {f1}
+    "head_title": "admin register",
+    "footer_style": footer_style,
+  {l1}
+  return render_template("admin_register.html", context=context)
 
 
 @auth.route("/admin/logout/", methods=["POST", "GET"])
