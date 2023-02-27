@@ -132,7 +132,7 @@ from .models import User
 @fresh_login_required
 def adminLChangePassword():
   {long_comment}
-    the `admin_change_password.html` below is located in the sakyum package (static/default_page/admin_login.html)
+    the `admin_change_password.html` below is located in the sakyum package (templates/default_page/admin_change_password.html)
   {long_comment}
   if request.method == "POST":
     old_password = request.form["old_password"]
@@ -158,7 +158,7 @@ def adminLChangePassword():
 @auth.route("/admin/login/", methods=["POST", "GET"])
 def adminLogin():
   {long_comment}
-    the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
+    the `admin_login.html` below is located in the sakyum package (templates/default_page/admin_login.html)
   {long_comment}
   if request.method == "POST":
     username = request.form["username"]
@@ -194,7 +194,7 @@ def adminLogin():
 @auth.route("/admin/register/", methods=["POST", "GET"])
 def adminRegister():
   {long_comment}
-    the `admin_register.html` below is located in the sakyum package (static/default_page/admin_register.html)
+    the `admin_register.html` below is located in the sakyum package (templates/default_page/admin_register.html)
   {long_comment}
   if request.method == "POST":
     username  = request.form["username"]

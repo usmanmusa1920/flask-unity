@@ -3,10 +3,6 @@
 long_comment = "\"\"\""
 
 
-def null(long_comment=long_comment):
-  return f"""{long_comment} write awesome code here! {long_comment}
-"""
-
 def thunder_dummy(project):
   return f"""from sakyum import Boot
 from auth.models import User

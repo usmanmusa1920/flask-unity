@@ -9,7 +9,6 @@ import subprocess as sp
 
 from pathlib import Path
 
-from .mute import null
 from .mute import thunder_dummy
 from .mute.page import _js
 from .mute.page import _css
@@ -104,7 +103,7 @@ class BaseStructure:
       os.chdir(_where)
       
 
-  def into_file(self, fls, fls_cmd, file=None, app_default_dummy=null(), is_static_file=False, is_app=False, proj_nm=None):
+  def into_file(self, fls, fls_cmd, file=None, app_default_dummy=None, is_static_file=False, is_app=False, proj_nm=None):
     """create files within current directory of '''self.file_opt()'''
     is_app: if it is True, that mean it will do operation of making app files,
     else it will make for the entire project
@@ -120,7 +119,7 @@ class BaseStructure:
         else:
           if _fls == "__init__.py":
             # building app `__init__.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{null()}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n", route_go=False)
 
           elif _fls == "forms.py":
             # building app `forms.py` default files

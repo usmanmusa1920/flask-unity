@@ -20,11 +20,6 @@ from sakyum.utils import footer_style, template_dir, static_dir
 
 @{app}.route('/{app}/', methods=["GET", "POST"])
 def index():
-  {long_comment}
-    the {app}/index.html pass below is the html file in your project templates/{app} base dir
-    inherited (extended) from `sakyum/templates/default_page/default_index.html`
-    you can edit it and give it a different css and js file to your desire
-  {long_comment}
   context = {f1}
     "head_title": "{app}",
     "footer_style": footer_style,
@@ -53,7 +48,7 @@ when ever you create a model, make sure you import it in your project config.py
 file and register it to the admin page in other to see it in admin page
 {long_comment}
 
-# write your models here!
+# write your admin model view here!
 """
 
 def app_admin_dummy(app=None):
@@ -61,5 +56,5 @@ def app_admin_dummy(app=None):
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
 
-# write your model view here!
+# write your app model view here!
 """

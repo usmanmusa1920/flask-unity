@@ -19,21 +19,13 @@ app = create_app()
 
 
 def pro_secret_dummy():
-  return f"""import os
-from pathlib import Path
+  return f"""from pathlib import Path
 
-db_ORIGIN = Path(__file__).resolve().parent.parent
+db_origin = Path(__file__).resolve().parent.parent
+
 class Config:
-  # SECRET_KEY = os.environ.get('SECRET_KEY')
-  # SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
-  # MAIL_SERVER = 'smtp.googlemail.com'
-  # MAIL_PORT = 587
-  # MAIL_USE_TLS = True
-  # MAIL_USERNAME = os.environ.get('EMAIL_USER')
-  # MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
   SECRET_KEY = '{secure_app}'
-  SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(db_ORIGIN)+'/default.db'
-
+  SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(db_origin)+'/default.db'
   # set optional bootswatch theme
   FLASK_ADMIN_SWATCH = 'cerulean'
 """
@@ -121,7 +113,6 @@ reg_blueprints = [
 
 @default.route('/', methods=["POST", "GET"])
 def index():
-  # the default_base.html below is located in the sakyum package (templates/default_page) folder
   context = {f1}
     "project_name": "{proj}",
     "footer_style": footer_style,

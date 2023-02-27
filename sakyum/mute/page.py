@@ -13,6 +13,10 @@ l2 = "}}"
 def _html(name, is_landing=False, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
   if is_landing:
     return f"""{f1}% extends 'default_base.html' %{l1}
+
+{f1}% block head_js %{l1}
+  <script src="{f2} url_for('base.static', filename='index.js') {l2}"></script>
+{f1}% endblock head_js %{l1}
 """
   if admin:
     return f"""{f1}% extends 'admin/master.html' %{l1}
@@ -70,6 +74,10 @@ def _html(name, is_landing=False, admin=False, project_name=False, is_base=True,
 {f1}% block head_css %{l1}
   <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}"> -->
 {f1}% endblock head_css %{l1}
+
+{f1}% block head_js %{l1}
+  <script src="{f2} url_for('{name}.static', filename='index.js') {l2}"></script>
+{f1}% endblock head_js %{l1}
 
 
 {f1}% block short_info %{l1}
