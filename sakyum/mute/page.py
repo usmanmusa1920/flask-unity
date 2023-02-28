@@ -10,7 +10,7 @@ f2 = "{{"
 l2 = "}}"
 
 
-def _html(name, is_landing=False, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=f2, l2=l2):
+def _html(name, is_landing=False, admin=False, project_name=False, is_base=True):
   if is_landing:
     return f"""{f1}% extends 'default_base.html' %{l1}
 
@@ -104,7 +104,7 @@ def _html(name, is_landing=False, admin=False, project_name=False, is_base=True,
 """
 
 
-def _css(f1=f1, l1=l1):
+def _css():
   return f"""
 * {f1}
   margin: 0;
@@ -139,7 +139,7 @@ body {f1}
 """
 
 
-def _js(name, f1=f1, l1=l1):
+def _js(name):
   return f"""function test(){f1}
   alert('I am {__title__} test alert for ({name}) index page')
 {l1}

@@ -101,6 +101,19 @@ class BaseStructure:
       os.chdir(os.path.join(_here, _dir))
     if _where:
       os.chdir(_where)
+
+
+  def validateProjectOrAppName(self, name, typ=False):
+    if typ:
+      proj_or_app = "project"
+    else:
+      proj_or_app = "app"
+    """validate app and project name"""
+    if "@" in name or "-" in name or "/" in name or "\\" in name or "^" in name:
+      name_err = f"Avoid using `@-` in your {proj_or_app} name, we found one in your {proj_or_app} name ({name})\n"
+      print()
+      logger.error(name_err)
+      exit()
       
 
   def into_file(self, fls, fls_cmd, file=None, app_default_dummy=None, is_static_file=False, is_app=False, proj_nm=None):
@@ -123,11 +136,11 @@ class BaseStructure:
 
           elif _fls == "forms.py":
             # building app `forms.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy(app_name)}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy()}", route_go=False)
 
           elif _fls == "models.py":
             # building app `models.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_models_dummy(self.proj_store_name, app_name=app_name)}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_models_dummy(self.proj_store_name)}", route_go=False)
             
           elif _fls == "views.py":
             # building app `views.py` default files
@@ -135,7 +148,7 @@ class BaseStructure:
             
           elif _fls == "admin.py":
             # building app `admin.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_admin_dummy(app=app_name)}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_admin_dummy()}", route_go=False)
     else:
       for _fls in fls:
         if _fls[:-3] == file:
@@ -146,6 +159,8 @@ class BaseStructure:
             
 
   def dir_tree(self, proj_name=None):
+    # validating app name
+    self.validateProjectOrAppName(proj_name, typ=True)
     """create a directory tree where file will reserved as well as modules too"""
     dirs = [proj_name, f"{proj_name}/{proj_name}", f"{proj_name}/auth", "templates", "static"]
 
@@ -287,6 +302,9 @@ class AppStructure(BaseStructure):
     """create a directory tree where file will reserved as well as modules too"""
     
     dirs = [proj_app_name]
+    # validating app name
+    self.validateProjectOrAppName(proj_app_name)
+
     app_store_name = proj_app_name # store our app name
     fls_name = ["__init__", "views", "models", "forms", "admin"]
     fls = self.append_exs_to_file(fls_name=fls_name)
@@ -445,7 +463,8 @@ class Boot:
       user = self.model(username=username, email=email, password=hashed_password)
       self.db.session.add(user)
       self.db.session.commit()
-      logger.info(f"One record added ({username})")
+      print()
+      logger.info(f"One record added ({username})\n")
       exit()
     else:
       print()

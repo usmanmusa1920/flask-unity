@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-long_comment = "\"\"\""
-
 
 def thunder_dummy(project):
   return f"""from sakyum import Boot

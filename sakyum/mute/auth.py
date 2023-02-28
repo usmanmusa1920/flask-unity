@@ -119,7 +119,7 @@ class User(db.Model, UserMixin):
 """
 
 
-def auth_routes_dummy(proj_name, f1=f1, l1=l1):
+def auth_routes_dummy(proj_name):
   return f"""from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
 from sakyum.utils import footer_style

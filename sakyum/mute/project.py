@@ -31,7 +31,7 @@ class Config:
 """
 
 
-def pro_config_dummy(proj_name, long_comment=long_comment):
+def pro_config_dummy(proj_name):
   return f"""from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask import Flask
@@ -91,7 +91,7 @@ def create_app(reg_blueprints=False, conf=Config):
 """
 
 
-def pro_routes_dummy(proj, f1=f1, l1=l1):
+def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
 from sakyum.blueprint import default, errors, auth

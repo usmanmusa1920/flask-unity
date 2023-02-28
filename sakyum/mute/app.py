@@ -5,7 +5,7 @@ l1 = "}"
 long_comment = "\"\"\""
 
 
-def app_views_dummy(app, f1=f1, l1=l1):
+def app_views_dummy(app):
   """
   # :app is the application name that you create within your project
   """
@@ -29,7 +29,7 @@ def index():
 """
 
 
-def app_forms_dummy(app_name):
+def app_forms_dummy():
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
@@ -38,7 +38,7 @@ from wtforms.validators import DataRequired, Length
 """
 
 
-def app_models_dummy(your_application, f1=f1, l1=l1, app_name=False, long_comment=long_comment):
+def app_models_dummy(your_application):
   return f"""from datetime import datetime
 from {your_application}.config import db
 
@@ -51,7 +51,7 @@ file and register it to the admin page in other to see it in admin page
 # write your admin model view here!
 """
 
-def app_admin_dummy(app=None):
+def app_admin_dummy():
   return f"""from flask_login import current_user
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView

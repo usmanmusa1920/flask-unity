@@ -51,8 +51,8 @@ Now I will define the **ExamChoiceModel** model which will look like::
 
 and save the file
 
-Play withapi
-------------
+Play with api
+-------------
 
 Before we move further let us play with the model api. Continuetion from the last tutorial where we stop, when we make debug value to be `True` ( `last tutorial <https://sakyum.readthedocs.io/en/latest/example/create_app.html>`_ )
 
