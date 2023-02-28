@@ -19,8 +19,7 @@ Table of content
    example/index
    advance/index
    views
-   html_forms
-   models
+   admin_user
    templates_and_static
    error_pages
    databases

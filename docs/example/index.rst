@@ -15,3 +15,5 @@ Schoolsite
    create_models
    app_views
    app_forms
+
+**Source code** for this tutorial is available at `sakyum github repo <https://github.com/usmanmusa1920/sakyum/tree/master/example>`_
