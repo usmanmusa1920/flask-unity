@@ -117,5 +117,5 @@ def index():
   return render_template("{proj}/index.html", context=context)
   
   
-{long_comment} overwrite error pages here {long_comment}
+{long_comment} overwrite (customise) error pages here {long_comment}
 """

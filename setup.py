@@ -14,6 +14,7 @@ setup(
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
   long_description_content_type="text/markdown",
   python_requires='>=3.6',
+  # platforms='any',
   
   # The URL of your package's (project) home page e.g. github link
   url=__website__,
@@ -27,12 +28,13 @@ setup(
     'Intended Audience :: Developers',
     'Natural Language :: English',
     'Operating System :: POSIX :: Linux',
+    # 'Operating System :: OS Independent',
     'License :: OSI Approved :: MIT License',
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.8'
-    'Programming Language :: Python :: 3.10'
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.10',
   ],
   
   # used when people are searching for a module, keywords separated with a space
