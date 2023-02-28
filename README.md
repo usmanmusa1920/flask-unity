@@ -71,7 +71,7 @@ visit `http://127.0.0.1:5000` which is your project landing page
 
 visit `http://127.0.0.1:5000/exam` this will take you to your app landing page (exam)
 
-visit `http://127.0.0.1:5000/exam` this will take you to admin page. From there you are ready to go. See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
+visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there you are ready to go. See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 
 ## Useful links
 

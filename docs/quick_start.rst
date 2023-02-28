@@ -5,9 +5,9 @@ Quick start
 
 First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtualenvironment
 
-Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** too will be release, stay tuned.
+Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
-you will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest version), you can ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
+you will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest version), you can still ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
   pip install --upgrade sakyum
 
@@ -45,7 +45,8 @@ Tree structure of your project look like (using tree package)
     ├── Schoolsite
     │   ├── config.py
     │   ├── __init__.py
-    │   └── routes.py
+    │   ├── routes.py
+    │   └── secret.py
     ├── static
     │   └── Schoolsite
     │       ├── index.js
@@ -58,7 +59,7 @@ Tree structure of your project look like (using tree package)
     │       └── index.html
     └── thunder.py
 
-    8 directories, 12 files
+    8 directories, 13 files
 
 Boot up the flask server by running the below command::
 
@@ -79,9 +80,9 @@ or
 
     python thunder.py create_app --app exam
 
-this will create an app (a new package called **exam**) within your project (**Schoolsite**), the **-a** flag is equivalent to **--app** which is for the app name in this example it is called **exam**
+this will create an app (a new package called **exam**) within your project (**Schoolsite**), the **-a** flag is equivalent to **--app** which is a flag for the app name in this example it is called **exam**
 
-Now the tree structure of your project after creating **exam** look like (using tree package)
+Now the tree structure of your project after creating **exam** app look like (using tree package)
 
 .. code-block::
 
@@ -105,7 +106,8 @@ Now the tree structure of your project after creating **exam** look like (using 
     ├── Schoolsite
     │   ├── config.py
     │   ├── __init__.py
-    │   └── routes.py
+    │   ├── routes.py
+    │   └── secret.py
     ├── static
     │   ├── exam
     │   │   ├── index.js
@@ -124,9 +126,9 @@ Now the tree structure of your project after creating **exam** look like (using 
     │       └── index.html
     └── thunder.py
 
-    12 directories, 21 files
+    12 directories, 22 files
 
-You notice it create a package name with thesame name of your app (**exam**), also a directory named **exam** inside **templates** and **static** folder with default html page
+You notice it create a package name with thesame name of your app (**exam**), also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
 Register an app
 ===============
@@ -173,7 +175,7 @@ The above command will bring the serve on port **7000** visit the localhost url 
 
 **http://127.0.0.1:7000/exam**
 
-this will take you to your app **index page** (exam). From there you are ready to go.
+this will take you to your app **index page** (exam), and you can also vist the admin page with this url **http://127.0.0.1:7000/admin**
 
 Also, you can give your desire ip address/host by using **-H** or **--host** flag, e.g::
 
