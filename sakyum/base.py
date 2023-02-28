@@ -408,12 +408,39 @@ class Boot:
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
     elif sys.argv[1] == "create_user":
-      from .utils import AuthCredentials
+      parser = argparse.ArgumentParser(prog="create user", description="This create user")
+      parser.add_argument("--username", "-u", required=False, type=str, metavar="", help="What is the username?")
+      parser.add_argument("--email", "-e", required=False, type=str, metavar="", help="What is the email?")
+      parser.add_argument("--password", "-p", required=False, type=str, metavar="", help="What is the password?")
+      parser.add_argument(dest="create_user", default="create_user", type=str, metavar="", help="Put positional argument of `create_user` to create user")
+      args = parser.parse_args()
 
-      auth_class = AuthCredentials().result
-      username = auth_class[0]
-      email = auth_class[1]
-      raw_password = auth_class[2]
+      from .utils import AuthCredentials
+      if args.username != None:
+        args_u = False
+        usr = args.username
+      else:
+        args_u = True
+        usr = None
+      if args.email != None:
+        args_e = False
+        mail = args.email
+      else:
+        args_e = True
+        mail = None
+      if args.password != None:
+        args_p = False
+        pwd = args.password
+      else:
+        args_p = True
+        pwd = None
+        
+      auth_class = AuthCredentials(username=usr, email=mail, password=pwd, u_args=args_u, e_args=args_e, p_args=args_p)
+      auth_result = auth_class.result
+      username = auth_result[0]
+      email = auth_result[1]
+      raw_password = auth_result[2]
+
       hashed_password = self.pwd_hash.generate_password_hash(raw_password).decode('utf-8')
       user = self.model(username=username, email=email, password=hashed_password)
       self.db.session.add(user)

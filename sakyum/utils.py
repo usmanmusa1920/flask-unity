@@ -86,48 +86,60 @@ def rem_blueprint(lst_blue=None, rem_blue=None):
 
 
 class AuthCredentials:
-  def __init__(self, username=None, email=None, password=None):
+  def __init__(self, username=None, email=None, password=None, u_args=True, e_args=True, p_args=True):
     self.username = username
     self.email = email
     self.password = password
+    self.u_args = u_args
+    self.e_args = e_args
+    self.p_args = p_args
 
-    while self.username == None or self.username == "" or len(self.username) < 3:
-      if self.username == None:
-        self.username = input("Enter username: ")
-        print()
-      elif self.username == "":
-        print("username can't be empty")
-        self.username = input("Enter username: ")
-        print()
-      elif len((self.username)) < 3:
-        print("username must be not less than 3 character")
-        self.username = input("Enter username: ")
-        print()
-        
-    while self.email == None or self.email == "":
-      if self.email == None:
-        self.email = input("Enter email: ")
-        print()
-      elif self.email == "":
-        print("email can't be empty")
-        self.email = input("Enter email: ")
-        print()
-        
-    while self.password == None or self.password == "" or len(self.password) < 6:
-      if self.password == None:
-        self.password = getpass("Enter password: ")
-        print()
-      elif self.password == "":
-        print("password can't be empty")
-        self.password = getpass("Enter password: ")
-        print()
-      elif len((self.password)) < 6:
-        print("password must be not less than 6 character")
-        self.password = getpass("Enter password: ")
-        print()
+    if self.u_args:
+      while self.username == None or self.username == "" or len(self.username) < 3:
+        if self.username == None:
+          self.username = input("Enter username: ")
+          print()
+        elif self.username == "":
+          print("username can't be empty")
+          self.username = input("Enter username: ")
+          print()
+        elif len((self.username)) < 3:
+          print("username must be not less than 3 character")
+          self.username = input("Enter username: ")
+          print()
+
+    if self.e_args:
+      while self.email == None or self.email == "":
+        if self.email == None:
+          self.email = input("Enter email: ")
+          print()
+        elif self.email == "":
+          print("email can't be empty")
+          self.email = input("Enter email: ")
+          print()
+
+    if self.p_args:
+      while self.password == None or self.password == "" or len(self.password) < 6:
+        if self.password == None:
+          self.password = getpass("Enter password: ")
+          print()
+        elif self.password == "":
+          print("password can't be empty")
+          self.password = getpass("Enter password: ")
+          print()
+        elif len((self.password)) < 6:
+          print("password must be not less than 6 character")
+          self.password = getpass("Enter password: ")
+          print()
         
   @property
   def validate_username(self):
+    # the below while is included to chech data validation
+    # when user uses flags `-u` or `--username`
+    while len(self.username) < 3:
+      print("username must be not less than 3 character")
+      self.username = input("Enter username: ")
+      print()
     return self.username
 
   @property
@@ -144,6 +156,12 @@ class AuthCredentials:
 
   @property
   def validate_password(self):
+    # the below while is included to chech data validation
+    # when user uses flags `-p` or `--password`
+    while len(self.password) < 6:
+      print("password must be not less than 6 character")
+      self.password = getpass("Enter password: ")
+      print()
     return self.password
 
   @property
