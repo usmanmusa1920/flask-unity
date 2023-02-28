@@ -240,12 +240,12 @@ class BaseStructure:
               # make project dir in templates and cd into it 
               self.file_opt(proj_name, _here=templates_folder)
               # create project index.html and back to templates base dir path
-              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html(proj_name, is_landing=True), dir_togo=templates_folder)
+              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) index.html page -->\n"+_html("do_nothing", is_landing=True), dir_togo=templates_folder)
 
-              # make project dir in templates and cd into it 
+              # make project admin dir in templates and cd into it 
               self.file_opt("admin", _here=templates_folder)
               # create project admin index.html and back to project base dir path
-              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) admin index.html page -->\n"+_html("do_nothing", admin=True, project_name=proj_name), dir_togo=project_folder)
+              self.file_content(self._exs_last[0], content=f"<!-- @{__title__}, {proj_name} (project) admin index.html page -->\n"+_html("do_nothing", is_admin=True, project_name=proj_name), dir_togo=project_folder)
               
             if static_dir == dirs[3:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
@@ -327,7 +327,7 @@ class AppStructure(BaseStructure):
           self.into_file(fls, self.fls_cmd, is_app=True) # to maker app default files
           
       self.app_static_and_template(
-        _html(app_store_name, project_name=self.proj_store_name), top_comment="html", _dir_=roove_dir[0], file=[self.append_exs_to_file(_exs_=[])[0]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
+        _html(app_store_name, project_name=self.proj_store_name, is_base_app=True), top_comment="html", _dir_=roove_dir[0], file=[self.append_exs_to_file(_exs_=[])[0]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app
         )
       self.app_static_and_template(
         _css(), top_comment="css", _dir_=roove_dir[1], file=[self.append_exs_to_file(_exs_=[])[2]], app=proj_app_name, cmd=self.fls_cmd, _here_=_here_app

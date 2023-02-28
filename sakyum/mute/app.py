@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-f1 = "{"
-l1 = "}"
-long_comment = "\"\"\""
+from . import f1
+from . import l1
+from . import long_comment
 
 
 def app_views_dummy(app):

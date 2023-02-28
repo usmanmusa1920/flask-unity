@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from sakyum import __title__
-from sakyum.utils import stylePage
+from . import f1
+from . import l1
+from . import f2
+from . import l2
+from . import __title__
+from . import stylePage
 
 
-f1 = "{"
-l1 = "}"
-f2 = "{{"
-l2 = "}}"
-
-
-def _html(name, is_landing=False, admin=False, project_name=False, is_base=True):
+def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_app=False):
   if is_landing:
     return f"""{f1}% extends 'default_base.html' %{l1}
 
@@ -18,7 +16,7 @@ def _html(name, is_landing=False, admin=False, project_name=False, is_base=True)
   <script src="{f2} url_for('base.static', filename='index.js') {l2}"></script>
 {f1}% endblock head_js %{l1}
 """
-  if admin:
+  if is_admin:
     return f"""{f1}% extends 'admin/master.html' %{l1}
 {f1}% block body %{l1}
   <a href="/">Go to {project_name} home page</a>
@@ -34,42 +32,9 @@ def _html(name, is_landing=False, admin=False, project_name=False, is_base=True)
   {f1}% endif %{l1}
 {f1}% endblock body %{l1}
 """
-  if is_base:
-    _is = "application"
-    static_url = name
-  else:
-    _is = "project"
-    static_url = "base"
-    return f"""{f1}% extends "default_index.html" %{l1}
-
-{f1}% block short_info %{l1}
-  <p>Your project ({name}) default page</p>
-{f1}% endblock short_info %{l1}
-
-{f1}% block main %{l1}
-  {f1}% if context.blueprints_list|length > 1 %{l1}
-    <div class="blueprint_list_wrapper">
-      <div class="blueprint_list">
-        <p>Routes</p>
-        {f1}% for blueprint in context.blueprints_list %{l1}
-          <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
-          </br>
-        {f1}% endfor %{l1}
-        <a href="/admin/login">login</a>
-        </br>
-      </div>
-    </div>
-  {f1}% endif %{l1}
-
-  <div class="pkg_desc">
-    <div>
-      <p>An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs</p>
-    </div>
-  </div>
-{f1}% endblock main %{l1}
-"""
-  page_desc = stylePage(name, _is)
-  return f"""{f1}% extends "{project_name}/index.html" %{l1}
+  if is_base_app:
+    page_desc = stylePage(name)
+    return f"""{f1}% extends "{project_name}/index.html" %{l1}
 
 {f1}% block head_css %{l1}
   <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}"> -->

@@ -1,5 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from sakyum import __title__
+from sakyum.utils import Security
+from sakyum.utils import stylePage
+
+
+secret = Security()
+secure_app = secret.passcode_salt
+f1 = "{"
+l1 = "}"
+f2 = "{{"
+l2 = "}}"
+long_comment = "\"\"\""
+
 
 def thunder_dummy(project):
   return f"""from sakyum import Boot

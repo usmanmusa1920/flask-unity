@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from sakyum.utils import Security
-
-
-secret = Security()
-secure_app = secret.passcode_salt
-f1 = "{"
-l1 = "}"
-long_comment = "\"\"\""
+from . import f1
+from . import l1
+from . import secure_app
+from . import long_comment
 
 
 def pro_init_dummy():

@@ -26,10 +26,8 @@ def os_name(lin=False, win=False, name=os.name):
 
 
 def static_dir(app, static_from_pkg=False):
-  
   """
     relative path to static files
-    
     # :static_from_pkg:
         is the directory name that is in the library package which is `static`
   """
@@ -39,10 +37,8 @@ def static_dir(app, static_from_pkg=False):
   
 
 def template_dir(temp_from_pkg=False):
-
   """
     relative path to html page
-
     # :temp_from_pkg:
         is the directory name that is in the library package which is `templates`
   """
@@ -51,9 +47,8 @@ def template_dir(temp_from_pkg=False):
   return os.getcwd() + "/templates"
   
 
-def stylePage(name, _is, version=False):
+def stylePage(name, version=False):
   """function for styling project/app description default pages"""
-
   if version:
     # it will style the description in the footer
     desc = "@ " + name + " software - v" + version
@@ -62,19 +57,18 @@ def stylePage(name, _is, version=False):
     return [desc_center, border]
 
   # it will style the description of default app pages
-  desc = "Your " + name + " " + _is + " default pages"
+  desc = "Your " + name + " application default pages"
   desc_center = desc.center(len(desc) + 6)
   border = "=" * len(desc_center)
   return [desc_center, border]
   
   
-footer_style = stylePage(__title__, "do_nothing", version=__version__)
+footer_style = stylePage(__title__, version=__version__)
 
 
 def rem_blueprint(lst_blue=None, rem_blue=None):
   # these are blueprint that we don't want to show on the
   # default page so we are removing them from the list
-
   for blue in rem_blue:
     if blue in lst_blue:
       # finding the index of the `blue` item blueprint in the list
@@ -178,7 +172,6 @@ class Security:
   A reqular expression that matches any character that
   should never appear in base 64 encodings would be:
     [^A-Za-z0-9+/=]
-    
   we follow the base64 pattern of [^A-Za-z0-9+/=] that should never appear in base64, (in reqex)
   """
   
@@ -203,7 +196,6 @@ class Security:
   def __init__(self, token_generate = token_generate):
     self.token_generate = "".join(token_generate)
     
-
   @property
   def passcode_salt(self):
     """
@@ -217,7 +209,6 @@ class Security:
     salt = "".join(random.sample(self.token_generate, random.randint(20, 50)))
     return salt # return type is string
     
-
   def passcode_iteration(self, r_min, r_max, r_step):
     """
     Generating a random iteration. The iterations is not static,
@@ -228,13 +219,11 @@ class Security:
     itter = random.randrange(r_min, r_max, r_step)
     return itter # return type is integer
     
-
   def get_hash(self, salt: str, itter: int, passwd: str) -> str:
     """
     generating our key using this class method, and also
     the return type of the key is bytes
     """
-
     key = hashlib.pbkdf2_hmac(
         'sha256', # The hash digest algorithm for HMAC
         passwd.encode('utf-8'), # Convert the password to bytes
@@ -263,12 +252,10 @@ class Security:
     # return types of the list is string all, access it by print(self.get_hash.__annotations__)
     return [hash_result, secure_ingredient]
 
-
   def secret(self):
     r = random.randint(32, 52)
     secret = secrets.token_hex(r)
     return secret
     
-
   def __str__(self):
     return f"Passcode security class"
