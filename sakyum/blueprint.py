@@ -11,33 +11,26 @@ auth = Blueprint("auth", __name__, template_folder=template_dir(temp_from_pkg="d
 
 
 def adminModelRegister(admin, reg_models, db):
+  """function that will register a direct model (not model view)"""
   for reg_model in reg_models:
     admin.add_view(ModelView(reg_model, db.session))
     
 """
+  the `default` blueprint above is the blueprint that we will be using for linking
+  our project default pages (css, js, and favicon.ico) files and also our app default
+  html pages (landing page route) that is located in your project route.py file
+  `<project_name>/route.py` you will see it decorated with it ` @default.route() `.
+  We also register it in the project routes.py file `reg_blueprints` list to make it accessible
 
-  the `default` blueprint above is the blueprint that we will be extending
-  our project default pages and also our app default html pages from.
-  We also register it in the project routes.py file `reg_blueprints` list
-
-  the `errors` blueprint above is for error pages, you can overite the error
-  pages by defining them in your project routes.py file just like the way we
-  did in here down below for some of our default error pages (404, 403, 500)
+  the `errors` blueprint above is for error pages, you can overite the error pages by
+  defining them in your project routes.py file `<project_name>/route.py` just like the
+  way we did in here down below for some of our default error pages (400, 403, 500, etc)
   by giving your desire template file path (correspond to your project templates folder)
   for each error page
 
-  the `auth` blueprint above is for the login and other default authentication
-  system of your project, which will let you log into admin page
-
+  the `auth` blueprint above is for the `login, logout, register, change_password` and
+  other default authentication system (route) of your project, which will let you log into admin page
 """
-
-
-# @auth.route('/admin/login/')
-# def index():
-#   """
-#     the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
-#   """
-#   return render_template("admin_login.html", footer_style=footer_style)
 
 
 @errors.app_errorhandler(400)
