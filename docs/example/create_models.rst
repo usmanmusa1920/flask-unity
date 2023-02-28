@@ -51,10 +51,10 @@ Now I will define the **ExamChoiceModel** model which will look like::
 
 and save the file
 
-PLAY WITH API
--------------
+Play withapi
+------------
 
-Before we move further let us play with the model api. Continuetion from the last tutorial where we stop, when we make debug value to be `True` ( ` last tutorial <https://sakyum.readthedocs.io/en/latest/example/create_app.html>`_ )
+Before we move further let us play with the model api. Continuetion from the last tutorial where we stop, when we make debug value to be `True` ( `last tutorial <https://sakyum.readthedocs.io/en/latest/example/create_app.html>`_ )
 
 From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter start by importing your **db** and **bcrypt** (for password hash) instance from project package::
 
@@ -167,7 +167,7 @@ Also like the `ExamQuestionModel.query` we see above, we can see many other meth
 
     dir(ExamChoiceModel.query)
 
-Lastly let us make a loop over all question and print each question choice::
+Lastly let us make a loop over all question and print each question choices::
 
     for question in ExamQuestionModel.query.all():
         question
@@ -212,11 +212,11 @@ In other to register our model view, open the `config.py` file (Schoolsite/confi
     from exam.models import ExamQuestionModel, ExamChoiceModel
     from exam.admin import QuestionChoiceAdminView
 
-Now remove the **ExamQuestionModel** and **ExamChoiceModel** from the `reg_models` list, go below the function we call **adminModelRegister** in (within admin_runner function) and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="my_models_view"::
+Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models` list, go below the function we call **adminModelRegister** in (within admin_runner function) and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="my_models_view"::
 
     admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Questions", category="Question-Choice"))
     admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Choices", category="Question-Choice"))
 
-That will register your related model in the admin page and you will see it if you vist the admin page::
+That will register your related model in the admin page and you will see them if you vist the admin page::
 
 see more documentation on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation
