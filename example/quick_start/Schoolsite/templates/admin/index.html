@@ -1,0 +1,15 @@
+<!-- @sakyum, Schoolsite (project) admin index.html page -->
+{% extends 'admin/master.html' %}
+{% block body %}
+  <a href="/">Go to Schoolsite home page</a>
+  <br>
+  {% if current_user.is_authenticated %}
+    <a href="/admin/logout">logout</a>
+    <br>
+    <a href="/admin/change/password">change password</a>
+  {% else %}
+    <a href="/admin/login">login</a>
+    <br>
+    <a href="/admin/register">register</a>
+  {% endif %}
+{% endblock body %}
