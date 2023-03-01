@@ -130,7 +130,7 @@ from .models import User
 
 @auth.route("/admin/change/password/", methods=["POST", "GET"])
 @fresh_login_required
-def adminLChangePassword():
+def adminChangePassword():
   {long_comment}
     the `admin_change_password.html` below is located in the sakyum package (templates/default_page/admin_change_password.html)
   {long_comment}

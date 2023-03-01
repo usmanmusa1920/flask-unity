@@ -16,11 +16,12 @@ def adminModelRegister(admin, reg_models, db):
     admin.add_view(ModelView(reg_model, db.session))
     
 """
-  the `default` blueprint above is the blueprint that we will be using for linking
-  our project default pages (css, js, and favicon.ico) files and also our app default
-  html pages (landing page route) that is located in your project route.py file
-  `<project_name>/route.py` you will see it decorated with it ` @default.route() `.
-  We also register it in the project routes.py file `reg_blueprints` list to make it accessible
+  the `default` blueprint above is the blueprint that is been used by sakyum for linking
+  it default pages (css, js, and favicon.ico) files and also it can be use for our project
+  default html pages (landing page route) that is located in your project route.py file
+  `<project_name>/route.py` like ` @default.route() `, but instead we use ` @base.route() `
+  for that `<project_name>/routes.py` as default. We also register it in the project routes.py
+  file `reg_blueprints` list to make it accessible
 
   the `errors` blueprint above is for error pages, you can overite the error pages by
   defining them in your project routes.py file `<project_name>/route.py` just like the

@@ -22,13 +22,13 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
   <a href="/">Go to {project_name} home page</a>
   <br>
   {f1}% if current_user.is_authenticated %{l1}
-    <a href="/admin/logout">logout</a>
+    <a href="{f2} url_for('auth.adminLogout') {l2}">logout</a>
     <br>
-    <a href="/admin/change/password">change password</a>
+    <a href="{f2} url_for('auth.adminChangePassword') {l2}">change password</a>
   {f1}% else %{l1}
-    <a href="/admin/login">login</a>
+    <a href="{f2} url_for('auth.adminLogin') {l2}">login</a>
     <br>
-    <a href="/admin/register">register</a>
+    <a href="{f2} url_for('auth.adminRegister') {l2}">register</a>
   {f1}% endif %{l1}
 {f1}% endblock body %{l1}
 """
@@ -48,13 +48,13 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
 {f1}% block short_info %{l1}
   {f1}% if current_user.is_authenticated %{l1}
     <p>
-      <a href="/admin/logout" class="a_links">logout</a>
+      <a href="{f2} url_for('auth.adminLogout') {l2}" class="a_links">logout</a>
     </p>
   {f1}% else %{l1}
     <p>
-      <a href="/admin/login" class="a_links">login</a>
+      <a href="{f2} url_for('auth.adminLogin') {l2}" class="a_links">login</a>
       or
-      <a href="/admin/register" class="a_links">register</a>
+      <a href="{f2} url_for('auth.adminRegister') {l2}" class="a_links">register</a>
     </p>
   {f1}% endif %{l1}
 {f1}% endblock short_info %{l1}

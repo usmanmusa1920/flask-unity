@@ -6,9 +6,7 @@ from . import long_comment
 
 
 def app_views_dummy(app):
-  """
-  # :app is the application name that you create within your project
-  """
+  """app is the application name of your project"""
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir
 # from .forms import <model_form>

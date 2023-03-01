@@ -11,7 +11,7 @@
       <input type="password" name="password" placeholder="Enter password" required>
       <button type="submit">login</button>
       <p>
-        <a href="/admin/register" class="a_links">register</a>
+        <a href="{{ url_for('auth.adminRegister') }}" class="a_links">register</a>
       </p>
     </form>
   </div>

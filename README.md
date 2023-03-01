@@ -77,6 +77,6 @@ visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there
 
 - Documentation: https://sakyum.readthedocs.io
 - Repository: https://github.com/usmanmusa1920/sakyum
-- PYPI Release: https://pypi.org/projects/sakyum
+- PYPI Release: https://pypi.org/project/sakyum
 
 Pull requests are welcome

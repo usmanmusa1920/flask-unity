@@ -89,25 +89,24 @@ def create_app(reg_blueprints=False, conf=Config):
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
+from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
-from sakyum.blueprint import default, errors, auth
-from flask import render_template
 # from <app_name>.views import <app_name>
 
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
-rem_blue = [default, errors, auth, base]
+rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
 reg_blueprints = [
-  default,
-  errors,
-  auth,
+  blueprint.default,
+  blueprint.errors,
+  blueprint.auth,
   base,
   # <app_name>,
 ]
 
 
-@default.route('/', methods=["POST", "GET"])
+@base.route('/', methods=["POST", "GET"])
 def index():
   context = {f1}
     "project_name": "{proj}",
@@ -116,6 +115,5 @@ def index():
   {l1}
   return render_template("{proj}/index.html", context=context)
   
-  
-{long_comment} overwrite (customise) error pages here {long_comment}
+# overwrite (customise) error pages here
 """
