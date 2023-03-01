@@ -56,12 +56,9 @@ Play with api
 
 Before we move further let us play with the model api. Continuetion from the last tutorial where we stop, when we make debug value to be `True` ( `last tutorial <https://sakyum.readthedocs.io/en/latest/example/create_app.html>`_ )
 
-From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter start by importing your **db** and **bcrypt** (for password hash) instance from project package::
+From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter, start by importing your **db** and **bcrypt** (for password hash) instance from project package (Schoolsite), and also import the models you create for your app in `exam/models.py` and the default User model located in `auth.models.py`::
 
   from Schoolsite.config import db, bcrypt
-
-Then also import the models you create for your app in `exam/models.py` and the default User model located in `auth.models.py`::
-
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from auth.models import User
 
@@ -69,7 +66,7 @@ Next call the `create_all()` method of **db** that will create the tables of our
 
     db.create_all()
 
-After that let us create two users instance, that will be able to create question and choice of the **ExamQuestionModel** and **ExamChoiceModel** model::
+After that let us create three users instance, that will be able to create question and choice of the **ExamQuestionModel** and **ExamChoiceModel** model::
 
     user1_hashed_pwd = bcrypt.generate_password_hash("12345678").decode('utf-8')
     user1 = User(username="backend-developer", email="developer@backend.com", password=user1_hashed_pwd)
@@ -93,14 +90,14 @@ To make sure our users have been added in our database let query the entire User
 
 Yes, our users are in the database, good jod. The next thing now is to start creating our Questions and commit them to our database::
 
-    q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
-    q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
-    q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
+q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
+q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
+q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
 
-    db.session.add(q1)
-    db.session.add(q2)
-    db.session.add(q3)
-    db.session.commit()
+db.session.add(q1)
+db.session.add(q2)
+db.session.add(q3)
+db.session.commit()
 
 To make sure our `questions` are in the database let query them to see by::
 
@@ -112,8 +109,7 @@ Yes, our questions are in the database, good jod. We are to capture our question
     the_q2 = ExamQuestionModel.query.get_or_404(2)
     the_q3 = ExamQuestionModel.query.get_or_404(3)
 
-These are choice for each of our questions, they are::
-
+    # These are choice for each of our questions, they are
     # choices for our first question
     c1_1 = ExamChoiceModel(choice_text="In 1969", question_id=the_q1.id)
     c1_2 = ExamChoiceModel(choice_text="In 1996", question_id=the_q1.id)
@@ -132,8 +128,7 @@ These are choice for each of our questions, they are::
     c3_3 = ExamChoiceModel(choice_text="bit", question_id=the_q3.id)
     c3_4 = ExamChoiceModel(choice_text="superposition", question_id=the_q3.id)
 
-Now let commit the choice into database::
-
+    # Now let commit the choice into database::
     db.session.add(c1_1)
     db.session.add(c1_2)
     db.session.add(c1_3)

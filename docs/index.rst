@@ -16,14 +16,13 @@ Table of content
    :maxdepth: 2
 
    quick_start
+   flags
+   error_pages
    example/index
    advance/index
-   views
    admin_user
    templates_and_static
-   error_pages
    databases
-   flags
    mod_wsgi
    email
    testing
