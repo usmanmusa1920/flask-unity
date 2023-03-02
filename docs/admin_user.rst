@@ -1,8 +1,5 @@
 :tocdepth: 2
 
-Models
-######
-
 Admin user
 ==========
 

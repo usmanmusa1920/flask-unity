@@ -19,8 +19,8 @@ Table of content
    flags
    error_pages
    example/index
-   advance/index
    admin_user
+   auth_routes
    templates_and_static
    databases
    mod_wsgi

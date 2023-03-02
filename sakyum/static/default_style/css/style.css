@@ -296,6 +296,14 @@ body{
   border-radius: 3px;
 }
 
+.error_feed_back{
+  width: 80%;
+  background: grey;
+  font-style: italic;
+  padding: 5px;
+  border-radius: 3px;
+}
+
 .admin_auth_form form button{
   width: 60%;
   height: 30px;
