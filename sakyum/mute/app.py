@@ -22,7 +22,6 @@ def index():
     "head_title": "{app}",
     "footer_style": footer_style,
   {l1}
-
   return render_template("{app}/index.html", context=context)
 """
 

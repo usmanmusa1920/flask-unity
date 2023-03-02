@@ -17,11 +17,10 @@ from sakyum import __version__
 rel_path = Path(__file__).resolve().parent
 
 
-def static_dir(app, static_from_pkg=False, os_name: "nt or posix" =os.name):
+def static_dir(app, static_from_pkg=False, os_name: "nt or posix"=os.name):
   """
     relative path to static files
-    # :static_from_pkg:
-        is the directory name that is in the library package which is `static`
+    if `static_from_pkg` is not false, it will use the directory name that is in the library package which is `static`, else it will use for project `static` directory
   """
   if os_name == "nt":
     if static_from_pkg:
@@ -36,13 +35,12 @@ def static_dir(app, static_from_pkg=False, os_name: "nt or posix" =os.name):
 def template_dir(temp_from_pkg=False, os_name=os.name):
   """
     relative path to html page
-    # :temp_from_pkg:
-        is the directory name that is in the library package which is `templates`
+    if `temp_from_pkg` is not false, it will use the directory name that is in the library package which is `templates`, else it will use for project `templates` directory
   """
   if os_name == "nt":
     if temp_from_pkg:
-      return str(rel_path) + "\templates\\" + temp_from_pkg
-    return os.getcwd() + "\templates"
+      return str(rel_path) + "\\templates\\" + temp_from_pkg
+    return os.getcwd() + "\\templates"
   else:
     if temp_from_pkg:
       return str(rel_path) + "/templates/" + temp_from_pkg
