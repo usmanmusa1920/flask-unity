@@ -1,24 +1,23 @@
 # from sakyum software, your (Schoolsite) project routes.py file
 from flask import (render_template, Blueprint)
+from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
-from sakyum.blueprint import default, errors, auth
-from flask import render_template
 from exam.views import exam
 
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("Schoolsite"))
 
-rem_blue = [default, errors, auth, base]
+rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
 reg_blueprints = [
-  default,
-  errors,
-  auth,
+  blueprint.default,
+  blueprint.errors,
+  blueprint.auth,
   base,
   exam,
 ]
 
 
-@default.route('/', methods=["POST", "GET"])
+@base.route('/', methods=["POST", "GET"])
 def index():
   context = {
     "project_name": "Schoolsite",
@@ -27,5 +26,4 @@ def index():
   }
   return render_template("Schoolsite/index.html", context=context)
   
-  
-""" overwrite error pages here """
+# overwrite (customise) error pages here

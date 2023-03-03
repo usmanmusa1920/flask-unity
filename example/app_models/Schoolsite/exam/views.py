@@ -14,5 +14,4 @@ def index():
     "head_title": "exam",
     "footer_style": footer_style,
   }
-
   return render_template("exam/index.html", context=context)

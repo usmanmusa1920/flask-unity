@@ -23,10 +23,11 @@ class ExamQuestionModel(db.Model):
 
   def __repr__(self):
     return f"{self.question_text}"
-
+    
   # the `ExamChoiceModel` is the choice model class below
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
+
 
 class ExamChoiceModel(db.Model):
   """ Exam default Choice model """

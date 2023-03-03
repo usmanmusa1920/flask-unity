@@ -4,6 +4,7 @@ from flask_admin import Admin
 from flask import Flask
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_wtf.csrf import CSRFProtect
 from sakyum.blueprint import adminModelRegister
 from .secret import Config
 
@@ -11,6 +12,8 @@ from .secret import Config
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
+# To enable CSRF protection globally for Flask, using secret key to securely sign the token
+csrf = CSRFProtect()
 login_manager.session_protection = "strong"
 login_manager.login_view = 'auth.adminLogin'
 login_manager.login_message_category = 'info'
@@ -24,6 +27,7 @@ def create_app(reg_blueprints=False, conf=Config):
   db.init_app(app)
   bcrypt.init_app(app)
   login_manager.init_app(app)
+  csrf.init_app(app)
 
 
   """ You will need to import models themselves before issuing `db.create_all` """

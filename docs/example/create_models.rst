@@ -3,14 +3,14 @@
 App models
 ##########
 
-Now we are going to create models for our **exam app**, the models are going to be two `ExamQuestionModel` and `ExamChoiceModel`
+Now we are going to create models for our **exam** app, the models are going to be two `ExamQuestionModel` and `ExamChoiceModel`
 
-To create these two models we have to go into our app models.py **exam/models.py**. We will notice some default import::
+To create these two models we have to go into our **exam** app models.py **exam/models.py**. We will notice some default import::
 
     from datetime import datetime
     from Schoolsite.config import db
 
-Now below we are to start defining our model, I will first start with **ExamQuestionModel** model which will look like::
+Now below we are to start defining our model, let start with **ExamQuestionModel** model which will look like::
 
     class ExamQuestionModel(db.Model):
       """ Exam default Question model """
@@ -32,7 +32,7 @@ Now below we are to start defining our model, I will first start with **ExamQues
       # the `selector` is the attribute that we can use to get selector who choose the choice
       # the `lazy` argument just define when sqlalchemy loads the data from the database
 
-Now I will define the **ExamChoiceModel** model which will look like::
+Now let define the **ExamChoiceModel** model which will look like::
 
     class ExamChoiceModel(db.Model):
       """ Exam default Choice model """
@@ -54,13 +54,13 @@ and save the file
 Play with api
 -------------
 
-Before we move further let us play with the model api. Continuetion from the last tutorial where we stop, when we make debug value to be `True` ( `last tutorial <https://sakyum.readthedocs.io/en/latest/example/create_app.html>`_ )
+Before we move further let us play with the model api. This is the continuation from the last tutorial where we stop, when we make debug value to be `True` after registering the app ( `last tutorial <https://sakyum.readthedocs.io/en/latest/quick_start.html#register-an-app>`_ )
 
 From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter, start by importing your **db** and **bcrypt** (for password hash) instance from project package (Schoolsite), and also import the models you create for your app in `exam/models.py` and the default User model located in `auth.models.py`::
 
-  from Schoolsite.config import db, bcrypt
-  from exam.models import ExamQuestionModel, ExamChoiceModel
-  from auth.models import User
+    from Schoolsite.config import db, bcrypt
+    from exam.models import ExamQuestionModel, ExamChoiceModel
+    from auth.models import User
 
 Next call the `create_all()` method of **db** that will create the tables of our models and database (if it doesn't create db file). Run the below command.::
 
@@ -87,21 +87,23 @@ Now we are to add and commit those users in our database::
 To make sure our users have been added in our database let query the entire User model of our project by::
 
     User.query.all()
+    # [User('backend-developer', 'developer@backend.com', User('front-developer', 'developer@front.com', User('quantum-developer', 'developer@quantum.com']
 
 Yes, our users are in the database, good jod. The next thing now is to start creating our Questions and commit them to our database::
 
-q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
-q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
-q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
+    q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
+    q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
+    q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
 
-db.session.add(q1)
-db.session.add(q2)
-db.session.add(q3)
-db.session.commit()
+    db.session.add(q1)
+    db.session.add(q2)
+    db.session.add(q3)
+    db.session.commit()
 
 To make sure our `questions` are in the database let query them to see by::
 
     ExamQuestionModel.query.all()
+    # [At which year Neil Armstrong landed in the moon?, What is odd in the choice?, What is not related to quantum?]
 
 Yes, our questions are in the database, good jod. We are to capture our questions `id` (q1, q2 and q3) since they are the once we are going to link to each choice::
 
@@ -149,6 +151,7 @@ Yes, our questions are in the database, good jod. We are to capture our question
 We can see choices related to our question number one (1) by::
 
     ExamQuestionModel.query.get_or_404(1).choices
+    # [In 1969, In 1996, In 2023, In 2007]
 
 To see many other method related to our `ExamQuestionModel.query` by passing it into `dir()` function::
 
@@ -157,6 +160,7 @@ To see many other method related to our `ExamQuestionModel.query` by passing it 
 To see all choices in our database::
 
     ExamChoiceModel.query.all()
+    # [In 1969, In 1996, In 2023, In 2007, python, java, linux, ruby, qubit, entanglement, bit, superposition]
 
 Also like the `ExamQuestionModel.query` we see above, we can see many other method related to our `ExamChoiceModel.query` by passing it into `dir()` function::
 
@@ -169,17 +173,51 @@ Lastly let us make a loop over all question and print each question choices::
         for choice in question.choices:
             print('\t', f'{choice.id}: ', choice)
 
+    # At which year Neil Armstrong landed in the moon?
+    #     1:  In 1969
+    #     2:  In 1996
+    #     3:  In 2023
+    #     4:  In 2007
+    # What is odd in the choice?
+    #     5:  python
+    #     6:  java
+    #     7:  linux
+    #     8:  ruby
+    # What is not related to quantum?
+    #     9:  qubit
+    #     10:  entanglement
+    #     11:  bit
+    #     12:  superposition
+
 Since we insert something into the database, let move on, on how we can make those record to be display in the admin page (by registering the models), because if now we logout from the python interpreter and boot up the server **python thunder.py boot -d True** then navigate to admin page we won't be able to see those models. We can do so below:
 
 Register our models to admin
 ----------------------------
 
-In other to register our model, we are to open a sub project folder and open the **config.py** file we see there **(Schoolsite/config.py)**, within create_app function in the file, we are to import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register, above the method that will create the tables **db.create_all()** and we will see a commented prototype above it, then we will append the models in the **reg_models = []** list within **admin_runner** function (inner function of the create_app function). That will register our model in the admin page and we will be able to see it if we vist the admin page now!
+In other to register our model, we are to open a sub project folder and open the **config.py** file we see there **(Schoolsite/config.py)**, within create_app function in the file, we are to import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register, above the method that will create the tables **db.create_all()** and we will see a commented prototype above it::
+
+    """ You will need to import models themselves before issuing `db.create_all` """
+    from auth.models import User
+    from exam.models import ExamQuestionModel, ExamChoiceModel
+    # from <app_name>.admin import <admin_model_view>
+    db.create_all() # method to create the tables and database
+
+then we will append the models in the **reg_models = []** list within **admin_runner** function (inner function of the create_app function)::
+
+        # rgister model to admin direct by passing every model that you
+        # want to manage in admin page in the below list (reg_models)
+        reg_models = [
+        User,
+        ExamQuestionModel,
+        ExamChoiceModel,
+        ]
+
+That will register our model in the admin page and we will be able to see it if we visit the admin page now!
 
 Register model in the form of model view
 ----------------------------------------
 
-We can register our model in the form of model view by grouping models that are related
+We can register our model in the form of model view by grouping models that are related.
 
 To create these model view we have to go into our app admin.py **exam/admin.py**. We will notice some default import::
 
@@ -207,11 +245,21 @@ In other to register our model view, open the `config.py` file (Schoolsite/confi
     from exam.models import ExamQuestionModel, ExamChoiceModel
     from exam.admin import QuestionChoiceAdminView
 
-Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models` list, go below the function we call **adminModelRegister** in (within admin_runner function) and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="my_models_view"::
+Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models` list::
+
+    # rgister model to admin direct by passing every model that you
+    # want to manage in admin page in the below list (reg_models)
+    reg_models = [
+      User,
+      # ExamQuestionModel,
+      # ExamChoiceModel,
+    ]
+
+go below the function we call **adminModelRegister** in (within admin_runner function) and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="Question-Choice"::
 
     admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Questions", category="Question-Choice"))
     admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Choices", category="Question-Choice"))
 
-That will register your related model in the admin page and you will see them if you vist the admin page::
+Save the file, that will register your related model in the admin page and you will see them if you vist the admin page `http://127.0.0.1:5000/admin`
 
-see more documentation on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation
+See more on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation.

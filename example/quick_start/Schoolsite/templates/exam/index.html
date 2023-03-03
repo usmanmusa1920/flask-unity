@@ -13,13 +13,13 @@
 {% block short_info %}
   {% if current_user.is_authenticated %}
     <p>
-      <a href="/admin/logout" class="a_links">logout</a>
+      <a href="{{ url_for('auth.adminLogout') }}" class="a_links">logout</a>
     </p>
   {% else %}
     <p>
-      <a href="/admin/login" class="a_links">login</a>
+      <a href="{{ url_for('auth.adminLogin') }}" class="a_links">login</a>
       or
-      <a href="/admin/register" class="a_links">register</a>
+      <a href="{{ url_for('auth.adminRegister') }}" class="a_links">register</a>
     </p>
   {% endif %}
 {% endblock short_info %}
