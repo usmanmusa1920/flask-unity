@@ -111,7 +111,6 @@ Yes, our questions are in the database, good jod. We are to capture our question
     the_q2 = ExamQuestionModel.query.get_or_404(2)
     the_q3 = ExamQuestionModel.query.get_or_404(3)
 
-    # These are choice for each of our questions, they are
     # choices for our first question
     c1_1 = ExamChoiceModel(choice_text="In 1969", question_id=the_q1.id)
     c1_2 = ExamChoiceModel(choice_text="In 1996", question_id=the_q1.id)
@@ -130,7 +129,7 @@ Yes, our questions are in the database, good jod. We are to capture our question
     c3_3 = ExamChoiceModel(choice_text="bit", question_id=the_q3.id)
     c3_4 = ExamChoiceModel(choice_text="superposition", question_id=the_q3.id)
 
-    # Now let commit the choice into database::
+    # Now let add and commit the choice into database::
     db.session.add(c1_1)
     db.session.add(c1_2)
     db.session.add(c1_3)
@@ -207,9 +206,9 @@ then we will append the models in the **reg_models = []** list within **admin_ru
         # rgister model to admin direct by passing every model that you
         # want to manage in admin page in the below list (reg_models)
         reg_models = [
-        User,
-        ExamQuestionModel,
-        ExamChoiceModel,
+            User,
+            ExamQuestionModel,
+            ExamChoiceModel,
         ]
 
 That will register our model in the admin page and we will be able to see it if we visit the admin page now!

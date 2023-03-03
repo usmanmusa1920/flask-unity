@@ -12,9 +12,7 @@ This can be done by given the `create_user` position argument and flags together
 
   python thunder.py create_user -u network-engineer -e network-engineer@datacenter.com -p p@s$w0d
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --username network-engineer --email network-engineer@datacenter.com --password p@s$w0d
 
@@ -34,9 +32,7 @@ Use `-u` or `--username` and then the username beside it, if you do not specify 
 
   python thunder.py create_user -u network-engineer
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --username network-engineer
 
@@ -44,9 +40,7 @@ Use `-e` or `--email` and then the email beside it, if you do not specify it, yo
 
   python thunder.py create_user -e network-engineer@datacenter.com
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --email network-engineer@datacenter.com
 
@@ -54,8 +48,6 @@ Use `-p` or `--password` and then the password beside it, if you do not specify 
 
   python thunder.py create_user -p p@s$w0d
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --password p@s$w0d

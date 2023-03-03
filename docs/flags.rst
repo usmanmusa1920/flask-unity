@@ -13,9 +13,7 @@ Use `-a` or `--app` if you are about to create app in your project, that will ca
 
   python thunder.py create_app -a blog
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_app --app blog
 
@@ -26,9 +24,7 @@ Use `-p` or `--port` if you want to give your desire port number instead of the 
 
   python thunder.py boot -p 7000
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py boot --port 7000
 
@@ -36,9 +32,7 @@ Use `-H` or `--host` if you are to give a different host, in the case of deploym
 
   python thunder.py boot -H 0.0.0.0
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py boot --host 0.0.0.0
 
@@ -46,9 +40,7 @@ Use `-d` or `--debug` if you want your app in debug mode. That mean ifyou make c
 
   python thunder.py boot -d True
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py boot --debug True
 
@@ -59,9 +51,7 @@ Use `-u` or `--username` and then the username beside it, if you do not specify 
 
   python thunder.py create_user -u network-engineer
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --username network-engineer
 
@@ -69,9 +59,7 @@ Use `-e` or `--email` and then the email beside it, if you do not specify it, yo
 
   python thunder.py create_user -e network-engineer@datacenter.com
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --email network-engineer@datacenter.com
 
@@ -79,8 +67,6 @@ Use `-p` or `--password` and then the password beside it, if you do not specify 
 
   python thunder.py create_user -p p@s$w0d
 
-or
-
-.. code-block::
+  # or
 
   python thunder.py create_user --password p@s$w0d

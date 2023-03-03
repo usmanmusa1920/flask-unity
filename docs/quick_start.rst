@@ -11,7 +11,7 @@ You will notice we use **--upgrade** in the installation command, this will make
 
   pip install --upgrade sakyum
 
-This **tutorial** will walk you through creating project called **Schoolsite** and a basic application called **exam*** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using **sakyum**. You will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum.git>`_. it is located inside example directory of the base repository.
+This **tutorial** will walk you through creating project called **Schoolsite** and a basic application called **exam*** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using **sakyum**. You will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum>`_. it is located inside example directory of the base repository.
 
 Create flask project using sakyum
 ============================================
@@ -125,7 +125,7 @@ You notice it create a package name with thesame name of the app (**exam**), als
 Register an app
 ===============
 
-Once the app is created it is time to register the app, to do so open a file **Schoolsite/routes.py** and import your **exam** blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
+Once the app is created it is time to register the app, to do so open a file **Schoolsite/routes.py** and import your **exam** app blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
 
 ``**WARNING** don't ommit the registered blueprint you see in the `reg_blueprints` list **(blueprint.default, blueprint.errors, blueprint.auth, base)** blueprints just append your app blueprint``
 
@@ -183,5 +183,4 @@ For development server, you can give a debug value to True by specifying **-d** 
 
     python thunder.py boot --port 7000 --debug True
 
-With this, you can do many and many project now!
-From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only
+With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.

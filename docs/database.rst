@@ -3,7 +3,9 @@
 Database migration
 ##################
 
-Welcome to the chapter that will talk about how to do database migration. By default the database that it (sakyum) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that. We are going to use `alembic`.
+Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (sakyum) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
+
+**Migrations** are very powerful and let you change your models over time, as you develop your project, without the need to delete your database or tables and make new ones - it specializes in upgrading your database live, without losing data. More will be gist later.
 
 `Alembic` is a very useful library we can use for our database migrations. when we are working with Flask Framework we need a tool which can handle the database migrations. Alembic is widely used for migrations. Let us start how to use alembic. First install `alembic` by::
 
@@ -23,7 +25,7 @@ After running this command you will see some files and folders are created in yo
 
   1 directory, 3 files
 
-Notice there will be no version files in your versions directory because we haven’t made any migrations yet. Now to use alembic we need to do certain changes in these files. First, change the sqlalchemy.url in your alembic.ini file, and give it your reletive `default.db` path, ours look like::
+Notice there will be no version files in your versions directory `(alembic/versions)` because we haven’t made any migrations yet. Now to use alembic we need to do certain changes in these files. First, change the `sqlalchemy.url` in your `alembic.ini` file, and give it your reletive `default.db` path, ours look like::
 
   # for the default.db file
   sqlalchemy.url = sqlite:////home/usman/Desktop/Schoolsite/default.db
@@ -34,7 +36,7 @@ Notice there will be no version files in your versions directory because we have
   # for postgresql (if youare using postgres database)
   sqlalchemy.url = postgresql://user:user@localhost/test
 
-After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets, ``make sure you don't import your app models in the project config.py file (Schoolsite.config.py) until after you run the make migration``::
+After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets, ``Make sure you don't import your app models in the project config.py file (Schoolsite.config.py) until after you run the make migration``::
 
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from Schoolsite.config import db
@@ -71,7 +73,6 @@ Once this file generates we are ready for database migration. To migrate we are 
 
 Once you run the above command your tables will be generated in your database. This is how to use alembic for your database, there are many you can do so, hit to the `alembic <https://alembic.sqlalchemy.org>`_ website for more clarification.
 
-
 Hint
 ----
 
@@ -92,5 +93,3 @@ Hint
   - Downgrading, We can illustrate a downgrade back to nothing, by calling alembic downgrade back to the beginning, which in Alembic is called base::
 
     alembic downgrade base
-
-Other database management command will be implemented, they are: `update_db` `dump_db` `cleaned_db`

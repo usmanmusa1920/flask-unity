@@ -10,7 +10,7 @@ Sakyum depends on (come with) the following flask popular and useful extensions,
 
 When using sakyum, don't be confuse with the the concept of **project** and **app**.
 
-**Project** is the entire folder it contain your flask application, when you create project with the command::
+**Project** is the entire folder that contain your flask application, when you create project with the command::
 
    python -c "from sakyum import project; project('Schoolsite')"
 
@@ -18,9 +18,9 @@ It will create a parent directory with the name `Schoolsite` also inside the `Sc
 
 Within that parent directory `Schoolsite` it also generate a file called `thunder.py` this is the file that you will be running along side with some positional arguments and flags. Also it will generate a directory called `auth` this directory contains admin system utilities. Lastly it will generate `templates` and `static` directory for your site pages and it styles respectively. At a glance, it will create `Schoolsite, thunder.py, templates, static, auth` all in `Schoolsite`.
 
-**App** (application) is like to say a blueprint which greatly simplify how large applications work and provide a central means for Flask extensions to register operations on applications. `read blueprint about flask <https://flask.palletsprojects.com/en/2.2.x/blueprints/>`_.
+**App** (application) is like to say a blueprint which greatly simplify how large applications work and provide a central means for Flask extensions to register operations on applications. Read `blueprint <https://flask.palletsprojects.com/en/2.2.x/blueprints/>`_ about flask.
 
-Don't worry if you didn't get the concept of `project` and `app` surely you will get it if we dive deep by the help of the `Schoolsite <https://sakyum.readthedocs.io/en/latest/quick_start.html>`_ project.
+Don't worry if you didn't get the concept of `project` and `app`, surely you will get it if we dive deep by the help of the `Schoolsite <https://sakyum.readthedocs.io/en/latest/quick_start.html>`_ project.
 
 
 Table of content
