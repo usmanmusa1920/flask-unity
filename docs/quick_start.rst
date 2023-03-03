@@ -7,14 +7,14 @@ First we recomend you to create a virtual environment to avoid conflict (upgrade
 
 Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
-you will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest version), you can still ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
+You will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest), you can still ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
   pip install --upgrade sakyum
 
 Create flask project using sakyum
 ============================================
 
-After the installation paste the following command on your termianl::
+Now after the installation, let create a project called **Schoolsite** to do so paste the following command on your termianl::
 
   python -c "from sakyum import project; project('Schoolsite')"
 
@@ -26,13 +26,9 @@ or create a file and paste the below codes which is equivalent of the above, and
 
     project("Schoolsite")
 
-Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **Schoolsite** now cd into the **Schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with the same name of your base directory name, in our case it is **Schoolsite**.
+Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **Schoolsite** now cd into the **Schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with thesame name of your base (parent) directory, in our case it is **Schoolsite**.
 
-Tree structure of your project look like (using tree package)
-
-.. code-block::
-
-    tree .
+Tree structure of the project using **tree .** command look like:
 
 .. code-block::
 
@@ -65,12 +61,12 @@ Boot up the flask server by running the below command::
 
     python thunder.py boot
 
-Now visit the local url **http://127.0.0.1:5000** this will show you index page of your project
+Now visit the local url **http://127.0.0.1:5000** this will show you index page of your project with some links in the page.
 
 Create flask project app using sakyum
 =====================================
 
-For you to start an app within your project (**Schoolsite**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file). Now run the following command in other to create your app, by giving the name you want your app to be, in our case we will call our app **exam**::
+Since we create a project, let create an app within the project. To start an app within the project (**Schoolsite**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file) which is our default database. Now run the following command in other to create your app, by giving the name you want your app to be, in our case we will call our app **exam**::
 
     python thunder.py create_app -a exam
 
@@ -80,13 +76,9 @@ or
 
     python thunder.py create_app --app exam
 
-this will create an app (a new package called **exam**) within your project (**Schoolsite**), the **-a** flag is equivalent to **--app** which is a flag for the app name in this example it is called **exam**
+this will create an app (a new package called **exam**) within the project (**Schoolsite**), the **-a** flag is equivalent to **--app** which is a flag for the app name in this example it is called **exam**
 
-Now the tree structure of your project after creating **exam** app look like (using tree package)
-
-.. code-block::
-
-    tree .
+Now the **tree .** structure of the project after creating **exam** app look like:
 
 .. code-block::
 
@@ -128,14 +120,14 @@ Now the tree structure of your project after creating **exam** app look like (us
 
     12 directories, 22 files
 
-You notice it create a package name with thesame name of your app (**exam**), also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
+You notice it create a package name with thesame name of the app (**exam**), also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
 Register an app
 ===============
 
-Once the app is created open a file **Schoolsite/routes.py** and import your **exam** blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
+Once the app is created it is time to register the app, to do so open a file **Schoolsite/routes.py** and import your **exam** blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
 
-**warning:** `don't ommit the registered blueprint you see in the list **(default, errors, auth, base)** blueprints` just append your app blueprint
+``**warning:** don't ommit the registered blueprint you see in the `reg_blueprints` list **(blueprint.default, blueprint.errors, blueprint.auth, base)** blueprints just append your app blueprint``
 
 importing blueprint
 
@@ -150,11 +142,11 @@ registering blueprint
 .. code-block:: python
 
     reg_blueprints = [
-      default,
-      errors,
-      auth,
-      base,
-      exam,
+        blueprint.default,
+        blueprint.errors,
+        blueprint.auth,
+        base,
+        exam,
     ]
 
 once you register the app, boot up the flask webserver again by::
@@ -165,25 +157,21 @@ This will bring the flask development server on port **5000** you can give it a 
 
     python thunder.py boot -p 7000
 
-or
-
-.. code-block::
+    # or
 
     python thunder.py boot --port 7000
 
-The above command will bring the serve on port **7000** visit the localhost url with the port number, it will show you your project **index page** (Schoolsite). To get to your app default page (exam), visit the url with your app name in our case:
+The above command will bring the development serve on port **7000** visit the localhost url with the port number, it will show you your project **index page** (Schoolsite). To get to the app `(exam)` default page, visit the url with your app name in our case:
 
 **http://127.0.0.1:7000/exam**
 
-this will take you to your app **index page** (exam), and you can also vist the admin page with this url **http://127.0.0.1:7000/admin**
+this will take you to the app (exam) **index page**, and you can also vist the admin page with this url **http://127.0.0.1:7000/admin**
 
 Also, you can give your desire ip address/host by using **-H** or **--host** flag, e.g::
 
     python thunder.py boot -p 7000 -H 0.0.0.0
 
-or
-
-.. code-block::
+    # or
 
     python thunder.py boot --port 7000 --host 0.0.0.0
 
@@ -191,10 +179,9 @@ For development server, you can give a debug value to True by specifying **-d** 
 
     python thunder.py boot -p 7000 -d True
         
-or
-
-.. code-block::
+    # or
 
     python thunder.py boot --port 7000 --debug True
 
 With this, you can do many and many project now!
+From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only

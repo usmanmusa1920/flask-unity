@@ -76,7 +76,7 @@ Hint
 
   - To make migrations (Create a Migration Script)::
 
-    `alembic revision --autogenerate -m "Added table"`
+    .. `alembic revision --autogenerate -m "Added table"`
 
   - To migrate (Running our Migration)::
 

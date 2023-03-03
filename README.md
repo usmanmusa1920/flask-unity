@@ -53,9 +53,9 @@ registering blueprint
 
 ```py
 reg_blueprints = [
-  default,
-  errors,
-  auth,
+  blueprint.default,
+  blueprint.errors,
+  blueprint.auth,
   base,
   exam,
 ]

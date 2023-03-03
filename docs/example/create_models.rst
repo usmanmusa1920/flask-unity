@@ -3,7 +3,7 @@
 App models
 ##########
 
-Now we are going to create models for our exam app, the models are going to be two `ExamQuestionModel` and `ExamChoiceModel`
+Now we are going to create models for our **exam app**, the models are going to be two `ExamQuestionModel` and `ExamChoiceModel`
 
 To create these two models we have to go into our app models.py **exam/models.py**. We will notice some default import::
 

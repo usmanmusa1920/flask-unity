@@ -4,15 +4,16 @@ This **tutorial** will walk you through creating project called **Schoolsite** a
 
 **Note** that the app views, you can write your views like the way you usually write them when using flask without sakyum. It work great, nothing change.
 
+This tutorial will be a continuation of the `quick_start <https://sakyum.readthedocs.io/en/latest/quick_start.html>`_. As we see in the `quick_start` we create a project called **Schoolsite** and an app inside the project called **exam**. Taking from there let continue by creating models in our **exam** app.
+
 Schoolsite
 ==========
 
 .. toctree::
    :maxdepth: 2
 
-   create_app
    create_models
    app_forms
    advance/index
 
-**Source code** for this tutorial is available at `sakyum github repo <https://github.com/usmanmusa1920/sakyum/tree/master/example>`_
+**Source code** for this tutorial is available at official sakyum `github <https://github.com/usmanmusa1920/sakyum/tree/master/example>`_ repository.
