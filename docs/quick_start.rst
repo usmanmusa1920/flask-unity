@@ -5,13 +5,13 @@ Quick start
 
 First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtualenvironment
 
-Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
+Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) it might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
 You will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest), you can still ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
   pip install --upgrade sakyum
 
-This **tutorial** will walk you through creating project called **Schoolsite** and a basic application called **exam*** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using **sakyum**. You will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum>`_. it is located inside example directory of the base repository.
+This **quick start** will walk you through creating project called **Schoolsite** and a basic application called **exam*** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `sakyum`, you will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum>`_. it is located inside example directory of the base repository.
 
 Create flask project using sakyum
 ============================================
@@ -28,7 +28,7 @@ or create a file and paste the below codes which is equivalent of the above, and
 
     project("Schoolsite")
 
-Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **Schoolsite** now cd into the **Schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with thesame name of your base (parent) directory, in our case it is **Schoolsite**.
+Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **Schoolsite** now cd into the **Schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with thesame name of your parent directory which is **Schoolsite**.
 
 Tree structure of the project using **tree .** command look like:
 
@@ -36,6 +36,7 @@ Tree structure of the project using **tree .** command look like:
 
     .
     ├── auth
+    │   ├── admin.py
     │   ├── forms.py
     │   ├── __init__.py
     │   ├── models.py
@@ -57,13 +58,13 @@ Tree structure of the project using **tree .** command look like:
     │       └── index.html
     └── thunder.py
 
-    8 directories, 13 files
+    8 directories, 14 files
 
 Boot up the flask server by running the below command::
 
     python thunder.py boot
 
-Now visit the local url **http://127.0.0.1:5000** this will show you index page of your project with some links in the page.
+Now visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
 
 Create flask project app using sakyum
 =====================================
@@ -84,6 +85,7 @@ Now the **tree .** structure of the project after creating **exam** app look lik
 
     .
     ├── auth
+    │   ├── admin.py
     │   ├── forms.py
     │   ├── __init__.py
     │   ├── models.py
@@ -118,14 +120,14 @@ Now the **tree .** structure of the project after creating **exam** app look lik
     │       └── index.html
     └── thunder.py
 
-    12 directories, 22 files
+    12 directories, 23 files
 
-You notice it create a package name with thesame name of the app (**exam**), also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
+You notice it create a package name with thesame name of the app (**exam**) with some files in it, also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
 Register an app
 ===============
 
-Once the app is created it is time to register the app, to do so open a file **Schoolsite/routes.py** and import your **exam** app blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
+Once the app is created it is time to register the app, to do so open a file **Schoolsite/routes.py** and import your **exam** app blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** app blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **Schoolsite/routes.py**
 
 ``**WARNING** don't ommit the registered blueprint you see in the `reg_blueprints` list **(blueprint.default, blueprint.errors, blueprint.auth, base)** blueprints just append your app blueprint``
 
@@ -184,3 +186,5 @@ For development server, you can give a debug value to True by specifying **-d** 
     python thunder.py boot --port 7000 --debug True
 
 With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.
+
+Source code for this `quick start` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/quick_start/Schoolsite>`_ repository of the project.

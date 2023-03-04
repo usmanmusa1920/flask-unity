@@ -25,10 +25,10 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
     <a href="{f2} url_for('auth.adminLogout') {l2}">logout</a>
     <br>
     <a href="{f2} url_for('auth.adminChangePassword') {l2}">change password</a>
-  {f1}% else %{l1}
-    <a href="{f2} url_for('auth.adminLogin') {l2}">login</a>
     <br>
     <a href="{f2} url_for('auth.adminRegister') {l2}">register</a>
+  {f1}% else %{l1}
+    <a href="{f2} url_for('auth.adminLogin') {l2}">login</a>
   {f1}% endif %{l1}
 {f1}% endblock body %{l1}
 """
@@ -47,16 +47,10 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
 
 {f1}% block short_info %{l1}
   {f1}% if current_user.is_authenticated %{l1}
-    <p>
-      <a href="{f2} url_for('auth.adminLogout') {l2}" class="a_links">logout</a>
-    </p>
-  {f1}% else %{l1}
-    <p>
-      <a href="{f2} url_for('auth.adminLogin') {l2}" class="a_links">login</a>
-      or
-      <a href="{f2} url_for('auth.adminRegister') {l2}" class="a_links">register</a>
-    </p>
-  {f1}% endif %{l1}
+      Hi {f2} current_user.username {l2}! from your ({name}) project app
+    {f1}% else %{l1}
+      Your ({name}) app says, please login
+    {f1}% endif %{l1}
 {f1}% endblock short_info %{l1}
 
 

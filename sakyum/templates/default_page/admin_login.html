@@ -49,9 +49,6 @@
           {{ context.form.password(placeholder="Enter password") }}
         {% endif %}
         <button type="submit">Login</button>
-        <p>
-          <a href="{{ url_for('auth.adminRegister') }}" class="a_links">register</a>
-        </p>
       </form>
     {% else %}
       <!-- if user is not using wtforms template in the `auth.route` views, this is the form that is going to be used (if using html page template) -->
@@ -60,9 +57,6 @@
         <input type="text" name="username" placeholder="Enter username" minlength="2" maxlength="30" required>
         <input type="password" name="password" placeholder="Enter password" minlength="6" required>
         <button type="submit">Login</button>
-        <p>
-          <a href="{{ url_for('auth.adminRegister') }}" class="a_links">register</a>
-        </p>
       </form>
     {% endif %}
   </div>

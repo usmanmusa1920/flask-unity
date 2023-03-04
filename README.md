@@ -5,7 +5,7 @@ An extension of flask web framework that erase the complexity of structuring fla
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
+Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) it might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
 ```
 pip install --upgrade sakyum
@@ -41,7 +41,7 @@ this will create an app (a new package called `exam`) within your project `(Scho
 
 ## Register an app
 
-Once the app is created open a file `Schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `Schoolsite/routes.py`
+Once the app is created open a file `Schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` app blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `Schoolsite/routes.py`
 
 importing blueprint
 
@@ -71,7 +71,9 @@ visit `http://127.0.0.1:5000` which is your project landing page
 
 visit `http://127.0.0.1:5000/exam` this will take you to your app landing page (exam)
 
-visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there you are ready to go. See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
+visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there you are ready to go.
+
+See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 
 ## Useful links
 

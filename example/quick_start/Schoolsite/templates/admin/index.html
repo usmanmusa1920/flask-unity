@@ -7,9 +7,9 @@
     <a href="{{ url_for('auth.adminLogout') }}">logout</a>
     <br>
     <a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
-  {% else %}
-    <a href="{{ url_for('auth.adminLogin') }}">login</a>
     <br>
     <a href="{{ url_for('auth.adminRegister') }}">register</a>
+  {% else %}
+    <a href="{{ url_for('auth.adminLogin') }}">login</a>
   {% endif %}
 {% endblock body %}

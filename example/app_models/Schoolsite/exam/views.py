@@ -1,9 +1,9 @@
 # from sakyum software, your app (exam) views.py file
 from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir
-# from .forms import <model_form>
-# from <project_name>.config import db
+from Schoolsite.config import db
 # from .models import <app_models>
+# from .forms import <model_form>
 
 exam = Blueprint("exam", __name__, template_folder=template_dir(), static_folder=static_dir("exam"))
 

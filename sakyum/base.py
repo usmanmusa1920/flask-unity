@@ -17,6 +17,7 @@ from .mute.app import app_admin_dummy
 from .mute.app import app_forms_dummy
 from .mute.app import app_models_dummy
 from .mute.app import app_views_dummy
+from .mute.app import app_init_dummy
 from .mute.project import pro_init_dummy
 from .mute.project import pro_secret_dummy
 from .mute.project import pro_config_dummy
@@ -25,6 +26,7 @@ from .mute.auth import auth_init_dummy
 from .mute.auth import auth_forms_dummy
 from .mute.auth import auth_models_dummy
 from .mute.auth import auth_routes_dummy
+from .mute.auth import auth_admin_dummy
 from . import __title__
 from . import __version__
 
@@ -132,7 +134,11 @@ class BaseStructure:
         else:
           if _fls == "__init__.py":
             # building app `__init__.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_init_dummy()}", route_go=False)
+            
+          elif _fls == "admin.py":
+            # building app `admin.py` default files
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_admin_dummy()}", route_go=False)
 
           elif _fls == "forms.py":
             # building app `forms.py` default files
@@ -144,11 +150,7 @@ class BaseStructure:
             
           elif _fls == "views.py":
             # building app `views.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(app_name)}", route_go=False)
-            
-          elif _fls == "admin.py":
-            # building app `admin.py` default files
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_admin_dummy()}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(app_name, self.proj_store_name)}", route_go=False)
     else:
       for _fls in fls:
         if _fls[:-3] == file:
@@ -165,11 +167,11 @@ class BaseStructure:
     dirs = [proj_name, f"{proj_name}/{proj_name}", f"{proj_name}/auth", "templates", "static"]
 
     # default files of project auth folder, which is for project base dir
-    auth_models = ["__init__", "models", "forms", "routes"]
+    auth_models = ["__init__", "admin", "forms", "models", "routes"]
     auth_fls = self.append_exs_to_file(fls_name=auth_models)
     
     # default files of project sub folder, except `thunder` which is for project base dir
-    fls_name = ["__init__", "secret", "config", "routes", "thunder"]
+    fls_name = ["__init__", "config", "routes", "secret", "thunder"]
     fls = self.append_exs_to_file(fls_name=fls_name) # appending extensions to files
     _here = os.getcwd() # initial `cwd` where the project was e.g `Desktop`
     
@@ -191,10 +193,6 @@ class BaseStructure:
                 # building project `__init__.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_init_dummy()}", route_go=False)
 
-              elif _fls == "secret.py":
-                # building project `secret.py` default files
-                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_secret_dummy()}", route_go=False)
-
               elif _fls == "config.py":
                 # building project `config.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_config_dummy(proj_name)}", route_go=False)
@@ -202,6 +200,10 @@ class BaseStructure:
               elif _fls == "routes.py":
                 # building project `routes.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_routes_dummy(proj_name)}", route_go=False)
+
+              elif _fls == "secret.py":
+                # building project `secret.py` default files
+                self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_secret_dummy()}", route_go=False)
           os.chdir(_here)
 
          
@@ -213,6 +215,10 @@ class BaseStructure:
             if _fls == "__init__.py":
               # building project `__init__.py` default files
               self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_init_dummy()}", route_go=False)
+
+            elif _fls == "admin.py":
+              # building project `admin.py` default files
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_admin_dummy()}", route_go=False)
 
             elif _fls == "forms.py":
               # building project `forms.py` default files
@@ -460,11 +466,11 @@ class Boot:
       raw_password = auth_result[2]
 
       hashed_password = self.pwd_hash.generate_password_hash(raw_password).decode('utf-8')
-      user = self.model(username=username, email=email, password=hashed_password)
+      user = self.model(username=username, email=email, password=hashed_password, is_admin=True)
       self.db.session.add(user)
       self.db.session.commit()
       print()
-      logger.info(f"One record added ({username})\n")
+      logger.info(f"One user record added ({username})\n")
       exit()
     else:
       print()

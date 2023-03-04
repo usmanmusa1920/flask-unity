@@ -9,10 +9,8 @@ from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
+@login_required
 def adminRegister():
-  if current_user.is_authenticated:
-    flash("You have an account, unless if you need another, then logout", "info")
-    return redirect(url_for("base.index"))
   form = RegisterForm()
   if form.validate_on_submit():
     username  = form.username.data

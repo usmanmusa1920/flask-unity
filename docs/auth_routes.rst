@@ -7,7 +7,10 @@ In this chapter we are going to see how we can replace the default route for our
 
 **Route for register:** the default route of `adminRegister` can be replace with::
 
+  import re
+
   @auth.route("/admin/register/", methods=["POST", "GET"])
+  @login_required
   def adminRegister():
     """
       the `admin_register.html` below is located in the sakyum package (templates/default_page/admin_register.html)

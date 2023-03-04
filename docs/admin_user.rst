@@ -5,6 +5,10 @@ Admin user
 
 There are basically two ways in which you can create admin user. One is by using flags, second one is by prompt, and the other one is by using (combining both the two `prompt or flags`).
 
+Let say you start a project, and an app inside the project by the following command::
+
+  python -c "from sakyum import project; project('Schoolsite')" && cd Schoolsite && python thunder.py create_app -a exam
+
 
 **Admin user using flags:**
 

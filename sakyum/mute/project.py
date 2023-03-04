@@ -61,6 +61,7 @@ def create_app(reg_blueprints=False, conf=Config):
 
   {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
   from auth.models import User
+  from auth.admin import UserAdminView
   # from <app_name>.models import <app_model>
   # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
@@ -80,11 +81,12 @@ def create_app(reg_blueprints=False, conf=Config):
     # rgister model to admin direct by passing every model that you
     # want to manage in admin page in the below list (reg_models)
     reg_models = [
-      User,
+      # User,
       # <app_model>,
     ]
     adminModelRegister(admin, reg_models, db)
     # admin model view be here!
+    admin.add_view(UserAdminView(User, db.session, name="User", category="User-section"))
 
   admin_runner()
   return app

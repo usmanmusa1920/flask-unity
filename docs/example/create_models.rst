@@ -49,7 +49,7 @@ Now let define the **ExamChoiceModel** model which will look like::
       def __repr__(self):
         return f"{self.choice_text}"
 
-and save the file
+After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://sakyum.readthedocs.io/en/latest/database.html>`_ using alembic in sakyum, but we are going to skip that and just play with `api`.
 
 Play with api
 -------------
@@ -197,6 +197,7 @@ In other to register our model, we are to open a sub project folder and open the
 
     """ You will need to import models themselves before issuing `db.create_all` """
     from auth.models import User
+    from auth.admin import UserAdminView
     from exam.models import ExamQuestionModel, ExamChoiceModel
     # from <app_name>.admin import <admin_model_view>
     db.create_all() # method to create the tables and database
@@ -206,15 +207,15 @@ then we will append the models in the **reg_models = []** list within **admin_ru
         # rgister model to admin direct by passing every model that you
         # want to manage in admin page in the below list (reg_models)
         reg_models = [
-            User,
+            # User,
             ExamQuestionModel,
             ExamChoiceModel,
         ]
 
-That will register our model in the admin page and we will be able to see it if we visit the admin page now!
+That will register our model in the admin page and we will be able to see it if we visit the admin page now! But this kind of registering admin model is not convenient, the convenient way is to use what is called admin model view.
 
-Register model in the form of model view
-----------------------------------------
+Register model in the form of admin model view
+----------------------------------------------
 
 We can register our model in the form of model view by grouping models that are related.
 
@@ -232,33 +233,41 @@ Now below we are to start defining our model view, I will call the model view **
         can_edit = True  # enable model deletion
         page_size = 50  # the number of entries to display on the list view
 
-        # def is_accessible(self):
-        #   return current_user.is_authenticated
+        def is_accessible(self):
+          return current_user.is_authenticated
 
-        # def inaccessible_callback(self, name, **kwargs):
-        #   # redirect to login page if user doesn't have access
-        #   return redirect(url_for('login', next=request.url))
+        def inaccessible_callback(self, name, **kwargs):
+          # redirect to login page if user doesn't have access
+          return redirect(url_for('auth.adminLogin', next=request.url))
+
+The `is_accessible` method will check if a user is logged in, in other to show the `QuestionChoiceAdminView` model in the admin page, else it just show the plain admin page without the `QuestionChoiceAdminView`.
+
+The `inaccessible_callback` method will redirect user (who is not logged in) to the login page of the admin.
 
 In other to register our model view, open the `config.py` file (Schoolsite/config.py) and import our admin model view (`QuestionChoiceAdminView`) below the import of our `ExamQuestionModel` and `ExamChoiceModel`::
 
     from exam.models import ExamQuestionModel, ExamChoiceModel
     from exam.admin import QuestionChoiceAdminView
 
-Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models` list::
+Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models` list, just like the way we comment the `User` in the list, because if we didn't comment it and we register our `QuestionChoiceAdminView` that mean we register `ExamQuestionModel and ExamChoiceModel` twice and that will trow an error::
 
     # rgister model to admin direct by passing every model that you
     # want to manage in admin page in the below list (reg_models)
     reg_models = [
-      User,
+      # User,
       # ExamQuestionModel,
       # ExamChoiceModel,
     ]
 
-go below the function we call **adminModelRegister** in (within admin_runner function) and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) **category="Question-Choice"::
+go below the function we call **adminModelRegister** in (within admin_runner function) after registering  our `UserAdminView` and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) in our case we will call it **category="Question-Choice" like::
 
-    admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Questions", category="Question-Choice"))
-    admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Choices", category="Question-Choice"))
+    admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Questions", category="Question-Choice"))
+    admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Choices", category="Question-Choice"))
 
-Save the file, that will register your related model in the admin page and you will see them if you vist the admin page `http://127.0.0.1:5000/admin`
+Save the file, that will register your related model in the admin page and you will see them if you vist the admin page `http://127.0.0.1:5000/admin`, only if you are logged in.
+
+Now let navigate to `http://127.0.0.1:5000/login` and login using one of the user credential, we created when we were in the python interpreter (shell), the one (user credential) that we are going to use is for the `backend-developer` (username: **backend-developer**, password: **12345678**).
+
+After we logged in, now if we navigate to `http://127.0.0.1:5000/admin` we are able to see our `QuestionChoiceAdminView` view in the form of drop-down menu, if we click it, it will show list containing `Questions  and Choices` only, since the are the only once associated with that mode admin view. Now click the `Questions` this will show list of questions we have inserted in the python shell.
 
 See more on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation.

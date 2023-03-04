@@ -47,7 +47,8 @@ class ChangePasswordForm(FlaskForm):
 
 
 def auth_models_dummy(proj_name):
-  return f"""from {proj_name}.config import db, login_manager
+  return f"""from datetime import datetime
+from {proj_name}.config import db, login_manager
 from flask_login import UserMixin
 
 
@@ -58,11 +59,13 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
+  date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   username = db.Column(db.String(20), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.String(255), nullable=False)
   authenticated = db.Column(db.Boolean, default=False)
   is_superuser = db.Column(db.Boolean, default=False)
+  is_admin = db.Column(db.Boolean, default=False)
 
   def is_active(self):
     {long_comment}True, as all users are active.{long_comment}
@@ -96,10 +99,8 @@ from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
+@login_required
 def adminRegister():
-  if current_user.is_authenticated:
-    flash("You have an account, unless if you need another, then logout", "info")
-    return redirect(url_for("base.index"))
   form = RegisterForm()
   if form.validate_on_submit():
     username  = form.username.data
@@ -182,4 +183,34 @@ def adminLogout():
   logout_user()
   flash("You logged out!", "info")
   return redirect(url_for("auth.adminLogin"))
+"""
+
+def auth_admin_dummy():
+  return f"""from flask_login import current_user
+from flask import redirect, request, url_for
+from flask_admin.contrib.sqla import ModelView
+
+
+class UserAdminView(ModelView):
+  can_delete = True  # enable model deletion
+  can_create = True  # enable model deletion
+  can_edit = True  # enable model deletion
+  page_size = 50  # the number of entries to display on the list view
+
+  # This is used to list the various columns in the order you want them.
+  column_list = ('username', 'email', 'password', 'date_created', 'authenticated', 'is_superuser')
+  # Columns that you want to be searchable in the model.
+  column_searchable_list = ('username', 'email', 'password', 'date_joined', 'authenticated', 'is_superuser')
+  # The column that the view should be sorted with by default (when the view is loaded for
+  # the first time). The second parameter True tells flask-admin to sort it in descending order.
+  column_default_sort = ('username', True)
+  # List of columns that can be used to filter.
+  column_filters = ('username',)
+
+  def is_accessible(self):
+    return current_user.is_authenticated
+
+  def inaccessible_callback(self, name, **kwargs):
+    # redirect to login page if user doesn't have access
+    return redirect(url_for('auth.adminLogin', next=request.url))
 """

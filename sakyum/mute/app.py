@@ -5,13 +5,18 @@ from . import l1
 from . import long_comment
 
 
-def app_views_dummy(app):
+def app_init_dummy():
+  return f"""from . import views
+"""
+
+
+def app_views_dummy(app, project_name):
   """app is the application name of your project"""
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir
-# from .forms import <model_form>
-# from <project_name>.config import db
+from {project_name}.config import db
 # from .models import <app_models>
+# from .forms import <model_form>
 
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
 

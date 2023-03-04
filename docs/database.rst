@@ -36,7 +36,7 @@ Notice there will be no version files in your versions directory `(alembic/versi
   # for postgresql (if youare using postgres database)
   sqlalchemy.url = postgresql://user:user@localhost/test
 
-After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets, ``Make sure you don't import your app models in the project config.py file (Schoolsite.config.py) until after you run the make migration``::
+After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets::
 
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from Schoolsite.config import db
@@ -66,6 +66,7 @@ Before, in the `alembic/versions` directory there is nothing inside, but now aft
           └── 83241ca0f125_added_table.cpython-310.pyc
 
   3 directories, 6 files
+Every commit we did, it will generate the migration file in the `(alembic/versions)` directory.
 
 Once this file generates we are ready for database migration. To migrate we are to run::
 

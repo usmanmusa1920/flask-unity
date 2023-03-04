@@ -1,4 +1,5 @@
 # from sakyum software, your (Schoolsite) project models.py file
+from datetime import datetime
 from Schoolsite.config import db, login_manager
 from flask_login import UserMixin
 
@@ -10,11 +11,13 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
+  date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   username = db.Column(db.String(20), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.String(255), nullable=False)
   authenticated = db.Column(db.Boolean, default=False)
   is_superuser = db.Column(db.Boolean, default=False)
+  is_admin = db.Column(db.Boolean, default=False)
 
   def is_active(self):
     """True, as all users are active."""
