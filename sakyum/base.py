@@ -93,6 +93,15 @@ class BaseStructure:
         pay_fls.write(f"{content}")
     if route_go:
       os.chdir(dir_togo)
+
+
+  def instanciate_default_img(self):
+    """instanciate user default image"""
+    img_rel_path = Path(__file__).resolve().parent
+    with open(str(img_rel_path) + "/static/default_style/media/default_img.png", mode="rb") as d_img:
+      d_img_read = d_img.read()
+    with open("default_img.png", mode="wb") as d_img_write:
+      d_img_write.write(d_img_read)
       
 
   def file_opt(self, _dir, tree=True, _here=False, _where=False):
@@ -236,6 +245,7 @@ class BaseStructure:
               
             if static_dir == dirs[3:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
+              static_base_dir = os.getcwd()
               
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
               self.file_opt(proj_name, _where=os.getcwd()+"/"+proj_name)
@@ -251,7 +261,12 @@ class BaseStructure:
               self.file_content(self._exs_last[1], file_name="style", content=f"/* @{__title__}, {proj_name} (project) style.css file */\n"+_css(), route_go=False) # create style.css
               
               # create index.js and back to project static base dir path
-              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=project_folder)
+              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=static_base_dir)
+
+              # make project auth/media and cd into it
+              self.file_opt("auth/media", _where="auth/media")
+              self.instanciate_default_img()
+              self.file_opt("do_nothing", tree=False, _where=s_p_dir)
 
           os.chdir(_here)
       print()
