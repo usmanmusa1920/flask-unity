@@ -93,10 +93,18 @@ class BaseStructure:
         pay_fls.write(f"{content}")
     if route_go:
       os.chdir(dir_togo)
+
+
+  def instanciate_default_img(self):
+    """instanciate user default image"""
+    with open(str(ORIGIN) + "/static/default_style/media/default_img.png", mode="rb") as img_read:
+      img_read_data = img_read.read()
+    with open("default_img.png", mode="wb") as img_write:
+      img_write.write(img_read_data)
       
 
   def file_opt(self, _dir, tree=True, _here=False, _where=False):
-    """make tree dir if `tree=True` and get into it, if `_here` or `_where` is equal to True"""
+    """make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True"""
     if tree:
       sp.run(["mkdir", "-p", _dir])
     if _here:
@@ -105,21 +113,23 @@ class BaseStructure:
       os.chdir(_where)
 
 
-  def validateProjectOrAppName(self, name, typ=False):
-    if typ:
+  def validateProjectOrAppName(self, name, type_of=False):
+    """validate project or app name"""
+    if type_of:
       proj_or_app = "project"
     else:
       proj_or_app = "app"
-    """validate app and project name"""
-    if "@" in name or "-" in name or "/" in name or "\\" in name or "^" in name:
-      name_err = f"Avoid using `@-` in your {proj_or_app} name, we found one in your {proj_or_app} name ({name})\n"
-      print()
-      logger.error(name_err)
-      exit()
+    un_accept_char = "@-/\\^+#&*!=%$?.>'<,'\";:`~|}{][)("
+    for i in un_accept_char:
+      if i in name:
+        name_err = f"[{un_accept_char}] are characters that are not allowed to be in your {proj_or_app} name, we found `{i}` in the name ({name})\n"
+        print()
+        logger.error(name_err)
+        exit()
       
 
   def into_file(self, fls, fls_cmd, file=None, app_default_dummy=None, is_static_file=False, is_app=False, proj_nm=None):
-    """create files within current directory of '''self.file_opt()'''
+    """create files within current directory of `self.file_opt()`
     is_app: if it is True, that mean it will do operation of making app files,
     else it will make for the entire project
     """
@@ -129,27 +139,19 @@ class BaseStructure:
         app_name = os.getcwd().split('/')[-1]
         sp.run(shlex.split(f"{fls_cmd} {_fls}"))
         if is_static_file:
-          # building app default files
+          # building app default files (html, css, js)
           self.file_content(file_name=_fls, content=f"{app_default_dummy}", route_go=False)
         else:
+          # building app default files (__init__.py, admin.py, forms.py, models.py, views.py)
           if _fls == "__init__.py":
-            # building app `__init__.py` default files
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_init_dummy()}", route_go=False)
-            
           elif _fls == "admin.py":
-            # building app `admin.py` default files
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_admin_dummy()}", route_go=False)
-
           elif _fls == "forms.py":
-            # building app `forms.py` default files
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy()}", route_go=False)
-
           elif _fls == "models.py":
-            # building app `models.py` default files
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_models_dummy(self.proj_store_name)}", route_go=False)
-            
           elif _fls == "views.py":
-            # building app `views.py` default files
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(app_name, self.proj_store_name)}", route_go=False)
     else:
       for _fls in fls:
@@ -157,16 +159,15 @@ class BaseStructure:
           sp.run(shlex.split(f"{fls_cmd} {_fls}"))
           self.file_content(
             file_name=_fls,content=f"# Your project {_fls} file\n{thunder_dummy(proj_nm)}", route_go=False
-            ) # building the run module
+            ) # building the run module `thunder.py`
             
 
   def dir_tree(self, proj_name=None):
-    # validating app name
-    self.validateProjectOrAppName(proj_name, typ=True)
     """create a directory tree where file will reserved as well as modules too"""
+    self.validateProjectOrAppName(proj_name, type_of=True)
     dirs = [proj_name, f"{proj_name}/{proj_name}", f"{proj_name}/auth", "templates", "static"]
 
-    # default files of project auth folder, which is for project base dir
+    # default files of project auth package
     auth_models = ["__init__", "admin", "forms", "models", "routes"]
     auth_fls = self.append_exs_to_file(fls_name=auth_models)
     
@@ -189,20 +190,14 @@ class BaseStructure:
           for _fls in fls:
             if _fls[:-3] != "thunder":
               sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
+              # building project default files (__init__.py, config.py, routes.py, secret.py)
               if _fls == "__init__.py":
-                # building project `__init__.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_init_dummy()}", route_go=False)
-
               elif _fls == "config.py":
-                # building project `config.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_config_dummy(proj_name)}", route_go=False)
-
               elif _fls == "routes.py":
-                # building project `routes.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_routes_dummy(proj_name)}", route_go=False)
-
               elif _fls == "secret.py":
-                # building project `secret.py` default files
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_secret_dummy()}", route_go=False)
           os.chdir(_here)
 
@@ -213,34 +208,24 @@ class BaseStructure:
           for _fls in auth_fls:
             sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
             if _fls == "__init__.py":
-              # building project `__init__.py` default files
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_init_dummy()}", route_go=False)
-
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_init_dummy()}", route_go=False)
             elif _fls == "admin.py":
-              # building project `admin.py` default files
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_admin_dummy()}", route_go=False)
-
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_admin_dummy()}", route_go=False)
             elif _fls == "forms.py":
-              # building project `forms.py` default files
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_forms_dummy()}", route_go=False)
-
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_forms_dummy()}", route_go=False)
             elif _fls == "models.py":
-              # building project `models.py` default files
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_models_dummy(proj_name)}", route_go=False)
-
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_models_dummy(proj_name)}", route_go=False)
             elif _fls == "routes.py":
-              # building project `routes.py` default files
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{auth_routes_dummy(proj_name)}", route_go=False)
+              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_routes_dummy(proj_name)}", route_go=False)
           os.chdir(_here) 
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
           self.into_file(fls, self.fls_cmd, file="thunder", proj_nm=proj_name) # to maker thunder file
-          project_folder = os.getcwd() # base dir path of 
+          project_folder = os.getcwd() # base dir path of the project (parent dir)
           
           for static_dir in dirs[3:]: # templates & static
             if static_dir == dirs[3:][0]: # templates
               self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into it
-              
               templates_folder = os.getcwd() # base dir path of templates folder
               
               # make project dir in templates and cd into it 
@@ -255,25 +240,27 @@ class BaseStructure:
               
             if static_dir == dirs[3:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
+              static_base_dir = os.getcwd() # base dir path of static folder
               
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
               self.file_opt(proj_name, _where=os.getcwd()+"/"+proj_name)
-
               # storing the project static dir path before creating any thing and cd into media
               s_p_dir = os.getcwd()
               self.file_opt("media", _where="media") # make media dir for project
               self.file_opt("do_nothing", tree=False, _where=s_p_dir)
               """
-              # :going back with one step
-
-              we pass `do_nothing` as a directory name here, to avoid any
-              error even though it do nothing if we give it a real directory name
+              going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name
               """
 
               self.file_content(self._exs_last[1], file_name="style", content=f"/* @{__title__}, {proj_name} (project) style.css file */\n"+_css(), route_go=False) # create style.css
               
               # create index.js and back to project static base dir path
-              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=project_folder)
+              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=static_base_dir)
+
+              # make project auth/media and cd into it
+              self.file_opt("auth/media", _where="auth/media")
+              self.instanciate_default_img()
+              self.file_opt("do_nothing", tree=False, _where=s_p_dir)
 
           os.chdir(_here)
       print()
@@ -287,11 +274,13 @@ class AppStructure(BaseStructure):
   proj_store_name = None # project name
   
   def app_static_and_template(self, file_dummy, top_comment=False, _dir_=False, file=False, app=False, cmd=False, _here_=False):
-    # :_dir_ = "template or static"
-    # :file = ["index.html"]
-    # :app = app name
-    # :cmd = "touch"
-    # :_here_ = # initial `inside project folder` where the project was created
+    """
+      #: _dir_ = "template or static"
+      #: file = ["index.html"]
+      #: app = app name
+      #: cmd = "touch"
+      #: _here_ = # initial `inside project folder` where the project was created
+    """
     if top_comment == "html":
       top_comment = f"<!-- @{__title__}, {app} {file[0]} page -->\n"
     if top_comment == "css":
@@ -306,16 +295,14 @@ class AppStructure(BaseStructure):
     
   def dir_tree(self, proj_app_name=None):
     """create a directory tree where file will reserved as well as modules too"""
-    
     dirs = [proj_app_name]
-    # validating app name
     self.validateProjectOrAppName(proj_app_name)
 
     app_store_name = proj_app_name # store our app name
     fls_name = ["__init__", "views", "models", "forms", "admin"]
     fls = self.append_exs_to_file(fls_name=fls_name)
     roove_dir = ["templates", "static", "static"]
-    _here_app = os.getcwd()  # initial `inside project folder` where the project was created
+    _here_app = os.getcwd()  # initial `inside project folder` (parent) directory
     
     # check if the app already exist
     app_proj_name = _here_app.split("/")[-1]
@@ -360,7 +347,7 @@ class Boot:
     self.p = p # port
     self.d = d # debug
     self.h = h # host
-    self.db = db
+    self.db = db # database
     self.model = model
     self.pwd_hash = pwd_hash
 
@@ -381,6 +368,19 @@ class Boot:
     optional arguments:
       -h, --help     show this help message and exit
       --app , -a     What is the app name
+  create_user:
+    usage: create user [-h] [--username] [--email] [--password]
+
+    This create user
+
+    positional arguments:
+                        Put positional argument of `create_user` to create user
+
+    options:
+      -h, --help        show this help message and exit
+      --username , -u   What is the username?
+      --email , -e      What is the email?
+      --password , -p   What is the password?
 
  boot:
     usage: boot up server [-h] [--port] [--host] [--debug]
@@ -431,6 +431,7 @@ class Boot:
       self.d = args.debug
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
+      
     elif sys.argv[1] == "create_user":
       parser = argparse.ArgumentParser(prog="create user", description="This create user")
       parser.add_argument("--username", "-u", required=False, type=str, metavar="", help="What is the username?")

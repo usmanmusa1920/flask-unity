@@ -47,9 +47,9 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
 
 {f1}% block short_info %{l1}
   {f1}% if current_user.is_authenticated %{l1}
-      Hi {f2} current_user.username {l2}! from your ({name}) project app
+      <p>Hi {f2} current_user.username {l2}! from your ({name}) project app</p>
     {f1}% else %{l1}
-      Your ({name}) app says, please login
+      <p>Your ({name}) app says, please login</p>
     {f1}% endif %{l1}
 {f1}% endblock short_info %{l1}
 

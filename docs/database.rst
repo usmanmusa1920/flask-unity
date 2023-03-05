@@ -28,7 +28,7 @@ After running this command you will see some files and folders are created in yo
 Notice there will be no version files in your versions directory `(alembic/versions)` because we haven’t made any migrations yet. Now to use alembic we need to do certain changes in these files. First, change the `sqlalchemy.url` in your `alembic.ini` file, and give it your reletive `default.db` path, ours look like::
 
   # for the default.db file
-  sqlalchemy.url = sqlite:////home/usman/Desktop/Schoolsite/default.db
+  sqlalchemy.url = sqlite:////home/usman/Desktop/schoolsite/default.db
 
   # for mysql (if you are using mysql database)
   sqlalchemy.url = mysql+mysqldb://root:root@localhost:3306/database_name
@@ -39,7 +39,7 @@ Notice there will be no version files in your versions directory `(alembic/versi
 After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets::
 
   from exam.models import ExamQuestionModel, ExamChoiceModel
-  from Schoolsite.config import db
+  from schoolsite.config import db
   target_metadata = db.Model.metadata
 
 For Autogenerating Multiple MetaData collections, you can pass a list of models instead e.g::

@@ -36,7 +36,15 @@
         </div>
 
         <div class="head_right">
-          <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
+          {% if current_user.is_authenticated %}
+            {% if context.user_img %}
+              <img src="{{context.user_img}}" alt="" class="user_default_img">
+            {% else %}
+              <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
+            {% endif %}
+          {% else %}
+            <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
+          {% endif %}
           <a class="link_1">|</a>
           {% if current_user.is_authenticated %}
             <a href="{{ url_for('auth.adminRegister') }}" class="link_2">register</a>

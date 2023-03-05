@@ -3,7 +3,7 @@
 Templates / static
 ##################
 
-Templates and static folder for each blueprint is located within (in side) the base templates/static directory, with thesame name of the bluprint, e.g let say we create an app `exam` in our project called `Schoolsite` within the templates directory it will create (templates/exam) also for the static too (static/exam)
+Templates and static folder for each blueprint is located within (in side) the base templates/static directory, with thesame name of the bluprint, e.g let say we create an app `exam` in our project called `schoolsite` within the templates directory it will create (templates/exam) also for the static too (static/exam)
 
 Customise admin page
 ====================
