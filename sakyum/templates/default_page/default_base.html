@@ -7,7 +7,6 @@
   {% endif %}
   <p>
     {% if current_user.is_authenticated %}
-      <img src="{{context.user_img}}" alt="" class="user_default_img">
       Hi <strong>{{ current_user.username }}!</strong> you'r logged in
     {% else %}
       Login to take actions

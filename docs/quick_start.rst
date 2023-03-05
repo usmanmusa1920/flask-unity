@@ -47,6 +47,9 @@ Tree structure of the project using **tree .** command look like:
   │   ├── routes.py
   │   └── secret.py
   ├── static
+  │   ├── auth
+  │   │   └── media
+  │   │       └── default_img.png
   │   └── schoolsite
   │       ├── index.js
   │       ├── media
@@ -58,7 +61,7 @@ Tree structure of the project using **tree .** command look like:
   │       └── index.html
   └── thunder.py
 
-  8 directories, 14 files
+  10 directories, 15 files
 
 Boot up the flask server by running the below command::
 
@@ -103,6 +106,9 @@ Now the **tree .** structure of the project after creating **exam** app look lik
   │   ├── routes.py
   │   └── secret.py
   ├── static
+  │   ├── auth
+  │   │   └── media
+  │   │       └── default_img.png
   │   ├── exam
   │   │   ├── index.js
   │   │   ├── media
@@ -120,7 +126,7 @@ Now the **tree .** structure of the project after creating **exam** app look lik
   │       └── index.html
   └── thunder.py
 
-  12 directories, 23 files
+  14 directories, 24 files
 
 You notice it create a package name with thesame name of the app (**exam**) with some files in it, also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
@@ -147,6 +153,7 @@ registering blueprint
     blueprint.default,
     blueprint.errors,
     blueprint.auth,
+    auth2,
     base,
     exam,
   ]

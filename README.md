@@ -56,6 +56,7 @@ reg_blueprints = [
   blueprint.default,
   blueprint.errors,
   blueprint.auth,
+  auth2,
   base,
   exam,
 ]

@@ -97,11 +97,10 @@ class BaseStructure:
 
   def instanciate_default_img(self):
     """instanciate user default image"""
-    img_rel_path = Path(__file__).resolve().parent
-    with open(str(img_rel_path) + "/static/default_style/media/default_img.png", mode="rb") as d_img:
-      d_img_read = d_img.read()
-    with open("default_img.png", mode="wb") as d_img_write:
-      d_img_write.write(d_img_read)
+    with open(str(ORIGIN) + "/static/default_style/media/default_img.png", mode="rb") as img_read:
+      img_read_data = img_read.read()
+    with open("default_img.png", mode="wb") as img_write:
+      img_write.write(img_read_data)
       
 
   def file_opt(self, _dir, tree=True, _here=False, _where=False):
@@ -120,7 +119,6 @@ class BaseStructure:
       proj_or_app = "project"
     else:
       proj_or_app = "app"
-
     un_accept_char = "@-/\\^+#&*!=%$?.>'<,'\";:`~|}{][)("
     for i in un_accept_char:
       if i in name:
@@ -166,7 +164,6 @@ class BaseStructure:
 
   def dir_tree(self, proj_name=None):
     """create a directory tree where file will reserved as well as modules too"""
-    
     self.validateProjectOrAppName(proj_name, type_of=True)
     dirs = [proj_name, f"{proj_name}/{proj_name}", f"{proj_name}/auth", "templates", "static"]
 
@@ -210,7 +207,6 @@ class BaseStructure:
           # create default modules inside project auth dir
           for _fls in auth_fls:
             sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
-            # building auth default files (__init__.py, admin.py, forms.py, models.py, routes.py)
             if _fls == "__init__.py":
               self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_init_dummy()}", route_go=False)
             elif _fls == "admin.py":
@@ -230,7 +226,6 @@ class BaseStructure:
           for static_dir in dirs[3:]: # templates & static
             if static_dir == dirs[3:][0]: # templates
               self.file_opt(static_dir, _here=project_folder) # make templates dir and cd into it
-              
               templates_folder = os.getcwd() # base dir path of templates folder
               
               # make project dir in templates and cd into it 
@@ -245,11 +240,10 @@ class BaseStructure:
               
             if static_dir == dirs[3:][1]: # static
               self.file_opt(static_dir, _here=project_folder) # make static dir and cd into
-              static_base_dir = os.getcwd()
+              static_base_dir = os.getcwd() # base dir path of static folder
               
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
               self.file_opt(proj_name, _where=os.getcwd()+"/"+proj_name)
-
               # storing the project static dir path before creating any thing and cd into media
               s_p_dir = os.getcwd()
               self.file_opt("media", _where="media") # make media dir for project
@@ -301,7 +295,6 @@ class AppStructure(BaseStructure):
     
   def dir_tree(self, proj_app_name=None):
     """create a directory tree where file will reserved as well as modules too"""
-    
     dirs = [proj_app_name]
     self.validateProjectOrAppName(proj_app_name)
 
@@ -375,6 +368,19 @@ class Boot:
     optional arguments:
       -h, --help     show this help message and exit
       --app , -a     What is the app name
+  create_user:
+    usage: create user [-h] [--username] [--email] [--password]
+
+    This create user
+
+    positional arguments:
+                        Put positional argument of `create_user` to create user
+
+    options:
+      -h, --help        show this help message and exit
+      --username , -u   What is the username?
+      --email , -e      What is the email?
+      --password , -p   What is the password?
 
  boot:
     usage: boot up server [-h] [--port] [--host] [--debug]
@@ -425,6 +431,7 @@ class Boot:
       self.d = args.debug
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
+      
     elif sys.argv[1] == "create_user":
       parser = argparse.ArgumentParser(prog="create user", description="This create user")
       parser.add_argument("--username", "-u", required=False, type=str, metavar="", help="What is the username?")

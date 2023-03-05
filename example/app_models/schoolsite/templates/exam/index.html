@@ -12,9 +12,9 @@
 
 {% block short_info %}
   {% if current_user.is_authenticated %}
-      Hi {{ current_user.username }}! from your (exam) project app
+      <p>Hi {{ current_user.username }}! from your (exam) project app</p>
     {% else %}
-      Your (exam) app says, please login
+      <p>Your (exam) app says, please login</p>
     {% endif %}
 {% endblock short_info %}
 

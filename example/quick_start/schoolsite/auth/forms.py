@@ -1,4 +1,4 @@
-# from sakyum software, your (schoolsite) project forms.py file
+# from sakyum software, your (schoolsite) project auth forms.py file
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
