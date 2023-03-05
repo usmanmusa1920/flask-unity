@@ -1,6 +1,6 @@
 # from sakyum software, your app (exam) models.py file
 from datetime import datetime
-from Schoolsite.config import db
+from schoolsite.config import db
 
 
 """
@@ -8,4 +8,4 @@ when ever you create a model, make sure you import it in your project config.py
 file and register it to the admin page in other to see it in admin page
 """
 
-# write your admin model view here!
+# write your app model here!

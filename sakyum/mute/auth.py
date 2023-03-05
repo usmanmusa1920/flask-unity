@@ -110,7 +110,7 @@ def adminRegister():
     user = User(username=username, email=email, password=hashed_password)
     db.session.add(user)
     db.session.commit()
-    flash("Your account has been created! You are now able to log in", "success")
+    flash("Your created new user, the user is able to log in", "success")
     return redirect(url_for("auth.adminLogin"))
   context = {f1}
     "head_title": "admin register",
@@ -123,7 +123,6 @@ def adminRegister():
 @auth.route("/admin/login/", methods=["POST", "GET"])
 def adminLogin():
   if current_user.is_authenticated:
-    flash("You are already logged in!", "success")
     return redirect(url_for("base.index"))
   form = LoginForm()
   if form.validate_on_submit():

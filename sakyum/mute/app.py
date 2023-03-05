@@ -50,7 +50,7 @@ when ever you create a model, make sure you import it in your project config.py
 file and register it to the admin page in other to see it in admin page
 {long_comment}
 
-# write your admin model view here!
+# write your app model here!
 """
 
 def app_admin_dummy():
@@ -58,5 +58,5 @@ def app_admin_dummy():
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
 
-# write your app model view here!
+# write your app admin model view here!
 """

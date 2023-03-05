@@ -47,16 +47,15 @@ login_manager.session_protection = "strong"
 login_manager.login_view = 'auth.adminLogin'
 login_manager.login_message_category = 'info'
 login_manager.login_message = u"You must login, in other to get access to that page"
+ext_lst = [db, bcrypt, login_manager, csrf]
 
 
 def create_app(reg_blueprints=False, conf=Config):
   app = Flask(__name__)
   app.config.from_object(conf)
   app.app_context().push()
-  db.init_app(app)
-  bcrypt.init_app(app)
-  login_manager.init_app(app)
-  csrf.init_app(app)
+  for ext in ext_lst:
+    ext.init_app(app)
 
 
   {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}

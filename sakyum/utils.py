@@ -69,6 +69,7 @@ footer_style = stylePage(__title__, version=__version__)
 def rem_blueprint(lst_blue=None, rem_blue=None):
   # these are blueprint that we don't want to show on the
   # default page so we are removing them from the list
+  # reason is they are not route
   for blue in rem_blue:
     if blue in lst_blue:
       # finding the index of the `blue` item blueprint in the list
@@ -80,6 +81,7 @@ def rem_blueprint(lst_blue=None, rem_blue=None):
 
 
 class AuthCredentials:
+  """Authenticate new user credentials"""
   def __init__(self, username=None, email=None, password=None, u_args=True, e_args=True, p_args=True):
     self.username = username
     self.email = email
@@ -128,7 +130,8 @@ class AuthCredentials:
         
   @property
   def validate_username(self):
-    # the below while is included to chech data validation
+    """validate username"""
+    # the below while is included to check data validation
     # when user uses flags `-u` or `--username`
     while len(self.username) < 3:
       print("username must be not less than 3 character")
@@ -150,6 +153,7 @@ class AuthCredentials:
 
   @property
   def validate_password(self):
+    """validate password"""
     # the below while is included to chech data validation
     # when user uses flags `-p` or `--password`
     while len(self.password) < 6:
@@ -160,6 +164,7 @@ class AuthCredentials:
 
   @property
   def result(self):
+    """user credentials in a list"""
     auth_list = [self.validate_username, self.validate_email, self.validate_password]
     return auth_list
     

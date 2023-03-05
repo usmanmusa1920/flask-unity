@@ -16,10 +16,10 @@ pip install --upgrade sakyum
 After the installation paste the following command on your termianl
 
 ```
-python -c "from sakyum import project; project('Schoolsite')"
+python -c "from sakyum import project; project('schoolsite')"
 ```
 
-This will create a project called `Schoolsite` now cd into the `Schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py` and some directories (some in the form of package) `auth`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `Schoolsite`.
+This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py` and some directories (some in the form of package) `auth`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
 
 Boot up the flask server by running the below command
 
@@ -29,19 +29,19 @@ python thunder.py boot
 
 Now visit the local url `http://127.0.0.1:5000` this will show you index page of your project
 
-## Create flask app within your project (Schoolsite)
+## Create flask app within your project (schoolsite)
 
-For you to start an app within your project `Schoolsite` shutdown the flask development server by pressing ( CTRL+C ) and then run the following command, by giving the name you want your app to be, in our case we will call our app `exam`
+For you to start an app within your project `schoolsite` shutdown the flask development server by pressing ( CTRL+C ) and then run the following command, by giving the name you want your app to be, in our case we will call our app `exam`
 
 ```
 python thunder.py create_app -a exam
 ```
 
-this will create an app (a new package called `exam`) within your project `(Schoolsite)`
+this will create an app (a new package called `exam`) within your project `(schoolsite)`
 
 ## Register an app
 
-Once the app is created open a file `Schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` app blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `Schoolsite/routes.py`
+Once the app is created open a file `schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` app blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `schoolsite/routes.py`
 
 importing blueprint
 

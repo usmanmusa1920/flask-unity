@@ -32,8 +32,6 @@ In this chapter we are going to see how we can replace the default route for our
         return redirect(url_for("auth.adminRegister"))
       # checking email pattern using regex
       pattern = re.compile(r"^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+")
-      if re.match(pattern, email):
-        pass
       if not re.match(pattern, email):
         flash(f"Please use a valid email", "error")
         return redirect(url_for("auth.adminRegister"))
@@ -50,7 +48,6 @@ In this chapter we are going to see how we can replace the default route for our
         return redirect(url_for("auth.adminLogin"))
       else:
         flash(f"The two password fields didn't match", "error")
-        return redirect(url_for("auth.adminLogin"))
     context = {
       "head_title": "admin register",
       "footer_style": footer_style,
@@ -66,7 +63,6 @@ In this chapter we are going to see how we can replace the default route for our
       the `admin_login.html` below is located in the sakyum package (templates/default_page/admin_login.html)
     """
     if current_user.is_authenticated:
-      flash("You are already logged in!", "success")
       return redirect(url_for("base.index"))
     if request.method == "POST":
       username = request.form["username"]
@@ -114,17 +110,16 @@ In this chapter we are going to see how we can replace the default route for our
       if len(password1) < 6 or len(password2) < 6:
         flash("Password must be not less than 6 character", "error")
         return redirect(url_for("auth.adminChangePassword"))
-      elif password2 != password1:
-        flash("The two password fields didn't match", "error")
-        return redirect(url_for("auth.adminChangePassword"))
       user = User.query.filter_by(username=current_user.username).first()
       if user and bcrypt.check_password_hash(user.password, old_password):
         if password1 == password2:
           hashed_password = bcrypt.generate_password_hash(password2).decode("utf-8")
           user.password = hashed_password
           db.session.commit()
-        flash("Your password has changed!", "success")
-        return redirect(url_for("auth.adminLogin"))
+          flash("Your password has changed!", "success")
+          return redirect(url_for("auth.adminLogin"))
+        else:
+          flash("The two password fields didn't match", "error")
       else:
         flash("Cross check your login credentials!", "error")
     context = {
