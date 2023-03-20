@@ -8,7 +8,6 @@ from . import long_comment
 
 def pro_init_dummy():
   return f"""from .config import create_app
-from .config import db
 
 app = create_app()
 """
@@ -28,26 +27,14 @@ class Config:
 
 
 def pro_config_dummy(proj_name):
-  return f"""from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
+  return f"""from flask_admin import Admin
 from flask import Flask
-from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
-from flask_wtf.csrf import CSRFProtect
 from sakyum.blueprint import adminModelRegister
+from sakyum.contrib import ext_lst, db, login_manager
 from .secret import Config
 
-
-db = SQLAlchemy()
-bcrypt = Bcrypt()
-login_manager = LoginManager()
-# To enable CSRF protection globally for Flask, using secret key to securely sign the token
-csrf = CSRFProtect()
-login_manager.session_protection = "strong"
-login_manager.login_view = 'auth.adminLogin'
-login_manager.login_message_category = 'info'
-login_manager.login_message = u"You must login, in other to get access to that page"
-ext_lst = [db, bcrypt, login_manager, csrf]
+# to change login redirect page
+# login_manager.login_view = 'auth.adminRegister'
 
 
 def create_app(reg_blueprints=False, conf=Config):
@@ -59,8 +46,8 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
   {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
-  from auth.models import User
-  from auth.admin import UserAdminView
+  from sakyum.auth.models import User
+  from sakyum.auth.admin import UserAdminView
   # from <app_name>.models import <app_model>
   # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
@@ -97,18 +84,16 @@ def pro_routes_dummy(proj):
 from flask_login import current_user
 from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
-from auth.routes import auth2
 # from <app_name>.views import <app_name>
 
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
 
-rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, auth2, base]
+rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
 reg_blueprints = [
   blueprint.default,
   blueprint.errors,
   blueprint.auth,
-  auth2,
   base,
   # <app_name>,
 ]
@@ -117,7 +102,7 @@ reg_blueprints = [
 @base.route('/', methods=["POST", "GET"])
 def index():
   if current_user.is_authenticated:
-    user_img = url_for("auth2.static", filename="media/" + current_user.user_img)
+    user_img = url_for("default.static", filename="media/" + current_user.user_img)
   else:
     user_img = None
   context = {f1}

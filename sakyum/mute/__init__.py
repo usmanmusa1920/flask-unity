@@ -16,10 +16,10 @@ long_comment = "\"\"\""
 
 def thunder_dummy(project):
   return f"""from sakyum import Boot
-from auth.models import User
-from {project} import db
+from sakyum.auth.models import User
+from sakyum.contrib import bcrypt, db
 from {project}.routes import reg_blueprints
-from {project}.config import bcrypt, create_app
+from {project}.config import create_app
 
 
 boot = Boot(db=db, model=User, pwd_hash=bcrypt)

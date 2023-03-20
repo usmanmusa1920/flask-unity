@@ -19,3 +19,25 @@ class DB:
 
   def cleaned_db(self):
     pass
+
+"""
+  Command line shortcuts for database:
+    db_status
+    db_migrate
+    db_makemigrations
+    db_pulldata
+    db_pushdata
+    db_cleaned
+
+    Note::
+      alembic prototype in each app model
+      how to query all database record at once for `db_pulldata`
+      login_refresh
+      file system
+      mod_wsgi
+      test deployment
+
+      intro mapp(using function) for blueprint and models
+
+      default route (blueprint) for default image
+"""

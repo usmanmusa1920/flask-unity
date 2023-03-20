@@ -10,11 +10,11 @@ def app_init_dummy():
 """
 
 
-def app_views_dummy(app, project_name):
+def app_views_dummy(app):
   """app is the application name of your project"""
   return f"""from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir
-from {project_name}.config import db
+from sakyum.contrib import db
 # from .models import <app_models>
 # from .forms import <model_form>
 
@@ -40,9 +40,9 @@ from wtforms.validators import DataRequired, Length
 """
 
 
-def app_models_dummy(your_application):
+def app_models_dummy():
   return f"""from datetime import datetime
-from {your_application}.config import db
+from sakyum.contrib import db
 
 
 {long_comment}

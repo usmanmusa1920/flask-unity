@@ -22,11 +22,6 @@ from .mute.project import pro_init_dummy
 from .mute.project import pro_secret_dummy
 from .mute.project import pro_config_dummy
 from .mute.project import pro_routes_dummy
-from .mute.auth import auth_init_dummy
-from .mute.auth import auth_forms_dummy
-from .mute.auth import auth_models_dummy
-from .mute.auth import auth_routes_dummy
-from .mute.auth import auth_admin_dummy
 from . import __title__
 from . import __version__
 
@@ -150,9 +145,9 @@ class BaseStructure:
           elif _fls == "forms.py":
             self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_forms_dummy()}", route_go=False)
           elif _fls == "models.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_models_dummy(self.proj_store_name)}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_models_dummy()}", route_go=False)
           elif _fls == "views.py":
-            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(app_name, self.proj_store_name)}", route_go=False)
+            self.file_content(file_name=_fls, content=f"# from {__title__} software, your app ({app_name}) {_fls} file\n{app_views_dummy(app_name)}", route_go=False)
     else:
       for _fls in fls:
         if _fls[:-3] == file:
@@ -165,11 +160,7 @@ class BaseStructure:
   def dir_tree(self, proj_name=None):
     """create a directory tree where file will reserved as well as modules too"""
     self.validateProjectOrAppName(proj_name, type_of=True)
-    dirs = [proj_name, f"{proj_name}/{proj_name}", f"{proj_name}/auth", "templates", "static"]
-
-    # default files of project auth package
-    auth_models = ["__init__", "admin", "forms", "models", "routes"]
-    auth_fls = self.append_exs_to_file(fls_name=auth_models)
+    dirs = [proj_name, f"{proj_name}/{proj_name}", "media", "templates", "static"]
     
     # default files of project sub folder, except `thunder` which is for project base dir
     fls_name = ["__init__", "config", "routes", "secret", "thunder"]
@@ -200,24 +191,8 @@ class BaseStructure:
               elif _fls == "secret.py":
                 self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_secret_dummy()}", route_go=False)
           os.chdir(_here)
+          
 
-         
-        if _dir == dirs[2]:
-          self.file_opt(_dir, _here=_here)
-          # create default modules inside project auth dir
-          for _fls in auth_fls:
-            sp.run(shlex.split(f"{self.fls_cmd} {_fls}"))
-            if _fls == "__init__.py":
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_init_dummy()}", route_go=False)
-            elif _fls == "admin.py":
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_admin_dummy()}", route_go=False)
-            elif _fls == "forms.py":
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_forms_dummy()}", route_go=False)
-            elif _fls == "models.py":
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_models_dummy(proj_name)}", route_go=False)
-            elif _fls == "routes.py":
-              self.file_content(file_name=_fls, content=f"# from {__title__} software, your ({proj_name}) project auth {_fls} file\n{auth_routes_dummy(proj_name)}", route_go=False)
-          os.chdir(_here) 
         if _dir == dirs[0]:
           self.file_opt(_dir, _here=_here)
           self.into_file(fls, self.fls_cmd, file="thunder", proj_nm=proj_name) # to maker thunder file
@@ -255,14 +230,13 @@ class BaseStructure:
               self.file_content(self._exs_last[1], file_name="style", content=f"/* @{__title__}, {proj_name} (project) style.css file */\n"+_css(), route_go=False) # create style.css
               
               # create index.js and back to project static base dir path
-              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=static_base_dir)
-
-              # make project auth/media and cd into it
-              self.file_opt("auth/media", _where="auth/media")
-              self.instanciate_default_img()
-              self.file_opt("do_nothing", tree=False, _where=s_p_dir)
-
+              self.file_content(self._exs_last[2], content=f"// @{__title__}, {proj_name} (project) index.js file\n"+_js(proj_name), dir_togo=project_folder)
+              
+          # make media folder and default image inside it
+          self.file_opt(dirs[2], _where=dirs[2])
+          self.instanciate_default_img()
           os.chdir(_here)
+
       print()
       logger.info(f"Project ({proj_name}) created successfully!")
       print()
