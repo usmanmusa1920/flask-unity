@@ -1,0 +1,20 @@
+<!-- default index page for your project and app (they `app and project` will inherite it) -->
+{% extends "default.html" %}
+
+{% block logo %}
+  <div class="mini">
+    <div class="mini_column">
+      <p><pre>  ...........................
+    _
+  /_  /|   / / |/ /  / /\  /|
+   / /_|  /_/  / /  / /  \/ |
+/_/ /  | /  | / /__/ /      |
+.............................
+
+</pre></p>
+      {% block short_info %}
+        <!-- short_info -->
+      {% endblock short_info %}
+    </div>
+  </div>
+{% endblock logo %}

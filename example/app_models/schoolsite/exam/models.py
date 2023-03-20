@@ -1,6 +1,6 @@
 # from sakyum software, your app (exam) models.py file
 from datetime import datetime
-from schoolsite.config import db
+from sakyum.contrib import db
 
 
 """
@@ -28,7 +28,6 @@ class ExamQuestionModel(db.Model):
   # the `selector` is the attribute that we can use to get selector who choose the choice
   # the `lazy` argument just define when sqlalchemy loads the data from the database
 
-
 class ExamChoiceModel(db.Model):
   """ Exam default Choice model """
   id = db.Column(db.Integer, primary_key=True)
@@ -43,4 +42,3 @@ class ExamChoiceModel(db.Model):
 
   def __repr__(self):
     return f"{self.choice_text}"
-

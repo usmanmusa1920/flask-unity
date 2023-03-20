@@ -58,9 +58,10 @@ Before we move further let us play with the model api. This is the continuation 
 
 From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter, start by importing your **db** and **bcrypt** (for password hash) instance from project package (schoolsite), and also import the models you create for your app in `exam/models.py` and the default User model located in `auth.models.py`::
 
-  from schoolsite.config import db, bcrypt
+  from sakyum.contrib import bcrypt
+  from sakyum.auth.models import User
+  from schoolsite.config import db
   from exam.models import ExamQuestionModel, ExamChoiceModel
-  from auth.models import User
 
 Next call the `create_all()` method of **db** that will create the tables of our models and database (if it doesn't create db file). Run the below command.::
 
@@ -196,8 +197,8 @@ Register our models to admin
 In other to register our model, we are to open a sub project folder and open the **config.py** file we see there **(schoolsite/config.py)**, within create_app function in the file, we are to import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register, above the method that will create the tables **db.create_all()** and we will see a commented prototype above it::
 
   """ You will need to import models themselves before issuing `db.create_all` """
-  from auth.models import User
-  from auth.admin import UserAdminView
+  from sakyum.auth.models import User
+  from sakyum.auth.admin import UserAdminView
   from exam.models import ExamQuestionModel, ExamChoiceModel
   # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
@@ -247,11 +248,10 @@ The `inaccessible_callback` method will redirect user (who is not logged in) to 
 In other to register our model view, open the `config.py` file (schoolsite/config.py) and import our admin model view (`QuestionChoiceAdminView`) below the import of our `ExamQuestionModel` and `ExamChoiceModel`  which look like::
 
   """ You will need to import models themselves before issuing `db.create_all` """
-  from auth.models import User
-  from auth.admin import UserAdminView
+  from sakyum.auth.models import User
+  from sakyum.auth.admin import UserAdminView
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from exam.admin import QuestionChoiceAdminView
-  # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
 
 Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models` list, just like the way we comment the `User` in the list, because if we didn't comment it and we register our `QuestionChoiceAdminView` that mean we register `ExamQuestionModel and ExamChoiceModel` twice and that will trow an error::

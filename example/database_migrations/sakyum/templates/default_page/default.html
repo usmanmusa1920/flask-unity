@@ -1,0 +1,123 @@
+<!-- base index file (parent) for default pages -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ url_for('default.static', filename='media/favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('default.static', filename='css/style.css') }}">
+  {% block head_css %}
+    <!-- child css file link -->
+  {% endblock head_css %}
+
+  <script type="text/javascript" src="{{ url_for('default.static', filename='js/index.js') }}"></script>
+  {% block head_js %}
+    <!-- child js file link -->
+  {% endblock head_js %}
+
+  {% if context.head_title %}
+    {% block head_title %}
+      <!-- title can be change to any page also -->
+      <title>Sakyum - {{context.head_title}}</title>
+    {% endblock head_title %}
+  {% else %}
+    <title>Sakyum</title>
+  {% endif %}
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header_col">
+        <div class="head_left">
+          <h1 class="logo">
+            <a href="{{ url_for('base.index') }}">Sakyum</a>
+          </h1>
+        </div>
+
+        <div class="head_right">
+          {% if current_user.is_authenticated %}
+            {% if context.user_img %}
+              <img src="{{context.user_img}}" alt="" class="user_default_img">
+            {% else %}
+              <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
+            {% endif %}
+          {% else %}
+            <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
+          {% endif %}
+          <a class="link_1">|</a>
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('auth.adminRegister') }}" class="link_2">register</a>
+            <a href="{{ url_for('auth.adminLogout') }}" class="link_3">logout</a>
+          {% else %}
+            <a href="https://sakyum.readthedocs.io" class="link_2" target="_blank">Docs</a>
+            <a href="{{ url_for('auth.adminLogin') }}" class="link_3">login</a>
+          {% endif %}
+          <a onclick="test()" class="alert">
+            <img src="{{ url_for('default.static', filename='media/alert.png') }}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="notification_{{category}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    <div class="main">
+      <div class="main_column">
+        {% block auth %}
+          <!-- block auth is mainly for auth pages (login and registration) -->
+        {% endblock auth %}
+
+
+        {% block logo %}
+          <!-- 
+            block logo contains the style of sakyum in the default page of app
+            and project excluding auth pages like (login and registration) page
+         -->
+            {% block short_info %}
+              <!-- short_info -->
+            {% endblock short_info %}
+        {% endblock logo %}
+
+
+        {% block main %}
+          <!-- main content, anything can be here! -->
+        {% endblock main %}
+      </div>
+    </div>
+
+    <div class="footer_margin_top"></div>
+    <div class="footer">
+      <!-- the below span tag will be visible only if the page is view with small size screen -->
+      <span class="auth_route_sm">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('auth.adminRegister') }}">register</a>
+          <a href="{{ url_for('auth.adminLogout') }}">logout</a>
+        {% else %}
+          <a href="{{ url_for('auth.adminLogin') }}">login</a>
+        {% endif %}
+      </span>
+      <p><pre>{{context.footer_style[1]}}
+{{context.footer_style[0]}}
+{{context.footer_style[1]}}</pre>
+        <div>
+          <a href="https://github.com/usmanmusa1920/sakyum" target="_blank">Github</a>
+          <a>|</a>
+          <a href="https://sakyum.readthedocs.io" target="_blank">Docs</a>
+          <a>|</a>
+          <a href="/admin">Admin</a>
+        </div>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

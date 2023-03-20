@@ -8,6 +8,7 @@ from .models import User
 class RegisterForm(FlaskForm):
   username = StringField("Username", validators=[DataRequired(), Length(min=2, max=30)])
   email = StringField("Email", validators=[DataRequired(), Email()])
+  # picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
   password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
   confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password"), Length(min=6)])
   

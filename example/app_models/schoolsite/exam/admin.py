@@ -3,7 +3,6 @@ from flask_login import current_user
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
 
-
 class QuestionChoiceAdminView(ModelView):
   can_delete = True  # enable model deletion
   can_create = True  # enable model deletion

@@ -1,0 +1,63 @@
+<!-- default admin user login page -->
+{% extends "default.html" %}
+
+{% block auth %}
+  <div class="pkg_desc">
+    <h1>Login to admin</h1>
+  </div>
+  <div class="admin_auth_form">
+    {% if context.form %}
+      <!-- if user is using wtforms template in the `auth.route` views, this is the form that is going to be used -->
+      <form method="POST" action="">
+        {{ context.form.csrf_token }}
+        <!-- reference about csrf_token -->
+        {#
+          If whether we use:
+            {{ context.form.csrf_token }}
+          or we use:
+            {{ context.form.hidden_tag() }}
+          all the two is thesame
+        #}
+
+
+        {% if context.form.username.errors %}
+          {{ context.form.username(placeholder="Enter username") }}
+          <!-- we commented the error -->
+          {#
+            <div class="invalid-feedback">
+              {% for error in context.form.username.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          #}
+        {% else %}
+          {{ context.form.username(placeholder="Enter username") }}
+        {% endif %}
+        
+
+        {% if context.form.password.errors %}
+          {{ context.form.password(placeholder="Enter password") }}
+          <!-- we commented the error -->
+          {#
+            <div class="invalid-feedback">
+              {% for error in context.form.password.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          #}
+        {% else %}
+          {{ context.form.password(placeholder="Enter password") }}
+        {% endif %}
+        <button type="submit">Login</button>
+      </form>
+    {% else %}
+      <!-- if user is not using wtforms template in the `auth.route` views, this is the form that is going to be used (if using html page template) -->
+      <form action="" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="text" name="username" placeholder="Enter username" minlength="2" maxlength="30" required>
+        <input type="password" name="password" placeholder="Enter password" minlength="6" required>
+        <button type="submit">Login</button>
+      </form>
+    {% endif %}
+  </div>
+{% endblock auth %}

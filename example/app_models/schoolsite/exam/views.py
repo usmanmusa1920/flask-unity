@@ -1,7 +1,7 @@
 # from sakyum software, your app (exam) views.py file
 from flask import (render_template, Blueprint)
 from sakyum.utils import footer_style, template_dir, static_dir
-from schoolsite.config import db
+from sakyum.contrib import db
 # from .models import <app_models>
 # from .forms import <model_form>
 

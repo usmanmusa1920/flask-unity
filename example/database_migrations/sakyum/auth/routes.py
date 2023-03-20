@@ -1,14 +1,11 @@
 # from sakyum software, your (schoolsite) project auth routes.py file
-from flask import render_template, request, redirect, url_for, flash, Blueprint
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-from sakyum.utils import footer_style, template_dir, static_dir
+from sakyum.utils import footer_style
 from sakyum.blueprint import auth
-from schoolsite.config import db, bcrypt
+from sakyum.contrib import db, bcrypt
 from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
-
-
-auth2 = Blueprint("auth2", __name__, template_folder=template_dir(), static_folder=static_dir("auth"))
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])

@@ -1,6 +1,6 @@
 # from sakyum software, your app (exam) models.py file
 from datetime import datetime
-from schoolsite.config import db
+from sakyum.contrib import db
 
 
 """

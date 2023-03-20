@@ -3,18 +3,16 @@ from flask import (render_template, Blueprint, url_for)
 from flask_login import current_user
 from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
-from auth.routes import auth2
 from exam.views import exam
 
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("schoolsite"))
 
-rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, auth2, base]
+rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
 reg_blueprints = [
   blueprint.default,
   blueprint.errors,
   blueprint.auth,
-  auth2,
   base,
   exam,
 ]
@@ -23,7 +21,7 @@ reg_blueprints = [
 @base.route('/', methods=["POST", "GET"])
 def index():
   if current_user.is_authenticated:
-    user_img = url_for("auth2.static", filename="media/" + current_user.user_img)
+    user_img = url_for("default.static", filename="media/" + current_user.user_img)
   else:
     user_img = None
   context = {

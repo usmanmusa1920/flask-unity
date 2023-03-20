@@ -1,12 +1,10 @@
 # Your project thunder.py file
 from sakyum import Boot
-from auth.models import User
-from schoolsite import db
 from schoolsite.routes import reg_blueprints
-from schoolsite.config import bcrypt, create_app
+from schoolsite.config import create_app
 
 
-boot = Boot(db=db, model=User, pwd_hash=bcrypt)
+boot = Boot()
 if __name__ == "__main__":
   boot.run()
 

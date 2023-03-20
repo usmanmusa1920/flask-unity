@@ -1,24 +1,12 @@
 # from sakyum software, your (schoolsite) project config.py file
-from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask import Flask
-from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
-from flask_wtf.csrf import CSRFProtect
 from sakyum.blueprint import adminModelRegister
+from sakyum.contrib import ext_lst, db, login_manager
 from .secret import Config
 
-
-db = SQLAlchemy()
-bcrypt = Bcrypt()
-login_manager = LoginManager()
-# To enable CSRF protection globally for Flask, using secret key to securely sign the token
-csrf = CSRFProtect()
-login_manager.session_protection = "strong"
-login_manager.login_view = 'auth.adminLogin'
-login_manager.login_message_category = 'info'
-login_manager.login_message = u"You must login, in other to get access to that page"
-ext_lst = [db, bcrypt, login_manager, csrf]
+# to change login redirect page
+# login_manager.login_view = 'auth.adminRegister'
 
 
 def create_app(reg_blueprints=False, conf=Config):
@@ -30,11 +18,10 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
   """ You will need to import models themselves before issuing `db.create_all` """
-  from auth.models import User
-  from auth.admin import UserAdminView
+  from sakyum.auth.models import User
+  from sakyum.auth.admin import UserAdminView
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from exam.admin import QuestionChoiceAdminView
-  # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
   
 

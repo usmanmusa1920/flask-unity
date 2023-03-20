@@ -1,0 +1,35 @@
+<!-- this is the landing page when you create a project -->
+{% extends "default_index.html" %}
+
+{% block short_info %}
+  {% if context.project_name %}
+    <p>Your project ({{context.project_name}}) default page</p>
+  {% endif %}
+  <p>
+    {% if current_user.is_authenticated %}
+      Hi <strong>{{ current_user.username }}!</strong> you'r logged in
+    {% else %}
+      Login to take actions
+    {% endif %}
+  </p>
+{% endblock short_info %}
+
+{% block main %}
+  {% if context.blueprints_list|length > 0 %}
+    <div class="blueprint_list_wrapper">
+      <div class="blueprint_list">
+        <p>App routes</p>
+        {% for blueprint in context.blueprints_list %}
+          <a href="/{{blueprint.name}}">{{blueprint.name}}</a>
+        {% endfor %}
+        </br>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="pkg_desc">
+    <div>
+      <p>An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs</p>
+    </div>
+  </div>
+{% endblock main %}
