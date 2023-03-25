@@ -27,6 +27,8 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
     <a href="{f2} url_for('auth.adminChangePassword') {l2}">change password</a>
     <br>
     <a href="{f2} url_for('auth.adminRegister') {l2}">register</a>
+    <br>
+    <a href="{f2} url_for('auth.changeProfileImage') {l2}">change image</a>
   {f1}% else %{l1}
     <a href="{f2} url_for('auth.adminLogin') {l2}">login</a>
   {f1}% endif %{l1}
