@@ -1,0 +1,15 @@
+<!-- default admin user change profile image page -->
+{% extends "default.html" %}
+
+{% block auth %}
+  <div class="pkg_desc">
+    <h1>Change user profile image</h1>
+  </div>
+  <div class="admin_auth_form">
+    <form method=post enctype=multipart/form-data>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <input type=file name=file required>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+{% endblock auth %}

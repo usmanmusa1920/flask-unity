@@ -1,11 +1,18 @@
 # from sakyum software, your (schoolsite) project auth routes.py file
-from flask import render_template, request, redirect, url_for, flash
+import os
+import secrets
+from werkzeug.utils import secure_filename
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
 from sakyum.utils import footer_style
 from sakyum.blueprint import auth
 from sakyum.contrib import db, bcrypt
 from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
+
+upload_folder = os.environ.get('FLASK_UPLOAD_FOLDER')
+origin_path = os.environ.get('FLASK_ORIGIN_PATH')
+allowed_extensions = os.environ.get('FLASK_ALLOWED_EXTENSIONS')
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
@@ -92,3 +99,58 @@ def adminLogout():
   logout_user()
   flash("You logged out!", "info")
   return redirect(url_for("auth.adminLogin"))
+
+
+def allowed_file(filename):
+  return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+@auth.route('/profile_image/<path:filename>')
+def profile_image(filename):
+  return upload_folder+ filename
+@auth.route('/media/<path:filename>')
+def download_file(filename):
+  return send_from_directory(upload_folder, filename, as_attachment=True)
+
+
+def picture_name(pic_name):
+  random_hex = secrets.token_hex(8)
+  _, f_ext = os.path.splitext(pic_name)
+  picture_fn = random_hex + f_ext
+  new_name = _ + "_" + picture_fn
+  return new_name
+
+
+@auth.route('/admin/change_profile_image/', methods=["POST", "GET"])
+def changeProfileImage():
+  if request.method == 'POST':
+    # check if the post request has the file part
+    if 'file' not in request.files:
+      flash('No file part')
+      return redirect(request.url)
+    file = request.files['file']
+    # If the user does not select a file, the browser submits an
+    # empty file without a filename.
+    if file.filename == '':
+      flash('No selected file')
+      return redirect(request.url)
+    if file and allowed_file(file.filename):
+      filename = secure_filename(file.filename)
+      file_name = picture_name(filename)
+      file.save(os.path.join(upload_folder, file_name))
+      user = User.query.filter_by(username=current_user.username).first()
+      if user:
+        if user.user_img != "default_img.png":
+          r = str(origin_path) + "/media/" + user.user_img
+          if os.path.exists(r):
+            os.remove(r)
+        user.user_img = file_name
+        db.session.commit()
+      flash("Your profile image has been changed!", "success")
+      # return redirect(url_for('base.index', name=file_name))
+      return redirect(url_for('base.index'))
+      # it will redirect to the home page
+  context = {
+    "head_title": "admin change profile image",
+    "footer_style": footer_style,
+  }
+  return render_template("admin_change_profile_image.html", context=context)

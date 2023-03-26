@@ -404,7 +404,10 @@ class Boot:
       args = parser.parse_args()
       self.p = args.port
       self.h = args.host
-      self.d = args.debug
+      if os.environ.get("FLASK_DEBUG"):
+        self.d = os.environ.get("FLASK_DEBUG")
+      else:
+        self.d = args.debug
       
       # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
       
@@ -413,6 +416,9 @@ class Boot:
       parser.add_argument("--username", "-u", required=False, type=str, metavar="", help="What is the username?")
       parser.add_argument("--email", "-e", required=False, type=str, metavar="", help="What is the email?")
       parser.add_argument("--password", "-p", required=False, type=str, metavar="", help="What is the password?")
+      """
+        Warning: don't put your password using `-p` flag, onlyif you are testing
+      """
       parser.add_argument(dest="create_user", default="create_user", type=str, metavar="", help="Put positional argument of `create_user` to create user")
       args = parser.parse_args()
 

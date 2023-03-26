@@ -14,15 +14,25 @@ app = create_app()
 
 
 def pro_secret_dummy():
-  return f"""from pathlib import Path
+  return f"""import os
+from pathlib import Path
 
-db_origin = Path(__file__).resolve().parent.parent
+origin_path = Path(__file__).resolve().parent.parent
 
 class Config:
   SECRET_KEY = '{secure_app}'
-  SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(db_origin)+'/default.db'
+  SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(origin_path)+'/default.db'
   # set optional bootswatch theme
   FLASK_ADMIN_SWATCH = 'cerulean'
+  UPLOAD_FOLDER = os.path.join(origin_path, 'media')
+  ALLOWED_EXTENSIONS = ('png', 'jpg', 'jpeg', 'gif')
+  MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+
+
+def load_env():
+  os.environ['FLASK_UPLOAD_FOLDER'] = Config.UPLOAD_FOLDER
+  os.environ['FLASK_ORIGIN_PATH'] = str(origin_path)
+  os.environ['FLASK_ALLOWED_EXTENSIONS'] = str(Config.ALLOWED_EXTENSIONS)
 """
 
 
@@ -80,8 +90,7 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
 def pro_routes_dummy(proj):
-  return f"""from flask import (render_template, Blueprint, url_for)
-from flask_login import current_user
+  return f"""from flask import (render_template, Blueprint)
 from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
 # from <app_name>.views import <app_name>
@@ -101,14 +110,9 @@ reg_blueprints = [
 
 @base.route('/', methods=["POST", "GET"])
 def index():
-  if current_user.is_authenticated:
-    user_img = url_for("default.static", filename="media/" + current_user.user_img)
-  else:
-    user_img = None
   context = {f1}
     "project_name": "{proj}",
     "footer_style": footer_style,
-    "user_img": user_img,
     "blueprints_list": rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue),
   {l1}
   return render_template("{proj}/index.html", context=context)

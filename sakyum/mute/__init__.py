@@ -18,8 +18,10 @@ def thunder_dummy(project):
   return f"""from sakyum import Boot
 from {project}.routes import reg_blueprints
 from {project}.config import create_app
+from {project}.secret import load_env
 
 
+load_env()
 boot = Boot()
 if __name__ == "__main__":
   boot.run()
