@@ -3,6 +3,8 @@
 Auth routes
 ###########
 
+Custom authentication for users
+
 In this chapter we are going to see how we can replace the default route for our `auth` pages instead of rendering the `wtforms` (in the auth package of our project `auth/routes.py`) to use html form. To do so, sakyum already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is just to replace the default routes in the `auth/routes.py` with the following:
 
 **Route for register:** the default route of `adminRegister` can be replace with::

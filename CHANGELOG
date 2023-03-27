@@ -1,11 +1,15 @@
 Change Log
 ==========
 
-0.0.6 (27/march/2023)
+0.0.7 (1/april/2023)
 ------------------
+- Seventh Release
+
+This release mostly is for adding more docs and examples.
+
 - Sixth Release
 
-Alembic is included as dependency (in the require module list)
+Alembic is included as dependency (in the require module list).
 
 - Fifth Release
 

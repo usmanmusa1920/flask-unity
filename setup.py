@@ -7,7 +7,7 @@ from setuptools import find_packages
 setup(
   # name of the main package (base folder)
   name = "sakyum",
-  version = "0.0.6",
+  version = "0.0.7",
   description = "An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs",
   long_description=open("README.md").read() + "\n\n" + open("CHANGELOG").read(),
   long_description_content_type="text/markdown",
