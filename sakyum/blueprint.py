@@ -47,7 +47,7 @@ def error_400(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('400.html', context=context), 400
+  return render_template("400.html", context=context), 400
 
 @errors.app_errorhandler(401)
 def error_401(error):
@@ -55,7 +55,7 @@ def error_401(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('401.html', context=context), 401
+  return render_template("401.html", context=context), 401
 
 @errors.app_errorhandler(403)
 def error_403(error):
@@ -63,7 +63,7 @@ def error_403(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('403.html', context=context), 403
+  return render_template("403.html", context=context), 403
 
 @errors.app_errorhandler(404)
 def error_404(error):
@@ -71,7 +71,7 @@ def error_404(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('404.html', context=context), 404
+  return render_template("404.html", context=context), 404
 
 @errors.app_errorhandler(406)
 def error_406(error):
@@ -79,7 +79,7 @@ def error_406(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('406.html', context=context), 406
+  return render_template("406.html", context=context), 406
 
 @errors.app_errorhandler(415)
 def error_415(error):
@@ -87,7 +87,7 @@ def error_415(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('415.html', context=context), 415
+  return render_template("415.html", context=context), 415
 
 @errors.app_errorhandler(429)
 def error_429(error):
@@ -95,7 +95,7 @@ def error_429(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('429.html', context=context), 429
+  return render_template("429.html", context=context), 429
 
 @errors.app_errorhandler(500)
 def error_500(error):
@@ -103,7 +103,7 @@ def error_500(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('500.html', context=context), 500
+  return render_template("500.html", context=context), 500
 
 @errors.app_errorhandler(501)
 def error_501(error):
@@ -111,7 +111,7 @@ def error_501(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('501.html', context=context), 501
+  return render_template("501.html", context=context), 501
 
 @errors.app_errorhandler(502)
 def error_502(error):
@@ -119,7 +119,7 @@ def error_502(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('502.html', context=context), 502
+  return render_template("502.html", context=context), 502
 
 @errors.app_errorhandler(503)
 def error_503(error):
@@ -127,7 +127,7 @@ def error_503(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('503.html', context=context), 503
+  return render_template("503.html", context=context), 503
 
 @errors.app_errorhandler(504)
 def error_504(error):
@@ -135,4 +135,4 @@ def error_504(error):
     "head_title": "error page",
     "footer_style": footer_style,
   }
-  return render_template('504.html', context=context), 504
+  return render_template("504.html", context=context), 504

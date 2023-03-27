@@ -10,25 +10,25 @@ from . import stylePage
 
 def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_app=False):
   if is_landing:
-    return f"""{f1}% extends 'default_base.html' %{l1}
+    return f"""{f1}% extends "default_base.html" %{l1}
 
 {f1}% block head_js %{l1}
   <script src="{f2} url_for('base.static', filename='index.js') {l2}"></script>
 {f1}% endblock head_js %{l1}
 """
   if is_admin:
-    return f"""{f1}% extends 'admin/master.html' %{l1}
+    return f"""{f1}% extends "admin/master.html" %{l1}
 {f1}% block body %{l1}
   <a href="/">Go to {project_name} home page</a>
   <br>
   {f1}% if current_user.is_authenticated %{l1}
     <a href="{f2} url_for('auth.adminLogout') {l2}">logout</a>
     <br>
-    <a href="{f2} url_for('auth.adminChangePassword') {l2}">change password</a>
-    <br>
     <a href="{f2} url_for('auth.adminRegister') {l2}">register</a>
     <br>
     <a href="{f2} url_for('auth.changeProfileImage') {l2}">change image</a>
+    <br>
+    <a href="{f2} url_for('auth.adminChangePassword') {l2}">change password</a>
   {f1}% else %{l1}
     <a href="{f2} url_for('auth.adminLogin') {l2}">login</a>
   {f1}% endif %{l1}

@@ -9,6 +9,8 @@
     <a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
     <br>
     <a href="{{ url_for('auth.adminRegister') }}">register</a>
+    <br>
+    <a href="{{ url_for('auth.changeProfileImage') }}">change image</a>
   {% else %}
     <a href="{{ url_for('auth.adminLogin') }}">login</a>
   {% endif %}

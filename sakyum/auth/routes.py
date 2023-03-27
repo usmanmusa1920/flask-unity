@@ -2,7 +2,7 @@
 import os
 import secrets
 from werkzeug.utils import secure_filename
-from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from flask import render_template, request, redirect, url_for, flash, send_from_directory, send_file
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
 from sakyum.utils import footer_style
 from sakyum.blueprint import auth
@@ -10,9 +10,10 @@ from sakyum.contrib import db, bcrypt
 from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
-upload_folder = os.environ.get('FLASK_UPLOAD_FOLDER')
-origin_path = os.environ.get('FLASK_ORIGIN_PATH')
-allowed_extensions = os.environ.get('FLASK_ALLOWED_EXTENSIONS')
+
+upload_folder = os.environ.get("FLASK_UPLOAD_FOLDER")
+origin_path = os.environ.get("FLASK_ORIGIN_PATH")
+allowed_extensions = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
@@ -35,7 +36,7 @@ def adminRegister():
     "form": form,
   }
   return render_template("admin_register.html", context=context)
-
+  
 
 @auth.route("/admin/login/", methods=["POST", "GET"])
 def adminLogin():
@@ -59,7 +60,7 @@ def adminLogin():
     "form": form,
   }
   return render_template("admin_login.html", context=context)
-
+  
 
 @auth.route("/admin/change/password/", methods=["POST", "GET"])
 @fresh_login_required
@@ -91,7 +92,7 @@ def adminChangePassword():
     "form": form,
   }
   return render_template("admin_change_password.html", context=context)
-
+  
 
 @auth.route("/admin/logout/", methods=["POST", "GET"])
 @login_required
@@ -99,18 +100,31 @@ def adminLogout():
   logout_user()
   flash("You logged out!", "info")
   return redirect(url_for("auth.adminLogin"))
-
+  
 
 def allowed_file(filename):
-  return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+  return "." in filename and filename.rsplit(".", 1)[1].lower() in allowed_extensions
+  
 
-@auth.route('/profile_image/<path:filename>')
+@auth.route("/profile_image/<path:filename>")
+@login_required
 def profile_image(filename):
-  return upload_folder+ filename
-@auth.route('/media/<path:filename>')
-def download_file(filename):
-  return send_from_directory(upload_folder, filename, as_attachment=True)
+  """
+  this function help to show current user profile image, it won't download it
+  like the `download_file` function below does
+  """
+  return send_file(upload_folder + "/" + filename)
+  
 
+@auth.route("/media/<path:filename>")
+@login_required
+def download_file(filename):
+  """
+  if we use this to show current user profile image, it won't show instead it will download it,
+  so it meant for downloading media file
+  """
+  return send_from_directory(upload_folder, filename, as_attachment=True)
+  
 
 def picture_name(pic_name):
   random_hex = secrets.token_hex(8)
@@ -118,20 +132,21 @@ def picture_name(pic_name):
   picture_fn = random_hex + f_ext
   new_name = _ + "_" + picture_fn
   return new_name
+  
 
-
-@auth.route('/admin/change_profile_image/', methods=["POST", "GET"])
+@auth.route("/admin/change_profile_image/", methods=["POST", "GET"])
+@login_required
 def changeProfileImage():
-  if request.method == 'POST':
+  if request.method == "POST":
     # check if the post request has the file part
-    if 'file' not in request.files:
-      flash('No file part')
+    if "file" not in request.files:
+      flash("No file part")
       return redirect(request.url)
-    file = request.files['file']
+    file = request.files["file"]
     # If the user does not select a file, the browser submits an
     # empty file without a filename.
-    if file.filename == '':
-      flash('No selected file')
+    if file.filename == "":
+      flash("No selected file")
       return redirect(request.url)
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
@@ -146,9 +161,7 @@ def changeProfileImage():
         user.user_img = file_name
         db.session.commit()
       flash("Your profile image has been changed!", "success")
-      # return redirect(url_for('base.index', name=file_name))
-      return redirect(url_for('base.index'))
-      # it will redirect to the home page
+      return redirect(url_for("base.index")) # it will redirect to the home page
   context = {
     "head_title": "admin change profile image",
     "footer_style": footer_style,

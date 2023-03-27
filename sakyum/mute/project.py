@@ -20,19 +20,19 @@ from pathlib import Path
 origin_path = Path(__file__).resolve().parent.parent
 
 class Config:
-  SECRET_KEY = '{secure_app}'
-  SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(origin_path)+'/default.db'
+  SECRET_KEY = "{secure_app}"
+  SQLALCHEMY_DATABASE_URI = "sqlite:///"+str(origin_path)+"/default.db"
   # set optional bootswatch theme
-  FLASK_ADMIN_SWATCH = 'cerulean'
-  UPLOAD_FOLDER = os.path.join(origin_path, 'media')
-  ALLOWED_EXTENSIONS = ('png', 'jpg', 'jpeg', 'gif')
+  FLASK_ADMIN_SWATCH = "cerulean"
+  UPLOAD_FOLDER = os.path.join(origin_path, "media")
+  ALLOWED_EXTENSIONS = ("png", "jpg", "jpeg")
   MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 
 def load_env():
-  os.environ['FLASK_UPLOAD_FOLDER'] = Config.UPLOAD_FOLDER
-  os.environ['FLASK_ORIGIN_PATH'] = str(origin_path)
-  os.environ['FLASK_ALLOWED_EXTENSIONS'] = str(Config.ALLOWED_EXTENSIONS)
+  os.environ["FLASK_UPLOAD_FOLDER"] = Config.UPLOAD_FOLDER
+  os.environ["FLASK_ORIGIN_PATH"] = str(origin_path)
+  os.environ["FLASK_ALLOWED_EXTENSIONS"] = str(Config.ALLOWED_EXTENSIONS)
 """
 
 
@@ -40,11 +40,8 @@ def pro_config_dummy(proj_name):
   return f"""from flask_admin import Admin
 from flask import Flask
 from sakyum.blueprint import adminModelRegister
-from sakyum.contrib import ext_lst, db, login_manager
+from sakyum.contrib import ext_lst, db
 from .secret import Config
-
-# to change login redirect page
-# login_manager.login_view = 'auth.adminRegister'
 
 
 def create_app(reg_blueprints=False, conf=Config):
@@ -71,7 +68,7 @@ def create_app(reg_blueprints=False, conf=Config):
   def admin_runner():
     # Model views allow you to add a dedicated set of admin
     # pages for managing any model in your database
-    admin = Admin(app, name='{proj_name}')
+    admin = Admin(app, name="{proj_name}")
 
 
     # rgister model to admin direct by passing every model that you
@@ -108,7 +105,7 @@ reg_blueprints = [
 ]
 
 
-@base.route('/', methods=["POST", "GET"])
+@base.route("/", methods=["POST", "GET"])
 def index():
   context = {f1}
     "project_name": "{proj}",

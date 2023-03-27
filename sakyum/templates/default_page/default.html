@@ -37,7 +37,7 @@
 
         <div class="head_right">
           {% if current_user.is_authenticated %}
-            <img src="{{ url_for('auth.download_file', filename=current_user.user_img) }}" alt="" class="user_default_img">
+            <img src="{{ url_for('auth.profile_image', filename=current_user.user_img) }}" alt="" class="user_default_img">
           {% else %}
             <a href="https://github.com/usmanmusa1920/sakyum" class="link_0" target="_blank">Github</a>
           {% endif %}

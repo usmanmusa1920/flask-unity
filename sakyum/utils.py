@@ -180,10 +180,10 @@ class Security:
   we follow the base64 pattern of [^A-Za-z0-9+/=] that should never appear in base64, (in reqex)
   """
   
-  token_sm_alpha = 'abcdefghijklmnopqrstuvwxyz'
+  token_sm_alpha = "abcdefghijklmnopqrstuvwxyz"
   token_cap_alpha = token_sm_alpha.upper()
-  token_num = '0123456789'
-  token_char = '/+='
+  token_num = "0123456789"
+  token_char = "/+="
   token_sum = token_sm_alpha + token_cap_alpha + token_num
   
   """
@@ -196,7 +196,7 @@ class Security:
   token_times = token_sum * 2
   token_list = list(token_times)
   random.shuffle(token_list) # shuffling the above list
-  token_generate = ''.join(token_list)
+  token_generate = "".join(token_list)
   
   def __init__(self, token_generate = token_generate):
     self.token_generate = "".join(token_generate)
@@ -230,9 +230,9 @@ class Security:
     the return type of the key is bytes
     """
     key = hashlib.pbkdf2_hmac(
-        'sha256', # The hash digest algorithm for HMAC
-        passwd.encode('utf-8'), # Convert the password to bytes
-        salt.encode('utf-8'), # Convert the salt to bytes
+        "sha256", # The hash digest algorithm for HMAC
+        passwd.encode("utf-8"), # Convert the password to bytes
+        salt.encode("utf-8"), # Convert the salt to bytes
         itter, # iteration type is integer
         dklen=128 # Get a 128 byte key
     )
@@ -252,7 +252,7 @@ class Security:
     hash_result = hashlib.sha256(str.encode(str(b64_encode))).hexdigest()
 
     # salt + iteration + hash_result, type is string
-    secure_ingredient = '%s%d%s' % (salt, itter, hash_result)
+    secure_ingredient = "%s%d%s" % (salt, itter, hash_result)
     
     # return types of the list is string all, access it by print(self.get_hash.__annotations__)
     return [hash_result, secure_ingredient]

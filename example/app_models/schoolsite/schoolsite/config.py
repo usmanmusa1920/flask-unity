@@ -2,11 +2,8 @@
 from flask_admin import Admin
 from flask import Flask
 from sakyum.blueprint import adminModelRegister
-from sakyum.contrib import ext_lst, db, login_manager
+from sakyum.contrib import ext_lst, db
 from .secret import Config
-
-# to change login redirect page
-# login_manager.login_view = 'auth.adminRegister'
 
 
 def create_app(reg_blueprints=False, conf=Config):

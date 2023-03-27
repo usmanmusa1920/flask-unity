@@ -28,13 +28,4 @@ class DB:
     db_pulldata
     db_pushdata
     db_cleaned
-
-    Note::
-      alembic prototype in each app model
-      how to query all database record at once for `db_pulldata`
-      login_refresh
-      mod_wsgi
-      test deployment
-
-      intro mapp(using function) for blueprint and models
 """

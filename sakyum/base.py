@@ -57,7 +57,7 @@ class BaseStructure:
     
 
   def append_exs_to_file(self, fls_name=False, _exs_=".py", name=None):
-    """append .py extension for files if _exs_ value is ".py" or type is str, else if _exs_ type is list, make list of static files `['index.html', 'index.js', 'style.css']` """
+    """append .py extension for files if _exs_ value is ".py" or type is str, else if _exs_ type is list, make list of static files `["index.html", "index.js", "style.css"]` """
 
     if type(_exs_) == list:
       name, exst = self._exs_first, self._exs_last
@@ -133,7 +133,7 @@ class BaseStructure:
     
     if is_app:
       for _fls in fls:
-        app_name = os.getcwd().split('/')[-1]
+        app_name = os.getcwd().split("/")[-1]
         sp.run(shlex.split(f"{fls_cmd} {_fls}"))
         if is_static_file:
           # building app default files (html, css, js)
@@ -383,7 +383,7 @@ class Boot:
       parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
       parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
       args = parser.parse_args()
-      the_proj = os.getcwd().split('/')[-1]
+      the_proj = os.getcwd().split("/")[-1]
       
       if args.app.lower() == __title__:
         print()
@@ -404,8 +404,9 @@ class Boot:
       args = parser.parse_args()
       self.p = args.port
       self.h = args.host
-      if os.environ.get("FLASK_DEBUG"):
-        self.d = os.environ.get("FLASK_DEBUG")
+      if os.environ.get("FLASK_DEBUG") and os.environ.get("FLASK_DEBUG") == "1":
+        self.d = True
+        logger.info(" * You have set an environment variable of `FLASK_DEBUG` to '1'")
       else:
         self.d = args.debug
       
@@ -416,9 +417,6 @@ class Boot:
       parser.add_argument("--username", "-u", required=False, type=str, metavar="", help="What is the username?")
       parser.add_argument("--email", "-e", required=False, type=str, metavar="", help="What is the email?")
       parser.add_argument("--password", "-p", required=False, type=str, metavar="", help="What is the password?")
-      """
-        Warning: don't put your password using `-p` flag, onlyif you are testing
-      """
       parser.add_argument(dest="create_user", default="create_user", type=str, metavar="", help="Put positional argument of `create_user` to create user")
       args = parser.parse_args()
 
@@ -448,7 +446,7 @@ class Boot:
       email = auth_result[1]
       raw_password = auth_result[2]
 
-      hashed_password = self.pwd_hash.generate_password_hash(raw_password).decode('utf-8')
+      hashed_password = self.pwd_hash.generate_password_hash(raw_password).decode("utf-8")
       user = self.model(username=username, email=email, password=hashed_password, is_admin=True)
       self.db.session.add(user)
       self.db.session.commit()
