@@ -7,11 +7,9 @@ Welcome to the chapter that will talk about how to do database migration with `a
 
 **Migrations** are very powerful and let you change your models over time, as you develop your project, without the need to delete your database or tables and make new ones - it specializes in upgrading your database live, without losing data. More will be gist later.
 
-`Alembic` is a very useful library we can use for our database migrations. when we are working with Flask Framework we need a tool which can handle the database migrations. Alembic is widely used for migrations. Let us start how to use alembic. First install `alembic` by::
+`Alembic` is a very useful library we can use for our database migrations. when we are working with Flask Framework we need a tool which can handle the database migrations. Alembic is widely used for migrations. Alembic version `1.10.2` come with (Mako=1.2.4, MarkupSafe=2.1.2, SQLAlchemy=2.0.7, greenlet=2.0.2, typing-extensions=4.5.0) extensions, let us start how to use alembic.
 
-  pip install alembic
-
-After installing the alembic we need to initialize the alembic to our working project directory (parent) directory, by running the following command::
+First we need to initialize the alembic to our working project directory (parent) directory, by running the following command::
 
   alembic init alembic
 

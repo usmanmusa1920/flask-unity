@@ -14,7 +14,7 @@
 
 
 __title__ = "sakyum"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __author__ = "Usman Musa"
 __author_email__ = "usmanmusa1920@gmail.com"
 __author_website__ = "https://usmanmusa1920.github.io"

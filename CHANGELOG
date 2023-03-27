@@ -1,8 +1,12 @@
 Change Log
 ==========
 
-0.0.5 (27/march/2023)
+0.0.6 (27/march/2023)
 ------------------
+- Sixth Release
+
+Alembic is included as dependency (in the require module list)
+
 - Fifth Release
 
 In fifith release, we handle how default user file system tricks is, things like when user change his profile picture.
