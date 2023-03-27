@@ -50,7 +50,7 @@ For Autogenerating Multiple MetaData collections, you can pass a list of models 
 
 Lastly make the migrations (Create a Migration Script) by runnig the following command::
 
-  alembic revision --autogenerate -m "Added table"
+  alembic revision --autogenerate -m "Added tables"
 
 Before, in the `alembic/versions` directory there is nothing inside, but now after running the above command, alembic generate our first migration commit file in versions folder `(alembic/versions)`, you can see the version file now in the versions folder, for simplicity the structure look like::
 
@@ -61,9 +61,9 @@ Before, in the `alembic/versions` directory there is nothing inside, but now aft
   ├── README
   ├── script.py.mako
   └── versions
-      ├── 83241ca0f125_added_table.py
+      ├── 9fa76cb2d815_added_tables.py
       └── __pycache__
-          └── 83241ca0f125_added_table.cpython-310.pyc
+          └── 9fa76cb2d815_added_tables.cpython-310.pyc
 
   3 directories, 6 files
 Every commit we did, it will generate the migration file in the `(alembic/versions)` directory.

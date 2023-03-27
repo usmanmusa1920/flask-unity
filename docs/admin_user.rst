@@ -21,6 +21,13 @@ This can be done by given the `create_user` position argument and flags together
   python thunder.py create_user --username network-engineer --email network-engineer@datacenter.com --password p@s$w0d
 
 
+``Warning:`` don't use the `-p` flag to specify user password, do so only if you are testing (not in production) by just giving the user username, and email address, then enter, where as the password will be prompt to enter it, like:
+
+.. code-block:: python
+
+  python thunder.py create_user -u network-engineer -e network-engineer@datacenter.com
+
+
 **Admin user using prompt:**
 
 This can be done by only given the `create_user` position argument and then hit tab, e.g::

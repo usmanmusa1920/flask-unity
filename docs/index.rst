@@ -35,7 +35,7 @@ Table of content
   example/index
   admin_user
   auth_routes
-  templates_and_static
+  templates_and_static_and_filesystem
   database
   mod_wsgi
   email

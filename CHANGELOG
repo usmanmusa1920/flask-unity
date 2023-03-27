@@ -1,8 +1,12 @@
 Change Log
 ==========
 
-0.0.4 (5/march/2023)
+0.0.5 (27/march/2023)
 ------------------
+- Fifth Release
+
+In fifith release, we handle how default user file system tricks is, things like when user change his profile picture.
+
 - Fourth Release
 
 In this release we handle how we can customise the admin html page by inheriting (extends) it in our project templates/admin directory, and the admin page on how to bind models in the admin. Also I refactor other libraries that this package needs with their corresponding versions in the setup.py and requirements.txt files. In this release good documentations is well packed.

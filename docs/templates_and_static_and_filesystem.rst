@@ -13,4 +13,4 @@ A default directory in which you can customise admin page is created in the (tem
 File system storage
 ===================
 
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed voluptate dicta ut harum, unde quisquam blanditiis libero, dolorem aut natus, debitis cupiditate accusamus ducimus adipisci accusantium quam dignissimos pariatur. Alias?
+The default directory where files will be saved is called `media` which is in the project directory. In the media directory there is a default user profile image called `default_img.png`, and if user change profile image it will be available in that directory (saved).

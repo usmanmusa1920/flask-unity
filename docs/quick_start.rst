@@ -28,28 +28,21 @@ or create a file and paste the below codes which is equivalent of the above, and
 
   project("schoolsite")
 
-Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **auth**, **static**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
+Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **media**, **static**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
 
 Tree structure of the project using **tree .** command look like:
 
 .. code-block::
 
   .
-  ├── auth
-  │   ├── admin.py
-  │   ├── forms.py
-  │   ├── __init__.py
-  │   ├── models.py
-  │   └── routes.py
+  ├── media
+  │   └── default_img.png
   ├── schoolsite
   │   ├── config.py
   │   ├── __init__.py
   │   ├── routes.py
   │   └── secret.py
   ├── static
-  │   ├── auth
-  │   │   └── media
-  │   │       └── default_img.png
   │   └── schoolsite
   │       ├── index.js
   │       ├── media
@@ -61,7 +54,7 @@ Tree structure of the project using **tree .** command look like:
   │       └── index.html
   └── thunder.py
 
-  10 directories, 15 files
+  8 directories, 10 files
 
 Boot up the flask server by running the below command::
 
@@ -87,12 +80,6 @@ Now the **tree .** structure of the project after creating **exam** app look lik
 .. code-block::
 
   .
-  ├── auth
-  │   ├── admin.py
-  │   ├── forms.py
-  │   ├── __init__.py
-  │   ├── models.py
-  │   └── routes.py
   ├── default.db
   ├── exam
   │   ├── admin.py
@@ -100,15 +87,14 @@ Now the **tree .** structure of the project after creating **exam** app look lik
   │   ├── __init__.py
   │   ├── models.py
   │   └── views.py
+  ├── media
+  │   └── default_img.png
   ├── schoolsite
   │   ├── config.py
   │   ├── __init__.py
   │   ├── routes.py
   │   └── secret.py
   ├── static
-  │   ├── auth
-  │   │   └── media
-  │   │       └── default_img.png
   │   ├── exam
   │   │   ├── index.js
   │   │   ├── media
@@ -126,7 +112,7 @@ Now the **tree .** structure of the project after creating **exam** app look lik
   │       └── index.html
   └── thunder.py
 
-  14 directories, 24 files
+  12 directories, 19 files
 
 You notice it create a package name with thesame name of the app (**exam**) with some files in it, also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
@@ -153,7 +139,6 @@ registering blueprint
     blueprint.default,
     blueprint.errors,
     blueprint.auth,
-    auth2,
     base,
     exam,
   ]
@@ -191,6 +176,8 @@ For development server, you can give a debug value to True by specifying **-d** 
   # or
 
   python thunder.py boot --port 7000 --debug True
+
+You can change your default profile picture by moving to http://127.0.0.1:5000/admin/change_profile_image/ and select your new picture from yourfile system.
 
 With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.
 
