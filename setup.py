@@ -2,14 +2,13 @@
 
 from setuptools import setup
 from setuptools import find_packages
-from sakyum import (__title__, __version__, __author__, __author_email__, __repository__, __website__)
 
 
 setup(
   
   # name of the main package (base folder)
-  name=__title__,
-  version=__version__,
+  name = "sakyum",
+  version = "0.0.5",
   description='An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs',
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
   long_description_content_type="text/markdown",
@@ -17,10 +16,10 @@ setup(
   # platforms='any',
   
   # The URL of your package's (project) home page e.g. github link
-  url=__website__,
-  repo=__repository__,
-  author=__author__,
-  author_email=__author_email__,
+  url = "https://sakyum.readthedocs.io",
+  repo = "https://github.com/usmanmusa1920/sakyum",
+  author = "Usman Musa",
+  author_email = "usmanmusa1920@gmail.com",
   License='MIT',
   classifiers = [
     'Development Status :: 5 - Production/Stable',
