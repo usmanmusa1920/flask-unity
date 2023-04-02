@@ -72,6 +72,8 @@ Once this file generates we are ready for database migration. To migrate we are 
 
 Once you run the above command your tables will be generated in your database. This is how to use alembic for your database, there are many you can do so, hit to the `alembic <https://alembic.sqlalchemy.org>`_ website for more clarification.
 
+Each time the database models change, repeat the migrate and upgrade commands.
+
 Hint
 ----
 

@@ -4,8 +4,8 @@ This tutorial will be a continuation of the `quick start <https://sakyum.readthe
 
 **Note** that, you can write your views or models like the way you usually write them when using flask without sakyum. It work great, nothing change.
 
-schoolsite
-==========
+schoolsite project
+==================
 
 .. toctree::
   :maxdepth: 2
