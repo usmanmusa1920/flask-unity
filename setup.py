@@ -5,8 +5,7 @@ from setuptools import find_packages
 
 
 setup(
-  # name of the main package (base folder)
-  name = "sakyum",
+  name = "sakyum", # name of the main package (base folder)
   version = "0.0.7",
   description = "An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs",
   long_description=open("README.md").read() + "\n\n" + open("CHANGELOG").read(),
@@ -14,7 +13,6 @@ setup(
   python_requires=">=3.6",
   # platforms="any",
   
-  # The URL of your package's (project) home page e.g. github link
   url = "https://sakyum.readthedocs.io",
   repo = "https://github.com/usmanmusa1920/sakyum",
   author = "Usman Musa",
@@ -45,7 +43,7 @@ setup(
   # py_modules=[""] # list of files (modules) that are not in any directory (at the root dir)
   # the libraries it depends on
   
-  # List of other python modules which this module depends on.  For example RPi.GPIO
+  # List of other python modules which this module depends on. For example RPi.GPIO
   install_requires = [
     "alembic==1.9.4",
     "bcrypt==4.0.1",

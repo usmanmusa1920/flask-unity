@@ -1,0 +1,27 @@
+<!-- @sakyum, exam index.html page -->
+{% extends "schoolsite/index.html" %}
+
+{% block head_css %}
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('exam.static', filename='style.css') }}"> -->
+{% endblock head_css %}
+
+{% block head_js %}
+  <script src="{{ url_for('exam.static', filename='index.js') }}"></script>
+{% endblock head_js %}
+
+
+{% block short_info %}
+  {% if current_user.is_authenticated %}
+      <p>Hi {{ current_user.username }}! from your (exam) project app</p>
+    {% else %}
+      <p>Your (exam) app says, please login</p>
+    {% endif %}
+{% endblock short_info %}
+
+
+{% block main %}
+  <h3><pre>(exam) app
+=========================================
+   Your exam application default pages   
+=========================================</pre></h3>
+{% endblock main %}

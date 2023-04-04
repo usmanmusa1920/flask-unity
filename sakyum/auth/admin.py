@@ -19,10 +19,12 @@ class UserAdminView(ModelView):
   column_default_sort = ("username", True)
   # List of columns that can be used to filter.
   column_filters = ("username",)
+  
 
   def is_accessible(self):
     return current_user.is_authenticated
-
+    
+    
   def inaccessible_callback(self, name, **kwargs):
     # redirect to login page if user doesn't have access
     return redirect(url_for("auth.adminLogin", next=request.url))
