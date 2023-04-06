@@ -5,19 +5,19 @@ from setuptools import find_packages
 
 
 setup(
-  name = "sakyum", # name of the main package (base folder)
+  name = "sakyum", # name of the main package (base folder i.e sakyum)
   version = "0.0.7",
   description = "An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs",
-  long_description=open("README.md").read() + "\n\n" + open("CHANGELOG").read(),
+  long_description = open("README.md").read() + "\n\n" + open("CHANGELOG").read(),
   long_description_content_type="text/markdown",
-  python_requires=">=3.6",
+  python_requires = ">=3.6",
   # platforms="any",
   
   url = "https://sakyum.readthedocs.io",
   repo = "https://github.com/usmanmusa1920/sakyum",
   author = "Usman Musa",
   author_email = "usmanmusa1920@gmail.com",
-  License="MIT",
+  License = "MIT",
   classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
@@ -34,11 +34,11 @@ setup(
   ],
   
   # used when people are searching for a module, keywords separated with a space
-  keywords="sakyum",
+  keywords = "sakyum",
   include_package_data = True, # include files listed in MANIFEST.in
   
   # The list of packages(directories) for your library
-  packages=find_packages(), # OR packages=["sakyum"] 
+  packages = find_packages(), # OR packages=["sakyum"] 
   # If your package is a single module, use this instead of "packages":
   # py_modules=[""] # list of files (modules) that are not in any directory (at the root dir)
   # the libraries it depends on
