@@ -78,6 +78,7 @@ See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 ## Useful links
 
 - Documentation: https://sakyum.readthedocs.io
+<!-- - Repository: https://github.com/usmanmusa1920/sakyum -->
 - PYPI Release: https://pypi.org/project/sakyum
 
 Pull requests are welcome
