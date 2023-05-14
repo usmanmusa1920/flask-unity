@@ -75,6 +75,10 @@ visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there
 
 See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 
+### Sakyum default page
+
+![Sakyum default page](./media/sakyum_default_page.png)
+
 ## Useful links
 
 - Documentation: https://sakyum.readthedocs.io
