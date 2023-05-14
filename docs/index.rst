@@ -39,6 +39,7 @@ Table of content
   database
   mod_wsgi
   deployment
+  docker_docs
 
 
 Useful links:
