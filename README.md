@@ -80,6 +80,6 @@ See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 - Documentation: https://sakyum.readthedocs.io
 <!-- - Repository: https://github.com/usmanmusa1920/sakyum -->
 - PYPI Release: https://pypi.org/project/sakyum
-- Docker example: https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum_demo"
+- Docker example: https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum_demo
 
 Pull requests are welcome
