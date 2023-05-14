@@ -11,7 +11,7 @@ git clone https://github.com/usmanmusa1920/sakyum.git
 Now cd into the project folder you just clone to spin up the services using the command::
 
 ```
-cd /sakyum/example/sakyum_demo
+cd sakyum/example/sakyum_demo
 ```
 
 To spinup the services, run the command::
@@ -24,6 +24,7 @@ you can use the command below instead of the above, in other to see how it build
 
 ```
 docker-compose up --build
+```
 
 Once the services build up, you can visit it at `http://0.0.0.0:5000`, also you can login with these credentials, where username is: `backend-developer` and the password is: `123456`
 
