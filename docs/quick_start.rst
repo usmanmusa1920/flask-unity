@@ -3,7 +3,7 @@
 Quick start
 ###########
 
-First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtualenvironment
+First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtual environment
 
 Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) it might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
@@ -11,10 +11,10 @@ You will notice we use **--upgrade** in the installation command, this will make
 
   pip install --upgrade sakyum
 
-This **quick start** will walk you through creating project called **schoolsite** and a basic application called **exam*** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `sakyum`, you will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum>`_. it is located inside example directory of the base repository.
+This **quick start** will walk you through creating project called **schoolsite** and a basic application called **exam** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `sakyum`, you will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum>`_. it is located inside example directory of the base repository.
 
 Create flask project using sakyum
-============================================
+=================================
 
 Now after the installation, let create a project called **schoolsite** to do so paste the following command on your termianl::
 
@@ -177,7 +177,7 @@ For development server, you can give a debug value to True by specifying **-d** 
 
   python thunder.py boot --port 7000 --debug True
 
-You can change your default profile picture by moving to http://127.0.0.1:5000/admin/change_profile_image/ and select your new picture from yourfile system.
+You can change your default profile picture by moving to http://127.0.0.1:5000/admin/change_profile_image/ and select your new picture from your file system.
 
 With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.
 
