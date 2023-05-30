@@ -11,6 +11,7 @@ from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
 
+OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
 upload_folder = os.environ.get("FLASK_UPLOAD_FOLDER")
 origin_path = os.environ.get("FLASK_ORIGIN_PATH")
 allowed_extensions = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
@@ -113,7 +114,7 @@ def profile_image(filename):
   this function help to show current user profile image, it won't download it
   like the `download_file` function below does
   """
-  return send_file(upload_folder + "/" + filename)
+  return send_file(upload_folder + OS_SEP + filename)
   
 
 @auth.route("/media/<path:filename>")
@@ -155,7 +156,7 @@ def changeProfileImage():
       user = User.query.filter_by(username=current_user.username).first()
       if user:
         if user.user_img != "default_img.png":
-          r = str(origin_path) + "/media/" + user.user_img
+          r = str(origin_path) + OS_SEP + "media" + OS_SEP + user.user_img
           if os.path.exists(r):
             os.remove(r)
         user.user_img = file_name

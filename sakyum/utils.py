@@ -14,7 +14,8 @@ from sakyum import __version__
 
 
 # relative path to the package folder (sakyum)
-rel_path = Path(__file__).resolve().parent
+REL_PATH = Path(__file__).resolve().parent
+OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
 
 
 def static_dir(app, static_from_pkg=False, os_name: "nt or posix"=os.name):
@@ -22,14 +23,10 @@ def static_dir(app, static_from_pkg=False, os_name: "nt or posix"=os.name):
     relative path to static files
     if `static_from_pkg` is not false, it will use the directory name that is in the library package which is `static`, else it will use for project `static` directory
   """
-  if os_name == "nt":
-    if static_from_pkg:
-      return str(rel_path) + "\static\\" + app
-    return os.getcwd() + "\static\\" + app
-  else:
-    if static_from_pkg:
-      return str(rel_path) + "/static/" + app
-    return os.getcwd() + "/static/" + app
+
+  if static_from_pkg:
+      return str(REL_PATH) + OS_SEP + "static" + OS_SEP + app
+  return os.getcwd() + OS_SEP + "static" + OS_SEP + app
   
 
 def template_dir(temp_from_pkg=False, os_name=os.name):
@@ -37,14 +34,10 @@ def template_dir(temp_from_pkg=False, os_name=os.name):
     relative path to html page
     if `temp_from_pkg` is not false, it will use the directory name that is in the library package which is `templates`, else it will use for project `templates` directory
   """
-  if os_name == "nt":
-    if temp_from_pkg:
-      return str(rel_path) + "\\templates\\" + temp_from_pkg
-    return os.getcwd() + "\\templates"
-  else:
-    if temp_from_pkg:
-      return str(rel_path) + "/templates/" + temp_from_pkg
-    return os.getcwd() + "/templates"
+
+  if temp_from_pkg:
+    return str(REL_PATH) + OS_SEP + "templates" + OS_SEP + temp_from_pkg
+  return os.getcwd() + OS_SEP + "templates"
   
 
 def stylePage(name, version=False):

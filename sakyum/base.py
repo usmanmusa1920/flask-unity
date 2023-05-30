@@ -5,6 +5,7 @@ import sys
 import shlex
 import logging
 import argparse
+import platform
 import subprocess as sp
 
 from pathlib import Path
@@ -38,11 +39,12 @@ from . import __version__
 
 formatter = "[+] [%(asctime)s] [%(levelname)s] %(message)s"
 logging.basicConfig(format = formatter)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
 
 # used for relative path to default image to copy for a project (only)
 ORIGIN = Path(__file__).resolve().parent
+OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
 
 
 class BaseStructure:
@@ -94,16 +96,40 @@ class BaseStructure:
 
   def instanciate_default_img(self):
     """instanciate user default image"""
-    with open(str(ORIGIN) + "/static/default_style/media/default_img.png", mode="rb") as img_read:
+    file_path = os.path.join(ORIGIN, "static", "default_style", "media", "default_img.png")
+    with open(file_path, mode="rb") as img_read:
       img_read_data = img_read.read()
     with open("default_img.png", mode="wb") as img_write:
       img_write.write(img_read_data)
       
 
   def file_opt(self, _dir, tree=True, _here=False, _where=False):
-    """make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True"""
+    """
+    make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True
+    """
+
+    # we can use any of the below three variables to make our code compatible with many OS
+    os_name = os.name # nt or posix
+    platform_name_1 = sys.platform # win32 or linux or darwin or android
+    platform_name_2 = platform.system() # Windows, Darwin, Linux, etc.
+
     if tree:
-      sp.run(["mkdir", "-p", _dir])
+      if os_name == "nt":
+      # if platform_name_1 == "win32":
+      # if platform_name_2 == "Windows":
+        os.makedirs(_dir, exist_ok=True)
+        # The exist_ok=True argument ensures that the function
+        # does not raise an exception if the directory already exists.
+      elif os_name == "posix":
+      # elif platform_name_1 == "linux" or platform_name_1 == "darwin" or platform_name_1 == "android":
+      # elif platform_name_2 == "Linux" or platform_name_2 == "Darwin":
+        sp.run(["mkdir", "-p", _dir])
+      else:
+        err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+        print()
+        LOGGER.error(err_compt)
+        print()
+        exit()
     if _here:
       os.chdir(os.path.join(_here, _dir))
     if _where:
@@ -121,7 +147,7 @@ class BaseStructure:
       if i in name:
         name_err = f"[{un_accept_char}] are characters that are not allowed to be in your {proj_or_app} name, we found `{i}` in the name ({name})\n"
         print()
-        logger.error(name_err)
+        LOGGER.error(name_err)
         exit()
       
 
@@ -133,7 +159,7 @@ class BaseStructure:
     
     if is_app:
       for _fls in fls:
-        app_name = os.getcwd().split("/")[-1]
+        app_name = os.getcwd().split(OS_SEP)[-1]
         sp.run(shlex.split(f"{fls_cmd} {_fls}"))
         if is_static_file:
           # building app default files (html, css, js)
@@ -162,7 +188,7 @@ class BaseStructure:
   def dir_tree(self, proj_name=None):
     """create a directory tree where file will reserved as well as modules too"""
     self.validateProjectOrAppName(proj_name, type_of=True)
-    dirs = [proj_name, f"{proj_name}/{proj_name}", "media", "templates", "static"]
+    dirs = [proj_name, f"{proj_name}{OS_SEP}{proj_name}", "media", "templates", "static"]
     
     # default files of project sub folder, except `thunder` which is for project base dir
     fls_name = ["__init__", "config", "routes", "secret", "thunder"]
@@ -172,12 +198,12 @@ class BaseStructure:
     # check if the project already exist
     if os.path.exists(os.path.join(_here, proj_name)):
       print(f"\nProject ({proj_name}) already exist in this directory\n\t" + os.path.realpath(proj_name))
-      logger.info(_here)
+      LOGGER.info(_here)
       print()
     else:
       # making directories trees and their default files in the loop
       for _dir in dirs:
-        if _dir == dirs[0] + "/" + dirs[0]:
+        if _dir == dirs[0] + OS_SEP + dirs[0]:
           self.file_opt(_dir, _here=_here)
           # create default modules inside project sub dir
           for _fls in fls:
@@ -220,7 +246,7 @@ class BaseStructure:
               static_base_dir = os.getcwd() # base dir path of static folder
               
               # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
-              self.file_opt(proj_name, _where=os.getcwd()+"/"+proj_name)
+              self.file_opt(proj_name, _where=os.getcwd()+OS_SEP+proj_name)
               # storing the project static dir path before creating any thing and cd into media
               s_p_dir = os.getcwd()
               self.file_opt("media", _where="media") # make media dir for project
@@ -240,7 +266,7 @@ class BaseStructure:
           os.chdir(_here)
 
       print()
-      logger.info(f"Project ({proj_name}) created successfully!")
+      LOGGER.info(f"Project ({proj_name}) created successfully!")
       print()
       
 
@@ -281,12 +307,12 @@ class AppStructure(BaseStructure):
     _here_app = os.getcwd()  # initial `inside project folder` (parent) directory
     
     # check if the app already exist
-    app_proj_name = _here_app.split("/")[-1]
+    app_proj_name = _here_app.split(OS_SEP)[-1]
     self.proj_store_name = app_proj_name
 
     if os.path.exists(os.path.join(_here_app, proj_app_name)):
       print(f"\nApp ({proj_app_name}) already exist in this project ({app_proj_name})\n\t" + os.path.realpath(proj_app_name))
-      logger.info(_here_app)
+      LOGGER.info(_here_app)
       print()
     else:
       # making directories trees and their default files
@@ -307,7 +333,7 @@ class AppStructure(BaseStructure):
       self.file_opt("media") # an app media folder
       self.file_opt("do_nothing", tree=False, _where=_here_app) # back to project dir
       print()
-      logger.info(f"App ({proj_app_name}) created successfully! in {app_proj_name}")
+      LOGGER.info(f"App ({proj_app_name}) created successfully! in {app_proj_name}")
       print()
       
 
@@ -373,7 +399,7 @@ class Boot:
       --debug , -d   Do you want debug?"""
     if len(sys.argv) == 1:
       print()
-      logger.error(f"please run the module with positional argument and flag if needed\n{error_ref_1}")
+      LOGGER.error(f"please run the module with positional argument and flag if needed\n{error_ref_1}")
       exit()
 
     if sys.argv[1] == "create_app":
@@ -383,15 +409,15 @@ class Boot:
       parser.add_argument("--app", "-a", required=True, type=str, metavar="", help="What is the app name")
       parser.add_argument(dest="create_app", default="create_app", type=str, metavar="", help="Put positional argument of `create_app` to create app, app are create inside your project")
       args = parser.parse_args()
-      the_proj = os.getcwd().split("/")[-1]
+      the_proj = os.getcwd().split(OS_SEP)[-1]
       
       if args.app.lower() == __title__:
         print()
-        logger.error(f"Not allowed to use ({__title__}) package name as an app name\n")
+        LOGGER.error(f"Not allowed to use ({__title__}) package name as an app name\n")
         exit()
       elif args.app == the_proj:
         print()
-        logger.error(f"Not allowed to use your ({the_proj}) project name as an app name\n")
+        LOGGER.error(f"Not allowed to use your ({the_proj}) project name as an app name\n")
         exit()
       app_init(args.app)
 
@@ -406,11 +432,11 @@ class Boot:
       self.h = args.host
       if os.environ.get("FLASK_DEBUG") and os.environ.get("FLASK_DEBUG") == "1":
         self.d = True
-        logger.info(" * You have set an environment variable of `FLASK_DEBUG` to '1'")
+        LOGGER.info(" * You have set an environment variable of `FLASK_DEBUG` to '1'")
       else:
         self.d = args.debug
       
-      # logger.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
+      # LOGGER.info(f"@{__title__} v{__version__} | visit: http://localhost:{args.port} (for development)")
       
     elif sys.argv[1] == "create_user":
       parser = argparse.ArgumentParser(prog="create user", description="This create user")
@@ -451,9 +477,9 @@ class Boot:
       self.db.session.add(user)
       self.db.session.commit()
       print()
-      logger.info(f"One user record added ({username})\n")
+      LOGGER.info(f"One user record added ({username})\n")
       exit()
     else:
       print()
-      logger.error(f"use a valid positional argument and flag if needed\n{error_ref_2}")
+      LOGGER.error(f"use a valid positional argument and flag if needed\n{error_ref_2}")
       exit()

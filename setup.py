@@ -6,25 +6,24 @@ from setuptools import find_packages
 
 setup(
   name = "sakyum", # name of the main package (base folder i.e sakyum)
-  version = "0.0.7",
+  version = "0.0.8",
   description = "An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs",
   long_description = open("README.md").read() + "\n\n" + open("CHANGELOG").read(),
   long_description_content_type="text/markdown",
   python_requires = ">=3.6",
-  # platforms="any",
+  platforms="any",
   
   url = "https://sakyum.readthedocs.io",
-  repo = "https://github.com/usmanmusa1920/sakyum",
   author = "Usman Musa",
   author_email = "usmanmusa1920@gmail.com",
-  License = "MIT",
+  license = "MIT",
   classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Intended Audience :: Developers",
     "Natural Language :: English",
-    "Operating System :: POSIX :: Linux",
-    # "Operating System :: OS Independent",
+    # "Operating System :: POSIX :: Linux",
+    "Operating System :: OS Independent",
     "License :: OSI Approved :: MIT License",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Programming Language :: Python",
