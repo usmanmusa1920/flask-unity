@@ -5,6 +5,7 @@ from . import l1
 from . import secure_app
 from . import long_comment
 
+# Some variable name will be change to our convention which is upper-case
 
 def pro_init_dummy():
   return f"""from .config import create_app

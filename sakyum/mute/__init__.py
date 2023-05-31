@@ -13,6 +13,8 @@ f2 = "{{"
 l2 = "}}"
 long_comment = "\"\"\""
 
+# Some variable name will be change to our convention which is upper-case
+
 
 def thunder_dummy(project):
   return f"""from sakyum import Boot

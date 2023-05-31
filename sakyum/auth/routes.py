@@ -16,6 +16,11 @@ upload_folder = os.environ.get("FLASK_UPLOAD_FOLDER")
 origin_path = os.environ.get("FLASK_ORIGIN_PATH")
 allowed_extensions = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
 
+# the above later will be change to:
+# UPLOAD_FOLDER = os.environ.get("FLASK_UPLOAD_FOLDER")
+# ORIGIN_PATH = os.environ.get("FLASK_ORIGIN_PATH")
+# ALLOWED_EXTENSIONS = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
+
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
 @login_required
