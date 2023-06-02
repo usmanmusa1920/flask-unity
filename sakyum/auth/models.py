@@ -1,4 +1,5 @@
-# from sakyum software, your (schoolsite) project auth models.py file
+# -*- coding: utf-8 -*-
+
 from datetime import datetime
 from sakyum.contrib import db, login_manager
 from flask_login import UserMixin

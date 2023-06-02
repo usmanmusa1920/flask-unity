@@ -1,4 +1,5 @@
-# from sakyum software, your (schoolsite) project auth routes.py file
+# -*- coding: utf-8 -*-
+
 import os
 import secrets
 from werkzeug.utils import secure_filename
@@ -12,14 +13,9 @@ from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
 
 OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
-upload_folder = os.environ.get("FLASK_UPLOAD_FOLDER")
-origin_path = os.environ.get("FLASK_ORIGIN_PATH")
-allowed_extensions = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
-
-# the above later will be change to:
-# UPLOAD_FOLDER = os.environ.get("FLASK_UPLOAD_FOLDER")
-# ORIGIN_PATH = os.environ.get("FLASK_ORIGIN_PATH")
-# ALLOWED_EXTENSIONS = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
+UPLOAD_FOLDER = os.environ.get("FLASK_UPLOAD_FOLDER")
+ORIGIN_PATH = os.environ.get("FLASK_ORIGIN_PATH")
+ALLOWED_EXTENSIONS = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
 
 
 @auth.route("/admin/register/", methods=["POST", "GET"])
@@ -109,7 +105,7 @@ def adminLogout():
   
 
 def allowed_file(filename):
-  return "." in filename and filename.rsplit(".", 1)[1].lower() in allowed_extensions
+  return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
   
 
 @auth.route("/profile_image/<path:filename>")
@@ -119,7 +115,7 @@ def profile_image(filename):
   this function help to show current user profile image, it won't download it
   like the `download_file` function below does
   """
-  return send_file(upload_folder + OS_SEP + filename)
+  return send_file(UPLOAD_FOLDER + OS_SEP + filename)
   
 
 @auth.route("/media/<path:filename>")
@@ -129,7 +125,7 @@ def download_file(filename):
   if we use this to show current user profile image, it won't show instead it will download it,
   so it meant for downloading media file
   """
-  return send_from_directory(upload_folder, filename, as_attachment=True)
+  return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
   
 
 def picture_name(pic_name):
@@ -157,11 +153,11 @@ def changeProfileImage():
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
       file_name = picture_name(filename)
-      file.save(os.path.join(upload_folder, file_name))
+      file.save(os.path.join(UPLOAD_FOLDER, file_name))
       user = User.query.filter_by(username=current_user.username).first()
       if user:
         if user.user_img != "default_img.png":
-          r = str(origin_path) + OS_SEP + "media" + OS_SEP + user.user_img
+          r = str(ORIGIN_PATH) + OS_SEP + "media" + OS_SEP + user.user_img
           if os.path.exists(r):
             os.remove(r)
         user.user_img = file_name

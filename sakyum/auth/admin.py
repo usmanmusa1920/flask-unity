@@ -1,4 +1,5 @@
-# from sakyum software, your (schoolsite) project auth admin.py file
+# -*- coding: utf-8 -*-
+
 from flask_login import current_user
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
