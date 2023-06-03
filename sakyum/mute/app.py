@@ -18,6 +18,7 @@ from sakyum.contrib import db
 # from .models import <app_models>
 # from .forms import <model_form>
 
+
 {app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
 
 
@@ -35,6 +36,7 @@ def app_forms_dummy():
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
+
 
 # write your app forms here!
 """
@@ -57,6 +59,7 @@ def app_admin_dummy():
   return f"""from flask_login import current_user
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
+
 
 # write your app admin model view here!
 """

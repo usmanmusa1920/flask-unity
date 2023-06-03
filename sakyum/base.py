@@ -359,7 +359,7 @@ class Boot:
     error_ref_1 = f"""\n Run the command with one of this positional arguments:\n\tcreate_app   ---   ( for creating an app within your project )\n\tboot  ---   ( for booting up your server )"""
 
     error_ref_2 = f"""
- create_app:
+  create_app:
     usage: create_app [-h] --app  [--debug]
 
     This create an app in your project
@@ -384,7 +384,7 @@ class Boot:
       --email , -e      What is the email?
       --password , -p   What is the password?
 
- boot:
+  boot:
     usage: boot up server [-h] [--port] [--host] [--debug]
 
     This boot up the server

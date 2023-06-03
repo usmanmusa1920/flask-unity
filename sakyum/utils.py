@@ -56,6 +56,10 @@ def stylePage(name, version=False):
   return [desc_center, border]
   
   
+# Style for sakyum default pages:
+    # ============================
+    #  @ sakyum software - v0.0.8 
+    # ============================
 footer_style = stylePage(__title__, version=__version__)
 
 

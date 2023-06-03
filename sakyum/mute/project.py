@@ -5,10 +5,10 @@ from . import l1
 from . import secure_app
 from . import long_comment
 
-# Some variable name will be change to our convention which is upper-case
 
 def pro_init_dummy():
   return f"""from .config import create_app
+
 
 app = create_app()
 """
@@ -18,21 +18,26 @@ def pro_secret_dummy():
   return f"""import os
 from pathlib import Path
 
-origin_path = Path(__file__).resolve().parent.parent
+
+ORIGIN_PATH = Path(__file__).resolve().parent.parent
+OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
+
 
 class Config:
   SECRET_KEY = "{secure_app}"
-  SQLALCHEMY_DATABASE_URI = "sqlite:///"+str(origin_path)+"/default.db"
+  # The `SQLALCHEMY_DATABASE_URI` might not be compatible with windows OS,
+  # change it to your windows drive like: "C:\path\to\your\default.db"
+  SQLALCHEMY_DATABASE_URI = "sqlite:///"+str(ORIGIN_PATH)+OS_SEP+"default.db"
   # set optional bootswatch theme
   FLASK_ADMIN_SWATCH = "cerulean"
-  UPLOAD_FOLDER = os.path.join(origin_path, "media")
+  UPLOAD_FOLDER = os.path.join(ORIGIN_PATH, "media")
   ALLOWED_EXTENSIONS = ("png", "jpg", "jpeg")
   MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 
 def load_env():
   os.environ["FLASK_UPLOAD_FOLDER"] = Config.UPLOAD_FOLDER
-  os.environ["FLASK_ORIGIN_PATH"] = str(origin_path)
+  os.environ["FLASK_ORIGIN_PATH"] = str(ORIGIN_PATH)
   os.environ["FLASK_ALLOWED_EXTENSIONS"] = str(Config.ALLOWED_EXTENSIONS)
 """
 
