@@ -22,9 +22,9 @@ First we are to replace the top import with the following::
   # from .forms import <model_form>
 
 
-  upload_folder = os.environ.get("FLASK_UPLOAD_FOLDER")
-  origin_path = os.environ.get("FLASK_ORIGIN_PATH")
-  allowed_extensions = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
+UPLOAD_FOLDER = os.environ.get("FLASK_UPLOAD_FOLDER")
+ORIGIN_PATH = os.environ.get("FLASK_ORIGIN_PATH")
+ALLOWED_EXTENSIONS = os.environ.get("FLASK_ALLOWED_EXTENSIONS")
 
 **Route for register:** the default route of `adminRegister` can be replace with::
 
@@ -76,41 +76,41 @@ First we are to replace the top import with the following::
 
 **Route for login** the default route of `adminLogin` can be replace with::
 
-  @custom_auth.route("/admin/login/", methods=["POST", "GET"])
-  def adminLogin():
-    """
-      the `admin_login.html` below is located in the sakyum package (templates/default_page/admin_login.html)
-    """
-    if current_user.is_authenticated:
-      return redirect(url_for("base.index"))
-    if request.method == "POST":
-      username = request.form["username"]
-      password = request.form["password"]
-      user = User.query.filter_by(username=username).first()
-      if user and bcrypt.check_password_hash(user.password, password):
-        """
-          Parameters:
-            user (object) - The user object to log in.
+@custom_auth.route("/admin/login/", methods=["POST", "GET"])
+def adminLogin():
+  """
+    the `admin_login.html` below is located in the sakyum package (templates/default_page/admin_login.html)
+  """
+  if current_user.is_authenticated:
+    return redirect(url_for("base.index"))
+  if request.method == "POST":
+    username = request.form["username"]
+    password = request.form["password"]
+    user = User.query.filter_by(username=username).first()
+    if user and bcrypt.check_password_hash(user.password, password):
+      """
+        Parameters:
+          user (object) - The user object to log in.
 
-            remember (bool) - Whether to remember the user after their session expires. Defaults to False.
+          remember (bool) - Whether to remember the user after their session expires. Defaults to False.
 
-            duration (datetime.timedelta) - The amount of time before the remember cookie expires. If None the value set in the settings is used. Defaults to None.
+          duration (datetime.timedelta) - The amount of time before the remember cookie expires. If None the value set in the settings is used. Defaults to None.
 
-            force (bool) - If the user is inactive, setting this to True will log them in regardless. Defaults to False.
+          force (bool) - If the user is inactive, setting this to True will log them in regardless. Defaults to False.
 
-            fresh (bool) - setting this to False will log in the user with a session marked as not “fresh”. Defaults to True.
-        """
-        login_user(user, remember=True)
-        flash("You are now logged in!", "success")
-        next_page = request.args.get("next")
-        return redirect(next_page) if next_page else redirect(url_for("admin.index"))
-      else:
-        flash("Login Unsuccessful. Please check username and password", "error")
-    context = {
-      "head_title": "admin login",
-      "footer_style": footer_style,
-    }
-    return render_template("admin_login.html", context=context)
+          fresh (bool) - setting this to False will log in the user with a session marked as not “fresh”. Defaults to True.
+      """
+      login_user(user, remember=True)
+      flash("You are now logged in!", "success")
+      next_page = request.args.get("next")
+      return redirect(next_page) if next_page else redirect(url_for("admin.index"))
+    else:
+      flash("Login Unsuccessful. Please check username and password", "error")
+  context = {
+    "head_title": "admin login",
+    "footer_style": footer_style,
+  }
+  return render_template("admin_login.html", context=context)
 
 
 **Route for change password** the default route of `adminChangePassword` can be replace with::
@@ -161,7 +161,7 @@ First we are to replace the top import with the following::
 **Route and functions for changing image and it route** can be replace with::
 
   def allowed_file(filename):
-    return "." in filename and filename.rsplit(".", 1)[1].lower() in allowed_extensions
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
     
 
   @custom_auth.route("/profile_image/<path:filename>")
@@ -171,7 +171,7 @@ First we are to replace the top import with the following::
     this function help to show current user profile image, it won't download it
     like the `download_file` function below does
     """
-    return send_file(upload_folder + "/" + filename)
+    return send_file(UPLOAD_FOLDER + "/" + filename)
     
 
   @custom_auth.route("/media/<path:filename>")
@@ -181,7 +181,7 @@ First we are to replace the top import with the following::
     if we use this to show current user profile image, it won't show instead it will download it,
     so it meant for downloading media file
     """
-    return send_from_directory(upload_folder, filename, as_attachment=True)
+    return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
     
 
   def picture_name(pic_name):
@@ -209,11 +209,11 @@ First we are to replace the top import with the following::
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_name = picture_name(filename)
-        file.save(os.path.join(upload_folder, file_name))
+        file.save(os.path.join(UPLOAD_FOLDER, file_name))
         user = User.query.filter_by(username=current_user.username).first()
         if user:
           if user.user_img != "default_img.png":
-            r = str(origin_path) + "/media/" + user.user_img
+            r = str(ORIGIN_PATH) + "/media/" + user.user_img
             if os.path.exists(r):
               os.remove(r)
           user.user_img = file_name
@@ -263,4 +263,6 @@ This will overwrite the default auth system for those routes. You can open the d
   {% endblock body %}
 
 
-Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from sakyum. ``but the creation of a user using the python thunder.py create_user command won't work`` for the custom model.
+Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from sakyum. Note: ``the creation of a user using the python thunder.py create_user command won't work`` for the custom model.
+
+**Source code** for the `custom auth` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/custom_auth>`_ repository of the project.

@@ -19,7 +19,7 @@ reg_blueprints = [
 ]
 
 
-@base.route('/', methods=["POST", "GET"])
+@base.route("/", methods=["POST", "GET"])
 def index():
   context = {
     "project_name": "schoolsite",

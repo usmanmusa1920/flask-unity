@@ -3,6 +3,7 @@ from flask import (render_template, Blueprint)
 from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
 from exam.views import exam
+from custom_auth.views import custom_auth
 
 
 base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("schoolsite"))
@@ -14,10 +15,11 @@ reg_blueprints = [
   blueprint.auth,
   base,
   exam,
+  custom_auth,
 ]
 
 
-@base.route('/', methods=["POST", "GET"])
+@base.route("/", methods=["POST", "GET"])
 def index():
   context = {
     "project_name": "schoolsite",

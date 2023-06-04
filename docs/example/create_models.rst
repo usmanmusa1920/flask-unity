@@ -34,20 +34,20 @@ Now below we are to start defining our model, let start with **ExamQuestionModel
 
 Now let define the **ExamChoiceModel** model which will look like::
 
-  class ExamChoiceModel(db.Model):
-    """ Exam default Choice model """
-    id = db.Column(db.Integer, primary_key=True)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    question_id = db.Column(db.Integer, db.ForeignKey('exam_question_model.id'), nullable=False)
-    # you can pass a keyword argument of `unique=True` in the below choice_text field
-    # that will make it unique across the entire table of choice
-    choice_text = db.Column(db.String(100), nullable=False)
+class ExamChoiceModel(db.Model):
+  """ Exam default Choice model """
+  id = db.Column(db.Integer, primary_key=True)
+  date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+  question_id = db.Column(db.Integer, db.ForeignKey('exam_question_model.id'), nullable=False)
+  # you can pass a keyword argument of `unique=True` in the below choice_text field
+  # that will make it unique across the entire table of choice
+  choice_text = db.Column(db.String(100), nullable=False)
 
-    def __str__(self):
-      return f"{self.choice_text}"
+  def __str__(self):
+    return f"{self.choice_text}"
 
-    def __repr__(self):
-      return f"{self.choice_text}"
+  def __repr__(self):
+    return f"{self.choice_text}"
 
 After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://sakyum.readthedocs.io/en/latest/database.html>`_ using alembic in sakyum, but we are going to skip this and just play with `api`.
 
@@ -69,21 +69,21 @@ Next call the `create_all()` method of **db** that will create the tables of our
 
 After that let us create three users instance, that will be able to create question and choice of the **ExamQuestionModel** and **ExamChoiceModel** model::
 
-  user1_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
-  user1 = User(username="backend-developer", email="developer@backend.com", password=user1_hashed_pwd)
+user1_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
+user1 = User(username="backend-developer", email="developer@backend.com", password=user1_hashed_pwd)
 
-  user2_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
-  user2 = User(username="front-developer", email="developer@front.com", password=user2_hashed_pwd)
+user2_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
+user2 = User(username="front-developer", email="developer@front.com", password=user2_hashed_pwd)
 
-  user3_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
-  user3 = User(username="quantum-developer", email="developer@quantum.com", password=user3_hashed_pwd)
+user3_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
+user3 = User(username="quantum-developer", email="developer@quantum.com", password=user3_hashed_pwd)
 
 Now we are to add and commit those users in our database::
 
-  db.session.add(user1)
-  db.session.add(user2)
-  db.session.add(user3)
-  db.session.commit()
+db.session.add(user1)
+db.session.add(user2)
+db.session.add(user3)
+db.session.commit()
 
 To make sure our users have been added in our database let query the entire User model of our project by::
 
@@ -92,14 +92,14 @@ To make sure our users have been added in our database let query the entire User
 
 Yes, our users are in the database, good jod. The next thing now is to start creating our Questions and commit them to our database::
 
-  q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
-  q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
-  q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
+q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
+q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
+q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
 
-  db.session.add(q1)
-  db.session.add(q2)
-  db.session.add(q3)
-  db.session.commit()
+db.session.add(q1)
+db.session.add(q2)
+db.session.add(q3)
+db.session.commit()
 
 To make sure our `questions` are in the database let query them to see by::
 
@@ -274,5 +274,7 @@ Save the file, that will register your related model in the admin page and you w
 Now let navigate to `http://127.0.0.1:5000/login` and login using one of the user credential, we created when we were in the python interpreter (shell), the one (user credential) that we are going to use is for the `backend-developer` (username: **backend-developer**, password: **123456**).
 
 After we logged in, now if we navigate to `http://127.0.0.1:5000/admin` we are able to see our `QuestionChoiceAdminView` view in the form of drop-down menu, if we click it, it will show list containing `Questions  and Choices` only, since the are the only once associated with that mode admin view. Now click the `Questions` this will show list of questions we have inserted in the python shell.
+
+**Source code** for the `app models` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/app_models>`_ repository of the project.
 
 See more on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation.

@@ -181,4 +181,4 @@ You can change your default profile picture by moving to http://127.0.0.1:5000/a
 
 With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.
 
-Source code for this `quick start` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/quick_start/schoolsite>`_ repository of the project.
+Source code for this `quick start` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/quick_start>`_ repository of the project.

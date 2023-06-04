@@ -30,7 +30,7 @@ def create_app(reg_blueprints=False, conf=Config):
   def admin_runner():
     # Model views allow you to add a dedicated set of admin
     # pages for managing any model in your database
-    admin = Admin(app, name='schoolsite')
+    admin = Admin(app, name="schoolsite")
 
 
     # rgister model to admin direct by passing every model that you
