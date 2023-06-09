@@ -18,16 +18,17 @@ from sakyum.contrib import db
 # from .models import <app_models>
 # from .forms import <model_form>
 
-{app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
+
+{app} = Blueprint('{app}', __name__, template_folder=template_dir(), static_folder=static_dir('{app}'))
 
 
-@{app}.route('/{app}/', methods=["GET", "POST"])
+@{app}.route('/{app}/', methods=['GET', 'POST'])
 def index():
   context = {f1}
-    "head_title": "{app}",
-    "footer_style": footer_style,
+    'head_title': '{app}',
+    'footer_style': footer_style,
   {l1}
-  return render_template("{app}/index.html", context=context)
+  return render_template('{app}/index.html', context=context)
 """
 
 
@@ -35,6 +36,7 @@ def app_forms_dummy():
   return f"""from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
+
 
 # write your app forms here!
 """
@@ -57,6 +59,7 @@ def app_admin_dummy():
   return f"""from flask_login import current_user
 from flask import redirect, request, url_for
 from flask_admin.contrib.sqla import ModelView
+
 
 # write your app admin model view here!
 """

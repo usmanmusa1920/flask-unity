@@ -7,11 +7,11 @@ from sakyum.utils import stylePage
 
 secret = Security()
 secure_app = secret.passcode_salt
-f1 = "{"
-l1 = "}"
-f2 = "{{"
-l2 = "}}"
-long_comment = "\"\"\""
+f1 = '{'
+l1 = '}'
+f2 = '{{'
+l2 = '}}'
+long_comment = '"""'
 
 
 def thunder_dummy(project):
@@ -23,7 +23,7 @@ from {project}.secret import load_env
 
 load_env()
 boot = Boot()
-if __name__ == "__main__":
+if __name__ == '__main__':
   boot.run()
 
 

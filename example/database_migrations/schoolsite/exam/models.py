@@ -13,16 +13,16 @@ class ExamQuestionModel(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
   # the user field is the user who create the question and he is in the `User` models of auth
-  user = db.relationship("User", backref="user")
+  user = db.relationship('User', backref='user')
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   question_text = db.Column(db.Text, nullable=False)
   choices = db.relationship('ExamChoiceModel', backref='selector', lazy=True)
 
   def __str__(self):
-    return f"{self.question_text}"
+    return f'{self.question_text}'
 
   def __repr__(self):
-    return f"{self.question_text}"
+    return f'{self.question_text}'
     
   # the `ExamChoiceModel` is the choice model class below
   # the `selector` is the attribute that we can use to get selector who choose the choice
@@ -39,7 +39,7 @@ class ExamChoiceModel(db.Model):
   choice_text = db.Column(db.String(100), nullable=False)
 
   def __str__(self):
-    return f"{self.choice_text}"
+    return f'{self.choice_text}'
 
   def __repr__(self):
-    return f"{self.choice_text}"
+    return f'{self.choice_text}'

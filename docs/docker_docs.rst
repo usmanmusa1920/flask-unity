@@ -3,9 +3,9 @@
 Sakyum on docker
 ################
 
-Documentations of this page is under development (very soon) it will be available to public stay update, Thank you
+This repo contains code to spin up a boilerplate sakyum project with Docker Compose. To run sakyum with docker compose, first pull it by::
 
-This repo contains code to spin up a boilerplate sakyum project with Docker Compose. To run sakyum with docker compose, first pull it using `docker pull usmanmusa/sakyum`
+  docker pull usmanmusa/sakyum
 
 Next you are to clone the github repo of the project in other to get the `docker-compose.yml` by::
   
@@ -54,3 +54,5 @@ Bring services down::
 Open a bash session in a running container::
   
   docker exec -it <container ID> sh
+
+**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum-docker>`_ repository of the project.

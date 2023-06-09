@@ -14,55 +14,52 @@ from sakyum import __version__
 
 
 # relative path to the package folder (sakyum)
-rel_path = Path(__file__).resolve().parent
+REL_PATH = Path(__file__).resolve().parent
+OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
 
 
-def static_dir(app, static_from_pkg=False, os_name: "nt or posix"=os.name):
+def static_dir(app, static_from_pkg=False, os_name: 'nt or posix'=os.name):
   """
-    relative path to static files
-    if `static_from_pkg` is not false, it will use the directory name that is in the library package which is `static`, else it will use for project `static` directory
+  relative path to static files
+  if `static_from_pkg` is not false, it will use the directory name that is in the library package which is `static`, else it will use for project `static` directory
   """
-  if os_name == "nt":
-    if static_from_pkg:
-      return str(rel_path) + "\static\\" + app
-    return os.getcwd() + "\static\\" + app
-  else:
-    if static_from_pkg:
-      return str(rel_path) + "/static/" + app
-    return os.getcwd() + "/static/" + app
+
+  if static_from_pkg:
+      return str(REL_PATH) + OS_SEP + 'static' + OS_SEP + app
+  return os.getcwd() + OS_SEP + 'static' + OS_SEP + app
   
 
 def template_dir(temp_from_pkg=False, os_name=os.name):
   """
-    relative path to html page
-    if `temp_from_pkg` is not false, it will use the directory name that is in the library package which is `templates`, else it will use for project `templates` directory
+  relative path to html page
+  if `temp_from_pkg` is not false, it will use the directory name that is in the library package which is `templates`, else it will use for project `templates` directory
   """
-  if os_name == "nt":
-    if temp_from_pkg:
-      return str(rel_path) + "\\templates\\" + temp_from_pkg
-    return os.getcwd() + "\\templates"
-  else:
-    if temp_from_pkg:
-      return str(rel_path) + "/templates/" + temp_from_pkg
-    return os.getcwd() + "/templates"
+
+  if temp_from_pkg:
+    return str(REL_PATH) + OS_SEP + 'templates' + OS_SEP + temp_from_pkg
+  return os.getcwd() + OS_SEP + 'templates'
   
 
 def stylePage(name, version=False):
   """function for styling project/app description default pages"""
   if version:
     # it will style the description in the footer
-    desc = "@ " + name + " software - v" + version
+    desc = '@ ' + name + ' software - v' + version
     desc_center = desc.center(len(desc) + 2)
-    border = "=" * len(desc_center)
+    border = '=' * len(desc_center)
     return [desc_center, border]
 
   # it will style the description of default app pages
-  desc = "Your " + name + " application default pages"
+  desc = 'Your ' + name + ' application default pages'
   desc_center = desc.center(len(desc) + 6)
-  border = "=" * len(desc_center)
+  border = '=' * len(desc_center)
   return [desc_center, border]
   
   
+# Style for sakyum default pages:
+    # ============================
+    #  @ sakyum software - v0.0.8 
+    # ============================
 footer_style = stylePage(__title__, version=__version__)
 
 
@@ -91,41 +88,41 @@ class AuthCredentials:
     self.p_args = p_args
 
     if self.u_args:
-      while self.username == None or self.username == "" or len(self.username) < 3:
+      while self.username == None or self.username == '' or len(self.username) < 3:
         if self.username == None:
-          self.username = input("Enter username: ")
+          self.username = input('Enter username: ')
           print()
-        elif self.username == "":
-          print("username can't be empty")
-          self.username = input("Enter username: ")
+        elif self.username == '':
+          print('username can\'t be empty')
+          self.username = input('Enter username: ')
           print()
         elif len((self.username)) < 3:
-          print("username must be not less than 3 character")
-          self.username = input("Enter username: ")
+          print('username must be not less than 3 character')
+          self.username = input('Enter username: ')
           print()
 
     if self.e_args:
-      while self.email == None or self.email == "":
+      while self.email == None or self.email == '':
         if self.email == None:
-          self.email = input("Enter email: ")
+          self.email = input('Enter email: ')
           print()
-        elif self.email == "":
-          print("email can't be empty")
-          self.email = input("Enter email: ")
+        elif self.email == '':
+          print('email can\'t be empty')
+          self.email = input('Enter email: ')
           print()
 
     if self.p_args:
-      while self.password == None or self.password == "" or len(self.password) < 6:
+      while self.password == None or self.password == '' or len(self.password) < 6:
         if self.password == None:
-          self.password = getpass("Enter password: ")
+          self.password = getpass('Enter password: ')
           print()
-        elif self.password == "":
-          print("password can't be empty")
-          self.password = getpass("Enter password: ")
+        elif self.password == '':
+          print('password can\'t be empty')
+          self.password = getpass('Enter password: ')
           print()
         elif len((self.password)) < 6:
-          print("password must be not less than 6 character")
-          self.password = getpass("Enter password: ")
+          print('password must be not less than 6 character')
+          self.password = getpass('Enter password: ')
           print()
         
   @property
@@ -134,20 +131,20 @@ class AuthCredentials:
     # the below while is included to check data validation
     # when user uses flags `-u` or `--username`
     while len(self.username) < 3:
-      print("username must be not less than 3 character")
-      self.username = input("Enter username: ")
+      print('username must be not less than 3 character')
+      self.username = input('Enter username: ')
       print()
     return self.username
 
   @property
   def validate_email(self):
     """email validator"""
-    pattern = re.compile(r"^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+")
+    pattern = re.compile(r'^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+')
     if re.match(pattern, self.email):
       return self.email
     while not re.match(pattern, self.email):
-      print("Put a valid email: ")
-      self.email = input("Enter email: ")
+      print('Put a valid email: ')
+      self.email = input('Enter email: ')
       print()
     return self.email
 
@@ -157,8 +154,8 @@ class AuthCredentials:
     # the below while is included to chech data validation
     # when user uses flags `-p` or `--password`
     while len(self.password) < 6:
-      print("password must be not less than 6 character")
-      self.password = getpass("Enter password: ")
+      print('password must be not less than 6 character')
+      self.password = getpass('Enter password: ')
       print()
     return self.password
 
@@ -180,10 +177,10 @@ class Security:
   we follow the base64 pattern of [^A-Za-z0-9+/=] that should never appear in base64, (in reqex)
   """
   
-  token_sm_alpha = "abcdefghijklmnopqrstuvwxyz"
+  token_sm_alpha = 'abcdefghijklmnopqrstuvwxyz'
   token_cap_alpha = token_sm_alpha.upper()
-  token_num = "0123456789"
-  token_char = "/+="
+  token_num = '0123456789'
+  token_char = '/+='
   token_sum = token_sm_alpha + token_cap_alpha + token_num
   
   """
@@ -196,10 +193,10 @@ class Security:
   token_times = token_sum * 2
   token_list = list(token_times)
   random.shuffle(token_list) # shuffling the above list
-  token_generate = "".join(token_list)
+  token_generate = ''.join(token_list)
   
   def __init__(self, token_generate = token_generate):
-    self.token_generate = "".join(token_generate)
+    self.token_generate = ''.join(token_generate)
     
   @property
   def passcode_salt(self):
@@ -211,7 +208,7 @@ class Security:
       k = random.randint(20, 50)
     """
 
-    salt = "".join(random.sample(self.token_generate, random.randint(20, 50)))
+    salt = ''.join(random.sample(self.token_generate, random.randint(20, 50)))
     return salt # return type is string
     
   def passcode_iteration(self, r_min, r_max, r_step):
@@ -230,9 +227,9 @@ class Security:
     the return type of the key is bytes
     """
     key = hashlib.pbkdf2_hmac(
-        "sha256", # The hash digest algorithm for HMAC
-        passwd.encode("utf-8"), # Convert the password to bytes
-        salt.encode("utf-8"), # Convert the salt to bytes
+        'sha256', # The hash digest algorithm for HMAC
+        passwd.encode('utf-8'), # Convert the password to bytes
+        salt.encode('utf-8'), # Convert the salt to bytes
         itter, # iteration type is integer
         dklen=128 # Get a 128 byte key
     )
@@ -246,13 +243,13 @@ class Security:
     """
     
     # encodeing the key, type is string
-    b64_encode = base64.b64encode(key).decode("ascii").strip()
+    b64_encode = base64.b64encode(key).decode('ascii').strip()
 
     # hashing our b64_encode (the second hash), type is string
     hash_result = hashlib.sha256(str.encode(str(b64_encode))).hexdigest()
 
     # salt + iteration + hash_result, type is string
-    secure_ingredient = "%s%d%s" % (salt, itter, hash_result)
+    secure_ingredient = '%s%d%s' % (salt, itter, hash_result)
     
     # return types of the list is string all, access it by print(self.get_hash.__annotations__)
     return [hash_result, secure_ingredient]
@@ -263,4 +260,4 @@ class Security:
     return secret
     
   def __str__(self):
-    return f"Passcode security class"
+    return f'Passcode security class'

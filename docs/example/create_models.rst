@@ -17,16 +17,16 @@ Now below we are to start defining our model, let start with **ExamQuestionModel
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     # the user field is the user who create the question and he is in the `User` models of auth
-    user = db.relationship("User", backref="user")
+    user = db.relationship('User', backref='user')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_text = db.Column(db.Text, nullable=False)
     choices = db.relationship('ExamChoiceModel', backref='selector', lazy=True)
 
     def __str__(self):
-      return f"{self.question_text}"
+      return f'{self.question_text}'
 
     def __repr__(self):
-      return f"{self.question_text}"
+      return f'{self.question_text}'
       
     # the `ExamChoiceModel` is the choice model class below
     # the `selector` is the attribute that we can use to get selector who choose the choice
@@ -44,10 +44,10 @@ Now let define the **ExamChoiceModel** model which will look like::
     choice_text = db.Column(db.String(100), nullable=False)
 
     def __str__(self):
-      return f"{self.choice_text}"
+      return f'{self.choice_text}'
 
     def __repr__(self):
-      return f"{self.choice_text}"
+      return f'{self.choice_text}'
 
 After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://sakyum.readthedocs.io/en/latest/database.html>`_ using alembic in sakyum, but we are going to skip this and just play with `api`.
 
@@ -69,14 +69,14 @@ Next call the `create_all()` method of **db** that will create the tables of our
 
 After that let us create three users instance, that will be able to create question and choice of the **ExamQuestionModel** and **ExamChoiceModel** model::
 
-  user1_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
-  user1 = User(username="backend-developer", email="developer@backend.com", password=user1_hashed_pwd)
+  user1_hashed_pwd = bcrypt.generate_password_hash('123456').decode('utf-8')
+  user1 = User(username='backend-developer', email='developer@backend.com', password=user1_hashed_pwd)
 
-  user2_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
-  user2 = User(username="front-developer", email="developer@front.com", password=user2_hashed_pwd)
+  user2_hashed_pwd = bcrypt.generate_password_hash('123456').decode('utf-8')
+  user2 = User(username='front-developer', email='developer@front.com', password=user2_hashed_pwd)
 
-  user3_hashed_pwd = bcrypt.generate_password_hash("123456").decode('utf-8')
-  user3 = User(username="quantum-developer", email="developer@quantum.com", password=user3_hashed_pwd)
+  user3_hashed_pwd = bcrypt.generate_password_hash('123456').decode('utf-8')
+  user3 = User(username='quantum-developer', email='developer@quantum.com', password=user3_hashed_pwd)
 
 Now we are to add and commit those users in our database::
 
@@ -92,9 +92,9 @@ To make sure our users have been added in our database let query the entire User
 
 Yes, our users are in the database, good jod. The next thing now is to start creating our Questions and commit them to our database::
 
-  q1 = ExamQuestionModel(question_text="At which year Neil Armstrong landed in the moon?", user=user1)
-  q2 = ExamQuestionModel(question_text="What is odd in the choice?", user=user2)
-  q3 = ExamQuestionModel(question_text="What is not related to quantum?", user=user3)
+  q1 = ExamQuestionModel(question_text='At which year Neil Armstrong landed in the moon?', user=user1)
+  q2 = ExamQuestionModel(question_text='What is odd in the choice?', user=user2)
+  q3 = ExamQuestionModel(question_text='What is not related to quantum?', user=user3)
 
   db.session.add(q1)
   db.session.add(q2)
@@ -113,22 +113,22 @@ Yes, our questions are in the database, good jod. We are to capture our question
   the_q3 = ExamQuestionModel.query.get_or_404(3)
 
   # choices for our first question
-  c1_1 = ExamChoiceModel(choice_text="In 1969", question_id=the_q1.id)
-  c1_2 = ExamChoiceModel(choice_text="In 1996", question_id=the_q1.id)
-  c1_3 = ExamChoiceModel(choice_text="In 2023", question_id=the_q1.id)
-  c1_4 = ExamChoiceModel(choice_text="In 2007", question_id=the_q1.id)
+  c1_1 = ExamChoiceModel(choice_text='In 1969', question_id=the_q1.id)
+  c1_2 = ExamChoiceModel(choice_text='In 1996', question_id=the_q1.id)
+  c1_3 = ExamChoiceModel(choice_text='In 2023', question_id=the_q1.id)
+  c1_4 = ExamChoiceModel(choice_text='In 2007', question_id=the_q1.id)
 
   # choices for our second question
-  c2_1 = ExamChoiceModel(choice_text="python", question_id=the_q2.id)
-  c2_2 = ExamChoiceModel(choice_text="java", question_id=the_q2.id)
-  c2_3 = ExamChoiceModel(choice_text="linux", question_id=the_q2.id)
-  c2_4 = ExamChoiceModel(choice_text="ruby", question_id=the_q2.id)
+  c2_1 = ExamChoiceModel(choice_text='python', question_id=the_q2.id)
+  c2_2 = ExamChoiceModel(choice_text='java', question_id=the_q2.id)
+  c2_3 = ExamChoiceModel(choice_text='linux', question_id=the_q2.id)
+  c2_4 = ExamChoiceModel(choice_text='ruby', question_id=the_q2.id)
 
   # choices for our third question
-  c3_1 = ExamChoiceModel(choice_text="qubit", question_id=the_q3.id)
-  c3_2 = ExamChoiceModel(choice_text="entanglement", question_id=the_q3.id)
-  c3_3 = ExamChoiceModel(choice_text="bit", question_id=the_q3.id)
-  c3_4 = ExamChoiceModel(choice_text="superposition", question_id=the_q3.id)
+  c3_1 = ExamChoiceModel(choice_text='qubit', question_id=the_q3.id)
+  c3_2 = ExamChoiceModel(choice_text='entanglement', question_id=the_q3.id)
+  c3_3 = ExamChoiceModel(choice_text='bit', question_id=the_q3.id)
+  c3_4 = ExamChoiceModel(choice_text='superposition', question_id=the_q3.id)
 
   # Now let add and commit the choice into database::
   db.session.add(c1_1)
@@ -264,15 +264,17 @@ Now comment the **ExamQuestionModel** and **ExamChoiceModel** in the `reg_models
     # ExamChoiceModel,
   ]
 
-go below the function we call **adminModelRegister** in (within admin_runner function) after registering  our `UserAdminView` and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) in our case we will call it **category="Question-Choice" like::
+go below the function we call **adminModelRegister** in (within admin_runner function) after registering  our `UserAdminView` and call the admin method called **add_view** and then pass your model view class as an argument, also pass an arguments in the model view class, the first argument is the model class, the second is the **db.session**, and then last give it a category (key word argument) in our case we will call it **category='Question-Choice' like::
 
-  admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Questions", category="Question-Choice"))
-  admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Choices", category="Question-Choice"))
+  admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name='Questions', category='Question-Choice'))
+  admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name='Choices', category='Question-Choice'))
 
 Save the file, that will register your related model in the admin page and you will see them if you vist the admin page `http://127.0.0.1:5000/admin`, only if you are logged in because of `is_accessible` method.
 
 Now let navigate to `http://127.0.0.1:5000/login` and login using one of the user credential, we created when we were in the python interpreter (shell), the one (user credential) that we are going to use is for the `backend-developer` (username: **backend-developer**, password: **123456**).
 
 After we logged in, now if we navigate to `http://127.0.0.1:5000/admin` we are able to see our `QuestionChoiceAdminView` view in the form of drop-down menu, if we click it, it will show list containing `Questions  and Choices` only, since the are the only once associated with that mode admin view. Now click the `Questions` this will show list of questions we have inserted in the python shell.
+
+**Source code** for the `app models` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/app_models>`_ repository of the project.
 
 See more on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation.

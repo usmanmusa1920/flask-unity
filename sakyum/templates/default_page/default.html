@@ -43,11 +43,11 @@
           {% endif %}
           <a class="link_1">|</a>
           {% if current_user.is_authenticated %}
-            <a href="{{ url_for('auth.adminRegister') }}" class="link_2">register</a>
-            <a href="{{ url_for('auth.adminLogout') }}" class="link_3">logout</a>
+            <a href="{{ url_for('auth.adminRegister') }}" class="link_2">Register</a>
+            <a href="{{ url_for('auth.adminLogout') }}" class="link_3">Logout</a>
           {% else %}
             <a href="https://sakyum.readthedocs.io" class="link_2" target="_blank">Docs</a>
-            <a href="{{ url_for('auth.adminLogin') }}" class="link_3">login</a>
+            <a href="{{ url_for('auth.adminLogin') }}" class="link_3">Login</a>
           {% endif %}
           <a onclick="test()" class="alert">
             <img src="{{ url_for('default.static', filename='media/alert.png') }}" alt="">
@@ -96,17 +96,17 @@
       <!-- the below span tag will be visible only if the page is view with small size screen -->
       <span class="auth_route_sm">
         {% if current_user.is_authenticated %}
-          <a href="{{ url_for('auth.adminRegister') }}">register</a>
-          <a href="{{ url_for('auth.adminLogout') }}">logout</a>
+          <a href="{{ url_for('auth.adminRegister') }}">Register</a>
+          <a href="{{ url_for('auth.adminLogout') }}">Logout</a>
         {% else %}
-          <a href="{{ url_for('auth.adminLogin') }}">login</a>
+          <a href="{{ url_for('auth.adminLogin') }}">Login</a>
         {% endif %}
       </span>
       <p><pre>{{context.footer_style[1]}}
 {{context.footer_style[0]}}
 {{context.footer_style[1]}}</pre>
         <div>
-          <a href="https://github.com/usmanmusa1920/sakyum" target="_blank">Github</a>
+          <a href="https://github.com/usmanmusa1920/sakyum" target="_blank">Repository</a>
           <a>|</a>
           <a href="https://sakyum.readthedocs.io" target="_blank">Docs</a>
           <a>|</a>

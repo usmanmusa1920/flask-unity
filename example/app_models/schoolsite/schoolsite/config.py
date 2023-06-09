@@ -42,9 +42,9 @@ def create_app(reg_blueprints=False, conf=Config):
     ]
     adminModelRegister(admin, reg_models, db)
     # admin model view be here!
-    admin.add_view(UserAdminView(User, db.session, name="User", category="User-section"))
-    admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Questions", category="Question-Choice"))
-    admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Choices", category="Question-Choice"))
+    admin.add_view(UserAdminView(User, db.session, name='User', category='User-section'))
+    admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name='Questions', category='Question-Choice'))
+    admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name='Choices', category='Question-Choice'))
 
   admin_runner()
   return app

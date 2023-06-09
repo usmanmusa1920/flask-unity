@@ -14,4 +14,4 @@ schoolsite project
   app_forms
   advance/index
 
-**Source code** for the `quick start` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/quick_start/schoolsite>`_ repository of the project.
+**Source code** for the `quick start` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/quick_start>`_ repository of the project.

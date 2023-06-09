@@ -3,9 +3,10 @@ from flask import (render_template, Blueprint)
 from sakyum import blueprint
 from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
 from exam.views import exam
+from custom_auth.views import custom_auth
 
 
-base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("schoolsite"))
+base = Blueprint('base', __name__, template_folder=template_dir(), static_folder=static_dir('schoolsite'))
 
 rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
 reg_blueprints = [
@@ -14,16 +15,17 @@ reg_blueprints = [
   blueprint.auth,
   base,
   exam,
+  custom_auth,
 ]
 
 
-@base.route('/', methods=["POST", "GET"])
+@base.route('/', methods=['POST', 'GET'])
 def index():
   context = {
-    "project_name": "schoolsite",
-    "footer_style": footer_style,
-    "blueprints_list": rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue),
+    'project_name': 'schoolsite',
+    'footer_style': footer_style,
+    'blueprints_list': rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue),
   }
-  return render_template("schoolsite/index.html", context=context)
+  return render_template('schoolsite/index.html', context=context)
   
 # overwrite (customise) error pages here

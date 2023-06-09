@@ -5,7 +5,7 @@ An extension of flask web framework that erase the complexity of structuring fla
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) it might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
+Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) as from `v0.0.8` it is now compatible with `windows OS` and others as well, such as `linux`, `macOS` and possibly some others too!.
 
 ```
 pip install --upgrade sakyum
@@ -84,6 +84,6 @@ See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 - Documentation: https://sakyum.readthedocs.io
 <!-- - Repository: https://github.com/usmanmusa1920/sakyum -->
 - PYPI Release: https://pypi.org/project/sakyum
-- Docker example: https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum_demo
+- Docker example: https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum-docker
 
 Pull requests are welcome

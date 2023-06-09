@@ -4,14 +4,14 @@
   <a href="/">Go to schoolsite home page</a>
   <br>
   {% if current_user.is_authenticated %}
-    <a href="{{ url_for('auth.adminLogout') }}">logout</a>
+    <a href="{{ url_for('custom_auth.adminLogout') }}">logout</a>
     <br>
-    <a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
+    <a href="{{ url_for('custom_auth.adminChangePassword') }}">change password</a>
     <br>
-    <a href="{{ url_for('auth.adminRegister') }}">register</a>
+    <a href="{{ url_for('custom_auth.adminRegister') }}">register</a>
     <br>
-    <a href="{{ url_for('auth.changeProfileImage') }}">change image</a>
+    <a href="{{ url_for('custom_auth.changeProfileImage') }}">change image</a>
   {% else %}
-    <a href="{{ url_for('auth.adminLogin') }}">login</a>
+    <a href="{{ url_for('custom_auth.adminLogin') }}">login</a>
   {% endif %}
 {% endblock body %}

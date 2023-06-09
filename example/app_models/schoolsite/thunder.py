@@ -7,7 +7,7 @@ from schoolsite.secret import load_env
 
 load_env()
 boot = Boot()
-if __name__ == "__main__":
+if __name__ == '__main__':
   boot.run()
 
 

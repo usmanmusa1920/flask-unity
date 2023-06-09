@@ -59,9 +59,9 @@ Before, in the `alembic/versions` directory there is nothing inside, but now aft
   ├── README
   ├── script.py.mako
   └── versions
-      ├── 9fa76cb2d815_added_tables.py
+      ├── ac25f12f55b0_added_tables.py
       └── __pycache__
-          └── 9fa76cb2d815_added_tables.cpython-310.pyc
+          └── ac25f12f55b0_added_tables.cpython-310.pyc
 
   3 directories, 6 files
 Every commit we did, it will generate the migration file in the `(alembic/versions)` directory.
@@ -94,3 +94,5 @@ Hint
   - Downgrading, We can illustrate a downgrade back to nothing, by calling alembic downgrade back to the beginning, which in Alembic is called base::
 
     alembic downgrade base
+
+**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/database_migrations>`_ repository of the project.

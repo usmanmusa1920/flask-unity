@@ -41,7 +41,7 @@ def create_app(reg_blueprints=False, conf=Config):
     ]
     adminModelRegister(admin, reg_models, db)
     # admin model view be here!
-    admin.add_view(UserAdminView(User, db.session, name="User", category="User-section"))
+    admin.add_view(UserAdminView(User, db.session, name='User', category='User-section'))
 
   admin_runner()
   return app

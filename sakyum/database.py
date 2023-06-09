@@ -21,11 +21,11 @@ class DB:
     pass
 
 """
-  Command line shortcuts for database:
-    db_status
-    db_migrate
-    db_makemigrations
-    db_pulldata
-    db_pushdata
-    db_cleaned
+Command line shortcuts for database:
+  db_status
+  db_migrate
+  db_makemigrations
+  db_pulldata
+  db_pushdata
+  db_cleaned
 """

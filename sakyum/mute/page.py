@@ -10,14 +10,14 @@ from . import stylePage
 
 def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_app=False):
   if is_landing:
-    return f"""{f1}% extends "default_base.html" %{l1}
+    return f"""{f1}% extends 'default_base.html' %{l1}
 
 {f1}% block head_js %{l1}
   <script src="{f2} url_for('base.static', filename='index.js') {l2}"></script>
 {f1}% endblock head_js %{l1}
 """
   if is_admin:
-    return f"""{f1}% extends "admin/master.html" %{l1}
+    return f"""{f1}% extends 'admin/master.html' %{l1}
 {f1}% block body %{l1}
   <a href="/">Go to {project_name} home page</a>
   <br>
@@ -36,7 +36,7 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
 """
   if is_base_app:
     page_desc = stylePage(name)
-    return f"""{f1}% extends "{project_name}/index.html" %{l1}
+    return f"""{f1}% extends '{project_name}/index.html' %{l1}
 
 {f1}% block head_css %{l1}
   <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}"> -->
