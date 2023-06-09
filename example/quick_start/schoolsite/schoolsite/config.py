@@ -30,7 +30,7 @@ def create_app(reg_blueprints=False, conf=Config):
   def admin_runner():
     # Model views allow you to add a dedicated set of admin
     # pages for managing any model in your database
-    admin = Admin(app, name="schoolsite")
+    admin = Admin(app, name='schoolsite')
 
 
     # rgister model to admin direct by passing every model that you
@@ -41,7 +41,7 @@ def create_app(reg_blueprints=False, conf=Config):
     ]
     adminModelRegister(admin, reg_models, db)
     # admin model view be here!
-    admin.add_view(UserAdminView(User, db.session, name="User", category="User-section"))
+    admin.add_view(UserAdminView(User, db.session, name='User', category='User-section'))
 
   admin_runner()
   return app

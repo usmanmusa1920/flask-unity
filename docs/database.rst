@@ -59,9 +59,9 @@ Before, in the `alembic/versions` directory there is nothing inside, but now aft
   ├── README
   ├── script.py.mako
   └── versions
-      ├── 15a38ce04fb2_added_tables.py
+      ├── ac25f12f55b0_added_tables.py
       └── __pycache__
-          └── 15a38ce04fb2_added_tables.cpython-310.pyc
+          └── ac25f12f55b0_added_tables.cpython-310.pyc
 
   3 directories, 6 files
 Every commit we did, it will generate the migration file in the `(alembic/versions)` directory.

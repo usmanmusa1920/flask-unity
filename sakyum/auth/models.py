@@ -26,7 +26,7 @@ class User(db.Model, UserMixin):
     return True
 
   def get_id(self):
-    """Return the user id to satisfy Flask-Login's requirements."""
+    """Return the user id to satisfy Flask-Login`s requirements."""
     return self.id
 
   def is_authenticated(self):
@@ -34,8 +34,8 @@ class User(db.Model, UserMixin):
     return self.authenticated
 
   def is_anonymous(self):
-    """False, as anonymous users aren't supported."""
+    """False, as anonymous users aren`t supported."""
     return False
 
   def __repr__(self):
-    return f"User('{self.username}', '{self.email}'"
+    return f'User(\'{self.username}\', \'{self.email}\')'

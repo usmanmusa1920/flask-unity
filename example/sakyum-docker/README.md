@@ -1,6 +1,8 @@
 # Run sakyum with Docker Compose
 
-This repo contains code to spin up a boilerplate sakyum project with Docker Compose. Pull it using `docker pull usmanmusa/sakyum`
+This repo contains code to spin up a boilerplate sakyum project with Docker Compose. Pull it using::
+
+  docker pull usmanmusa/sakyum
 
 Next you are to clone the github repo of the project in other to get the `docker-compose.yml` by:
 

@@ -24,21 +24,21 @@ OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for wind
 
 
 class Config:
-  SECRET_KEY = "{secure_app}"
+  SECRET_KEY = '{secure_app}'
   # The `SQLALCHEMY_DATABASE_URI` might not be compatible with windows OS,
-  # change it to your windows drive like: "C:\path\to\your\default.db"
-  SQLALCHEMY_DATABASE_URI = "sqlite:///"+str(ORIGIN_PATH)+OS_SEP+"default.db"
+  # change it to your windows drive like: 'C:\path\to\your\default.db'
+  SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(ORIGIN_PATH)+OS_SEP+'default.db'
   # set optional bootswatch theme
-  FLASK_ADMIN_SWATCH = "cerulean"
-  UPLOAD_FOLDER = os.path.join(ORIGIN_PATH, "media")
-  ALLOWED_EXTENSIONS = ("png", "jpg", "jpeg")
+  FLASK_ADMIN_SWATCH = 'cerulean'
+  UPLOAD_FOLDER = os.path.join(ORIGIN_PATH, 'media')
+  ALLOWED_EXTENSIONS = ('png', 'jpg', 'jpeg')
   MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 
 def load_env():
-  os.environ["FLASK_UPLOAD_FOLDER"] = Config.UPLOAD_FOLDER
-  os.environ["FLASK_ORIGIN_PATH"] = str(ORIGIN_PATH)
-  os.environ["FLASK_ALLOWED_EXTENSIONS"] = str(Config.ALLOWED_EXTENSIONS)
+  os.environ['FLASK_UPLOAD_FOLDER'] = Config.UPLOAD_FOLDER
+  os.environ['FLASK_ORIGIN_PATH'] = str(ORIGIN_PATH)
+  os.environ['FLASK_ALLOWED_EXTENSIONS'] = str(Config.ALLOWED_EXTENSIONS)
 """
 
 
@@ -74,7 +74,7 @@ def create_app(reg_blueprints=False, conf=Config):
   def admin_runner():
     # Model views allow you to add a dedicated set of admin
     # pages for managing any model in your database
-    admin = Admin(app, name="{proj_name}")
+    admin = Admin(app, name='{proj_name}')
 
 
     # rgister model to admin direct by passing every model that you
@@ -85,7 +85,7 @@ def create_app(reg_blueprints=False, conf=Config):
     ]
     adminModelRegister(admin, reg_models, db)
     # admin model view be here!
-    admin.add_view(UserAdminView(User, db.session, name="User", category="User-section"))
+    admin.add_view(UserAdminView(User, db.session, name='User', category='User-section'))
 
   admin_runner()
   return app
@@ -99,7 +99,7 @@ from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
 # from <app_name>.views import <app_name>
 
 
-base = Blueprint("base", __name__, template_folder=template_dir(), static_folder=static_dir("{proj}"))
+base = Blueprint('base', __name__, template_folder=template_dir(), static_folder=static_dir('{proj}'))
 
 rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
 reg_blueprints = [
@@ -111,14 +111,14 @@ reg_blueprints = [
 ]
 
 
-@base.route("/", methods=["POST", "GET"])
+@base.route('/', methods=['POST', 'GET'])
 def index():
   context = {f1}
-    "project_name": "{proj}",
-    "footer_style": footer_style,
-    "blueprints_list": rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue),
+    'project_name': '{proj}',
+    'footer_style': footer_style,
+    'blueprints_list': rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue),
   {l1}
-  return render_template("{proj}/index.html", context=context)
+  return render_template('{proj}/index.html', context=context)
   
 # overwrite (customise) error pages here
 """

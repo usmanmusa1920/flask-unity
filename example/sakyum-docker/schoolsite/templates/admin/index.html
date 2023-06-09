@@ -6,11 +6,11 @@
   {% if current_user.is_authenticated %}
     <a href="{{ url_for('auth.adminLogout') }}">logout</a>
     <br>
-    <a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
-    <br>
     <a href="{{ url_for('auth.adminRegister') }}">register</a>
     <br>
     <a href="{{ url_for('auth.changeProfileImage') }}">change image</a>
+    <br>
+    <a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
   {% else %}
     <a href="{{ url_for('auth.adminLogin') }}">login</a>
   {% endif %}

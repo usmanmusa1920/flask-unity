@@ -17,8 +17,8 @@ def create_app(reg_blueprints=False, conf=Config):
   """ You will need to import models themselves before issuing `db.create_all` """
   from sakyum.auth.models import User
   from sakyum.auth.admin import UserAdminView
-  from exam.models import ExamQuestionModel, ExamChoiceModel
-  from exam.admin import QuestionChoiceAdminView
+  # from <app_name>.models import <app_model>
+  # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
   
 
@@ -37,14 +37,11 @@ def create_app(reg_blueprints=False, conf=Config):
     # want to manage in admin page in the below list (reg_models)
     reg_models = [
       # User,
-      # ExamQuestionModel,
-      # ExamChoiceModel,
+      # <app_model>,
     ]
     adminModelRegister(admin, reg_models, db)
     # admin model view be here!
-    admin.add_view(UserAdminView(User, db.session, name="User", category="User-section"))
-    admin.add_view(QuestionChoiceAdminView(ExamQuestionModel, db.session, name="Questions", category="Question-Choice"))
-    admin.add_view(QuestionChoiceAdminView(ExamChoiceModel, db.session, name="Choices", category="Question-Choice"))
+    admin.add_view(UserAdminView(User, db.session, name='User', category='User-section'))
 
   admin_runner()
   return app

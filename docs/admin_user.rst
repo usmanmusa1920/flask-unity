@@ -14,11 +14,11 @@ Let say you start a project, and an app inside the project by the following comm
 
 This can be done by given the `create_user` position argument and flags together with their values e.g::
 
-  python thunder.py create_user -u network-engineer -e network-engineer@datacenter.com -p p@s$w0d
+  python thunder.py create_user -u network-engineer -e network-engineer@datacenter.com -p my-secret-pass
 
   # or
 
-  python thunder.py create_user --username network-engineer --email network-engineer@datacenter.com --password p@s$w0d
+  python thunder.py create_user --username network-engineer --email network-engineer@datacenter.com --password my-secret-pass
 
 
 ``Warning:`` don't use the `-p` flag to specify user password, do so only if you are testing (not in production) by just giving the user username, and email address, then enter, where as the password will be prompt to enter it, like:
@@ -57,8 +57,8 @@ Use `-e` or `--email` and then the email beside it, if you do not specify it, yo
 
 Use `-p` or `--password` and then the password beside it, if you do not specify it, you will see a prompt saying `Enter password:`::
 
-  python thunder.py create_user -p p@s$w0d
+  python thunder.py create_user -p my-secret-pass
 
   # or
 
-  python thunder.py create_user --password p@s$w0d
+  python thunder.py create_user --password my-secret-pass

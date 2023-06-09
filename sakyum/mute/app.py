@@ -19,16 +19,16 @@ from sakyum.contrib import db
 # from .forms import <model_form>
 
 
-{app} = Blueprint("{app}", __name__, template_folder=template_dir(), static_folder=static_dir("{app}"))
+{app} = Blueprint('{app}', __name__, template_folder=template_dir(), static_folder=static_dir('{app}'))
 
 
-@{app}.route('/{app}/', methods=["GET", "POST"])
+@{app}.route('/{app}/', methods=['GET', 'POST'])
 def index():
   context = {f1}
-    "head_title": "{app}",
-    "footer_style": footer_style,
+    'head_title': '{app}',
+    'footer_style': footer_style,
   {l1}
-  return render_template("{app}/index.html", context=context)
+  return render_template('{app}/index.html', context=context)
 """
 
 

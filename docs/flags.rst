@@ -65,8 +65,8 @@ Use `-e` or `--email` and then the email beside it, if you do not specify it, yo
 
 Use `-p` or `--password` and then the password beside it, if you do not specify it, you will see a prompt saying `Enter password:`::
 
-  python thunder.py create_user -p p@s$w0d
+  python thunder.py create_user -p my-secret-pass
 
   # or
 
-  python thunder.py create_user --password p@s$w0d
+  python thunder.py create_user --password my-secret-pass
