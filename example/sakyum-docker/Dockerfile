@@ -1,7 +1,7 @@
-FROM python:3.8.5-alpine
+FROM python:3.10.12-alpine
 
 LABEL name="sakyum"
-LABEL version="0.0.1"
+LABEL version="0.0.2"
 LABEL description="A demo of sakyum website on docker"
 MAINTAINER Usman Musa
 
