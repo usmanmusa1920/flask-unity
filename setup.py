@@ -6,7 +6,7 @@ from setuptools import find_packages
 
 setup(
   name = 'sakyum', # name of the main package (base folder i.e sakyum)
-  version = '0.0.9Tests',
+  version = '0.0.9',
   description = 'An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs',
   long_description = open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
   long_description_content_type='text/markdown',
@@ -72,7 +72,5 @@ setup(
   project_urls={
     'Documentation': 'https://sakyum.readthedocs.io',
     'Source': 'https://github.com/usmanmusa1920/sakyum',
-    'Developer': 'https://usmanmusa1920.github.io',
-    'PYPI Release': 'https://pypi.org/project/sakyum',
   },
 )
