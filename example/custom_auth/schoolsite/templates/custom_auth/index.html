@@ -1,0 +1,27 @@
+<!-- @sakyum, custom_auth index.html page -->
+{% extends 'schoolsite/index.html' %}
+
+{% block head_css %}
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('custom_auth.static', filename='style.css') }}"> -->
+{% endblock head_css %}
+
+{% block head_js %}
+  <script src="{{ url_for('custom_auth.static', filename='index.js') }}"></script>
+{% endblock head_js %}
+
+
+{% block short_info %}
+  {% if current_user.is_authenticated %}
+      <p>Hi {{ current_user.username }}! from your (custom_auth) project app</p>
+    {% else %}
+      <p>Your (custom_auth) app says, please login</p>
+    {% endif %}
+{% endblock short_info %}
+
+
+{% block main %}
+  <h3><pre>(custom_auth) app
+================================================
+   Your custom_auth application default pages   
+================================================</pre></h3>
+{% endblock main %}
