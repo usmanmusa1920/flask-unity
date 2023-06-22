@@ -50,32 +50,41 @@ OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for wind
 class BaseStructure:
   """base structure class"""
 
-  def __init__(self, is_software=True):
+  def __init__(self, is_software=True, os_name=os.name):
     """base structure class initializer"""
     self.is_software = is_software
-    self.fls_cmd = 'touch'
+    if os_name == 'nt':
+      self.fls_cmd = 'echo. >'
+    elif os_name == 'posix':
+      self.fls_cmd = 'touch'
+    else:
+        err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+        print()
+        LOGGER.error(err_compt)
+        print()
+        exit()
     self._exs_first = ['index', 'style']
     self._exs_last = ['.html', '.css', '.js']
 
-'''
-class BaseStructure:
-    """base structure class"""
+    '''
+    class BaseStructure:
+        """base structure class"""
 
-    def __init__(self, is_software=True):
-        """base structure class initializer"""
-        self.is_software = is_software
-        self.fls_cmd = 'echo. >'
-        self._exs_first = ['index', 'style']
-        self._exs_last = ['.html', '.css', '.js']
+        def __init__(self, is_software=True):
+            """base structure class initializer"""
+            self.is_software = is_software
+            self.fls_cmd = 'echo. >'
+            self._exs_first = ['index', 'style']
+            self._exs_last = ['.html', '.css', '.js']
 
-    def create_files(self, directory):
-        """Create files with specified names and extensions"""
-        os.makedirs(directory, exist_ok=True)
-        for name in self._exs_first:
-            for extension in self._exs_last:
-                file_path = os.path.join(directory, f"{name}{extension}")
-                os.system(f"{self.fls_cmd} {file_path}")
-'''
+        def create_files(self, directory):
+            """Create files with specified names and extensions"""
+            os.makedirs(directory, exist_ok=True)
+            for name in self._exs_first:
+                for extension in self._exs_last:
+                    file_path = os.path.join(directory, f"{name}{extension}")
+                    os.system(f"{self.fls_cmd} {file_path}")
+    '''
     
 
   def append_exs_to_file(self, fls_name=False, _exs_='.py', name=None):
@@ -178,6 +187,7 @@ class BaseStructure:
     create files within current directory of `self.file_opt()`
     is_app: if it is True, that mean it will do operation of making app files,
     else it will make for the entire project
+    self.into_file(fls, self.fls_cmd, file='thunder', proj_nm=proj_name) # to maker thunder file
     """
     
     if is_app:
@@ -203,6 +213,7 @@ class BaseStructure:
       for _fls in fls:
         if _fls[:-3] == file:
           sp.run(shlex.split(f'{fls_cmd} {_fls}'))
+          print(11111)
           self.file_content(
             file_name=_fls,content=f'# Your project {_fls} file\n{thunder_dummy(proj_nm)}', route_go=False
             ) # building the run module `thunder.py`
