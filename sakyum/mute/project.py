@@ -26,7 +26,7 @@ OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for wind
 class Config:
   SECRET_KEY = '{secure_app}'
   # The `SQLALCHEMY_DATABASE_URI` might not be compatible with windows OS,
-  # change it to your windows drive like: 'C:\path\to\your\default.db'
+  # change it to your windows drive like: 'C:\path\to\your\default.db' (if you encounter an error)
   SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(ORIGIN_PATH)+OS_SEP+'default.db'
   # set optional bootswatch theme
   FLASK_ADMIN_SWATCH = 'cerulean'

@@ -54,7 +54,7 @@ class BaseStructure:
     """base structure class initializer"""
     self.is_software = is_software
     if os_name == 'nt':
-      self.fls_cmd = 'echo. >'
+      self.fls_cmd = 'echo >'
     elif os_name == 'posix':
       self.fls_cmd = 'touch'
     else:
@@ -65,26 +65,6 @@ class BaseStructure:
         exit()
     self._exs_first = ['index', 'style']
     self._exs_last = ['.html', '.css', '.js']
-
-    '''
-    class BaseStructure:
-        """base structure class"""
-
-        def __init__(self, is_software=True):
-            """base structure class initializer"""
-            self.is_software = is_software
-            self.fls_cmd = 'echo. >'
-            self._exs_first = ['index', 'style']
-            self._exs_last = ['.html', '.css', '.js']
-
-        def create_files(self, directory):
-            """Create files with specified names and extensions"""
-            os.makedirs(directory, exist_ok=True)
-            for name in self._exs_first:
-                for extension in self._exs_last:
-                    file_path = os.path.join(directory, f"{name}{extension}")
-                    os.system(f"{self.fls_cmd} {file_path}")
-    '''
     
 
   def append_exs_to_file(self, fls_name=False, _exs_='.py', name=None):
@@ -187,13 +167,13 @@ class BaseStructure:
     create files within current directory of `self.file_opt()`
     is_app: if it is True, that mean it will do operation of making app files,
     else it will make for the entire project
-    self.into_file(fls, self.fls_cmd, file='thunder', proj_nm=proj_name) # to maker thunder file
     """
     
     if is_app:
       for _fls in fls:
         app_name = os.getcwd().split(OS_SEP)[-1]
-        sp.run(shlex.split(f'{fls_cmd} {_fls}'))
+        # sp.run(shlex.split(f'{fls_cmd} {_fls}'))
+        sp.run(shlex.split(f'{fls_cmd} {_fls}'), shell=True)
         if is_static_file:
           # building app default files (html, css, js)
           self.file_content(file_name=_fls, content=f'{app_default_dummy}', route_go=False)
@@ -212,8 +192,8 @@ class BaseStructure:
     else:
       for _fls in fls:
         if _fls[:-3] == file:
-          sp.run(shlex.split(f'{fls_cmd} {_fls}'))
-          print(11111)
+          # sp.run(shlex.split(f'{fls_cmd} {_fls}'))
+          sp.run(shlex.split(f'{fls_cmd} {_fls}'), shell=True)
           self.file_content(
             file_name=_fls,content=f'# Your project {_fls} file\n{thunder_dummy(proj_nm)}', route_go=False
             ) # building the run module `thunder.py`
@@ -244,7 +224,8 @@ class BaseStructure:
           # create default modules inside project sub dir
           for _fls in fls:
             if _fls[:-3] != 'thunder':
-              sp.run(shlex.split(f'{self.fls_cmd} {_fls}'))
+              # sp.run(shlex.split(f'{self.fls_cmd} {_fls}'))
+              sp.run(shlex.split(f'{self.fls_cmd} {_fls}'), shell=True)
               # building project default files (__init__.py, config.py, routes.py, secret.py)
               if _fls == '__init__.py':
                 self.file_content(file_name=_fls, content=f'# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_init_dummy()}', route_go=False)
