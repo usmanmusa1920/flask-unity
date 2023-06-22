@@ -5,7 +5,7 @@ Quick start
 
 First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtual environment
 
-Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) as from **v0.0.8** it is now compatible with **windows OS** and others as well, such as **linux**, **macOS** and possibly some others too!.
+Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and this software (library) it might not be compatible with **windows operating system** but it works on other **OS** such as **linux** and **macOS**, but very soon the version that will be compatible with **windows operating system** will be release, stay tuned.
 
 You will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest), you can still ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
