@@ -37,8 +37,8 @@ from . import __version__
   CRITICAL  ---  50
 """
 
-formatter = '[+] [%(asctime)s] [%(levelname)s] %(message)s'
-logging.basicConfig(format = formatter)
+FORMATTER = '[+] [%(asctime)s] [%(levelname)s] %(message)s'
+logging.basicConfig(format = FORMATTER)
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.DEBUG)
 
@@ -50,19 +50,30 @@ OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for wind
 class BaseStructure:
   """base structure class"""
 
-  def __init__(self, is_software=True, os_name=os.name):
+  def __init__(self, is_software=True):
     """base structure class initializer"""
     self.is_software = is_software
-    if os_name == 'nt':
+
+    # we can use any of the below three variables to make our code compatible with
+    # many OS, but we go with the first one which is `self.os_name`
+    self.os_name = os.name # nt or posix
+    self.platform_name_1 = sys.platform # win32 or linux or darwin or android
+    self.platform_name_2 = platform.system() # Windows, Darwin, Linux, etc.
+
+    if self.os_name == 'nt':
+    # if self.platform_name_1 == 'win32':
+    # if self.platform_name_2 == 'Windows':
       self.fls_cmd = 'echo >'
-    elif os_name == 'posix':
+    elif self.os_name == 'posix':
+    # elif self.platform_name_1 == 'linux' or self.platform_name_1 == 'darwin' or self.platform_name_1 == 'android':
+    # elif self.platform_name_2 == 'Linux' or self.platform_name_2 == 'Darwin':
       self.fls_cmd = 'touch'
     else:
-        err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
-        print()
-        LOGGER.error(err_compt)
-        print()
-        exit()
+      err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+      print()
+      LOGGER.error(err_compt)
+      print()
+      exit()
     self._exs_first = ['index', 'style']
     self._exs_last = ['.html', '.css', '.js']
     
@@ -118,22 +129,12 @@ class BaseStructure:
     """
     make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True
     """
-
-    # we can use any of the below three variables to make our code compatible with many OS
-    os_name = os.name # nt or posix
-    platform_name_1 = sys.platform # win32 or linux or darwin or android
-    platform_name_2 = platform.system() # Windows, Darwin, Linux, etc.
-
     if tree:
-      if os_name == 'nt':
-      # if platform_name_1 == 'win32':
-      # if platform_name_2 == 'Windows':
+      if self.os_name == 'nt':
         os.makedirs(_dir, exist_ok=True)
         # The exist_ok=True argument ensures that the function
         # does not raise an exception if the directory already exists.
-      elif os_name == 'posix':
-      # elif platform_name_1 == 'linux' or platform_name_1 == 'darwin' or platform_name_1 == 'android':
-      # elif platform_name_2 == 'Linux' or platform_name_2 == 'Darwin':
+      elif self.os_name == 'posix':
         sp.run(['mkdir', '-p', _dir])
       else:
         err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
@@ -172,8 +173,16 @@ class BaseStructure:
     if is_app:
       for _fls in fls:
         app_name = os.getcwd().split(OS_SEP)[-1]
-        # sp.run(shlex.split(f'{fls_cmd} {_fls}'))
-        sp.run(shlex.split(f'{fls_cmd} {_fls}'), shell=True)
+        if self.os_name == 'nt':
+          sp.run(shlex.split(f'{fls_cmd} {_fls}'), shell=True)
+        elif self.os_name == 'posix':
+          sp.run(shlex.split(f'{fls_cmd} {_fls}'))
+        else:
+          err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+          print()
+          LOGGER.error(err_compt)
+          print()
+          exit()
         if is_static_file:
           # building app default files (html, css, js)
           self.file_content(file_name=_fls, content=f'{app_default_dummy}', route_go=False)
@@ -192,8 +201,16 @@ class BaseStructure:
     else:
       for _fls in fls:
         if _fls[:-3] == file:
-          # sp.run(shlex.split(f'{fls_cmd} {_fls}'))
-          sp.run(shlex.split(f'{fls_cmd} {_fls}'), shell=True)
+          if self.os_name == 'nt':
+            sp.run(shlex.split(f'{fls_cmd} {_fls}'), shell=True)
+          elif self.os_name == 'posix':
+            sp.run(shlex.split(f'{fls_cmd} {_fls}'))
+          else:
+            err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+            print()
+            LOGGER.error(err_compt)
+            print()
+            exit()
           self.file_content(
             file_name=_fls,content=f'# Your project {_fls} file\n{thunder_dummy(proj_nm)}', route_go=False
             ) # building the run module `thunder.py`
@@ -224,8 +241,16 @@ class BaseStructure:
           # create default modules inside project sub dir
           for _fls in fls:
             if _fls[:-3] != 'thunder':
-              # sp.run(shlex.split(f'{self.fls_cmd} {_fls}'))
-              sp.run(shlex.split(f'{self.fls_cmd} {_fls}'), shell=True)
+              if self.os_name == 'nt':
+                sp.run(shlex.split(f'{self.fls_cmd} {_fls}'), shell=True)
+              elif self.os_name == 'posix':
+                sp.run(shlex.split(f'{self.fls_cmd} {_fls}'))
+              else:
+                err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+                print()
+                LOGGER.error(err_compt)
+                print()
+                exit()
               # building project default files (__init__.py, config.py, routes.py, secret.py)
               if _fls == '__init__.py':
                 self.file_content(file_name=_fls, content=f'# from {__title__} software, your ({proj_name}) project {_fls} file\n{pro_init_dummy()}', route_go=False)
