@@ -78,7 +78,7 @@ See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
 ### Sakyum default page
 
 ![Sakyum default page](./media/sakyum_default_page.png)
-<!-- [![Sakyum default page](https://raw.githubusercontent.com/usmanmusa1920/sakyum/v0.0.11/media/sakyum_default_page.png)](https://sakyum.readthedocs.io) -->
+<!-- [![Sakyum default page](https://raw.githubusercontent.com/usmanmusa1920/sakyum/v0.0.12/media/sakyum_default_page.png)](https://sakyum.readthedocs.io) -->
 
 ## Useful links
 

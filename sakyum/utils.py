@@ -58,7 +58,7 @@ def stylePage(name, version=False):
   
 # Style for sakyum default pages:
     # =============================
-    #  @ sakyum software - v0.0.11 
+    #  @ sakyum software - v0.0.12 
     # =============================
 footer_style = stylePage(__title__, version=__version__)
 
