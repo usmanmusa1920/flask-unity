@@ -1,8 +1,13 @@
 Change Log
 ==========
 
-0.0.9 (22/june/2023)
+0.0.10 (23/june/2023)
 ------------------
+
+- Tenth Release
+
+Testing for OS compatibility again
+
 - Nineth Release
 
 Fixing bugs
@@ -15,8 +20,6 @@ OS compatibility
 
 Making sakyum to be compatible with windows OS as well as other OS
 
-0.0.7 (4/april/2023)
-------------------
 - Seventh Release
 
 This release mostly is for adding more docs and examples.

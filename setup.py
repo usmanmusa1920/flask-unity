@@ -6,11 +6,11 @@ from setuptools import find_packages
 
 setup(
   name = 'sakyum', # name of the main package (base folder i.e sakyum)
-  version = '0.0.9',
+  version = '0.0.10',
   description = 'An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs',
   long_description = open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
   long_description_content_type='text/markdown',
-  python_requires = '>=3.6',
+  python_requires = '>=3.7',
   platforms='any',
   
   url = 'https://sakyum.readthedocs.io',
@@ -22,15 +22,18 @@ setup(
     'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
     'Natural Language :: English',
     # 'Operating System :: POSIX :: Linux',
     'Operating System :: OS Independent',
-    'License :: OSI Approved :: MIT License',
-    'Topic :: Software Development :: Libraries :: Python Modules',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    'Topic :: Internet',
+    'Topic :: Software Development :: Libraries :: Python Modules',
   ],
   
   # used when people are searching for a module, keywords separated with a space
