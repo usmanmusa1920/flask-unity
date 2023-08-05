@@ -1,27 +1,28 @@
+       ____            _                     _____ ______
+      /___ /    /|   /_  / /      /  / /|  /   /     /    |/
+     /    /    /_|    / /_/      /  / / | /   /     /     /
+    /    /___ /  | /_/ /  |     /__/ /  |/ __/__   /     /
 
-        _
-      /_  /|   /   |/ /  / /\  /|
-       / /_|  /_/  / /  / /  \/ |
-    /_/ /  | /  | / /__/ /      |
-
-# sakyum
+# flask-unity
 
 An extension of flask web framework of python that erase the complexity of constructing flask project blueprint, packages, and other annoying stuffs
 
 # How to use the library
+
 First create a virtual environment `python3 -m venv venv` and then activate it `source venv/bin/activate`
 
-Once that finish now install the library using `pip install sakyum` and wait for the installation basically the library was uploaded using `sdist` (Source Distribution)
+Once that finish now install the library using `pip install flask-unity` and wait for the installation basically the library was uploaded using `sdist` (Source Distribution)
 
 ## Create flask project
+
 After the installation paste the following command on your termianl
 
-`python3 -c "from sakyum import project; project('sakyum_todo')"`
+`python3 -c "from flask_unity import project; project('sakyum_todo')"`
 
 or create a file and paste the below codes which is equivalent of the above, and then run the file
 
 ```python
-from sakyum import project
+from flask_unity import project
 
 project("sakyum_todo")
 ```
@@ -29,6 +30,7 @@ project("sakyum_todo")
 the command/code will create a project called `sakyum_todo` now cd into the `sakyum_todo` directory.
 
 ## Create flask project app
+
 For you to start an app within your project (`sakyum_todo`), run the following command
 
 `python3 thunder.py create_app -a todo_app`
@@ -36,6 +38,7 @@ For you to start an app within your project (`sakyum_todo`), run the following c
 this will create an app within your project (`sakyum_todo`), the `-a` flag is for the app name in this example it is called `todo_app`
 
 ## Run flask server
+
 once the app is created open the `thunder.py` file of your project and import your app `views.py` file
 
 `from todo_app.views import todo_app`
@@ -59,10 +62,11 @@ this will bring the serve on port `7000` visit the localhost url with the port n
 this will take you to your app `index.html page` (todo_app). From there you are ready to go.
 
 # recommendation
+
 This software will not be compatible with `windows operating system` use other `OS` such as `linux` or `macOS`
 
 ## Github repository:
 
-- https://github.com/usmanmusa1920/sakyum
+- https://github.com/usmanmusa1920/flask-unity
 
 Pull requests are welcome
