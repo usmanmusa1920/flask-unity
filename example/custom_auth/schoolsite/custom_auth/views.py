@@ -1,13 +1,13 @@
-# from flask-unity software, your app (custom_auth) views.py file
+# from flask_unity software, your app (custom_auth) views.py file
 import re
 import os
 import secrets
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, url_for, flash, send_from_directory, send_file
-from flask-unity.utils import footer_style, template_dir, static_dir
+from flask_unity.utils import footer_style, template_dir, static_dir
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-from flask-unity.contrib import db, bcrypt
-from flask-unity.auth.models import User
+from flask_unity.contrib import db, bcrypt
+from flask_unity.auth.models import User
 # from .models import <app_models>
 # from .forms import <model_form>
 

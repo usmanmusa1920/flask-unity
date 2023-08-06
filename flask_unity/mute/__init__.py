@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask-unity import __title__
-from flask-unity.utils import Security
-from flask-unity.utils import stylePage
+from flask_unity import __title__
+from flask_unity.utils import Security
+from flask_unity.utils import stylePage
 
 
 secret = Security()
@@ -15,7 +15,7 @@ long_comment = '"""'
 
 
 def thunder_dummy(project):
-  return f"""from flask-unity import Boot
+  return f"""from flask_unity import Boot
 from {project}.routes import reg_blueprints
 from {project}.config import create_app
 from {project}.secret import load_env

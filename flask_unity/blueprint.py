@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template
 from flask_admin.contrib.sqla import ModelView
-from flask-unity.utils import footer_style, template_dir, static_dir
+from flask_unity.utils import footer_style, template_dir, static_dir
 
 # static_folder: the folder where the Blueprint's static files can be found
 # static_url_path: the URL to serve static files from

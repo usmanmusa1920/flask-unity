@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
-from flask-unity.contrib import db, login_manager
+from flask_unity.contrib import db, login_manager
 from flask_login import UserMixin
 
 

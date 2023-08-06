@@ -15,7 +15,7 @@ pip install --upgrade flask_unity
 After the installation paste the following command on your termianl
 
 ```
-python -c "from flask-unity import project; project('schoolsite')"
+python -c "from flask_unity import project; project('schoolsite')"
 ```
 
 This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py` and some directories (some in the form of package) `media`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `schoolsite`.

@@ -12,7 +12,7 @@ When using flask_unity, don't be confuse with the the concept of **project** and
 
 **Project** is the entire folder that contain your flask application, when you create project with the command::
 
-   python -c "from flask-unity import project; project('schoolsite')"
+   python -c "from flask_unity import project; project('schoolsite')"
 
 It will create a parent directory with the name `schoolsite` also inside the `schoolsite` directory there is a directory with thesame name of the parent directory `schoolsite` this directory is the one that most of configurations, registering and other thing that are going to be implemented inside it.
 

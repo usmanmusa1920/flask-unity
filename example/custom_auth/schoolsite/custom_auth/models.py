@@ -1,6 +1,6 @@
-# from flask-unity software, your app (custom_auth) models.py file
+# from flask_unity software, your app (custom_auth) models.py file
 from datetime import datetime
-from flask-unity.contrib import db
+from flask_unity.contrib import db
 
 
 """

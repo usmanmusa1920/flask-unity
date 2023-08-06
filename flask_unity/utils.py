@@ -9,8 +9,8 @@ import secrets
 
 from pathlib import Path
 from getpass import getpass
-from flask-unity import __title__
-from flask-unity import __version__
+from flask_unity import __title__
+from flask_unity import __version__
 
 
 # relative path to the package folder (flask_unity)

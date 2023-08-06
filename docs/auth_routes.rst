@@ -18,10 +18,10 @@ First we are to replace the top import with the following::
   import secrets
   from werkzeug.utils import secure_filename
   from flask import Blueprint, render_template, request, redirect, url_for, flash, send_from_directory, send_file
-  from flask-unity.utils import footer_style, template_dir, static_dir
+  from flask_unity.utils import footer_style, template_dir, static_dir
   from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-  from flask-unity.contrib import db, bcrypt
-  from flask-unity.auth.models import User
+  from flask_unity.contrib import db, bcrypt
+  from flask_unity.auth.models import User
   # from .models import <app_models>
   # from .forms import <model_form>
 
@@ -267,6 +267,6 @@ This will overwrite the default auth system for those routes. You can open the d
   {% endblock body %}
 
 
-Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from flask-unity. Note: ``the creation of a user using the python thunder.py create_user command won't work`` for the custom model.
+Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from flask_unity. Note: ``the creation of a user using the python thunder.py create_user command won't work`` for the custom model.
 
 **Source code** for the `custom auth` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/custom_auth>`_ repository of the project.

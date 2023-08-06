@@ -13,8 +13,8 @@ def app_init_dummy():
 def app_views_dummy(app):
   """app is the application name of your project"""
   return f"""from flask import (render_template, Blueprint)
-from flask-unity.utils import footer_style, template_dir, static_dir
-from flask-unity.contrib import db
+from flask_unity.utils import footer_style, template_dir, static_dir
+from flask_unity.contrib import db
 # from .models import <app_models>
 # from .forms import <model_form>
 
@@ -44,7 +44,7 @@ from wtforms.validators import DataRequired, Length
 
 def app_models_dummy():
   return f"""from datetime import datetime
-from flask-unity.contrib import db
+from flask_unity.contrib import db
 
 
 {long_comment}

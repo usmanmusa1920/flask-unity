@@ -5,9 +5,9 @@ import secrets
 from werkzeug.utils import secure_filename
 from flask import render_template, request, redirect, url_for, flash, send_from_directory, send_file
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-from flask-unity.utils import footer_style
-from flask-unity.blueprint import auth
-from flask-unity.contrib import db, bcrypt
+from flask_unity.utils import footer_style
+from flask_unity.blueprint import auth
+from flask_unity.contrib import db, bcrypt
 from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
 

@@ -29,7 +29,7 @@ Now I will define the **ChoiceForm** model which will look like::
 Next is to go to our app views.py file **exam/views.py** and import the forms, make sure your follow the order of the import (you will see a prototype commented in your app views.py file above) which look like::
 
   from flask import (render_template, Blueprint)
-  from flask-unity.utils import footer_style, template_dir, static_dir
+  from flask_unity.utils import footer_style, template_dir, static_dir
   # from <project_name>.config import db
   # from .models import <app_models>
   # from .forms import <model_form>
@@ -37,7 +37,7 @@ Next is to go to our app views.py file **exam/views.py** and import the forms, m
 Uncomment the fifth line, like::
 
   from flask import (render_template, Blueprint)
-  from flask-unity.utils import footer_style, template_dir, static_dir
+  from flask_unity.utils import footer_style, template_dir, static_dir
   # from <project_name>.config import db
   # from .models import <app_models>
   from .forms import QuestionForm, ChoiceForm

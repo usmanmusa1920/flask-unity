@@ -18,13 +18,13 @@ Create flask project using flask_unity
 
 Now after the installation, let create a project called **schoolsite** to do so paste the following command on your termianl::
 
-  python -c "from flask-unity import project; project('schoolsite')"
+  python -c "from flask_unity import project; project('schoolsite')"
 
 or create a file and paste the below codes which is equivalent of the above, and then run the file
 
 .. code-block:: python
 
-  from flask-unity import project
+  from flask_unity import project
 
   project("schoolsite")
 

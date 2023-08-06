@@ -37,7 +37,7 @@ Notice there will be no version files in your versions directory `(alembic/versi
 After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets::
 
   from exam.models import ExamQuestionModel, ExamChoiceModel
-  from flask-unity.contrib import db
+  from flask_unity.contrib import db
   target_metadata = db.Model.metadata
 
 For Autogenerating Multiple MetaData collections, you can pass a list of models instead e.g::

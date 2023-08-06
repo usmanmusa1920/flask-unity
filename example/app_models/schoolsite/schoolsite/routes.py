@@ -1,7 +1,7 @@
-# from flask-unity software, your (schoolsite) project routes.py file
+# from flask_unity software, your (schoolsite) project routes.py file
 from flask import (render_template, Blueprint)
-from flask-unity import blueprint
-from flask-unity.utils import footer_style, template_dir, static_dir, rem_blueprint
+from flask_unity import blueprint
+from flask_unity.utils import footer_style, template_dir, static_dir, rem_blueprint
 from exam.views import exam
 
 

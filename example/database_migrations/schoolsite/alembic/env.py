@@ -20,7 +20,7 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 # target_metadata = None
 from exam.models import ExamQuestionModel, ExamChoiceModel
-from flask-unity.contrib import db
+from flask_unity.contrib import db
 target_metadata = db.Model.metadata
 
 # other values from the config, defined by the needs of env.py,
