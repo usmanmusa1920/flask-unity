@@ -1,5 +1,5 @@
 # Your project thunder.py file
-from sakyum import Boot
+from flask_unity import Boot
 from auth.models import User
 from schoolsite import db
 from schoolsite.routes import reg_blueprints

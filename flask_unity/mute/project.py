@@ -34,7 +34,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_wtf.csrf import CSRFProtect
-from sakyum.blueprint import adminModelRegister
+from flask_unity.blueprint import adminModelRegister
 from .secret import Config
 
 
@@ -95,8 +95,8 @@ def create_app(reg_blueprints=False, conf=Config):
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint, url_for)
 from flask_login import current_user
-from sakyum import blueprint
-from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
+from flask_unity import blueprint
+from flask_unity.utils import footer_style, template_dir, static_dir, rem_blueprint
 from auth.routes import auth2
 # from <app_name>.views import <app_name>
 

@@ -92,8 +92,8 @@ class User(db.Model, UserMixin):
 def auth_routes_dummy(proj_name):
   return f"""from flask import render_template, request, redirect, url_for, flash, Blueprint
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-from sakyum.utils import footer_style, template_dir, static_dir
-from sakyum.blueprint import auth
+from flask_unity.utils import footer_style, template_dir, static_dir
+from flask_unity.blueprint import auth
 from {proj_name}.config import db, bcrypt
 from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
@@ -152,7 +152,7 @@ def adminLogin():
 @fresh_login_required
 def adminChangePassword():
   {long_comment}
-    the `admin_change_password.html` below is located in the sakyum package (templates/default_page/admin_change_password.html)
+    the `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
   {long_comment}
   form = ChangePasswordForm()
   if request.method == "POST":

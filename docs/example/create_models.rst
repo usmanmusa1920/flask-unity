@@ -49,12 +49,12 @@ Now let define the **ExamChoiceModel** model which will look like::
     def __repr__(self):
       return f"{self.choice_text}"
 
-After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://sakyum.readthedocs.io/en/latest/database.html>`_ using alembic in sakyum, but we are going to skip this and just play with `api`.
+After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://flask-unity.readthedocs.io/en/latest/database.html>`_ using alembic in flask_unity, but we are going to skip this and just play with `api`.
 
 Play with api
 -------------
 
-Before we move further let us play with the model api. This is the continuation from the last tutorial where we stop, when we make debug value to be `True` after registering the app ( `last tutorial <https://sakyum.readthedocs.io/en/latest/quick_start.html#register-an-app>`_ )
+Before we move further let us play with the model api. This is the continuation from the last tutorial where we stop, when we make debug value to be `True` after registering the app ( `last tutorial <https://flask-unity.readthedocs.io/en/latest/quick_start.html#register-an-app>`_ )
 
 From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter, start by importing your **db** and **bcrypt** (for password hash) instance from project package (schoolsite), and also import the models you create for your app in `exam/models.py` and the default User model located in `auth.models.py`::
 

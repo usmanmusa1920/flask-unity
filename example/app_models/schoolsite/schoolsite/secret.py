@@ -1,4 +1,4 @@
-# from sakyum software, your (schoolsite) project secret.py file
+# from flask_unity software, your (schoolsite) project secret.py file
 from pathlib import Path
 
 db_origin = Path(__file__).resolve().parent.parent

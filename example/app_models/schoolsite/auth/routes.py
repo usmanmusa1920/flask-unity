@@ -1,8 +1,8 @@
-# from sakyum software, your (schoolsite) project auth routes.py file
+# from flask_unity software, your (schoolsite) project auth routes.py file
 from flask import render_template, request, redirect, url_for, flash, Blueprint
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-from sakyum.utils import footer_style, template_dir, static_dir
-from sakyum.blueprint import auth
+from flask_unity.utils import footer_style, template_dir, static_dir
+from flask_unity.blueprint import auth
 from schoolsite.config import db, bcrypt
 from .models import User
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
@@ -61,7 +61,7 @@ def adminLogin():
 @fresh_login_required
 def adminChangePassword():
   """
-    the `admin_change_password.html` below is located in the sakyum package (templates/default_page/admin_change_password.html)
+    the `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
   """
   form = ChangePasswordForm()
   if request.method == "POST":

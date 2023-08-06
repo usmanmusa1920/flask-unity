@@ -1,4 +1,4 @@
-# from sakyum software, your (schoolsite) project auth models.py file
+# from flask_unity software, your (schoolsite) project auth models.py file
 from datetime import datetime
 from schoolsite.config import db, login_manager
 from flask_login import UserMixin

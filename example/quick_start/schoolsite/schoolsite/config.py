@@ -1,11 +1,11 @@
-# from sakyum software, your (schoolsite) project config.py file
+# from flask_unity software, your (schoolsite) project config.py file
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask import Flask
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_wtf.csrf import CSRFProtect
-from sakyum.blueprint import adminModelRegister
+from flask_unity.blueprint import adminModelRegister
 from .secret import Config
 
 

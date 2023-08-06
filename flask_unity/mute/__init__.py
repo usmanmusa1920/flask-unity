@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from sakyum import __title__
-from sakyum.utils import Security
-from sakyum.utils import stylePage
+from flask_unity import __title__
+from flask_unity.utils import Security
+from flask_unity.utils import stylePage
 
 
 secret = Security()
@@ -15,7 +15,7 @@ long_comment = "\"\"\""
 
 
 def thunder_dummy(project):
-  return f"""from sakyum import Boot
+  return f"""from flask_unity import Boot
 from auth.models import User
 from {project} import db
 from {project}.routes import reg_blueprints
