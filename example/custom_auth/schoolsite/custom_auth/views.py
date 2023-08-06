@@ -1,13 +1,13 @@
-# from sakyum software, your app (custom_auth) views.py file
+# from flask_unity software, your app (custom_auth) views.py file
 import re
 import os
 import secrets
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, url_for, flash, send_from_directory, send_file
-from sakyum.utils import footer_style, template_dir, static_dir
+from flask_unity.utils import footer_style, template_dir, static_dir
 from flask_login import login_user, current_user, logout_user, fresh_login_required, login_required
-from sakyum.contrib import db, bcrypt
-from sakyum.auth.models import User
+from flask_unity.contrib import db, bcrypt
+from flask_unity.auth.models import User
 # from .models import <app_models>
 # from .forms import <model_form>
 
@@ -32,7 +32,7 @@ def index():
 @login_required
 def adminRegister():
   """
-    the `admin_register.html` below is located in the sakyum package (templates/default_page/admin_register.html)
+    the `admin_register.html` below is located in the flask_unity package (templates/default_page/admin_register.html)
   """
   if request.method == "POST":
     username  = request.form["username"]
@@ -77,7 +77,7 @@ def adminRegister():
 @custom_auth.route("/custom_admin/login/", methods=["POST", "GET"])
 def adminLogin():
   """
-    the `admin_login.html` below is located in the sakyum package (templates/default_page/admin_login.html)
+    the `admin_login.html` below is located in the flask_unity package (templates/default_page/admin_login.html)
   """
   if current_user.is_authenticated:
     return redirect(url_for("base.index"))
@@ -115,7 +115,7 @@ def adminLogin():
 @fresh_login_required
 def adminChangePassword():
   """
-    the `admin_change_password.html` below is located in the sakyum package (templates/default_page/admin_change_password.html)
+    the `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
   """
   if request.method == "POST":
     old_password = request.form["old_password"]

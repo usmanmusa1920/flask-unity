@@ -39,8 +39,8 @@ def load_env():
 def pro_config_dummy(proj_name):
   return f"""from flask_admin import Admin
 from flask import Flask
-from sakyum.blueprint import adminModelRegister
-from sakyum.contrib import ext_lst, db
+from flask_unity.blueprint import adminModelRegister
+from flask_unity.contrib import ext_lst, db
 from .secret import Config
 
 
@@ -53,8 +53,8 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
   {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
-  from sakyum.auth.models import User
-  from sakyum.auth.admin import UserAdminView
+  from flask_unity.auth.models import User
+  from flask_unity.auth.admin import UserAdminView
   # from <app_name>.models import <app_model>
   # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
@@ -88,8 +88,8 @@ def create_app(reg_blueprints=False, conf=Config):
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
-from sakyum import blueprint
-from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
+from flask_unity import blueprint
+from flask_unity.utils import footer_style, template_dir, static_dir, rem_blueprint
 # from <app_name>.views import <app_name>
 
 

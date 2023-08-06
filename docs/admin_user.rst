@@ -7,7 +7,7 @@ There are basically two ways in which you can create admin user. One is by using
 
 Let say you start a project, and an app inside the project by the following command::
 
-  python -c "from sakyum import project; project('schoolsite')" && cd schoolsite && python thunder.py create_app -a exam
+  python -c "from flask_unity import project; project('schoolsite')" && cd schoolsite && python thunder.py create_app -a exam
 
 
 **Admin user using flags:**
