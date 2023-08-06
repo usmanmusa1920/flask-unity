@@ -76,7 +76,7 @@ See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
 ### Flask-unity default page
 
-![Flask-unity default page](./media/flask_unityunity_default_page.png)
+![Flask-unity default page](./media/flask_unity_default_page.png)
 
 <!-- [![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask_unityunity/v0.0.11/mflask_unitylask_unity_default_page.png)](https://flask-unity.readthedocs.io) -->
 
