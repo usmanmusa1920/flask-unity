@@ -1,20 +1,20 @@
 :tocdepth: 2
 
-Sakyum on docker
+Flask-unity on docker
 ################
 
-This repo contains code to spin up a boilerplate sakyum project with Docker Compose. To run sakyum with docker compose, first pull it by::
+This repo contains code to spin up a boilerplate flask_unityunity project with Docker Compose. Toflask_unitylask_unity with docker compose, first pull it by::
 
-  docker pull usmanmusa/sakyum
+  docker pull usmanmusa/flask_unityunity
 
 Next you are to clone the github repo of the project in other to get the `docker-compose.yml` by::
   
-  git clone https://github.com/usmanmusa1920/sakyum.git
+  git clone https://github.com/usmanmusa1920/flask-unity.git
 
 
 Now cd into the project folder you just clone to spin up the services using the command::
   
-  cd sakyum/example/sakyum_demo
+  cd flask_unityunity/exaflask_unitylask_unity_demo
 
 
 To spinup the services, run the command::
@@ -55,4 +55,4 @@ Open a bash session in a running container::
   
   docker exec -it <container ID> sh
 
-**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum-docker>`_ repository of the project.
+**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/flask_unityunity-docker>`_ repository of the project.

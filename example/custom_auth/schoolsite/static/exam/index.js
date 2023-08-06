@@ -1,4 +1,4 @@
-// @sakyum, exam index.js file
+// @flask_unityunity, exam index.js file
 function test(){
-  alert('I am sakyum test alert for (exam) index page')
+  alert('I am flask_unityunity test alert for (exam) index page')
 }

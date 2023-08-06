@@ -1,4 +1,4 @@
-// @sakyum, schoolsite (project) index.js file
+// @flask_unityunity, schoolsite (project) index.js file
 function test(){
-  alert('I am sakyum test alert for (schoolsite) index page')
+  alert('I am flask_unityunity test alert for (schoolsite) index page')
 }
