@@ -3,28 +3,28 @@
 Quick start
 ###########
 
-First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing sakyum, this is just a recomendation, it still work even if you install it without using virtual environment
+First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask_unity, this is just a recomendation, it still work even if you install it without using virtual environment
 
-Install and update the latest release from `pypi <https://pypi.org/project/sakyum>`_. Basically the library was uploaded using **sdist** (Source Distribution) and **bdist_wheel** (Built Distribution), this software (library) as from **v0.0.9** it is compatible and also tested with **windows OS** and others as well, such as **linux**, **macOS** and possibly some others too!.
+Install and update the latest release from `pypi <https://pypi.org/project/flask-unity>`_. Basically the library was uploaded using **sdist** (Source Distribution) and **bdist_wheel** (Built Distribution), this software (library) as from **v0.0.9** it is compatible and also tested with **windows OS** and others as well, such as **linux**, **macOS** and possibly some others too!.
 
 You will notice we use **--upgrade** in the installation command, this will make sure it install the latest release from pypi (in case you have a version which is not the latest), you can still ommit the `--upgrade` and use the version you want then wait for the installation to finish.::
 
-  pip install --upgrade sakyum
+  pip install --upgrade flask_unity
 
-This **quick start** will walk you through creating project called **schoolsite** and a basic application called **exam** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `sakyum`, you will be able to clone it on `github <https://github.com/usmanmusa1920/sakyum>`_. it is located inside example directory of the base repository.
+This **quick start** will walk you through creating project called **schoolsite** and a basic application called **exam** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `flask_unity`, you will be able to clone it on `github <https://github.com/usmanmusa1920/flask-unity>`_. it is located inside example directory of the base repository.
 
-Create flask project using sakyum
+Create flask project using flask_unity
 =================================
 
 Now after the installation, let create a project called **schoolsite** to do so paste the following command on your termianl::
 
-  python -c "from sakyum import project; project('schoolsite')"
+  python -c "from flask_unity import project; project('schoolsite')"
 
 or create a file and paste the below codes which is equivalent of the above, and then run the file
 
 .. code-block:: python
 
-  from sakyum import project
+  from flask_unity import project
 
   project("schoolsite")
 
@@ -62,7 +62,7 @@ Boot up the flask server by running the below command::
 
 Now visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
 
-Create flask project app using sakyum
+Create flask project app using flask_unity
 =====================================
 
 Since we create a project, let create an app within the project. To start an app within the project (**schoolsite**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file) which is our default database. Now run the following command in other to create your app, by giving the name you want your app to be, in our case we will call our app **exam**::
@@ -181,4 +181,4 @@ You can change your default profile picture by moving to http://127.0.0.1:5000/a
 
 With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.
 
-Source code for this `quick start` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/quick_start>`_ repository of the project.
+Source code for this `quick start` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/quick_start>`_ repository of the project.
