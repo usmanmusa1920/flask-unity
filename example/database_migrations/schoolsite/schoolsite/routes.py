@@ -1,7 +1,7 @@
-# from sakyum software, your (schoolsite) project routes.py file
+# from flask-unity software, your (schoolsite) project routes.py file
 from flask import (render_template, Blueprint)
-from sakyum import blueprint
-from sakyum.utils import footer_style, template_dir, static_dir, rem_blueprint
+from flask-unity import blueprint
+from flask-unity.utils import footer_style, template_dir, static_dir, rem_blueprint
 from exam.views import exam
 from custom_auth.views import custom_auth
 

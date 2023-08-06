@@ -1,8 +1,8 @@
-# from sakyum software, your (schoolsite) project config.py file
+# from flask-unity software, your (schoolsite) project config.py file
 from flask_admin import Admin
 from flask import Flask
-from sakyum.blueprint import adminModelRegister
-from sakyum.contrib import ext_lst, db
+from flask-unity.blueprint import adminModelRegister
+from flask-unity.contrib import ext_lst, db
 from .secret import Config
 
 
@@ -15,8 +15,8 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
   """ You will need to import models themselves before issuing `db.create_all` """
-  from sakyum.auth.models import User
-  from sakyum.auth.admin import UserAdminView
+  from flask-unity.auth.models import User
+  from flask-unity.auth.admin import UserAdminView
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from exam.admin import QuestionChoiceAdminView
   db.create_all() # method to create the tables and database

@@ -5,7 +5,7 @@ from setuptools import find_packages
 
 
 setup(
-  name = 'sakyum', # name of the main package (base folder i.e sakyum)
+  name = 'flask_unity', # name of the main package (base folder i.e flask_unity)
   version = '0.0.10',
   description = 'An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs',
   long_description = open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
@@ -13,8 +13,8 @@ setup(
   python_requires = '>=3.7',
   platforms='any',
   
-  url = 'https://sakyum.readthedocs.io',
-  download_url = 'https://pypi.org/project/sakyum',
+  url = 'https://flask-unity.readthedocs.io',
+  download_url = 'https://pypi.org/project/flask-unity',
   author = 'Usman Musa',
   author_email = 'usmanmusa1920@gmail.com',
   license = 'MIT',
@@ -37,11 +37,11 @@ setup(
   ],
   
   # used when people are searching for a module, keywords separated with a space
-  keywords = 'sakyum',
+  keywords = 'flask_unity',
   include_package_data = True, # include files listed in MANIFEST.in
   
   # The list of packages(directories) for your library
-  packages = find_packages(), # OR packages=['sakyum'] 
+  packages = find_packages(), # OR packages=['flask_unity'] 
   # If your package is a single module, use this instead of 'packages':
   # py_modules=[''] # list of files (modules) that are not in any directory (at the root dir)
   # the libraries it depends on
@@ -73,7 +73,7 @@ setup(
     'zipp==3.13.0',
   ],
   project_urls={
-    'Documentation': 'https://sakyum.readthedocs.io',
-    'Source': 'https://github.com/usmanmusa1920/sakyum',
+    'Documentation': 'https://flask-unity.readthedocs.io',
+    'Source': 'https://github.com/usmanmusa1920/flask-unity',
   },
 )

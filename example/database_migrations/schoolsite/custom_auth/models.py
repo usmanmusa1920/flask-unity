@@ -1,6 +1,6 @@
-# from sakyum software, your app (custom_auth) models.py file
+# from flask-unity software, your app (custom_auth) models.py file
 from datetime import datetime
-from sakyum.contrib import db
+from flask-unity.contrib import db
 
 
 """

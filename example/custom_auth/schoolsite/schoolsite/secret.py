@@ -1,4 +1,4 @@
-# from sakyum software, your (schoolsite) project secret.py file
+# from flask-unity software, your (schoolsite) project secret.py file
 import os
 from pathlib import Path
 
