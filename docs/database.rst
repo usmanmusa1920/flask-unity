@@ -3,7 +3,7 @@
 Database migration
 ##################
 
-Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (sakyum) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
+Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (flask_unity) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
 
 **Migrations** are very powerful and let you change your models over time, as you develop your project, without the need to delete your database or tables and make new ones - it specializes in upgrading your database live, without losing data. More will be gist later.
 
@@ -37,7 +37,7 @@ Notice there will be no version files in your versions directory `(alembic/versi
 After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets::
 
   from exam.models import ExamQuestionModel, ExamChoiceModel
-  from sakyum.contrib import db
+  from flask_unity.contrib import db
   target_metadata = db.Model.metadata
 
 For Autogenerating Multiple MetaData collections, you can pass a list of models instead e.g::
@@ -95,4 +95,4 @@ Hint
 
     alembic downgrade base
 
-**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/database_migrations>`_ repository of the project.
+**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/database_migrations>`_ repository of the project.

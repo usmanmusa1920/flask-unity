@@ -49,17 +49,17 @@ Now let define the **ExamChoiceModel** model which will look like::
     def __repr__(self):
       return f'{self.choice_text}'
 
-After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://sakyum.readthedocs.io/en/latest/database.html>`_ using alembic in sakyum, but we are going to skip this and just play with `api`.
+After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://flask-unity.readthedocs.io/en/latest/database.html>`_ using alembic in flask_unity, but we are going to skip this and just play with `api`.
 
 Play with api
 -------------
 
-Before we move further let us play with the model api. This is the continuation from the last tutorial where we stop, when we make debug value to be `True` after registering the app ( `last tutorial <https://sakyum.readthedocs.io/en/latest/quick_start.html#register-an-app>`_ )
+Before we move further let us play with the model api. This is the continuation from the last tutorial where we stop, when we make debug value to be `True` after registering the app ( `last tutorial <https://flask-unity.readthedocs.io/en/latest/quick_start.html#register-an-app>`_ )
 
 From there shutdown the development server and go into the python **shell** ( python interpreter ), make sure you are within that directory you boot up the server by typing **python**, once you are in the interpreter, start by importing your **db** and **bcrypt** (for password hash) instance from project package (schoolsite), and also import the models you create for your app in `exam/models.py` and the default User model located in `auth.models.py`::
 
-  from sakyum.contrib import bcrypt
-  from sakyum.auth.models import User
+  from flask_unity.contrib import bcrypt
+  from flask_unity.auth.models import User
   from schoolsite.config import db
   from exam.models import ExamQuestionModel, ExamChoiceModel
 
@@ -197,8 +197,8 @@ Register our models to admin
 In other to register our model, we are to open a sub project folder and open the **config.py** file we see there **(schoolsite/config.py)**, within create_app function in the file, we are to import our app models (**ExamQuestionModel**, **ExamChoiceModel**) that we want to register, above the method that will create the tables **db.create_all()** and we will see a commented prototype above it::
 
   """ You will need to import models themselves before issuing `db.create_all` """
-  from sakyum.auth.models import User
-  from sakyum.auth.admin import UserAdminView
+  from flask_unity.auth.models import User
+  from flask_unity.auth.admin import UserAdminView
   from exam.models import ExamQuestionModel, ExamChoiceModel
   # from <app_name>.admin import <admin_model_view>
   db.create_all() # method to create the tables and database
@@ -248,8 +248,8 @@ The `inaccessible_callback` method will redirect user (who is not logged in) to 
 In other to register our model view, open the `config.py` file (schoolsite/config.py) and import our admin model view (`QuestionChoiceAdminView`) below the import of our `ExamQuestionModel` and `ExamChoiceModel`  which look like::
 
   """ You will need to import models themselves before issuing `db.create_all` """
-  from sakyum.auth.models import User
-  from sakyum.auth.admin import UserAdminView
+  from flask_unity.auth.models import User
+  from flask_unity.auth.admin import UserAdminView
   from exam.models import ExamQuestionModel, ExamChoiceModel
   from exam.admin import QuestionChoiceAdminView
   db.create_all() # method to create the tables and database
@@ -275,6 +275,6 @@ Now let navigate to `http://127.0.0.1:5000/login` and login using one of the use
 
 After we logged in, now if we navigate to `http://127.0.0.1:5000/admin` we are able to see our `QuestionChoiceAdminView` view in the form of drop-down menu, if we click it, it will show list containing `Questions  and Choices` only, since the are the only once associated with that mode admin view. Now click the `Questions` this will show list of questions we have inserted in the python shell.
 
-**Source code** for the `app models` is available at official `github <https://github.com/usmanmusa1920/sakyum/tree/master/example/app_models>`_ repository of the project.
+**Source code** for the `app models` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/app_models>`_ repository of the project.
 
 See more on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation.
