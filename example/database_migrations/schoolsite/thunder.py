@@ -1,5 +1,5 @@
 # Your project thunder.py file
-from sakyum import Boot
+from flask_unity import Boot
 from schoolsite.routes import reg_blueprints
 from schoolsite.config import create_app
 from schoolsite.secret import load_env

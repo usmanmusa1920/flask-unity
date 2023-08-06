@@ -1,8 +1,8 @@
 Change Log
 ==========
 
-0.0.12 (23/june/2023)
-------------------
+0.0.12 (07/august/2023)
+-----------------------
 
 - Twelveth Release
 
@@ -26,7 +26,7 @@ Fixing v0.0.8 bugs for OS compatibility, and also tested on windows OS
 
 OS compatibility
 
-Making sakyum to be compatible with windows OS as well as other OS
+Making flask_unity to be compatible with windows OS as well as other OS
 
 - Seventh Release
 
