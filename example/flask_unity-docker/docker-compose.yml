@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  flask_unityunity_service:
+  flask_unity_service:
     build:
       context: .
     ports:

@@ -33,7 +33,7 @@ def index():
 @login_required
 def adminRegister():
   """
-  The `admin_register.html` below is located in the flask_unityunity package (templates/default_page/admin_register.html)
+  The `admin_register.html` below is located in the flask_unity package (templates/default_page/admin_register.html)
   """
   if request.method == 'POST':
     username  = request.form['username']
@@ -78,7 +78,7 @@ def adminRegister():
 @custom_auth.route('/admin/login/', methods=['POST', 'GET'])
 def adminLogin():
   """
-  The `admin_login.html` below is located in the flask_unityunity package (templates/default_page/admin_login.html)
+  The `admin_login.html` below is located in the flask_unity package (templates/default_page/admin_login.html)
   """
   if current_user.is_authenticated:
     return redirect(url_for('base.index'))
@@ -116,7 +116,7 @@ def adminLogin():
 @fresh_login_required
 def adminChangePassword():
   """
-  The `admin_change_password.html` below is located in the flask_unityunity package (templates/default_page/admin_change_password.html)
+  The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
   """
   if request.method == 'POST':
     old_password = request.form['old_password']

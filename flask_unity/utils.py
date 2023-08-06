@@ -13,7 +13,7 @@ from flask_unity import __title__
 from flask_unity import __version__
 
 
-# relative path to the package folder (flask_unityunity)
+# relative path to the package folder (flask_unity)
 REL_PATH = Path(__file__).resolve().parent
 OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for windows `\\`)
 
@@ -56,9 +56,9 @@ def stylePage(name, version=False):
   return [desc_center, border]
   
   
-# Style for flask_unityunity default pages:
+# Style for flask_unity default pages:
     # =============================
-    #  @ flask_unityunity software - v0.0.11 
+    #  @ flask_unity software - v0.0.11 
     # =============================
 footer_style = stylePage(__title__, version=__version__)
 

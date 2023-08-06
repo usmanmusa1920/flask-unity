@@ -1,8 +1,8 @@
-# Run flask_unityunity with Docker Compose
+# Run flask_unity with Docker Compose
 
-This repo contains code to spin up a boilerplate flask_unityunity project with Docker Compose. Pull it using::
+This repo contains code to spin up a boilerplate flask_unity project with Docker Compose. Pull it using::
 
-docker pull usmanmusa/flask_unityunity
+docker pull usmanmusa/flask_unity
 
 Next you are to clone the github repo of the project in other to get the `docker-compose.yml` by:
 
@@ -13,7 +13,7 @@ git clone https://github.com/usmanmusa1920/flask-unity.git
 Now cd into the project folder you just clone to spin up the services using the command::
 
 ```
-cd flask_unityunity/exaflask_unitylask_unity_demo
+cd flask_unity/exaflask_unitylask_unity_demo
 ```
 
 To spinup the services, run the command::

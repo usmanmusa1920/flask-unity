@@ -3,7 +3,7 @@
 Database migration
 ##################
 
-Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (flask_unityunity) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
+Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (flask_unity) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
 
 **Migrations** are very powerful and let you change your models over time, as you develop your project, without the need to delete your database or tables and make new ones - it specializes in upgrading your database live, without losing data. More will be gist later.
 

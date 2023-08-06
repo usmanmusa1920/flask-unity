@@ -13,7 +13,7 @@
 """
 
 
-__title__ = 'flask_unityunity'
+__title__ = 'flask_unity'
 __version__ = '0.0.11'
 __author__ = 'Usman Musa'
 __author_email__ = 'usmanmusa1920@gmail.com'

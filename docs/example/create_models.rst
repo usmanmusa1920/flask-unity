@@ -49,7 +49,7 @@ Now let define the **ExamChoiceModel** model which will look like::
     def __repr__(self):
       return f'{self.choice_text}'
 
-After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://flask-unity.readthedocs.io/en/latest/database.html>`_ using alembic in flask_unityunity, but we are going to skip this and just play with `api`.
+After pasting them, save the file. From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models using alembic, check how to `create migration <https://flask-unity.readthedocs.io/en/latest/database.html>`_ using alembic in flask_unity, but we are going to skip this and just play with `api`.
 
 Play with api
 -------------

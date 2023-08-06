@@ -3,7 +3,7 @@
 Error pages
 ###########
 
-There are 12 default error pages that have been implemented in flask_unityunity. These error pages include:
+There are 12 default error pages that have been implemented in flask_unity. These error pages include:
 
 Error page of `400` for bad request
 

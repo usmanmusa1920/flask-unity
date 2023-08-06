@@ -5,7 +5,7 @@ from setuptools import find_packages
 
 
 setup(
-  name = 'flask_unityunity', # name of the main package (base folderflask_unitylask_unity)
+  name = 'flask_unity', # name of the main package (base folderflask_unitylask_unity)
   version = '0.0.11',
   description = 'An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs',
   long_description = open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
@@ -37,11 +37,11 @@ setup(
   ],
   
   # used when people are searching for a module, keywords separated with a space
-  keywords = 'flask_unityunity',
+  keywords = 'flask_unity',
   include_package_data = True, # include files listed in MANIFEST.in
   
   # The list of packages(directories) for your library
-  packages = find_packages(), # OR packages=['flask_unityunity'] 
+  packages = find_packages(), # OR packages=['flask_unity'] 
   # If your package is a single module, use this instead of 'packages':
   # py_modules=[''] # list of files (modules) that are not in any directory (at the root dir)
   # the libraries it depends on

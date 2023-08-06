@@ -1,17 +1,15 @@
-<!-- @flask_unityunity, schoolsite (project) admin index.html page -->
-{% extends 'admin/master.html' %}
-{% block body %}
-  <a href="/">Go to schoolsite home page</a>
-  <br>
-  {% if current_user.is_authenticated %}
-    <a href="{{ url_for('auth.adminLogout') }}">logout</a>
-    <br>
-    <a href="{{ url_for('auth.adminRegister') }}">register</a>
-    <br>
-    <a href="{{ url_for('auth.changeProfileImage') }}">change image</a>
-    <br>
-    <a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
-  {% else %}
-    <a href="{{ url_for('auth.adminLogin') }}">login</a>
-  {% endif %}
-{% endblock body %}
+<!-- @flask_unity, schoolsite (project) admin index.html page -->
+{% extends 'admin/master.html' %} {% block body %}
+<a href="/">Go to schoolsite home page</a>
+<br />
+{% if current_user.is_authenticated %}
+<a href="{{ url_for('auth.adminLogout') }}">logout</a>
+<br />
+<a href="{{ url_for('auth.adminRegister') }}">register</a>
+<br />
+<a href="{{ url_for('auth.changeProfileImage') }}">change image</a>
+<br />
+<a href="{{ url_for('auth.adminChangePassword') }}">change password</a>
+{% else %}
+<a href="{{ url_for('auth.adminLogin') }}">login</a>
+{% endif %} {% endblock body %}

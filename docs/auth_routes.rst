@@ -5,7 +5,7 @@ Custome auth
 
 Custom authentication for users
 
-In this chapter we are going to see how we can write a custom authentication for users which will replace the default route for our `auth` pages and instead of rendering the `wtforms` views, we are to use html form. To do so, flask_unityunity already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is to create an app (`custom_auth`) just like the way we create the exam app::
+In this chapter we are going to see how we can write a custom authentication for users which will replace the default route for our `auth` pages and instead of rendering the `wtforms` views, we are to use html form. To do so, flask_unity already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is to create an app (`custom_auth`) just like the way we create the exam app::
 
   python thunder.py create_app -a custom_auth
 
@@ -36,7 +36,7 @@ First we are to replace the top import with the following::
   @login_required
   def adminRegister():
     """
-    The `admin_register.html` below is located in the flask_unityunity package (templates/default_page/admin_register.html)
+    The `admin_register.html` below is located in the flask_unity package (templates/default_page/admin_register.html)
     """
     if request.method == 'POST':
       username  = request.form['username']
@@ -83,7 +83,7 @@ First we are to replace the top import with the following::
   @custom_auth.route('/admin/login/', methods=['POST', 'GET'])
   def adminLogin():
     """
-    The `admin_login.html` below is located in the flask_unityunity package (templates/default_page/admin_login.html)
+    The `admin_login.html` below is located in the flask_unity package (templates/default_page/admin_login.html)
     """
     if current_user.is_authenticated:
       return redirect(url_for('base.index'))
@@ -123,7 +123,7 @@ First we are to replace the top import with the following::
   @fresh_login_required
   def adminChangePassword():
     """
-    The `admin_change_password.html` below is located in the flask_unityunity package (templates/default_page/admin_change_password.html)
+    The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
     """
     if request.method == 'POST':
       old_password = request.form['old_password']
@@ -248,7 +248,7 @@ then pass it into the reg_blueprints list in other to register it by::
 
 This will overwrite the default auth system for those routes. You can open the default admin page within your project (templates/admin/index.html) and overite it with::
 
-  <!-- @flask_unityunity, schoolsite (project) admin index.html page -->
+  <!-- @flask_unity, schoolsite (project) admin index.html page -->
   {% extends 'admin/master.html' %}
   {% block body %}
     <a href="/">Go to schoolsite home page</a>

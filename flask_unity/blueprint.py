@@ -18,7 +18,7 @@ auth = Blueprint('auth', __name__, template_folder=template_dir(temp_from_pkg='d
 
 
 """
-The `default` blueprint above is the blueprint that is been used by flask_unityunity for linking
+The `default` blueprint above is the blueprint that is been used by flask_unity for linking
 it default pages (css, js, and favicon.ico) files and also it can be use for our project
 default html pages (landing page route) that is located in your project route.py file
 `<project_name>/route.py` like ` @default.route() `, but instead we use ` @base.route() `

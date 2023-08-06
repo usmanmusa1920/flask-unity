@@ -68,7 +68,7 @@ def adminLogin():
 @fresh_login_required
 def adminChangePassword():
   """
-  The `admin_change_password.html` below is located in the flask_unityunity package (templates/default_page/admin_change_password.html)
+  The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
   """
   form = ChangePasswordForm()
   if request.method == 'POST':
