@@ -123,8 +123,8 @@ class User(db.Model, UserMixin):
 def auth_routes_dummy(proj_name):
   return f"""from flask import render_template, request, redirect, url_for
 from flask_login import login_user, current_user, logout_user
-from sakyum.utils import footer_style
-from sakyum.blueprint import auth
+from flask_unity.utils import footer_style
+from flask_unity.blueprint import auth
 from {proj_name}.config import db
 from .models import User
 import datetime
@@ -133,7 +133,7 @@ import datetime
 @auth.route('/admin/login/', methods=["POST", "GET"])
 def adminLogin():
   {long_comment}
-    the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
+    the `admin_login.html` below is located in the flask_unity package (static/default_page/admin_login.html)
   {long_comment}
   if request.method == "POST":
     username = request.form["username"]
@@ -150,7 +150,7 @@ def adminLogin():
 @auth.route('/admin/register/', methods=["POST", "GET"])
 def adminRegister():
   {long_comment}
-    the `admin_register.html` below is located in the sakyum package (static/default_page/admin_register.html)
+    the `admin_register.html` below is located in the flask_unity package (static/default_page/admin_register.html)
   {long_comment}
   if request.method == "POST":
     username  = request.form["username"]

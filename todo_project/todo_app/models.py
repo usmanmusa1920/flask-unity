@@ -1,4 +1,4 @@
-# from sakyum software, your app (todo_app) models.py file
+# from flask_unity software, your app (todo_app) models.py file
 from datetime import datetime
 from todo_project.config import db
 
@@ -62,8 +62,8 @@ from todo_app.models import Todo_appQuestionModel, Todo_appChoiceModel
 db.create_all()
 
 
-q1 = Todo_appQuestionModel(question_text="Is sakyum an extension of flask web framework?")
-q2 = Todo_appQuestionModel(question_text="Is flask better with sakyum")
+q1 = Todo_appQuestionModel(question_text="Is flask_unity an extension of flask web framework?")
+q2 = Todo_appQuestionModel(question_text="Is flask better with flask_unity")
 
 db.session.add(q1)
 db.session.add(q2)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sakyum.utils import Security
+from flask_unity.utils import Security
 
 
 secret = Security()
@@ -78,8 +78,8 @@ def admin_runner():
 
 def pro_routes_dummy(proj):
   return f"""from flask import (render_template, Blueprint)
-from sakyum.utils import footer_style, template_dir, static_dir
-from sakyum.blueprint import default, errors, auth
+from flask_unity.utils import footer_style, template_dir, static_dir
+from flask_unity.blueprint import default, errors, auth
 from flask import render_template
 # from <app_name>.views import <app_name>
 
@@ -120,7 +120,7 @@ def rem_blueprint(lst_blue):
 
 @default.route('/')
 def index():
-  # the default_base.html below is located in the sakyum package (templates/default_page) folder
+  # the default_base.html below is located in the flask_unity package (templates/default_page) folder
   return render_template("default_base.html", project_name="{proj}", blueprints_list=rem_blueprint(reg_blueprints), footer_style=footer_style)
   
   

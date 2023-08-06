@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from sakyum import __title__
-from sakyum.utils import stylePage
+from flask_unity import __title__
+from flask_unity.utils import stylePage
 
 
 f1 = "{"
@@ -59,7 +59,7 @@ def _html(name, admin=False, project_name=False, is_base=True, f1=f1, l1=l1, f2=
 {f1}% endblock head_css %{l1}
 
 {f1}% block head_title %{l1}
-  <title>Sakyum - {f2}head_title{l2}</title>
+  <title>Flask-unity - {f2}head_title{l2}</title>
 {f1}% endblock head_title %{l1}
 
 {f1}% block main %{l1}

@@ -10,7 +10,7 @@ def app_views_dummy(app):
   # :app is the application name that you create within your project
   """
   return f"""from flask import (render_template, Blueprint)
-from sakyum.utils import footer_style, template_dir, static_dir
+from flask_unity.utils import footer_style, template_dir, static_dir
 # from .forms import <model_form>
 from <project_name>.config import db
 from .models import <app_models>
@@ -23,7 +23,7 @@ def index():
   head_title = "{app}"
   {long_comment}
     the {app}/index.html pass below is the html file in your project templates/{app} base dir
-    inherited (extended) from `sakyum/templates/default_page/default_index.html`
+    inherited (extended) from `flask_unity/templates/default_page/default_index.html`
     you can edit it and give it a different css and js file to your desire
   {long_comment}
 
@@ -115,8 +115,8 @@ from {app_name}.models import {app_name.capitalize()}QuestionModel, {app_name.ca
 db.create_all()
 
 
-q1 = {app_name.capitalize()}QuestionModel(question_text="Is sakyum an extension of flask web framework?")
-q2 = {app_name.capitalize()}QuestionModel(question_text="Is flask better with sakyum")
+q1 = {app_name.capitalize()}QuestionModel(question_text="Is flask_unity an extension of flask web framework?")
+q2 = {app_name.capitalize()}QuestionModel(question_text="Is flask better with flask_unity")
 
 db.session.add(q1)
 db.session.add(q2)

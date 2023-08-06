@@ -1,7 +1,7 @@
-# from sakyum software, your (todo_project) project routes.py file
+# from flask_unity software, your (todo_project) project routes.py file
 from flask import (render_template, Blueprint)
-from sakyum.utils import footer_style, template_dir, static_dir
-from sakyum.blueprint import default, errors, auth
+from flask_unity.utils import footer_style, template_dir, static_dir
+from flask_unity.blueprint import default, errors, auth
 from flask import render_template
 from todo_app.views import todo_app
 
@@ -43,7 +43,7 @@ def rem_blueprint(lst_blue):
 
 @default.route('/')
 def index():
-  # the default_base.html below is located in the sakyum package (templates/default_page) folder
+  # the default_base.html below is located in the flask_unity package (templates/default_page) folder
   return render_template("default_base.html", project_name="todo_project", blueprints_list=rem_blueprint(reg_blueprints), footer_style=footer_style)
   
   

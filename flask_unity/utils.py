@@ -13,7 +13,7 @@ from . import __title__
 from . import __version__
 
 
-# relative path to the package folder (sakyum)
+# relative path to the package folder (flask_unity)
 rel_path = Path(__file__).resolve().parent
 
 _status_codes = {

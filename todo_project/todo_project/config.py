@@ -1,4 +1,4 @@
-# from sakyum software, your (todo_project) project config.py file
+# from flask_unity software, your (todo_project) project config.py file
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin

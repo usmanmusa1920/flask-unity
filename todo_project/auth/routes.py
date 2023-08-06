@@ -1,8 +1,8 @@
-# from sakyum software, your (todo_project) project routes.py file
+# from flask_unity software, your (todo_project) project routes.py file
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, current_user, logout_user
-from sakyum.utils import footer_style
-from sakyum.blueprint import auth
+from flask_unity.utils import footer_style
+from flask_unity.blueprint import auth
 from todo_project.config import db
 from .models import User
 import datetime
@@ -11,7 +11,7 @@ import datetime
 @auth.route('/admin/login/', methods=["POST", "GET"])
 def adminLogin():
   """
-    the `admin_login.html` below is located in the sakyum package (static/default_page/admin_login.html)
+    the `admin_login.html` below is located in the flask_unity package (static/default_page/admin_login.html)
   """
   if request.method == "POST":
     username = request.form["username"]
@@ -28,7 +28,7 @@ def adminLogin():
 @auth.route('/admin/register/', methods=["POST", "GET"])
 def adminRegister():
   """
-    the `admin_register.html` below is located in the sakyum package (static/default_page/admin_register.html)
+    the `admin_register.html` below is located in the flask_unity package (static/default_page/admin_register.html)
   """
   if request.method == "POST":
     username  = request.form["username"]

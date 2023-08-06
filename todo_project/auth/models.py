@@ -1,4 +1,4 @@
-# from sakyum software, your (todo_project) project models.py file
+# from flask_unity software, your (todo_project) project models.py file
 from flask import current_app
 from todo_project.config import db, login_manager
 from flask_login import UserMixin

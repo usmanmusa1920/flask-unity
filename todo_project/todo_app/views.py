@@ -1,7 +1,7 @@
-# from sakyum software, your app (todo_app) views.py file
+# from flask_unity software, your app (todo_app) views.py file
 from flask import (render_template, Blueprint, redirect, url_for, flash)
 from flask_login import current_user, login_required
-from sakyum.utils import footer_style, template_dir, static_dir
+from flask_unity.utils import footer_style, template_dir, static_dir
 from .forms import QuestionForm
 from todo_project.config import db
 from .models import Todo_appQuestionModel
@@ -15,7 +15,7 @@ def index():
   head_title = "todo_app"
   """
     the todo_app/index.html pass below is the html file in your project templates/todo_app base dir
-    inherited (extended) from `sakyum/templates/default_page/default_index.html`
+    inherited (extended) from `flask_unity/templates/default_page/default_index.html`
     you can edit it and give it a different css and js file to your desire
   """
 
