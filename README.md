@@ -1,4 +1,4 @@
-# Flask-unity
+# Flask-Unity
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
@@ -78,7 +78,7 @@ See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
 ![Flask-unity default page](./media/flask_unity_default_page.png)
 
-<!-- [![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask_unity/v0.0.12/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io) -->
+<!-- [![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/v0.0.12/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io) -->
 
 ## Useful links
 
