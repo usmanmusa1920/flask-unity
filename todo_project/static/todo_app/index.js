@@ -1,4 +1,4 @@
-// @sakyum, todo_app index.js file
+// @flask_unity, todo_app index.js file
 function test(){
-  alert('I am sakyum test alert for (todo_app) index page')
+  alert('I am flask_unity test alert for (todo_app) index page')
 }

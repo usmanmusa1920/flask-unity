@@ -8,7 +8,7 @@ def null(long_comment=long_comment):
 """
 
 def thunder_dummy(project):
-  return f"""from sakyum import Boot
+  return f"""from flask_unity import Boot
 from auth.models import User
 from {project} import app, db
 from {project}.routes import reg_blueprints

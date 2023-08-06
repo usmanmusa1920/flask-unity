@@ -1,4 +1,4 @@
-# from sakyum software, your app (todo_app) admin.py file
+# from flask_unity software, your app (todo_app) admin.py file
 
 from flask_login import current_user
 from flask import redirect, request, url_for

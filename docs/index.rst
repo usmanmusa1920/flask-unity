@@ -1,13 +1,14 @@
 
-Sakyum
+Flask-unity
 ###########
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
-        _
-      /_  /|   / / |/ /  / /\  /|
-       / /_|  /_/  / /  / /  \/ |
-    /_/ /  | /  | / /__/ /      |
+       ____            _                     _____ ______
+      /___ /    /|   /_  / /      /  / /|  /   /     /    |/
+     /    /    /_|    / /_/      /  / / | /   /     /     /
+    /    /___ /  | /_/ /  |     /__/ /  |/ __/__   /     /
+
 
 ## Installation
 
@@ -16,23 +17,23 @@ First create a virtual environment `python3 -m venv venv` and then activate it `
 Once that finish now install the library by
 
 ```py
-pip install sakyum
+pip install flask_unity
 ```
 
 wait for the installation basically the library was uploaded using `sdist` (Source Distribution) and this software (library) might not be compatible with `windows operating system` but it works on other `OS` such as `linux` and `macOS`
 
-## Create your first flask project using sakyum
+## Create your first flask project using flask_unity
 
 After the installation paste the following command on your termianl
 
 ```py
-python3 -c "from sakyum import project; project('todo_project')"
+python3 -c "from flask_unity import project; project('todo_project')"
 ```
 
 or create a file and paste the below codes which is equivalent of the above, and then run the file
 
 ```python
-from sakyum import project
+from flask_unity import project
 
 project("todo_project")
 ```
@@ -47,7 +48,7 @@ python3 thunder.py boot
 
 Now visit the local url `127.0.0.1:5000` this will show you index page of your project. And if you do `ls` in that same dir you will see it create a `default.db` file (an sqlite file)
 
-## Create flask project app using sakyum
+## Create flask project app using flask_unity
 
 For you to start an app within your project (`todo_project`) run the following command, in that working directory (todo_project) by giving the name you want your app to be, in our case we will call our app `todo_app`
 
@@ -139,7 +140,7 @@ once you run it, a prompt will come up to input your information
 
 ## Github repository:
 
-- https://github.com/usmanmusa1920/sakyum
+- https://github.com/usmanmusa1920/flask-unity
 
 Pull requests are welcome
 
