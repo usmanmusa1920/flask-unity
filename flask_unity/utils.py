@@ -9,8 +9,8 @@ import secrets
 
 from pathlib import Path
 from getpass import getpass
-from sakyum import __title__
-from sakyum import __version__
+from flask_unity import __title__
+from flask_unity import __version__
 
 
 # relative path to the package folder (sakyum)

@@ -3,7 +3,7 @@
 Auth routes
 ###########
 
-In this chapter we are going to see how we can replace the default route for our `auth` pages instead of rendering the `wtforms` (in the auth package of our project `auth/routes.py`) to use html form. To do so, sakyum already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is just to replace the default routes in the `auth/routes.py` with the following:
+In this chapter we are going to see how we can replace the default route for our `auth` pages instead of rendering the `wtforms` (in the auth package of our project `auth/routes.py`) to use html form. To do so, flask_unity already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is just to replace the default routes in the `auth/routes.py` with the following:
 
 **Route for register:** the default route of `adminRegister` can be replace with::
 
@@ -13,7 +13,7 @@ In this chapter we are going to see how we can replace the default route for our
   @login_required
   def adminRegister():
     """
-      the `admin_register.html` below is located in the sakyum package (templates/default_page/admin_register.html)
+      the `admin_register.html` below is located in the flask_unity package (templates/default_page/admin_register.html)
     """
     if request.method == "POST":
       username  = request.form["username"]
@@ -60,7 +60,7 @@ In this chapter we are going to see how we can replace the default route for our
   @auth.route("/admin/login/", methods=["POST", "GET"])
   def adminLogin():
     """
-      the `admin_login.html` below is located in the sakyum package (templates/default_page/admin_login.html)
+      the `admin_login.html` below is located in the flask_unity package (templates/default_page/admin_login.html)
     """
     if current_user.is_authenticated:
       return redirect(url_for("base.index"))
@@ -100,7 +100,7 @@ In this chapter we are going to see how we can replace the default route for our
   @fresh_login_required
   def adminChangePassword():
     """
-      the `admin_change_password.html` below is located in the sakyum package (templates/default_page/admin_change_password.html)
+      the `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
     """
     if request.method == "POST":
       old_password = request.form["old_password"]
