@@ -1,22 +1,21 @@
-
-# Sakyum
+# Flask-unity
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/sakyum">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) as from `v0.0.9` it is now compatible and also tested with `windows OS` and others as well, such as `linux`, `macOS` and possibly some others too!.
+Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and this software (library) as from `v0.0.9` it is now compatible and also tested with `windows OS` and others as well, such as `linux`, `macOS` and possibly some others too!.
 
 ```
-pip install --upgrade sakyum
+pip install --upgrade flask_unity
 ```
 
-## Create flask project using sakyum
+## Create flask project using flask_unity
 
 After the installation paste the following command on your termianl
 
 ```
-python -c "from sakyum import project; project('schoolsite')"
+python -c "from flask_unity import project; project('schoolsite')"
 ```
 
 This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py` and some directories (some in the form of package) `media`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
@@ -73,17 +72,17 @@ visit `http://127.0.0.1:5000/exam` this will take you to your app landing page (
 
 visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there you are ready to go.
 
-See more documentations <a href="https://sakyum.readthedocs.io">here!</a>
+See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
-### Sakyum default page
+### Flask-unity default page
 
-![Sakyum default page](./media/sakyum_default_page.png)
+![Flask-unity default page](./media/flask_unity_default_page.png)
 
 ## Useful links
 
-- Documentation: https://sakyum.readthedocs.io
-<!-- - Repository: https://github.com/usmanmusa1920/sakyum -->
-- PYPI Release: https://pypi.org/project/sakyum
-- Docker example: https://github.com/usmanmusa1920/sakyum/tree/master/example/sakyum-docker
+- Documentation: https://flask-unity.readthedocs.io
+<!-- - Repository: https://github.com/usmanmusa1920/flask-unity -->
+- PYPI Release: https://pypi.org/project/flask-unity
+- Docker example: https://github.com/usmanmusa1920/flask-unity/tree/master/example/flask_unity-docker
 
 Pull requests are welcome
