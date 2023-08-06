@@ -17,7 +17,7 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 from exam.models import ExamQuestionModel, ExamChoiceModel
-from sakyum.contrib import db
+from flask_unity.contrib import db
 target_metadata = db.Model.metadata
 
 # other values from the config, defined by the needs of env.py,

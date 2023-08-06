@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template
 from flask_admin.contrib.sqla import ModelView
-from sakyum.utils import footer_style, template_dir, static_dir
+from flask_unity.utils import footer_style, template_dir, static_dir
 
 # static_folder: the folder where the Blueprint's static files can be found
 # static_url_path: the URL to serve static files from
@@ -23,7 +23,7 @@ def adminModelRegister(admin, reg_models, db):
     admin.add_view(ModelView(reg_model, db.session))
     
 """
-  the `default` blueprint above is the blueprint that is been used by sakyum for linking
+  the `default` blueprint above is the blueprint that is been used by flask_unity for linking
   it default pages (css, js, and favicon.ico) files and also it can be use for our project
   default html pages (landing page route) that is located in your project route.py file
   `<project_name>/route.py` like ` @default.route() `, but instead we use ` @base.route() `
