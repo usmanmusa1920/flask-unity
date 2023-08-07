@@ -1,10 +1,10 @@
 # Flask-Unity
 
-An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, and other annoying stuffs.
+An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, and other annoying stuffs.
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) as from `v0.0.9` it is compatible and also tested with `windows OS` and others as well, such as `linux`, `macOS` and possibly some others too!.
+Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) is compatible and also tested with `windows OS`, `linux`, `macOS` and possibly can be compabible with others too!.
 
 ```
 pip install --upgrade flask_unity

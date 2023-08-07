@@ -37,9 +37,9 @@
 
         <div class="head_right">
           {% if current_user.is_authenticated %}
-            <img src="{{ url_for('auth.profile_image', filename=current_user.user_img) }}" alt="" class="user_default_img">
+            <img src="{{ url_for('auth.profile_image', filename=current_user.user_img) }}" alt="" class="user_default_img_lg">
           {% else %}
-            <a href="https://github.com/usmanmusa1920/flask-unity" class="link_0" target="_blank">Github</a>
+            <a href="https://github.com/usmanmusa1920/flask-unity" class="link_0" target="_blank">Repository</a>
           {% endif %}
           <a class="link_1">|</a>
           {% if current_user.is_authenticated %}
@@ -102,7 +102,15 @@
           <a href="{{ url_for('auth.adminLogin') }}">Login</a>
         {% endif %}
       </span>
-      <p><pre>{{context.footer_style[1]}}
+
+      <!-- for small screen -->
+      <p class="sm_screen">{{context.footer_style[1]}}</p>
+      <p class="sm_screen"><small>{{context.footer_style[0]}}</small></p>
+      <p class="sm_screen">{{context.footer_style[1]}}</p>
+
+      <!-- for large screen -->
+      <p>
+        <pre class="lg_screen">{{context.footer_style[1]}}
 {{context.footer_style[0]}}
 {{context.footer_style[1]}}</pre>
         <div>
