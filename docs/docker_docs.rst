@@ -1,7 +1,7 @@
 :tocdepth: 2
 
-Flask-unity on docker
-################
+Flask-Unity on docker
+#####################
 
 This repo contains code to spin up a boilerplate flask_unity project with Docker Compose. To run flask_unity with docker compose, first pull it by::
 

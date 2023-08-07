@@ -50,16 +50,18 @@ def stylePage(name, version=False):
     return [desc_center, border]
 
   # it will style the description of default app pages
-  desc = 'Your ' + name + ' application default pages'
+  f = "<small>"
+  l = "</small>"
+  desc = f + 'Your ' + name + ' application default pages' + l
   desc_center = desc.center(len(desc) + 6)
   border = '=' * len(desc_center)
   return [desc_center, border]
   
   
 # Style for flask_unity default pages:
-    # =============================
+    # ==================================
     #  @ flask_unity software - v0.0.12 
-    # =============================
+    # ==================================
 footer_style = stylePage(__title__, version=__version__)
 
 

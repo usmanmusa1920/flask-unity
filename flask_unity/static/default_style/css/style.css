@@ -26,10 +26,25 @@ time, mark, audio, video {
   color: dodgerblue;
 }
 
-.user_default_img{
+.user_default_img_lg, .user_default_img_sm{
   width: 40px;
   height: 40px;
   border-radius: 50px;
+}
+
+.user_default_img_sm{
+  display: none;
+}
+
+@media only screen and (max-width: 700px){
+  .user_default_img_lg{
+    display: none;
+  }
+
+  .user_default_img_sm{
+    display: block;
+    margin: 3px;
+  }
 }
 
 body{
@@ -79,7 +94,7 @@ body{
 
 @media only screen and (max-width: 700px){
   .logo{
-    font-size: 20px;
+    font-size: 15px;
   }
 }
 
@@ -191,6 +206,7 @@ body{
     justify-content: center;
     text-align: center;
     font-size: 11px;
+    margin-bottom: 50px;
   }
 }
 
@@ -229,6 +245,35 @@ body{
   font-size: 1rem;
 }
 
+.fu_style{
+  color: white;
+  max-width: 80%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: xx-large;
+  font-family: cursive;
+  font-style: oblique;
+  text-shadow: 0 0 2px rgb(50, 50, 63), 1px 1px 2px black, 0 0 5px rgb(50, 50, 63);
+  border-radius: 9px;
+  padding: 10px;
+  /* animation */
+  animation-name: fu_style;
+  animation-duration: 5s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+@keyframes fu_style{
+  from {background-color: rgb(50, 50, 63)}
+  to {background-color: grey}
+}
+
+@media only screen and (max-width: 700px){
+  .fu_style{
+    font-size: x-large;
+    padding: 5px;
+  }
+}
+
 .blueprint_list_wrapper{
   width: 100%;
   display: flex;
@@ -244,6 +289,7 @@ body{
   flex-direction: column;
   overflow-y: scroll;
   background: white;
+  margin: 3px;
 }
 
 @media only screen and (max-width: 700px){
@@ -361,6 +407,7 @@ body{
     font-size: 1rem;
     line-height: 25px;
     margin-top: 5px;
+    margin-bottom: 20px;
   }
 }
 
@@ -401,19 +448,26 @@ body{
   }
 }
 
-.footer p{
-  max-width: 80%;
-  font-size: 1.1rem;
-  line-height: 35px;
-  text-align: center;
+.sm_screen{
+  display: none;
 }
 
 @media only screen and (max-width: 700px){
-  .footer p{
-    max-width: 90%;
-    font-size: 1rem;
+  .sm_screen{
+    width: 100%;
+    max-width: 70%;
     line-height: 25px;
-    margin-top: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
+    font-size: small;
+  }
+  
+  .lg_screen{
+    display: none;
   }
 }
 
