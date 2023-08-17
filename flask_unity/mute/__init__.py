@@ -15,7 +15,7 @@ long_comment = '"""'
 
 
 def thunder_dummy(project):
-  return f"""from flask_unity import Boot
+    return f"""from flask_unity import Boot
 from {project}.routes import reg_blueprints
 from {project}.config import create_app
 from {project}.secret import load_env
@@ -24,7 +24,7 @@ from {project}.secret import load_env
 load_env()
 boot = Boot()
 if __name__ == '__main__':
-  boot.run()
+    boot.run()
 
 
 app = create_app(reg_blueprints)

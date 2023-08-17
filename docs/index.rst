@@ -12,7 +12,7 @@ When using flask_unity, don't be confuse with the the concept of **project** and
 
 **Project** is the entire folder that contain your flask application, when you create project with the command::
 
-   python -c "from flask_unity import project; project('schoolsite')"
+    python -c "from flask_unity import project; project('schoolsite')"
 
 It will create a parent directory with the name `schoolsite` also inside the `schoolsite` directory there is a directory with thesame name of the parent directory `schoolsite` this directory is the one that most of configurations, registering and other thing that are going to be implemented inside it.
 
@@ -27,19 +27,19 @@ Table of content
 ----------------
 
 .. toctree::
-  :maxdepth: 2
+    :maxdepth: 2
 
-  quick_start
-  flags
-  error_pages
-  example/index
-  admin_user
-  auth_routes
-  page_and_filesystem
-  database
-  mod_wsgi
-  deployment
-  docker_docs
+    quick_start
+    flags
+    error_pages
+    example/index
+    admin_user
+    auth_routes
+    page_and_filesystem
+    database
+    mod_wsgi
+    deployment
+    docker_docs
 
 
 Useful links:
