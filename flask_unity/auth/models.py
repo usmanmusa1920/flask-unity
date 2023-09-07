@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from datetime import datetime
 from flask_unity.contrib import db, login_manager
 from flask_login import UserMixin
@@ -12,8 +11,7 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    date_joined = db.Column(db.DateTime, nullable=False,
-                            default=datetime.utcnow)
+    date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     username = db.Column(db.String(20), unique=True, nullable=False)
     user_img = db.Column(db.String(255), default='default_img.png')
     email = db.Column(db.String(120), unique=True, nullable=False)

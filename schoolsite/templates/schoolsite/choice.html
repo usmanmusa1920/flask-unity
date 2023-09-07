@@ -1,0 +1,15 @@
+{% extends "exam/layout.html" %}
+
+{% block title %}
+ choice ({{context.q_id}}) page
+{% endblock title %}
+
+
+{% block main %}
+  {% for choice in context.choices %}
+    <div class="wrapp">
+      <input type="radio" name="{{choice}}">  {{choice}}
+      <br>
+    </div>
+  {% endfor %}
+{% endblock main %}

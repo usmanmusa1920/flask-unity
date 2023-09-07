@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from flask import Blueprint, render_template
 from flask_admin.contrib.sqla import ModelView
 from flask_unity.utils import footer_style, template_dir, static_dir
@@ -12,12 +11,15 @@ from flask_unity.utils import footer_style, template_dir, static_dir
 # url_defaults: a dictionary of default values that this Blueprint's views will receive
 # root_path: the Blueprint's root dictionary path, whose default values is obtained from the Blueprint's import
 
-default = Blueprint('default', __name__, template_folder=template_dir(
-    temp_from_pkg='default_page'), static_folder=static_dir('default_style', static_from_pkg=True))
-errors = Blueprint('errors', __name__, template_folder=template_dir(
-    temp_from_pkg='default_errors'))
-auth = Blueprint('auth', __name__, template_folder=template_dir(
-    temp_from_pkg='default_page'))
+default = Blueprint(
+    'default', __name__, template_folder=template_dir(temp_from_pkg='default_page'), static_folder=static_dir('default_style', static_from_pkg=True)
+)
+errors = Blueprint(
+    'errors', __name__, template_folder=template_dir(temp_from_pkg='default_errors')
+)
+auth = Blueprint(
+    'auth', __name__, template_folder=template_dir(temp_from_pkg='default_page')
+)
 
 
 """
@@ -37,6 +39,14 @@ for each error page
 The `auth` blueprint above is for the `login, logout, register, change_password` and
 other default authentication system (route) of your project, which will let you log into admin page
 """
+
+
+@default.route('/', methods=['POST', 'GET'])
+def index():
+    context = {
+        'footer_style': footer_style,
+    }
+    return render_template('default_base.html', context=context)
 
 
 def adminModelRegister(admin, reg_models, db):

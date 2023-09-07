@@ -1,0 +1,73 @@
+{% extends "exam/layout.html" %}
+
+{% block title %}
+ questions page
+{% endblock title %}
+
+
+{% block main %}
+  {% for question in context.questions %}
+    <div class="wrapp">
+      <h1>{{question.summary}}</h1>
+      <small>{{question.user}} - posted on - September 02, 2023</small>
+      <hr>
+      <br>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, illum voluptas eveniet animi unde laborum voluptate totam quaerat sapiente autem, ad, id culpa cupiditate libero pariatur veniam quisquam ea eos?</p>
+      {% for choice in question.choice %}
+        {{choice}}
+      {% endfor %}
+      <button type="submit">create</button>
+    </div>
+  {% endfor %}
+  <div class="wrapp">
+    <h1>At which year Neil Armstrong landed in the moon?</h1>
+    <small>Usman Musa - posted on - September 02, 2023</small>
+    <hr>
+    <br>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, illum voluptas eveniet animi unde laborum voluptate totam quaerat sapiente autem, ad, id culpa cupiditate libero pariatur veniam quisquam ea eos?</p>
+    <br>
+    <input type="radio" name="in 1969">  In 1969
+    <br>
+    <input type="radio" name="in 1996">  In 1996
+    <br>
+    <input type="radio" name="in 2023">  In 2023
+    <br>
+    <input type="radio" name="in 2007">  In 2007
+    <br>
+    <button type="submit">create</button>
+  </div>
+  <div class="wrapp">
+    <h1>What is odd in the choice?</h1>
+    <small>Usman Musa - posted on - September 02, 2023</small>
+    <hr>
+    <br>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, illum voluptas eveniet animi unde laborum voluptate totam quaerat sapiente autem, ad, id culpa cupiditate libero pariatur veniam quisquam ea eos?</p>
+    <br>
+    <input type="radio" name="python">  Python
+    <br>
+    <input type="radio" name="java">  Java
+    <br>
+    <input type="radio" name="linux">  Linux
+    <br>
+    <input type="radio" name="ruby">  Ruby
+    <br>
+    <button type="submit">create</button>
+  </div>
+  <div class="wrapp">
+    <h1>What is not related to quantum?</h1>
+    <small>Usman Musa - posted on - September 02, 2023</small>
+    <hr>
+    <br>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, illum voluptas eveniet animi unde laborum voluptate totam quaerat sapiente autem, ad, id culpa cupiditate libero pariatur veniam quisquam ea eos?</p>
+    <br>
+    <input type="radio" name="qubit">  Qubit
+    <br>
+    <input type="radio" name="entanglement">  Entanglement
+    <br>
+    <input type="radio" name="bit">  Bit
+    <br>
+    <input type="radio" name="superposition">  Superposition
+    <br>
+    <button type="submit">create</button>
+  </div>
+{% endblock main %}

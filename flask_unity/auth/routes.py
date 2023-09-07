@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import secrets
 from werkzeug.utils import secure_filename
@@ -27,8 +26,7 @@ def adminRegister():
         username = form.username.data
         email = form.email.data
         raw_password2 = form.confirm_password.data
-        hashed_password = bcrypt.generate_password_hash(
-            raw_password2).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(raw_password2).decode('utf-8')
         user = User(username=username, email=email, password=hashed_password)
         db.session.add(user)
         db.session.commit()
@@ -45,7 +43,7 @@ def adminRegister():
 @auth.route('/admin/login/', methods=['POST', 'GET'])
 def adminLogin():
     if current_user.is_authenticated:
-        return redirect(url_for('base.index'))
+        return redirect(url_for('default.index'))
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -80,8 +78,7 @@ def adminChangePassword():
         user = User.query.filter_by(username=current_user.username).first()
         if user and bcrypt.check_password_hash(user.password, old_password):
             if password1 == password2:
-                hashed_password = bcrypt.generate_password_hash(
-                    password2).decode('utf-8')
+                hashed_password = bcrypt.generate_password_hash(password2).decode('utf-8')
                 user.password = hashed_password
                 db.session.commit()
                 logout_user()
@@ -168,7 +165,7 @@ def changeProfileImage():
                 db.session.commit()
             flash('Your profile image has been changed!', 'success')
             # it will redirect to the home page
-            return redirect(url_for('base.index'))
+            return redirect(url_for('default.index'))
     context = {
         'head_title': 'admin change profile image',
         'footer_style': footer_style,

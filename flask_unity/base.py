@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import sys
 import shlex
@@ -289,7 +288,7 @@ class BaseStructure:
                             self.file_opt(proj_name, _here=templates_folder)
                             # create project index.html and back to templates base dir path
                             self.file_content(self._exs_last[0], content=f'<!-- @{__title__}, {proj_name} (project) index.html page -->\n'+_html(
-                                'do_nothing', is_landing=True), dir_togo=templates_folder)
+                                'do_nothing', is_landing=True, project_name=proj_name), dir_togo=templates_folder)
 
                             # make project admin dir in templates and cd into it
                             self.file_opt('admin', _here=templates_folder)
@@ -312,16 +311,16 @@ class BaseStructure:
                             self.file_opt(
                                 'do_nothing', tree=False, _where=s_p_dir)
                             """
-              going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name
-              """
-
+                            going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name
+                            """
+                            
                             # create style.css
                             self.file_content(
                                 self._exs_last[1], file_name='style', content=f'/* @{__title__}, {proj_name} (project) style.css file */\n'+_css(), route_go=False)
 
                             # create index.js and back to project static base dir path
                             self.file_content(
-                                self._exs_last[2], content=f'// @{__title__}, {proj_name} (project) index.js file\n'+_js(proj_name), dir_togo=project_folder)
+                                self._exs_last[2], content=f'// @{__title__}, {proj_name} (project) index.js file\n'+_js(proj_name, what=True), dir_togo=project_folder)
 
                     # make media folder and default image inside it
                     self.file_opt(dirs[2], _where=dirs[2])

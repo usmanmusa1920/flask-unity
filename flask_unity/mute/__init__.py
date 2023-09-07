@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from flask_unity import __title__
 from flask_unity.utils import Security
-from flask_unity.utils import stylePage
+from flask_unity.utils import style_page
 
 
 secret = Security()

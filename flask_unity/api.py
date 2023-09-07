@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import logging
 from . import __title__, __version__
@@ -26,7 +25,8 @@ def project(name):
         if name.lower() == __title__:
             print()
             LOGGER.error(
-                f'Not allowed to use ({__title__}) package name as project name\n')
+                f'Not allowed to use ({__title__}) package name as project name\n'
+            )
             return False
         BaseStructure().dir_tree(name)
     else:

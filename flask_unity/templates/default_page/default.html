@@ -19,7 +19,7 @@
   {% if context.head_title %}
     {% block head_title %}
       <!-- title can be change to any page also -->
-      <title>Flask-unity - {{context.head_title}}</title>
+      <title>Flask-Unity - {{context.head_title}}</title>
     {% endblock head_title %}
   {% else %}
     <title>Flask-Unity</title>
@@ -31,7 +31,7 @@
       <div class="header_col">
         <div class="head_left">
           <h1 class="logo">
-            <a href="{{ url_for('base.index') }}">Flask-Unity</a>
+            <a href="{{ url_for('default.index') }}">Flask-Unity</a>
           </h1>
         </div>
 
@@ -50,7 +50,7 @@
             <a href="{{ url_for('auth.adminLogin') }}" class="link_3">Login</a>
           {% endif %}
           <a onclick="test()" class="alert">
-            <img src="{{ url_for('default.static', filename='media/alert.png') }}" alt="">
+            <img src="{{ url_for('default.static', filename='media/logo.png') }}" alt="">
           </a>
         </div>
       </div>
@@ -103,24 +103,26 @@
         {% endif %}
       </span>
 
-      <!-- for small screen -->
-      <p class="sm_screen">{{context.footer_style[1]}}</p>
-      <p class="sm_screen"><small>{{context.footer_style[0]}}</small></p>
-      <p class="sm_screen">{{context.footer_style[1]}}</p>
+      {% if context.footer_style %}
+        <!-- for small screen -->
+        <p class="sm_screen">{{context.footer_style[1]}}</p>
+        <p class="sm_screen"><small>{{context.footer_style[0]}}</small></p>
+        <p class="sm_screen">{{context.footer_style[1]}}</p>
 
-      <!-- for large screen -->
-      <p>
-        <pre class="lg_screen">{{context.footer_style[1]}}
+        <!-- for large screen -->
+        <p>
+          <pre class="lg_screen">{{context.footer_style[1]}}
 {{context.footer_style[0]}}
 {{context.footer_style[1]}}</pre>
-        <div>
-          <a href="https://github.com/usmanmusa1920/flask-unity" target="_blank">Repository</a>
-          <a>|</a>
-          <a href="https://flask-unity.readthedocs.io" target="_blank">Docs</a>
-          <a>|</a>
-          <a href="/admin">Admin</a>
-        </div>
-      </p>
+          <div>
+            <a href="https://github.com/usmanmusa1920/flask-unity" target="_blank">Repository</a>
+            <a>|</a>
+            <a href="https://flask-unity.readthedocs.io" target="_blank">Docs</a>
+            <a>|</a>
+            <a href="/admin">Admin</a>
+          </div>
+        </p>
+      {% endif %}
     </div>
   </div>
 </body>

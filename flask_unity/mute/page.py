@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-
 from . import f1
 from . import l1
 from . import f2
 from . import l2
 from . import __title__
-from . import stylePage
+from . import style_page
 
 
 def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_app=False):
@@ -13,7 +12,7 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
         return f"""{f1}% extends 'default_base.html' %{l1}
 
 {f1}% block head_js %{l1}
-  <script src="{f2} url_for('base.static', filename='index.js') {l2}"></script>
+  <script src="{f2} url_for('{project_name}.static', filename='index.js') {l2}"></script>
 {f1}% endblock head_js %{l1}
 """
     if is_admin:
@@ -35,7 +34,7 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
 {f1}% endblock body %{l1}
 """
     if is_base_app:
-        page_desc = stylePage(name)
+        page_desc = style_page(name)
         return f"""{f1}% extends '{project_name}/index.html' %{l1}
 
 {f1}% block head_css %{l1}
@@ -100,8 +99,12 @@ body {f1}
 """
 
 
-def _js(name):
+def _js(name, what=False):
+    if what:
+        what = 'project'
+    else:
+        what = 'app'
     return f"""function test(){f1}
-  alert('I am {__title__} test alert for ({name}) index page')
+  alert('I am {__title__} test alert for ({name}) {what} index page')
 {l1}
 """

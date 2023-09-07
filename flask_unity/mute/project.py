@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from . import f1
 from . import l1
 from . import secure_app
@@ -43,8 +42,8 @@ def load_env():
 
 
 def pro_config_dummy(proj_name):
-    return f"""from flask_admin import Admin
-from flask import Flask
+    return f"""from flask import Flask
+from flask_admin import Admin
 from flask_unity.blueprint import adminModelRegister
 from flask_unity.contrib import ext_lst, db
 from .secret import Config
@@ -94,31 +93,29 @@ def create_app(reg_blueprints=False, conf=Config):
 
 def pro_routes_dummy(proj):
     return f"""from flask import (render_template, Blueprint)
-from flask_unity import blueprint
-from flask_unity.utils import footer_style, template_dir, static_dir, rem_blueprint
+from flask_unity.utils import footer_style, template_dir, static_dir, reg_blueprints_func
 # from <app_name>.views import <app_name>
 
 
-base = Blueprint('base', __name__, template_folder=template_dir(), static_folder=static_dir('{proj}'))
+{proj} = Blueprint(
+    '{proj}', __name__, template_folder=template_dir(), static_folder=static_dir('{proj}')
+)
 
-rem_blue = [blueprint.default, blueprint.errors, blueprint.auth, base]
-reg_blueprints = [
-    blueprint.default,
-    blueprint.errors,
-    blueprint.auth,
-    base,
+
+reg_blueprints = reg_blueprints_func(
+    {proj},
     # <app_name>,
-]
+)
 
 
-@base.route('/', methods=['POST', 'GET'])
+@{proj}.route('/', methods=['POST', 'GET'])
 def index():
     context = {f1}
         'project_name': '{proj}',
         'footer_style': footer_style,
-        'blueprints_list': rem_blueprint(lst_blue=reg_blueprints, rem_blue=rem_blue),
     {l1}
     return render_template('{proj}/index.html', context=context)
+    
     
 # overwrite (customise) error pages here
 """

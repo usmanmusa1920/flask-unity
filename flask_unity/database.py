@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 class DB:
     """This class handle mostly database management stuffs"""
 
@@ -24,10 +23,10 @@ class DB:
 
 """
 Command line shortcuts for database:
-  db_status
-  db_migrate
-  db_makemigrations
-  db_pulldata
-  db_pushdata
-  db_cleaned
+    db_status
+    db_migrate
+    db_makemigrations
+    db_pulldata
+    db_pushdata
+    db_cleaned
 """

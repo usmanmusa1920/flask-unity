@@ -1,26 +1,41 @@
 # -*- coding: utf-8 -*-
-
+import re
+import os
 from setuptools import setup
 from setuptools import find_packages
 
 
+def grep(attrname):
+    """get package info from __init__.py file"""
+    file_path = os.path.join(os.path.dirname(__file__), 'flask_unity/__init__.py')
+
+    # content of the file
+    read_file = open(file_path).read()
+
+    # pattern match using regex
+    pattern = r"{0}\W*=\W*'([^']+)'".format(attrname)
+
+    # our regex value
+    attr_value, = re.findall(pattern, read_file)
+    return attr_value
+
+
 setup(
     # name of the main package (base folder i.e flask_unity)
-    name='flask_unity',
-    version='0.0.12',
-    description='An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, and other annoying stuffs',
-    long_description=open('README.md').read() + '\n\n' + \
-    open('CHANGELOG').read(),
-    long_description_content_type='text/markdown',
-    python_requires='>=3.7',
-    platforms='any',
+    name = grep('__title__'),
+    version = grep('__version__'),
+    description = grep('__description__'),
+    long_description = open('README.md').read() + '\n\n' + open('CHANGELOG').read(),
+    long_description_content_type = 'text/markdown',
+    python_requires = '>=3.6',
+    platforms = 'any',
 
-    url='https://flask-unity.readthedocs.io',
-    download_url='https://pypi.org/project/flask-unity',
-    author='Usman Musa',
-    author_email='usmanmusa1920@gmail.com',
-    license='MIT',
-    classifiers=[
+    url = grep('__url__'),
+    download_url = 'https://pypi.org/project/flask-unity',
+    author = grep('__author__'),
+    author_email = grep('__author_email__'),
+    license = grep('__license__'),
+    classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -37,26 +52,26 @@ setup(
         'Topic :: Internet',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-
+    
     # used when people are searching for a module, keywords separated with a space
-    keywords='flask_unity',
-    include_package_data=True,  # include files listed in MANIFEST.in
-
+    keywords = 'flask_unity',
+    include_package_data = True,  # include files listed in MANIFEST.in
+    
     # The list of packages(directories) for your library
-    packages=find_packages(),  # OR packages=['flask_unity']
+    packages = find_packages(),  # OR packages = ['flask_unity']
     # If your package is a single module, use this instead of 'packages':
-    # py_modules=[''] # list of files (modules) that are not in any directory (at the root dir)
+    # py_modules = [''] # list of files (modules) that are not in any directory (at the root dir)
     # the libraries it depends on
-
+    
     # List of other python modules which this module depends on. For example RPi.GPIO
-    install_requires=[
+    install_requires = [
         'alembic==1.9.4',
         'bcrypt==4.0.1',
         'click==8.1.3',
         'dnspython==2.3.0',
         'email-validator==1.3.1',
         'Flask==2.2.3',
-        'Flask-Admin==1.6.0',
+        'Flunity==1.6.0',
         'Flask-Bcrypt==1.0.1',
         'Flask-Login==0.6.2',
         'Flask-SQLAlchemy==3.0.3',
@@ -74,8 +89,8 @@ setup(
         'WTForms==3.0.1',
         'zipp==3.13.0',
     ],
-    project_urls={
-        'Documentation': 'https://flask-unity.readthedocs.io',
-        'Source': 'https://github.com/usmanmusa1920/flask-unity',
+    project_urls = {
+        'Documentation': grep('__url__'),
+        'Source': grep('__repository__'),
     },
 )

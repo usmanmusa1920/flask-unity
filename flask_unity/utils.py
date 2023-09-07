@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import re
 import base64
@@ -41,7 +40,7 @@ def template_dir(temp_from_pkg=False, os_name=os.name):
     return os.getcwd() + OS_SEP + 'templates'
 
 
-def stylePage(name, version=False):
+def style_page(name, version=False):
     """function for styling project/app description default pages"""
     if version:
         # it will style the description in the footer
@@ -61,23 +60,18 @@ def stylePage(name, version=False):
 
 # Style for flask_unity default pages:
     # ==================================
-    #  @ flask_unity software - v0.0.12
+    #  @ flask_unity software - v0.0.13
     # ==================================
-footer_style = stylePage(__title__, version=__version__)
+footer_style = style_page(__title__, version=__version__)
 
 
-def rem_blueprint(lst_blue=None, rem_blue=None):
-    # these are blueprint that we don't want to show on the
-    # default page so we are removing them from the list
-    # reason is they are not route
-    for blue in rem_blue:
-        if blue in lst_blue:
-            # finding the index of the `blue` item blueprint in the list
-            err_index = lst_blue.index(blue)
-            # removing it `blue` item from the list using it index number
-            lst_blue.pop(err_index)
-    blueprints_list = lst_blue
-    return blueprints_list
+def reg_blueprints_func(*args):
+    from . import blueprint
+    reg_blueprints = list(args)
+    default_blueprints = [blueprint.default, blueprint.errors, blueprint.auth]
+    for d_blue in default_blueprints:
+        reg_blueprints.append(d_blue)
+    return reg_blueprints
 
 
 class AuthCredentials:

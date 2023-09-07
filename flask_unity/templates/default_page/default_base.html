@@ -15,6 +15,21 @@
 {% endblock short_info %}
 
 {% block main %}
+<div class="blueprint_list_wrapper">
+  <div class="blueprint_list">
+    <p>Useful links</p>
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('auth.adminRegister') }}">Register</a>
+      <a href="{{ url_for('auth.adminLogout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('auth.adminLogin') }}">Login</a>
+    {% endif %}
+    <a href="/admin">Admin page</a>
+    <a href="https://github.com/usmanmusa1920/flask-unity">Repository</a>
+    <a href="https://flask-unity.readthedocs.io">Documentation</a>
+    </br>
+  </div>
+</div>
   {% if context.blueprints_list|length > 0 %}
     <div class="blueprint_list_wrapper">
       <div class="blueprint_list">

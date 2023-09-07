@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from . import f1
 from . import l1
 from . import long_comment
@@ -19,7 +18,9 @@ from flask_unity.contrib import db
 # from .forms import <model_form>
 
 
-{app} = Blueprint('{app}', __name__, template_folder=template_dir(), static_folder=static_dir('{app}'))
+{app} = Blueprint(
+    '{app}', __name__, template_folder=template_dir(), static_folder=static_dir('{app}')
+)
 
 
 @{app}.route('/{app}/', methods=['GET', 'POST'])
@@ -57,8 +58,8 @@ file and register it to the admin page in other to see it in admin page
 
 
 def app_admin_dummy():
-    return f"""from flask_login import current_user
-from flask import redirect, request, url_for
+    return f"""from flask import redirect, request, url_for
+from flask_login import current_user
 from flask_admin.contrib.sqla import ModelView
 
 
