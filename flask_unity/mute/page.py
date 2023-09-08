@@ -12,7 +12,7 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
         return f"""{f1}% extends 'default_base.html' %{l1}
 
 {f1}% block head_js %{l1}
-  <script src="{f2} url_for('{project_name}.static', filename='index.js') {l2}"></script>
+  <script src="{f2} url_for('{project_name}.static', filename='js/index.js') {l2}"></script>
 {f1}% endblock head_js %{l1}
 """
     if is_admin:
@@ -35,14 +35,14 @@ def _html(name, is_landing=False, is_admin=False, project_name=False, is_base_ap
 """
     if is_base_app:
         page_desc = style_page(name)
-        return f"""{f1}% extends '{project_name}/index.html' %{l1}
+        return f"""{f1}% extends 'default_base.html' %{l1}
 
 {f1}% block head_css %{l1}
-  <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='style.css') {l2}"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{f2} url_for('{name}.static', filename='css/style.css') {l2}"> -->
 {f1}% endblock head_css %{l1}
 
 {f1}% block head_js %{l1}
-  <script src="{f2} url_for('{name}.static', filename='index.js') {l2}"></script>
+  <script src="{f2} url_for('{name}.static', filename='js/index.js') {l2}"></script>
 {f1}% endblock head_js %{l1}
 
 

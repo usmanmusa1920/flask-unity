@@ -1,5 +1,5 @@
 # from flask_unity software, your app (exam) views.py file
-from flask import (render_template, Blueprint, url_for, redirect, flash, request)
+from flask import (render_template, Blueprint, redirect, flash, request, url_for)
 from flask_login import current_user, login_required
 from flask_unity.utils import footer_style, template_dir, static_dir
 from flask_unity.contrib import db
@@ -27,7 +27,7 @@ def index():
 @login_required
 def create_question():
     if request.method == 'POST':
-        # title = request.form['title']
+        title = request.form['title']
         summary = request.form['summary']
         c_num_1 = request.form['c_num_1']
         c_num_2 = request.form['c_num_2']
@@ -35,8 +35,7 @@ def create_question():
         c_num_4 = request.form['c_num_4']
         
         usr = User.query.filter_by(username=current_user.username).first()
-        print(usr)
-        quest = ExamQuestionModel(question_text=summary, user=usr)
+        quest = ExamQuestionModel(title=title, summary=summary, user=usr)
         db.session.add(quest)
         db.session.commit()
 
@@ -50,10 +49,5 @@ def create_question():
         db.session.add(c1_4)
         db.session.commit()
         flash('Your just create one question', 'succes')
-        return redirect('/')
-    context = {
-        'head_title': 'exam',
-        'footer_style': footer_style,
-        'the_year': datetime.today().year,
-    }
-    return render_template('exam/create_question.html', context=context)
+        return redirect(url_for('schoolsite.index'))
+    return render_template('exam/create_question.html', the_year=datetime.today().year)

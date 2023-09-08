@@ -1,5 +1,4 @@
 /* @flask_unity, schoolsite (project) style.css file */
-
 * {
   margin: 0;
   padding: 0;
@@ -24,9 +23,65 @@ time, mark, audio, video {
   background:transparent;
 }
 
-body {
+body{
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 15px;
   font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page_head{
+  background: dodgerblue;
+  color: white;
+  padding: 30px 10px;
+  background: rgb(50, 50, 63);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.page_head h1{
+  text-align: center;
+}
+
+.page_head div a{
+  color: green;
+}
+
+.wrapp{
+  margin: 5px 3px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: whitesmoke;
+  width: 90%;
+  background: lightgray;
+}
+
+.choice{
+  outline: none;
+  border: none;
+  padding: 10px;
+  min-width: 30%;
+}
+
+.wrapp textarea{
+  outline: none;
+  border: none;
+  padding: 10px;
+}
+
+.wrapp button{
+  outline: none;
+  border: none;
+  background: green;
+  color: white;
+  padding: 10px 20px;
+}
+
+.copy-right{
+  text-align: center;
 }

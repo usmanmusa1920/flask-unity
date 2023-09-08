@@ -1,4 +1,4 @@
-{% extends "exam/layout.html" %}
+{% extends "schoolsite/layout.html" %}
 
 {% block title %}
  choice ({{context.q_id}}) page
@@ -6,7 +6,7 @@
 
 
 {% block main %}
-  {% for choice in context.choices %}
+  {% for choice in choices %}
     <div class="wrapp">
       <input type="radio" name="{{choice}}">  {{choice}}
       <br>

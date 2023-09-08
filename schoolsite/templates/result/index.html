@@ -1,12 +1,12 @@
 <!-- @flask_unity, result index.html page -->
-{% extends 'schoolsite/index.html' %}
+{% extends 'default_base.html' %}
 
 {% block head_css %}
-  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('result.static', filename='style.css') }}"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('result.static', filename='css/style.css') }}"> -->
 {% endblock head_css %}
 
 {% block head_js %}
-  <script src="{{ url_for('result.static', filename='index.js') }}"></script>
+  <script src="{{ url_for('result.static', filename='js/index.js') }}"></script>
 {% endblock head_js %}
 
 

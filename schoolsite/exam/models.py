@@ -15,7 +15,8 @@ class ExamQuestionModel(db.Model):
     # the user field is the user who create the question and he is in the `User` models of auth
     user = db.relationship('User', backref='user')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    question_text = db.Column(db.Text, nullable=False)
+    title = db.Column(db.String, nullable=False)
+    summary = db.Column(db.Text, nullable=False)
     choices = db.relationship('ExamChoiceModel', backref='selector', lazy=True)
 
     def __str__(self):

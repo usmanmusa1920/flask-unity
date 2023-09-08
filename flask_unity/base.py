@@ -311,13 +311,17 @@ class BaseStructure:
                             self.file_opt(
                                 'do_nothing', tree=False, _where=s_p_dir)
                             """
-                            going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name
+                            going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name, because `tree=False`
                             """
                             
-                            # create style.css
+                            # make css dir
+                            self.file_opt('css', _where='css')
+                            # create style.css and back to project static dir
                             self.file_content(
-                                self._exs_last[1], file_name='style', content=f'/* @{__title__}, {proj_name} (project) style.css file */\n'+_css(), route_go=False)
-
+                                self._exs_last[1], file_name='style', content=f'/* @{__title__}, {proj_name} (project) style.css file */\n'+_css(), dir_togo=s_p_dir, route_go=True)
+                            
+                            # make js dir
+                            self.file_opt('js', _where='js')
                             # create index.js and back to project static base dir path
                             self.file_content(
                                 self._exs_last[2], content=f'// @{__title__}, {proj_name} (project) index.js file\n'+_js(proj_name, what=True), dir_togo=project_folder)
@@ -345,6 +349,8 @@ class AppStructure(BaseStructure):
         #: cmd = 'touch'
         #: _here_ = # initial `inside project folder` where the project was created
         """
+        store_top_comment = top_comment
+
         if top_comment == 'html':
             top_comment = f'<!-- @{__title__}, {app} {file[0]} page -->\n'
         if top_comment == 'css':
@@ -354,9 +360,21 @@ class AppStructure(BaseStructure):
 
         self.file_opt(_dir_, tree=False, _here=_here_)  # back to template dir
         self.file_opt(f'{app}', _where=app)  # make app dir inside `template`
-        # making app default file
-        self.into_file(file, cmd, is_static_file=True,
-                       app_default_dummy=f'{top_comment}{file_dummy}', is_app=True)
+        
+        if os.getcwd().split(OS_SEP)[-2] == 'static':
+            for stic_dir in ['css', 'js']:
+                self.file_opt(stic_dir, _where=stic_dir) # make whether `css/js` in static dir
+                # making app default file, if the file extension (store_top_comment) match current loop item
+                if store_top_comment == stic_dir:
+                    self.into_file(
+                        file, cmd, is_static_file=True, app_default_dummy=f'{top_comment}{file_dummy}', is_app=True
+                    )
+                os.chdir(_here_ + OS_SEP + 'static' + OS_SEP + app)
+        else:
+            # making app default file (in template) dir
+            self.into_file(
+                file, cmd, is_static_file=True, app_default_dummy=f'{top_comment}{file_dummy}', is_app=True
+            )
 
     def dir_tree(self, proj_app_name=None):
         """

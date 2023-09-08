@@ -8,7 +8,7 @@ OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for wind
 
 
 class Config:
-    SECRET_KEY = 'PQBQ59HADbvvIzJchW2BurtSn25yz7ZkG8dtRfN'
+    SECRET_KEY = 'HY3gufuIwWtApF0VC6lxwHQdCcedEsA'
     # The `SQLALCHEMY_DATABASE_URI` might not be compatible with windows OS,
     # change it to your windows drive like: 'C:\path	o\your\default.db' (if you encounter an error)
     SQLALCHEMY_DATABASE_URI = 'sqlite:///'+str(ORIGIN_PATH)+OS_SEP+'default.db'

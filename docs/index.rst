@@ -40,6 +40,7 @@ Table of content
     mod_wsgi
     deployment
     docker_docs
+    history
 
 
 Useful links:

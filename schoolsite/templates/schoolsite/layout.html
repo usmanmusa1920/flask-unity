@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('exam.static', filename='home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('schoolsite.static', filename='css/style.css') }}">
   <link rel="shortcut icon" href="{{ url_for('schoolsite.static', filename='media/favicon.ico') }}" type="image/x-icon">
   <title>
     Schoolsite - {% block title %} <!-- title here! --> {% endblock title %}
@@ -32,7 +32,7 @@
   {% endblock main %}
   <br>
   <p class="copy-right">
-    Copyright &copy; 2022 - {{context.the_year}} Flask-Unity software.
+    Copyright &copy; 2022 - {{the_year}} Flask-Unity software.
   </p>
   <br>
 </body>
