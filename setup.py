@@ -29,7 +29,12 @@ setup(
     long_description_content_type = 'text/markdown',
     python_requires = '>=3.6',
     platforms = 'any',
-
+    
+    # Use console_scripts to hook to a specific Python method (not a whole executable),
+    entry_points = {
+        'console_scripts': [f'{grep("__title__")}={grep("__title__")}.cli:cli'],
+    },
+    
     url = grep('__url__'),
     download_url = 'https://pypi.org/project/flask-unity',
     author = grep('__author__'),
@@ -71,7 +76,7 @@ setup(
         'dnspython==2.3.0',
         'email-validator==1.3.1',
         'Flask==2.2.3',
-        'Flunity==1.6.0',
+        'Flask-Admin==1.6.0',
         'Flask-Bcrypt==1.0.1',
         'Flask-Login==0.6.2',
         'Flask-SQLAlchemy==3.0.3',

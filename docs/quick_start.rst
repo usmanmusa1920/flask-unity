@@ -18,17 +18,15 @@ Create flask project using flask_unity
 
 Now after the installation, let create a project called **schoolsite** to do so paste the following command on your termianl::
 
-    python -c "from flask_unity import project; project('schoolsite')"
+    flask_unity -p schoolsite
 
-or create a file and paste the below codes which is equivalent of the above, and then run the file
+or
 
-.. code-block:: python
+.. code-block:: bash
 
-    from flask_unity import project
+    flask_unity --project schoolsite
 
-    project("schoolsite")
-
-Both the command you type on terminal or the code you paste in a file (after running the file) will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **media**, **static**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
+Both (either of) the command you type on terminal will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **media**, **static**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
 
 Tree structure of the project using **tree .** command look like:
 

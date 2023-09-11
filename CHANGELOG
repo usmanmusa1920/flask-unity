@@ -4,7 +4,8 @@
 
 - Thirteen Release
 
-Modulising static files directory
+    - Modulising static files directory
+    - Introduce CLI for instanciating project
 
 - Twelveth Release
 
