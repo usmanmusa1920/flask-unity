@@ -42,7 +42,6 @@ Table of content
     auth_routes
     page_and_filesystem
     database
-    mod_wsgi
     deployment
     docker_docs
     history
@@ -54,3 +53,6 @@ Useful links:
 - `Repository <https://github.com/usmanmusa1920/flask-unity>`_
 
 - `PYPI Release <https://pypi.org/project/flask-unity>`_
+
+.. image:: https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/media/flask_unity_default_page.png
+    :align: center

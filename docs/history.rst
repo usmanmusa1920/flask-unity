@@ -3,9 +3,9 @@
 History
 #######
 
-`Flask-Unity` an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, and other annoying stuffs.
+**Flask-Unity** an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
 
-Initially this library `flask_unity` was named `sakyum`, it come into existance in `November 20, 2022` and released it first version (v0.0.1) on `December 30, 2022`. The following are list of versions released when it was called `sakyum`:
+Initially this library **flask_unity** was named **sakyum**, it come into existance in *November 20, 2022* and released it first version (v0.0.1) on *December 30, 2022*. The following are list of versions released when it was called `sakyum`:
 
 - **v0.0.1** First version released on `December 30, 2022`
 
@@ -58,3 +58,5 @@ On `August 05, 2023` the name `Flask-Unity` replaced `Sakyum`, by shipping (rele
 - **v0.0.11** released on `August 07, 2023`
 
 - **v0.0.12** released on `August 07, 2023`
+
+From that **v0.0.12**, **Flask-Unity** progress by releasing **v0.0.13** which is not available when it was **sakyum**, and other versions follows!

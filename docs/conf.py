@@ -14,19 +14,21 @@
 #
 # import os
 # import sys
+from datetime import datetime
 # sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- Project information -----------------------------------------------------
 
+
 project = 'Flask-Unity'
-copyright = '2023, <a href="https://usmanmusa1920.github.io">Usman Musa</a> Project'
+copyright = f'2022 - {datetime.today().year}, <a href="https://usmanmusa1920.github.io">Usman Musa</a> Project'
 author = 'Usman Musa'
 
 # The short X.Y version
-version = ''
+version = '0.0.13'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '0.0.13'
 
 
 # -- General configuration ---------------------------------------------------

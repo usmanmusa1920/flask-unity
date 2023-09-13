@@ -87,14 +87,12 @@ See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
 ### Flask-unity default page
 
-![Flask-unity default page](./media/flask_unity_default_page.png)
-
-<!-- [![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io) -->
+[![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io)
 
 ## Useful links
 
 -   Documentation: https://flask-unity.readthedocs.io
-<!-- - Repository: https://github.com/usmanmusa1920/flask-unity -->
+-   Repository: https://github.com/usmanmusa1920/flask-unity
 -   PYPI Release: https://pypi.org/project/flask-unity
 -   Docker example: https://github.com/usmanmusa1920/flask-unity/tree/master/example/flask_unity-docker
 
