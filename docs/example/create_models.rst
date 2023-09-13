@@ -275,6 +275,40 @@ Now let navigate to `http://127.0.0.1:5000/login` and login using one of the use
 
 After we logged in, now if we navigate to `http://127.0.0.1:5000/admin` we are able to see our `QuestionChoiceAdminView` view in the form of drop-down menu, if we click it, it will show list containing `Questions  and Choices` only, since the are the only once associated with that mode admin view. Now click the `Questions` this will show list of questions we have inserted in the python shell.
 
+For you to get out of lock when dropping a unique field in your table, make sure you dont do like:
+
+.. code-block:: python
+
+    class User(db.Model, UserMixin):
+        id = db.Column(db.Integer, primary_key=True)
+        date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+        username = db.Column(db.String(20), unique=True, nullable=False)
+        user_img = db.Column(db.String(255), default='default_img.png')
+        email = db.Column(db.String(120), unique=True, nullable=False)
+        password = db.Column(db.String(255), nullable=False)
+        authenticated = db.Column(db.Boolean, default=False)
+        is_superuser = db.Column(db.Boolean, default=False)
+        is_admin = db.Column(db.Boolean, default=False)
+    
+instead do:
+
+.. code-block:: python
+
+    class User(db.Model, UserMixin):
+        id = db.Column(db.Integer, primary_key=True)
+        date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+        username = db.Column(db.String(20), nullable=False)
+        user_img = db.Column(db.String(255), default='default_img.png')
+        email = db.Column(db.String(120), nullable=False)
+        password = db.Column(db.String(255), nullable=False)
+        authenticated = db.Column(db.Boolean, default=False)
+        is_superuser = db.Column(db.Boolean, default=False)
+        is_admin = db.Column(db.Boolean, default=False)
+        db.UniqueConstraint('username', name='uq_user_account_username')
+        db.UniqueConstraint('email', name='uq_user_account_email')
+
+The above field that are conrcerned is `username` and `email` fields.
+
 **Source code** for the `app models` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/app_models>`_ repository of the project.
 
 See more on how to write model view class at `Flask-Admin <https://flask-admin.readthedocs.io/en/latest/introduction/#customizing-built-in-views>`_ documentation.

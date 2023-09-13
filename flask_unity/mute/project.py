@@ -62,7 +62,9 @@ def create_app(reg_blueprints=False, conf=Config):
     from flask_unity.auth.admin import UserAdminView
     # from <app_name>.models import <app_model>
     # from <app_name>.admin import <admin_model_view>
-    db.create_all() # method to create the tables and database
+
+    {long_comment} once we make migration, it will populate our db file instead of calling it here like: {long_comment}
+    # db.create_all() # method to create the tables and database
   
 
     if reg_blueprints:

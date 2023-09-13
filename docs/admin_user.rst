@@ -17,7 +17,16 @@ or
 
 **Admin user using flags:**
 
-This can be done by given the `create_user` position argument and flags together with their values e.g::
+To start creating user in your database, you have to makemigrations and migrate the migration, like so::
+
+    flask_unity db makemigrations
+    flask_unity db migrate
+
+The first command will generate migration filee in the `migrations` directory and the initial database `default.db` file in our project base directory, instead of importing the db object from an interactive Python shell and run the `db.create_all()` or inserting `db.create_all()` below the import of our models in `schoolsite/config.py` file.
+
+The second command will apply the generated migrations in the database `default.db`.
+
+To create user in our databse, this can be done by given the `create_user` position argument and flags together with their values e.g::
 
     python thunder.py create_user -u network-engineer -e network-engineer@datacenter.com -p my-secret-pass
 

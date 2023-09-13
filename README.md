@@ -1,10 +1,10 @@
 # Flask-Unity
 
-An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, and other annoying stuffs.
+An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) is compatible and also tested with `windows OS`, `linux`, `macOS` and possibly can be compabible with others too!.
+Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>, we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask_unity, this is just a recomendation, it still work even if you install it without using virtual environment. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) is compatible and also tested with `windows OS`, `linux`, `macOS` and possibly can be compabible with others too!.
 
 ```sh
     pip install --upgrade flask_unity
@@ -12,7 +12,7 @@ Install and update the latest release from <a href="https://pypi.org/project/fla
 
 ## Create flask project using flask_unity
 
-After the installation paste the following command on your termianl
+After the installation paste either (one) of the following command on your termianl
 
 ```sh
     flask_unity -p schoolsite
@@ -20,19 +20,31 @@ After the installation paste the following command on your termianl
     flask_unity --project schoolsite
 ```
 
-This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py` and some directories (some in the form of package) `media`, `static`, `templates` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
+This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py`, `alembic.ini` and some directories (some in the form of package) `media`, `static`, `templates`, `migrations` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
 
-Boot up the flask server by running the below command
+Next make migrations by:
+
+```sh
+    flask_unity db makemigrations
+```
+
+If you do **ls** after making the migrations you will see it initiate a **default.db** file (an sqlite file) which is our default database. Apply the migrations:
+
+```sh
+    flask_unity db migrate
+```
+
+Now ready to boot up the flask server by running the below command
 
 ```sh
     python thunder.py boot
 ```
 
-Now visit the local url `http://127.0.0.1:5000` this will show you index page of your project
+Visit the local url `http://127.0.0.1:5000` this will show you index page of your project
 
 ## Create flask app within your project (schoolsite)
 
-For you to start an app within your project `schoolsite` shutdown the flask development server by pressing ( CTRL+C ) and then run the following command, by giving the name you want your app to be, in our case we will call our app `exam`
+For you to start an app within your project `schoolsite` shutdown the flask development server by pressing `CTRL+C` and then run the following command, by giving the name you want your app to be, in our case we will call our app `exam`
 
 ```sh
     python thunder.py create_app -a exam
@@ -42,7 +54,7 @@ this will create an app (a new package called `exam`) within your project `(scho
 
 ## Register an app
 
-Once the app is created open a file `schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` app blueprint name is `exam`, after importing it, append (register) the app blueprint in a list called `reg_blueprints` in that same file of `schoolsite/routes.py`
+Once the app is created open a file `schoolsite/routes.py` and import your `exam` blueprint which is in (`exam/views.py`), default name given to an app blueprint, is the app name so our `exam` app blueprint name is `exam`, after importing it, append (register) the app blueprint in a function called `reg_blueprints_func`, which was assigned to `reg_blueprints` in that same file of `schoolsite/routes.py`
 
 importing blueprint
 
@@ -53,13 +65,10 @@ from exam.views import exam
 registering blueprint
 
 ```py
-    reg_blueprints = [
-        blueprint.default,
-        blueprint.errors,
-        blueprint.auth,
-        base,
+    reg_blueprints = reg_blueprints_func(
+        schoolsite,
         exam,
-    ]
+    )
 ```
 
 once you register the app, boot up the flask webserver again by
@@ -80,7 +89,7 @@ See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
 ![Flask-unity default page](./media/flask_unity_default_page.png)
 
-<!-- [![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/v0.0.12/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io) -->
+<!-- [![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io) -->
 
 ## Useful links
 

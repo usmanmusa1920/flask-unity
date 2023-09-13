@@ -22,8 +22,13 @@ from .mute.project import pro_init_dummy
 from .mute.project import pro_secret_dummy
 from .mute.project import pro_config_dummy
 from .mute.project import pro_routes_dummy
+from . mute.db import generate_ini
+from . mute.db import generate_env
+from . mute.db import generate_script_py_mako
+from . mute.db import generate_readme
 from .auth.models import User
 from .contrib import db, bcrypt
+from . _log import log_style
 from . import __title__
 from . import __version__
 
@@ -213,6 +218,10 @@ class BaseStructure:
                         LOGGER.error(err_compt)
                         print()
                         exit()
+
+                    self.file_content(
+                        file_name='alembic.ini', content=f'{generate_ini(proj_nm)}', route_go=False
+                    )  # building the alembic ini file `alembic.ini`
                     self.file_content(
                         file_name=_fls, content=f'# Your project {_fls} file\n{thunder_dummy(proj_nm)}', route_go=False
                     )  # building the run module `thunder.py`
@@ -273,10 +282,40 @@ class BaseStructure:
 
                 if _dir == dirs[0]:
                     self.file_opt(_dir, _here=_here)
-                    # to maker thunder file
-                    self.into_file(fls, self.fls_cmd,
-                                   file='thunder', proj_nm=proj_name)
+                    # to make thunder file
+                    self.into_file(fls, self.fls_cmd, file='thunder', proj_nm=proj_name)
+                    # to make alembic.ini file
+                    self.into_file(['alembic.ini'], self.fls_cmd)
+                    
                     project_folder = os.getcwd()  # base dir path of the project (parent dir)
+
+                    # making directories trees and their default files in the loop
+                    for _dir in ['migrations']:
+                        self.file_opt(_dir, _here=project_folder)
+                        for _fls_migrations in ['env.py', 'script.py.mako', 'README']:
+                            if self.os_name == 'nt':
+                                sp.run(shlex.split(
+                                    f'{self.fls_cmd} {_fls_migrations}'), shell=True)
+                            elif self.os_name == 'posix':
+                                sp.run(shlex.split(f'{self.fls_cmd} {_fls_migrations}'))
+                            else:
+                                err_compt = f'{__title__.capitalize()} v{__version__} is not compatible with your OS'
+                                print()
+                                LOGGER.error(err_compt)
+                                print()
+                                exit()
+                            # building migrations files (env.py, script.py.mako, README)
+                            if _fls_migrations == 'env.py':
+                                self.file_content(
+                                    file_name=_fls_migrations, content=generate_env(), route_go=False)
+                            elif _fls_migrations == 'script.py.mako':
+                                self.file_content(
+                                    file_name=_fls_migrations, content=generate_script_py_mako(), route_go=False)
+                            elif _fls_migrations == 'README':
+                                self.file_content(
+                                    file_name=_fls_migrations, content=generate_readme(), route_go=False)
+                        self.file_opt('versions')
+                        os.chdir(project_folder)
 
                     for static_dir in dirs[3:]:  # templates & static
                         if static_dir == dirs[3:][0]:  # templates
@@ -308,8 +347,7 @@ class BaseStructure:
                             s_p_dir = os.getcwd()
                             # make media dir for project
                             self.file_opt('media', _where='media')
-                            self.file_opt(
-                                'do_nothing', tree=False, _where=s_p_dir)
+                            self.file_opt('do_nothing', tree=False, _where=s_p_dir)
                             """
                             going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name, because `tree=False`
                             """
@@ -332,7 +370,9 @@ class BaseStructure:
                     os.chdir(_here)
 
             print()
-            LOGGER.info(f'Project ({proj_name}) created successfully!')
+            # # LOGGER.info(f'Project ({proj_name}) created successfully!')
+            log_style(f'Project ({proj_name}) created successfully!')
+            log_style('Make migrations before proceeding', col='yellow')
             print()
 
 
@@ -419,8 +459,7 @@ class AppStructure(BaseStructure):
             self.file_opt('do_nothing', tree=False,
                           _where=_here_app)  # back to project dir
             print()
-            LOGGER.info(
-                f'App ({proj_app_name}) created successfully! in {app_proj_name}')
+            log_style(f'App ({proj_app_name}) created successfully! in {app_proj_name}')
             print()
 
 
@@ -507,13 +546,13 @@ class Boot:
 
             if args.app.lower() == __title__:
                 print()
-                LOGGER.error(
-                    f'Not allowed to use ({__title__}) package name as an app name\n')
+                log_style(
+                    f'Not allowed to use ({__title__}) package name as an app name\n', log='error')
                 exit()
             elif args.app == the_proj:
                 print()
-                LOGGER.error(
-                    f'Not allowed to use your ({the_proj}) project name as an app name\n')
+                log_style(
+                    f'Not allowed to use your ({the_proj}) project name as an app name\n', log='error')
                 exit()
             app_init(args.app)
 

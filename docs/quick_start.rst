@@ -16,25 +16,28 @@ This **quick start** will walk you through creating project called **schoolsite*
 Create flask project using flask_unity
 ======================================
 
-Now after the installation, let create a project called **schoolsite** to do so paste the following command on your termianl::
-
-    flask_unity -p schoolsite
-
-or
+Now after the installation, let create a project called **schoolsite** to do so paste either (one) of the following command on your termianl:
 
 .. code-block:: bash
-
+    flask_unity -p schoolsite
+    .. or
     flask_unity --project schoolsite
 
-Both (either of) the command you type on terminal will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py** and some directories (some in the form of package) **media**, **static**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
+Both (either of) the command you type on terminal will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **thunder.py**, **alembic.ini** and some directories (some in the form of package) **media**, **static**, **migrations**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
 
 Tree structure of the project using **tree .** command look like:
 
-.. code-block::
+.. code-block:: bash
 
     .
+    ├── alembic.ini
     ├── media
     │   └── default_img.png
+    ├── migrations
+    │   ├── env.py
+    │   ├── README
+    │   ├── script.py.mako
+    │   └── versions
     ├── schoolsite
     │   ├── config.py
     │   ├── __init__.py
@@ -42,9 +45,11 @@ Tree structure of the project using **tree .** command look like:
     │   └── secret.py
     ├── static
     │   └── schoolsite
-    │       ├── index.js
-    │       ├── media
-    │       └── style.css
+    │       ├── css
+    │       │   └── style.css
+    │       ├── js
+    │       │   └── index.js
+    │       └── media
     ├── templates
     │   ├── admin
     │   │   └── index.html
@@ -52,18 +57,28 @@ Tree structure of the project using **tree .** command look like:
     │       └── index.html
     └── thunder.py
 
-    8 directories, 10 files
+    12 directories, 14 files
 
-Boot up the flask server by running the below command::
+Next make migrations by:
+
+.. code-block:: bash
+    flask_unity db makemigrations
+
+If you do **ls** after making the migrations you will see it initiate a **default.db** file (an sqlite file) which is our default database. Apply the migrations:
+
+.. code-block:: bash
+    flask_unity db migrate
+
+Now ready to boot up the flask server by running the below command::
 
     python thunder.py boot
 
-Now visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
+Visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
 
 Create flask project app using flask_unity
 ==========================================
 
-Since we create a project, let create an app within the project. To start an app within the project (**schoolsite**) shutdown the flask development server by pressing ( CTRL+C ). If you do **ls** in that same directory you will see it create a **default.db** file (an sqlite file) which is our default database. Now run the following command in other to create your app, by giving the name you want your app to be, in our case we will call our app **exam**::
+Since we create a project, let create an app within the project. To start an app within the project (**schoolsite**) shutdown the flask development server by pressing `CTRL+C`. Run the following command in other to create an app, by giving the app name, you want your app to be, in our case we will call our app **exam**::
 
     python thunder.py create_app -a exam
 
@@ -75,9 +90,10 @@ this will create an app (a new package called **exam**) within the project (**sc
 
 Now the **tree .** structure of the project after creating **exam** app look like:
 
-.. code-block::
+.. code-block:: bash
 
     .
+    ├── alembic.ini
     ├── default.db
     ├── exam
     │   ├── admin.py
@@ -87,20 +103,39 @@ Now the **tree .** structure of the project after creating **exam** app look lik
     │   └── views.py
     ├── media
     │   └── default_img.png
+    ├── migrations
+    │   ├── env.py
+    │   ├── __pycache__
+    │   │   └── env.cpython-310.pyc
+    │   ├── README
+    │   ├── script.py.mako
+    │   └── versions
+    │       ├── c75e0f1c1c9e_changes_migrated.py
+    │       └── __pycache__
+    │           └── c75e0f1c1c9e_changes_migrated.cpython-310.pyc
     ├── schoolsite
     │   ├── config.py
     │   ├── __init__.py
+    │   ├── __pycache__
+    │   │   ├── config.cpython-310.pyc
+    │   │   ├── __init__.cpython-310.pyc
+    │   │   ├── routes.cpython-310.pyc
+    │   │   └── secret.cpython-310.pyc
     │   ├── routes.py
     │   └── secret.py
     ├── static
     │   ├── exam
-    │   │   ├── index.js
-    │   │   ├── media
-    │   │   └── style.css
+    │   │   ├── css
+    │   │   │   └── style.css
+    │   │   ├── js
+    │   │   │   └── index.js
+    │   │   └── media
     │   └── schoolsite
-    │       ├── index.js
-    │       ├── media
-    │       └── style.css
+    │       ├── css
+    │       │   └── style.css
+    │       ├── js
+    │       │   └── index.js
+    │       └── media
     ├── templates
     │   ├── admin
     │   │   └── index.html
@@ -110,7 +145,7 @@ Now the **tree .** structure of the project after creating **exam** app look lik
     │       └── index.html
     └── thunder.py
 
-    12 directories, 19 files
+    21 directories, 30 files
 
 You notice it create a package name with thesame name of the app (**exam**) with some files in it, also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
@@ -127,19 +162,14 @@ importing blueprint
 
     from exam.views import exam
 
-after that, append it in the list **reg_blueprints** provided in the **routes.py** file by
-
-registering blueprint
+after importing it, append (register) the app blueprint in a function called `reg_blueprints_func`, which was assigned to `reg_blueprints` in that same file of `schoolsite/routes.py`
 
 .. code-block:: python
 
-    reg_blueprints = [
-        blueprint.default,
-        blueprint.errors,
-        blueprint.auth,
-        base,
+    reg_blueprints = reg_blueprints_func(
+        schoolsite,
         exam,
-    ]
+    )
 
 once you register the app, boot up the flask webserver again by::
 
@@ -167,7 +197,7 @@ Also, you can give your desire ip address/host by using **-H** or **--host** fla
 
     python thunder.py boot --port 7000 --host 0.0.0.0
 
-For development server, you can give a debug value to True by specifying **-d** flag or **--debug** e.g::
+For development server, you can give a debug value to True (for auto reload of changes) by specifying **-d** flag or **--debug** e.g::
 
     python thunder.py boot -p 7000 -d True
         
@@ -175,7 +205,7 @@ For development server, you can give a debug value to True by specifying **-d** 
 
     python thunder.py boot --port 7000 --debug True
 
-You can change your default profile picture by moving to http://127.0.0.1:5000/admin/change_profile_image/ and select your new picture from your file system.
+You can change your default profile picture by moving to http://127.0.0.1:5000/admin/change_profile_image/ and select your new picture from your file system, once logged in.
 
 With this, you can do many and many stuffs now! From here you are ready to keep write more views in the app `views.py` as well as in the project `routes.py` and do many stuffs just like the way you do if you use flask only.
 

@@ -9,13 +9,9 @@ Welcome to the chapter that will talk about how to do database migration with `a
 
 `Alembic` is a very useful library we can use for our database migrations. when we are working with Flask Framework we need a tool which can handle the database migrations. Alembic is widely used for migrations. Alembic version `1.10.2` come with (Mako=1.2.4, MarkupSafe=2.1.2, SQLAlchemy=2.0.7, greenlet=2.0.2, typing-extensions=4.5.0) extensions, let us start how to use alembic.
 
-First we need to initialize the alembic to our working project directory (parent) directory, by running the following command::
+Alembic is already initialized to our working project directory (parent) directory, you noticed when we create the project (a folder `migrations`, and file `alimbic.ini` will be generated in the project dir), and the contents of this folder need to be added to version control along with your other source files. The tree structure of the `migrations` directory looks like::
 
-    alembic init alembic
-
-After running this command you will see some files and folders are created in your project directory they are `alembic` and `alembic.ini` the tree structure of the `alembic` directory is::
-
-    alembic
+    migrations
     ├── env.py
     ├── README
     ├── script.py.mako
@@ -23,20 +19,24 @@ After running this command you will see some files and folders are created in yo
 
     1 directory, 3 files
 
-Notice there will be no version files in your versions directory `(alembic/versions)` because we haven’t made any migrations yet. Now to use alembic we need to do certain changes in these files. First, change the `sqlalchemy.url` in your `alembic.ini` file, and give it your reletive `default.db` path, ours look like::
+Notice there will be no version files in your versions directory `(migrations/versions)` because we haven’t made any migrations yet. It also already populate the `sqlalchemy.url` in your `alembic.ini` file, and gave it your reletive `default.db` path, ours look like::
 
     # for the default.db file
     sqlalchemy.url = sqlite:////home/usman/Desktop/schoolsite/default.db
 
+Other RDBMS can be configure as:
+
+.. code-block:: bash
+
     # for mysql (if you are using mysql database)
     sqlalchemy.url = mysql+mysqldb://root:root@localhost:3306/database_name
 
-    # for postgresql (if youare using postgres database)
+    # for postgresql (if you are using postgres database)
     sqlalchemy.url = postgresql://user:user@localhost/test
 
-After giving your database url, open a file that it generate in the alembic directory **alembic/env.py** find a variable called `target_metadata = None`, above it import your app models and the **db** instance of your application and replace the value of `None` with `db.Model.metadata` like in the below snippets::
+Also in a file that it generate in the migrations directory **migrations/env.py** it imported the **db** instance of your application, which look like::
 
-    from exam.models import ExamQuestionModel, ExamChoiceModel
+    # from <app_name>.models import <app_model>
     from flask_unity.contrib import db
     target_metadata = db.Model.metadata
 
@@ -48,11 +48,11 @@ For Autogenerating Multiple MetaData collections, you can pass a list of models 
 
 Lastly make the migrations (Create a Migration Script) by runnig the following command::
 
-    alembic revision --autogenerate -m "Added tables"
+    flask_unity db makemigrations
 
-Before, in the `alembic/versions` directory there is nothing inside, but now after running the above command, alembic generate our first migration commit file in versions folder `(alembic/versions)`, you can see the version file now in the versions folder, for simplicity the structure look like::
+Before, in the `migrations/versions` directory there is nothing inside, but now after running the above command, alembic generate our first migration commit file in versions folder `(migrations/versions)`, you can see the version file now in the versions folder, for simplicity the structure look like::
 
-    alembic
+    migrations
     ├── env.py
     ├── __pycache__
     │   └── env.cpython-310.pyc
@@ -65,28 +65,34 @@ Before, in the `alembic/versions` directory there is nothing inside, but now aft
 
     3 directories, 6 files
 
-Every commit we did, it will generate the migration file in the `(alembic/versions)` directory.
+Every commit we did, it will generate the migration file in the `(migrations/versions)` directory. Once this file generates we are ready for database migration. To migrate we are to run::
 
-Once this file generates we are ready for database migration. To migrate we are to run::
-
-    alembic upgrade head
+    flask_unity db migrate
 
 Once you run the above command your tables will be generated in your database. This is how to use alembic for your database, there are many you can do so, hit to the `alembic <https://alembic.sqlalchemy.org>`_ website for more clarification.
 
-Each time the database models change, repeat the migrate and upgrade commands.
+Each time the database models change, repeat the `makemigrations` and `migrate` commands.
 
 Hint
 ----
 
   - To make migrations (Create a Migration Script)::
 
-    alembic revision --autogenerate -m "Added table"
+    flask_unity db makemigrations
+
+    or
+
+    alembic revision --autogenerate -m "Changes migrated!"
 
   - To migrate (Running our Migration)::
 
+    flask_unity db migrate
+
+    or
+
     alembic upgrade head
 
-  - Getting Information::
+  - Getting Information more command on `alembic site <https://alembic.sqlalchemy.org/en/latest/tutorial.html#getting-information>`_::
 
     alembic current
 
