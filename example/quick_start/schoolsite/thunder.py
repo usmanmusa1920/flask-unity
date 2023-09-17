@@ -1,4 +1,4 @@
-# Your project thunder.py file
+# Your project run.py file
 from flask_unity import Boot
 from schoolsite.routes import reg_blueprints
 from schoolsite.config import create_app

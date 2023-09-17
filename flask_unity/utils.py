@@ -8,8 +8,8 @@ import secrets
 
 from pathlib import Path
 from getpass import getpass
-from flask_unity import __title__
-from flask_unity import __version__
+from . import __title__
+from . import __version__
 
 
 # relative path to the package folder (flask_unity)
@@ -66,6 +66,7 @@ footer_style = style_page(__title__, version=__version__)
 
 
 def reg_blueprints_func(*args):
+    """function that implement blueprint registration"""
     from . import blueprint
     reg_blueprints = list(args)
     default_blueprints = [blueprint.default, blueprint.errors, blueprint.auth]

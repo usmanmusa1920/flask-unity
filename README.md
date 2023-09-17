@@ -20,7 +20,7 @@ After the installation paste either (one) of the following command on your termi
     flask_unity --project schoolsite
 ```
 
-This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `thunder.py`, `alembic.ini` and some directories (some in the form of package) `media`, `static`, `templates`, `migrations` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
+This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `run.py`, `alembic.ini` and some directories (some in the form of package) `media`, `static`, `templates`, `migrations` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
 
 Next make migrations by:
 
@@ -37,7 +37,7 @@ If you do **ls** after making the migrations you will see it initiate a **defaul
 Now ready to boot up the flask server by running the below command
 
 ```sh
-    python thunder.py boot
+    python run.py boot
 ```
 
 Visit the local url `http://127.0.0.1:5000` this will show you index page of your project
@@ -47,7 +47,7 @@ Visit the local url `http://127.0.0.1:5000` this will show you index page of you
 For you to start an app within your project `schoolsite` shutdown the flask development server by pressing `CTRL+C` and then run the following command, by giving the name you want your app to be, in our case we will call our app `exam`
 
 ```sh
-    python thunder.py create_app -a exam
+    python run.py create_app -a exam
 ```
 
 this will create an app (a new package called `exam`) within your project `(schoolsite)`
@@ -74,7 +74,7 @@ registering blueprint
 once you register the app, boot up the flask webserver again by
 
 ```sh
-    python thunder.py boot
+    python run.py boot
 ```
 
 visit `http://127.0.0.1:5000` which is your project landing page
@@ -94,6 +94,5 @@ See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 -   Documentation: https://flask-unity.readthedocs.io
 -   Repository: https://github.com/usmanmusa1920/flask-unity
 -   PYPI Release: https://pypi.org/project/flask-unity
--   Docker example: https://github.com/usmanmusa1920/flask-unity/tree/master/example/flask_unity-docker
 
 Pull requests are welcome

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
-from . import __title__, __version__
+from . import __title__
+from . import __version__
 from .base import BaseStructure
 
 

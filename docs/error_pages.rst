@@ -28,3 +28,12 @@ Error page of `502` for bad gateway
 Error page of `503` for service unavailable
 
 Error page of `504` for gateway timeout
+
+
+Table of content
+----------------
+
+.. toctree::
+    :maxdepth: 2
+
+    tables

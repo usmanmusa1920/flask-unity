@@ -4,7 +4,7 @@ import sys
 import shlex
 import argparse
 import subprocess as sp
-from flask_unity._log import log_style
+from .._log import log_style
 
 
 def cli():

@@ -7,7 +7,7 @@ Custom authentication for users
 
 In this chapter we are going to see how we can write a custom authentication for users which will replace the default route for our `auth` pages and instead of rendering the `wtforms` views, we are to use html form. To do so, flask_unity already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is to create an app (`custom_auth`) just like the way we create the exam app::
 
-    python thunder.py create_app -a custom_auth
+    python run.py create_app -a custom_auth
 
 after that, paste the following in the `custom_auth` views.py file:
 
@@ -267,6 +267,15 @@ This will overwrite the default auth system for those routes. You can open the d
   {% endblock body %}
 
 
-Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from flask_unity. Note: ``the creation of a user using the python thunder.py create_user command won't work`` for the custom model.
+Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from flask_unity. Note: ``the creation of a user using the python run.py create_user command won't work`` for the custom model.
 
 **Source code** for the `custom auth` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/custom_auth>`_ repository of the project.
+
+
+Table of content
+----------------
+
+.. toctree::
+    :maxdepth: 2
+
+    tables

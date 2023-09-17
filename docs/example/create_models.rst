@@ -189,7 +189,7 @@ Lastly let us make a loop over all question and print each question choices::
   #     11:  bit
   #     12:  superposition
 
-Since we insert something into the database, let move on, on how we can make those record to be display in the admin page (by registering the models), because if now we logout from the python interpreter and boot up the server **python thunder.py boot -d True** then navigate to admin page we won't be able to see those models. We can do so below:
+Since we insert something into the database, let move on, on how we can make those record to be display in the admin page (by registering the models), because if now we logout from the python interpreter and boot up the server **python run.py boot -d True** then navigate to admin page we won't be able to see those models. We can do so below:
 
 Register our models to admin
 ----------------------------

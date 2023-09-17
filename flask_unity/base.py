@@ -9,7 +9,7 @@ import subprocess as sp
 
 from pathlib import Path
 
-from .mute import thunder_dummy
+from .mute import run_dummy
 from .mute.page import _js
 from .mute.page import _css
 from .mute.page import _html
@@ -223,8 +223,8 @@ class BaseStructure:
                         file_name='alembic.ini', content=f'{generate_ini(proj_nm)}', route_go=False
                     )  # building the alembic ini file `alembic.ini`
                     self.file_content(
-                        file_name=_fls, content=f'# Your project {_fls} file\n{thunder_dummy(proj_nm)}', route_go=False
-                    )  # building the run module `thunder.py`
+                        file_name=_fls, content=f'# Your project {_fls} file\n{run_dummy(proj_nm)}', route_go=False
+                    )  # building the run module `run.py`
 
     def dir_tree(self, proj_name=None):
         """
@@ -234,8 +234,8 @@ class BaseStructure:
         dirs = [proj_name, f'{proj_name}{OS_SEP}{proj_name}',
                 'media', 'templates', 'static']
 
-        # default files of project sub folder, except `thunder` which is for project base dir
-        fls_name = ['__init__', 'config', 'routes', 'secret', 'thunder']
+        # default files of project sub folder, except `run` which is for project base dir
+        fls_name = ['__init__', 'config', 'routes', 'secret', 'run']
         # appending extensions to files
         fls = self.append_exs_to_file(fls_name=fls_name)
         _here = os.getcwd()  # initial `cwd` where the project was e.g `Desktop`
@@ -253,7 +253,7 @@ class BaseStructure:
                     self.file_opt(_dir, _here=_here)
                     # create default modules inside project sub dir
                     for _fls in fls:
-                        if _fls[:-3] != 'thunder':
+                        if _fls[:-3] != 'run':
                             if self.os_name == 'nt':
                                 sp.run(shlex.split(
                                     f'{self.fls_cmd} {_fls}'), shell=True)
@@ -282,8 +282,8 @@ class BaseStructure:
 
                 if _dir == dirs[0]:
                     self.file_opt(_dir, _here=_here)
-                    # to make thunder file
-                    self.into_file(fls, self.fls_cmd, file='thunder', proj_nm=proj_name)
+                    # to make run file
+                    self.into_file(fls, self.fls_cmd, file='run', proj_nm=proj_name)
                     # to make alembic.ini file
                     self.into_file(['alembic.ini'], self.fls_cmd)
                     

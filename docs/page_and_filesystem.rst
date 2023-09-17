@@ -14,3 +14,12 @@ File system storage
 ===================
 
 The default directory where files will be saved is `media` which is in the project directory. In the media directory there is a default user profile image called `default_img.png`, and if user change profile image it will be available (saved the new image) in that directory.
+
+
+Table of content
+----------------
+
+.. toctree::
+    :maxdepth: 2
+
+    tables

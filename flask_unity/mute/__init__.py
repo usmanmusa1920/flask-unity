@@ -13,7 +13,7 @@ l2 = '}}'
 long_comment = '"""'
 
 
-def thunder_dummy(project):
+def run_dummy(project):
     return f"""from flask_unity import Boot
 from {project}.routes import reg_blueprints
 from {project}.config import create_app

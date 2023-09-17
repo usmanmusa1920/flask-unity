@@ -12,10 +12,32 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
+import os
+import re
+import sys
+from pathlib import Path
 from datetime import datetime
-# sys.path.insert(0, os.path.abspath('.'))
+# Insert Flask-Unity' path into the system.
+sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("_themes"))
+
+
+ORIGIN = Path(__file__).resolve().parent.parent
+
+
+def grep(attrname):
+    """get package info from __init__.py file"""
+    file_path = os.path.join(ORIGIN, 'flask_unity/__init__.py')
+
+    # content of the file
+    read_file = open(file_path).read()
+
+    # pattern match using regex
+    pattern = r"{0}\W*=\W*'([^']+)'".format(attrname)
+
+    # our regex value
+    attr_value, = re.findall(pattern, read_file)
+    return attr_value
 
 
 # -- Project information -----------------------------------------------------
@@ -23,12 +45,12 @@ from datetime import datetime
 
 project = 'Flask-Unity'
 copyright = f'2022 - {datetime.today().year}, <a href="https://usmanmusa1920.github.io">Usman Musa</a> Project'
-author = 'Usman Musa'
+author = grep('__author__')
 
 # The short X.Y version
-version = '0.0.13'
+version = grep('__version__')
 # The full version, including alpha/beta/rc tags
-release = '0.0.13'
+release = grep('__version__')
 
 
 # -- General configuration ---------------------------------------------------
@@ -41,6 +63,10 @@ release = '0.0.13'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -67,8 +93,15 @@ language = None
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+# If true, '()' will be appended to :func: etc. cross-reference text.
+add_function_parentheses = False
+
+# If true, the current module name will be prepended to all description
+# unit titles (such as .. function::).
+add_module_names = True
+
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = None
+pygments_style = "flask_theme_support.FlaskyStyle"
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -88,13 +121,13 @@ html_theme_options = {
     'github_banner': True,
     'github_button': True,
     'github_type': 'star',
-    'fixed_sidebar': True,
+    # 'fixed_sidebar': True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_static_path = ["_static"]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -104,12 +137,23 @@ html_static_path = []
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
+# html_sidebars = {
+#     '**': [
+#         'about.html',
+#         'localtoc.html',
+#         'searchbox.html'
+#     ]
+# }
 html_sidebars = {
-    '**': [
-        'about.html',
-        'localtoc.html',
-        'searchbox.html'
-    ]
+    "index": ["sidebarintro.html", "sourcelink.html", "searchbox.html", "hacks.html"],
+    "**": [
+        "about.html",
+        "localtoc.html",
+        "relations.html",
+        "sourcelink.html",
+        "searchbox.html",
+        "hacks.html",
+    ],
 }
 
 
@@ -174,6 +218,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = project
+epub_author = author
+epub_publisher = author
+epub_copyright = copyright
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.

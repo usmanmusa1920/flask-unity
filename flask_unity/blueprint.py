@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template
 from flask_admin.contrib.sqla import ModelView
-from flask_unity.utils import footer_style, template_dir, static_dir
+from .utils import footer_style, template_dir, static_dir
+
 
 # static_folder: the folder where the Blueprint's static files can be found
 # static_url_path: the URL to serve static files from
@@ -10,6 +11,7 @@ from flask_unity.utils import footer_style, template_dir, static_dir
 # subdomain: the subdomain that this Blueprint's routes will match on by default
 # url_defaults: a dictionary of default values that this Blueprint's views will receive
 # root_path: the Blueprint's root dictionary path, whose default values is obtained from the Blueprint's import
+
 
 default = Blueprint(
     'default', __name__, template_folder=template_dir(temp_from_pkg='default_page'), static_folder=static_dir('default_style', static_from_pkg=True)
@@ -43,6 +45,7 @@ other default authentication system (route) of your project, which will let you 
 
 @default.route('/', methods=['POST', 'GET'])
 def index():
+    """if there is no route like this in a project, then it will use this as default"""
     context = {
         'footer_style': footer_style,
     }

@@ -21,7 +21,7 @@ When using flask_unity, don't be confuse with the the concept of **project** and
 
 It will create a parent directory with the name `schoolsite` also inside the `schoolsite` directory there is a directory with thesame name of the parent directory `schoolsite` this directory is the one that most of configurations, registering and other thing that are going to be implemented inside it.
 
-Within that parent directory `schoolsite` it also generate a file called `thunder.py` this is the file that you will be running along side with some positional arguments and flags. Also it will generate a directory called `migrations` this directory contains database migrations file and others. Lastly it will generate `templates` and `static` directory for your site pages and it styles respectively. At a glance, it will create `schoolsite, thunder.py, alembic.ini, templates, static, migrations, media` all in `schoolsite` (base dir of the project).
+Within that parent directory `schoolsite` it also generate a file called `run.py` this is the file that you will be running along side with some positional arguments and flags. Also it will generate a directory called `migrations` this directory contains database migrations file and others. Lastly it will generate `templates` and `static` directory for your site pages and it styles respectively. At a glance, it will create `schoolsite, run.py, alembic.ini, templates, static, migrations, media` all in `schoolsite` (base dir of the project).
 
 **App** (application) is like to say a blueprint which greatly simplify how large applications work and provide a central means for flask extensions to register operations on applications. Read `flask blueprint <https://flask.palletsprojects.com/en/2.2.x/blueprints/>`_.
 
@@ -34,17 +34,7 @@ Table of content
 .. toctree::
     :maxdepth: 2
 
-    quick_start
-    flags
-    error_pages
-    example/index
-    admin_user
-    auth_routes
-    page_and_filesystem
-    database
-    deployment
-    docker_docs
-    history
+    tables
 
 
 Useful links:
