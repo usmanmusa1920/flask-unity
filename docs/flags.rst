@@ -70,12 +70,3 @@ Use `-p` or `--password` and then the password beside it, if you do not specify 
     # or
 
     python run.py create_user --password my-secret-pass
-
-
-Table of content
-----------------
-
-.. toctree::
-    :maxdepth: 2
-
-    tables

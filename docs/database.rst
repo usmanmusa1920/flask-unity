@@ -103,12 +103,3 @@ Hint
     alembic downgrade base
 
 **Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/database_migrations>`_ repository of the project.
-
-
-Table of content
-----------------
-
-.. toctree::
-    :maxdepth: 2
-
-    tables

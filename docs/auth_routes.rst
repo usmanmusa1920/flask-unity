@@ -270,12 +270,3 @@ This will overwrite the default auth system for those routes. You can open the d
 Even the **User** model can be overwrite, but make sure to go all the files and import it from the custom_auth model instead of from flask_unity. Note: ``the creation of a user using the python run.py create_user command won't work`` for the custom model.
 
 **Source code** for the `custom auth` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/custom_auth>`_ repository of the project.
-
-
-Table of content
-----------------
-
-.. toctree::
-    :maxdepth: 2
-
-    tables
