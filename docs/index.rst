@@ -2,7 +2,7 @@
 Flask-Unity
 ###########
 
-**Flask-Unity** is an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
+**Flask-Unity** an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
 
 The main reason behind the development of `flask_unity` is to combine (`unite`) `flask <https://flask.palletsprojects.com>`_ and it extensions in one place to make it ease when developing an application without the headache (worrying) of knowing the tricks on how to connect those extensions with flask, or import something from somewhere to avoid some errors such as circular import and other unexpected errors. Also structuring flask application is a problem at some cases to some people, `flask_unity` take care of all these so that you only focus on writing your application views the way you want.
 

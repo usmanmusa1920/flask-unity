@@ -61,15 +61,15 @@ If you do **ls** after making the migrations you will see it initiate a **defaul
 .. code-block:: bash
     flask_unity db migrate
 
+.. note::
+    
+    As soon as you create the project make migrations and apply the migrations to avoid errors!
+
 Now ready to boot up the flask server by running the below command::
 
     python run.py boot
 
 Visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
-
-.. note::
-    
-    As soon as you create the project make migrations and apply the migrations to avoid errors!
 
 Create flask project app using flask_unity
 ==========================================
