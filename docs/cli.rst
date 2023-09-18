@@ -1,11 +1,25 @@
 :tocdepth: 2
 
-Flags
-#####
+Flags & CLI
+###########
 
+Some useful flags and CLI that you can use along side, when your are running your application (project) along side with `run.py` file are as follows:
 
-Some useful flags that you can use along side, when your are running your application (project) along side with `run.py` file are as follows:
+**CLI associated with `flask_unity`**:
 
+To initialize a project use `-p` or `--project` as::
+
+    flask_unity -p schoolsite
+    .. or
+    flask_unity --project schoolsite
+
+To make migrations::
+
+    flask_unity db makemigrations
+
+To apply the migrations::
+
+    flask_unity db migrate
 
 **Flags associated with `create_app` positional argument**:
 
@@ -16,7 +30,6 @@ Use `-a` or `--app` if you are about to create app in your project, that will ca
     # or
 
     python run.py create_app --app blog
-
 
 **Flags associated with `boot` positional argument**:
 
@@ -43,7 +56,6 @@ Use `-d` or `--debug` if you want your app in debug mode. That mean ifyou make c
     # or
 
     python run.py boot --debug True
-
 
 **Flags associated with `create_user` positional argument**:
 

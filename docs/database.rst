@@ -9,7 +9,7 @@ Welcome to the chapter that will talk about how to do database migration with `a
 
 `Alembic` is a very useful library we can use for our database migrations. when we are working with Flask Framework we need a tool which can handle the database migrations. Alembic is widely used for migrations. Alembic version `1.10.2` come with (Mako=1.2.4, MarkupSafe=2.1.2, SQLAlchemy=2.0.7, greenlet=2.0.2, typing-extensions=4.5.0) extensions, let us start how to use alembic.
 
-Alembic is already initialized to our working project directory (parent) directory, you noticed when we create the project (a folder `migrations`, and file `alimbic.ini` will be generated in the project dir), and the contents of this folder need to be added to version control along with your other source files. The tree structure of the `migrations` directory looks like::
+Alembic is already initialized to our working project directory (parent) directory, you noticed when we create the project (a folder `migrations`, and file `alimbic.ini` are generated in the project dir), and the contents of this folder need to be added to version control along with your other source files. The tree structure of the `migrations` directory looks like::
 
     migrations
     ├── env.py
@@ -40,13 +40,13 @@ Also in a file that it generate in the migrations directory **migrations/env.py*
     from flask_unity.contrib import db
     target_metadata = db.Model.metadata
 
-For Autogenerating Multiple MetaData collections, you can pass a list of models instead e.g::
+For Autogenerating Multiple MetaData collections, you can pass a list of models instead of the above, e.g::
 
     from myapp.mymodel1 import Model1Base
     from myapp.mymodel2 import Model2Base
     target_metadata = [Model1Base.metadata, Model2Base.metadata]
 
-Lastly make the migrations (Create a Migration Script) by runnig the following command::
+Next is to make the migrations (Create a Migration Script) by runnig the following command::
 
     flask_unity db makemigrations
 

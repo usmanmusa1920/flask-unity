@@ -94,30 +94,14 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
 def pro_routes_dummy(proj):
-    return f"""from flask import (render_template, Blueprint)
-from flask_unity.utils import footer_style, template_dir, static_dir, reg_blueprints_func
+    return f"""from flask_unity.utils import reg_blueprints_func
 # from <app_name>.views import <app_name>
 
 
-{proj} = Blueprint(
-    '{proj}', __name__, template_folder=template_dir(), static_folder=static_dir('{proj}')
-)
-
-
 reg_blueprints = reg_blueprints_func(
-    {proj},
     # <app_name>,
 )
 
 
-@{proj}.route('/', methods=['POST', 'GET'])
-def index():
-    context = {f1}
-        'project_name': '{proj}',
-        'footer_style': footer_style,
-    {l1}
-    return render_template('{proj}/index.html', context=context)
-    
-    
 # overwrite (customise) error pages here
 """

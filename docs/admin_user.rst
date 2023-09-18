@@ -17,7 +17,7 @@ or
 
 **Admin user using flags:**
 
-To start creating user in your database, you have to makemigrations and migrate the migration, like so::
+To start creating user in your database, you have to makemigrations and migrate the migration, if you haven't do it, like so::
 
     flask_unity db makemigrations
     flask_unity db migrate
@@ -33,9 +33,10 @@ To create user in our databse, this can be done by given the `create_user` posit
     # or
 
     python run.py create_user --username network-engineer --email network-engineer@datacenter.com --password my-secret-pass
-
-
-``Warning:`` don't use the `-p` flag to specify user password, do so only if you are testing (not in production) by just giving the user username, and email address, then enter, where as the password will be prompt to enter it, like:
+    
+.. warning::
+    
+    Don't use the `-p` flag to specify user password because the password will be visible to who so ever around, do so only if you are testing (not in production) by just giving the user username, and email address, then enter, where as the password will be prompt to enter it, like:
 
 .. code-block:: python
 

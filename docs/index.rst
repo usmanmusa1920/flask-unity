@@ -35,7 +35,7 @@ Table of content
     :maxdepth: 2
 
     quick_start
-    flags
+    cli
     error_pages
     example/index
     admin_user

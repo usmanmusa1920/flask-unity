@@ -5,7 +5,7 @@ History
 
 **Flask-Unity** an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
 
-Initially this library **flask_unity** was named **sakyum**, it come into existance in *November 20, 2022* and released it first version (v0.0.1) on *December 30, 2022*. The following are list of versions released when it was called `sakyum`:
+Initially this project (library) **flask_unity** was called (named) **sakyum**, it come into existance in *November 20, 2022* and released it first version (v0.0.1) on *December 30, 2022*. The following are list of versions released when it was called `sakyum`:
 
 - **v0.0.1** First version released on `December 30, 2022`
 
@@ -31,9 +31,9 @@ Initially this library **flask_unity** was named **sakyum**, it come into exista
 
 - **v0.0.12** Twelveth version released on `June 23, 2023`
 
-In `July, 2023` the maintainer of **Flask-Unity** `Usman <https://usmanmusa1920.github.io>`_ started thinking of following the naming convention giving to flask extensions (flask_foo).
+In `July, 2023` the maintainer of **Flask-Unity** `Usman <https://usmanmusa1920.github.io>`_ thinking of following the naming convention giving to flask extensions (flask_foo).
 
-On `August 05, 2023` the name `Flask-Unity` replaced `Sakyum`, by shipping (releasing) all the versions released when it was sakyum, change repository, and archieved the previous one. The following are versions that shipped from `sakyum` to `flask_unity` with the respective date of released:
+On `August 05, 2023` the name `Flask-Unity` replaced `Sakyum`, by shipping (releasing) all the versions released when it was called sakyum, change repository, and archieved the previous one. The following are versions that shipped from `sakyum` to `flask_unity` with the respective date of released:
 
 - **v0.0.1** released on `August 05, 2023`
 

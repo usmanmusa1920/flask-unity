@@ -9,6 +9,7 @@
     - Auto generate migration directory (alembic)
     - Update library site, by creating `.readthedocs.yaml` and `conf.py`
     - Change `thunder.py` to `run.py`
+    - Ship index route (page) `/` to flask-unity package
 
 - Twelveth Release
 

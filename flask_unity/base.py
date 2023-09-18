@@ -322,13 +322,7 @@ class BaseStructure:
                             # make templates dir and cd into it
                             self.file_opt(static_dir, _here=project_folder)
                             templates_folder = os.getcwd()  # base dir path of templates folder
-
-                            # make project dir in templates and cd into it
-                            self.file_opt(proj_name, _here=templates_folder)
-                            # create project index.html and back to templates base dir path
-                            self.file_content(self._exs_last[0], content=f'<!-- @{__title__}, {proj_name} (project) index.html page -->\n'+_html(
-                                'do_nothing', is_landing=True, project_name=proj_name), dir_togo=templates_folder)
-
+                            
                             # make project admin dir in templates and cd into it
                             self.file_opt('admin', _here=templates_folder)
                             # create project admin index.html and back to project base dir path
@@ -339,31 +333,8 @@ class BaseStructure:
                             # make static dir and cd into
                             self.file_opt(static_dir, _here=project_folder)
                             static_base_dir = os.getcwd()  # base dir path of static folder
-
-                            # make project static dir and cd into, NB: `os.getcwd()` is base dir of static dir
-                            self.file_opt(
-                                proj_name, _where=os.getcwd()+OS_SEP+proj_name)
-                            # storing the project static dir path before creating any thing and cd into media
-                            s_p_dir = os.getcwd()
-                            # make media dir for project
-                            self.file_opt('media', _where='media')
-                            self.file_opt('do_nothing', tree=False, _where=s_p_dir)
-                            """
-                            going back with one step, we pass `do_nothing` as a directory name here, to avoid any error even though it do nothing if we give it a real directory name, because `tree=False`
-                            """
                             
-                            # make css dir
-                            self.file_opt('css', _where='css')
-                            # create style.css and back to project static dir
-                            self.file_content(
-                                self._exs_last[1], file_name='style', content=f'/* @{__title__}, {proj_name} (project) style.css file */\n'+_css(), dir_togo=s_p_dir, route_go=True)
-                            
-                            # make js dir
-                            self.file_opt('js', _where='js')
-                            # create index.js and back to project static base dir path
-                            self.file_content(
-                                self._exs_last[2], content=f'// @{__title__}, {proj_name} (project) index.js file\n'+_js(proj_name, what=True), dir_togo=project_folder)
-
+                    os.chdir(project_folder)
                     # make media folder and default image inside it
                     self.file_opt(dirs[2], _where=dirs[2])
                     self.instanciate_default_img()

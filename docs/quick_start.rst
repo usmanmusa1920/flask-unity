@@ -38,26 +38,18 @@ Tree structure of the project using **tree .** command look like:
     │   ├── README
     │   ├── script.py.mako
     │   └── versions
+    ├── run.py
     ├── schoolsite
     │   ├── config.py
     │   ├── __init__.py
     │   ├── routes.py
     │   └── secret.py
     ├── static
-    │   └── schoolsite
-    │       ├── css
-    │       │   └── style.css
-    │       ├── js
-    │       │   └── index.js
-    │       └── media
-    ├── templates
-    │   ├── admin
-    │   │   └── index.html
-    │   └── schoolsite
-    │       └── index.html
-    └── run.py
+    └── templates
+        └── admin
+            └── index.html
 
-    12 directories, 14 files
+    7 directories, 11 files
 
 Next make migrations by:
 
@@ -74,6 +66,10 @@ Now ready to boot up the flask server by running the below command::
     python run.py boot
 
 Visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
+
+.. note::
+    
+    As soon as you create the project make migrations and apply the migrations to avoid errors!
 
 Create flask project app using flask_unity
 ==========================================
@@ -110,9 +106,10 @@ Now the **tree .** structure of the project after creating **exam** app look lik
     │   ├── README
     │   ├── script.py.mako
     │   └── versions
-    │       ├── c75e0f1c1c9e_changes_migrated.py
+    │       ├── 86121042216e_changes_migrated.py
     │       └── __pycache__
-    │           └── c75e0f1c1c9e_changes_migrated.cpython-310.pyc
+    │           └── 86121042216e_changes_migrated.cpython-310.pyc
+    ├── run.py
     ├── schoolsite
     │   ├── config.py
     │   ├── __init__.py
@@ -124,28 +121,19 @@ Now the **tree .** structure of the project after creating **exam** app look lik
     │   ├── routes.py
     │   └── secret.py
     ├── static
-    │   ├── exam
-    │   │   ├── css
-    │   │   │   └── style.css
-    │   │   ├── js
-    │   │   │   └── index.js
-    │   │   └── media
-    │   └── schoolsite
+    │   └── exam
     │       ├── css
     │       │   └── style.css
     │       ├── js
     │       │   └── index.js
     │       └── media
-    ├── templates
-    │   ├── admin
-    │   │   └── index.html
-    │   ├── exam
-    │   │   └── index.html
-    │   └── schoolsite
-    │       └── index.html
-    └── run.py
+    └── templates
+        ├── admin
+        │   └── index.html
+        └── exam
+            └── index.html
 
-    21 directories, 30 files
+    16 directories, 27 files
 
 You notice it create a package name with thesame name of the app (**exam**) with some files in it, also a directory named **exam** inside **templates** and **static** folder with default html page together with css and js files (in static folder)
 
@@ -153,8 +141,6 @@ Register an app
 ===============
 
 Once the app is created it is time to register the app, to do so open a file **schoolsite/routes.py** and import your **exam** app blueprint which is in (**exam/views.py**), default name given to an app blueprint, is the app name so our **exam** app blueprint name is **exam**, after importing it, append (register) the app blueprint in a list called **reg_blueprints** in that same file of **schoolsite/routes.py**
-
-``**WARNING** don't ommit the registered blueprint you see in the `reg_blueprints` list **(blueprint.default, blueprint.errors, blueprint.auth, base)** blueprints just append your app blueprint``
 
 importing blueprint
 
@@ -167,7 +153,6 @@ after importing it, append (register) the app blueprint in a function called `re
 .. code-block:: python
 
     reg_blueprints = reg_blueprints_func(
-        schoolsite,
         exam,
     )
 

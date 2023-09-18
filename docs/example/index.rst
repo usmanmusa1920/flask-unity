@@ -12,6 +12,6 @@ schoolsite project
 
     create_models
     app_forms
-    advance/index
+    advance
 
 **Source code** for the `quick start` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/quick_start>`_ repository of the project.
