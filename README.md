@@ -86,7 +86,8 @@ visit `http://127.0.0.1:5000/exam` this will take you to your app landing page (
 
 visit `http://127.0.0.1:5000/admin` this will take you to admin page. From there you are ready to go.
 
-See more documentations <a href="https://flask-unity.readthedocs.io">here!</a>
+Tutorials <a href="https://github.com/usmanmusa1920/flask-unity/tree/master/example">here!</a>
+More documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
 ### Flask-unity default page
 

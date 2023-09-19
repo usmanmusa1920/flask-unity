@@ -35,14 +35,14 @@ Table of content
     :maxdepth: 2
 
     quick_start
-    cli
-    error_pages
-    example/index
+    create_models
+    app_forms
     admin_user
     auth_routes
-    page_and_filesystem
     database
-    deployment
+    cli
+    error_pages
+    page_and_filesystem
     history
 
 

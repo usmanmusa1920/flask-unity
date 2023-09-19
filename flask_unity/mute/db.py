@@ -146,8 +146,8 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-# from <app_name>.models import <app_model>
 from flask_unity.contrib import db
+# from <app_name>.models import <app_model>
 target_metadata = db.Model.metadata
 
 # other values from the config, defined by the needs of env.py,

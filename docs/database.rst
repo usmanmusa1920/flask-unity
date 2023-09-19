@@ -101,5 +101,3 @@ Hint
   - Downgrading, We can illustrate a downgrade back to nothing, by calling alembic downgrade back to the beginning, which in Alembic is called base::
 
     alembic downgrade base
-
-**Source code** for the `database migration` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/database_migrations>`_ repository of the project.

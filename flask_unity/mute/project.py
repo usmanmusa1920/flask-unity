@@ -57,7 +57,7 @@ def create_app(reg_blueprints=False, conf=Config):
         ext.init_app(app)
 
 
-    {long_comment} You will need to import models themselves before issuing `db.create_all` {long_comment}
+    {long_comment} You will need to import models themselves here! {long_comment}
     from flask_unity.auth.models import User
     from flask_unity.auth.admin import UserAdminView
     # from <app_name>.models import <app_model>
