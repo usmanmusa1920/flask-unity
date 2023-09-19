@@ -73,8 +73,7 @@ Once you run the above command your tables will be generated in your database. T
 
 Each time the database models change, repeat the `makemigrations` and `migrate` commands.
 
-Hint
-----
+**Hint**
 
   - To make migrations (Create a Migration Script)::
 

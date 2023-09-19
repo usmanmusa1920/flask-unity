@@ -1,9 +1,12 @@
 :tocdepth: 2
 
-History
-#######
+History, project and app
+########################
 
 **Flask-Unity** an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
+
+History
+-------
 
 Initially this project (library) **flask_unity** was called (named) **sakyum**, it come into existance in *November 20, 2022* and released it first version (v0.0.1) on *December 30, 2022*. The following are list of versions released when it was called `sakyum`:
 
@@ -60,3 +63,23 @@ On `August 05, 2023` the name `Flask-Unity` replaced `Sakyum`, by shipping (rele
 - **v0.0.12** released on `August 07, 2023`
 
 From that **v0.0.12**, **Flask-Unity** progress by releasing **v0.0.13** which is not available when it was **sakyum**, and other versions follows! look @ `PYPI releases <https://pypi.org/project/flask-unity/#history>`_
+
+Project and app
+---------------
+
+When using flask_unity, don't be confuse with the the concept of **project** and **app**.
+
+**Project** is the entire folder that contain your flask application, when you create project with the command:
+
+.. code-block:: bash
+    flask_unity -p schoolsite
+    .. or
+    flask_unity --project schoolsite
+
+It will create a parent directory with the name `schoolsite` also inside the `schoolsite` directory there is a directory with thesame name of the parent directory `schoolsite` this directory is the one that most of configurations, registering and other thing that are going to be implemented inside it.
+
+Within that parent directory `schoolsite` it also generate a file called `run.py` this is the file that you will be running along side with some positional arguments and flags. Also it will generate a directory called `migrations` this directory contains database migrations file and others. Lastly it will generate `templates` and `static` directory for your site pages and it styles respectively. At a glance, it will create `schoolsite, run.py, alembic.ini, templates, static, migrations, media` all in `schoolsite` (base dir of the project).
+
+**App** (application) is like to say a blueprint which greatly simplify how large applications work and provide a central means for flask extensions to register operations on applications. Read `flask blueprint <https://flask.palletsprojects.com/en/2.2.x/blueprints/>`_.
+
+Don't worry if you didn't get the concept of `project` and `app`, surely you will get it if you dive deep by the help of the `schoolsite <https://flask-unity.readthedocs.io/en/latest/quick_start.html>`_ project.

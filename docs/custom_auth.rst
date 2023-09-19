@@ -1,7 +1,7 @@
 :tocdepth: 2
 
-Custome auth
-############
+Custom auth
+###########
 
 Custom authentication for users
 

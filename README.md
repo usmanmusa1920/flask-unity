@@ -91,7 +91,7 @@ More documentations <a href="https://flask-unity.readthedocs.io">here!</a>
 
 ### Flask-unity default page
 
-[![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/media/flask_unity_default_page.png)](https://flask-unity.readthedocs.io)
+[![Flask-unity default page](https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/docs/_static/flask_unity_default_page.png)](https://flask-unity.readthedocs.io)
 
 ## Useful links
 

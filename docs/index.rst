@@ -10,24 +10,6 @@ Flask-unity depends on (come with) the following flask popular and useful extens
 
 It also include `alembic <https://alembic.sqlalchemy.org>`_ that handles SQLAlchemy database migrations. The database operations are made available through the flask-unity command-line interface or the alembic. It configures Alembic in the proper way to work with your Flask and Flask-SQLAlchemy application. In terms of the actual database migrations, everything is handled by Alembic so you get exactly the same functionality.
 
-When using flask_unity, don't be confuse with the the concept of **project** and **app**.
-
-**Project** is the entire folder that contain your flask application, when you create project with the command:
-
-.. code-block:: bash
-    flask_unity -p schoolsite
-    .. or
-    flask_unity --project schoolsite
-
-It will create a parent directory with the name `schoolsite` also inside the `schoolsite` directory there is a directory with thesame name of the parent directory `schoolsite` this directory is the one that most of configurations, registering and other thing that are going to be implemented inside it.
-
-Within that parent directory `schoolsite` it also generate a file called `run.py` this is the file that you will be running along side with some positional arguments and flags. Also it will generate a directory called `migrations` this directory contains database migrations file and others. Lastly it will generate `templates` and `static` directory for your site pages and it styles respectively. At a glance, it will create `schoolsite, run.py, alembic.ini, templates, static, migrations, media` all in `schoolsite` (base dir of the project).
-
-**App** (application) is like to say a blueprint which greatly simplify how large applications work and provide a central means for flask extensions to register operations on applications. Read `flask blueprint <https://flask.palletsprojects.com/en/2.2.x/blueprints/>`_.
-
-Don't worry if you didn't get the concept of `project` and `app`, surely you will get it if we dive deep by the help of the `schoolsite <https://flask-unity.readthedocs.io/en/latest/quick_start.html>`_ project.
-
-
 Table of content
 ----------------
 
@@ -38,13 +20,12 @@ Table of content
     create_models
     app_forms
     admin_user
-    auth_routes
+    custom_auth
     database
     cli
     error_pages
     page_and_filesystem
-    history
-
+    know
 
 Useful links:
 -------------
@@ -53,5 +34,8 @@ Useful links:
 
 - `PYPI Release <https://pypi.org/project/flask-unity>`_
 
-.. image:: https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/media/flask_unity_default_page.png
+Flask-unity default page
+------------------------
+
+.. image:: https://raw.githubusercontent.com/usmanmusa1920/flask-unity/master/docs/_static/flask_unity_default_page.png
     :align: center
