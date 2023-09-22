@@ -2,6 +2,13 @@
 
 An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
 
+[![Downloads Month Badge](https://static.pepy.tech/badge/flask-unity/month)](https://pypi.org/project/flask-unity)
+[![Downloads Week Badge](https://static.pepy.tech/badge/flask-unity/week)](https://pypi.org/project/flask-unity)
+[![License Badge](https://img.shields.io/pypi/l/flask-unity.svg)](https://pypi.org/project/flask-unity)
+[![Supported Wheel Badge](https://img.shields.io/pypi/wheel/flask-unity.svg)](https://pypi.org/project/flask-unity)
+[![Supported Versions Badge](https://img.shields.io/pypi/pyversions/flask-unity.svg)](https://pypi.org/project/flask-unity)
+[![Contributors](https://img.shields.io/github/contributors/usmanmusa1920/flask-unity.svg)](https://github.com/usmanmusa1920/flask-unity/graphs/contributors)
+
 ## Installation
 
 Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>, we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask_unity, this is just a recomendation, it still work even if you install it without using virtual environment. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) is compatible and also tested with `windows OS`, `linux`, `macOS` and possibly can be compabible with others too!.

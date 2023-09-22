@@ -4,7 +4,7 @@ Flask-Unity
 
 **Flask-Unity** an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs. For more about visit this `page <https://flask-unity.readthedocs.io/en/latest/know.html>`_
 
-Release v\ |version|. (:ref:`Installation <install>`)
+Release v\ |version|
 
 
 .. image:: https://static.pepy.tech/badge/flask-unity/month
@@ -27,6 +27,10 @@ Release v\ |version|. (:ref:`Installation <install>`)
     :target: https://pypi.org/project/flask-unity/
     :alt: Python Version Support Badge
 
+.. image:: https://img.shields.io/github/contributors/usmanmusa1920/flask-unity.svg
+    :target: https://github.com/usmanmusa1920/flask-unity/graphs/contributors
+    :alt: Contributors Badge
+    
 -------------------
 
 **Simple usage**::
