@@ -1,6 +1,10 @@
 # Change Log
 
-## 0.0.13 (19/september/2023)
+## 0.0.14 (01/october/2023)
+
+- Fourteen Release
+
+    - Tricks on how to add other extensions, by making example with flask-mail that provides a simple interface to set up SMTP with your Flask application and to send messages from your views and scripts.
 
 - Thirteen Release
 

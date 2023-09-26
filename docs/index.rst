@@ -64,6 +64,7 @@ Table of content
     custom_auth
     database
     cli
+    conn_ext
     error_pages
     page_and_filesystem
     know
