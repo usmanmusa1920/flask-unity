@@ -150,7 +150,7 @@ class BaseStructure:
         if _where:
             os.chdir(_where)
 
-    def validateProjectOrAppName(self, name, type_of=False):
+    def validate_project_or_app_name(self, name, type_of=False):
         """validate project or app name"""
         if type_of:
             proj_or_app = 'project'
@@ -230,9 +230,8 @@ class BaseStructure:
         """
         create a directory tree where file will reserved as well as modules too
         """
-        self.validateProjectOrAppName(proj_name, type_of=True)
-        dirs = [proj_name, f'{proj_name}{OS_SEP}{proj_name}',
-                'media', 'templates', 'static']
+        self.validate_project_or_app_name(proj_name, type_of=True)
+        dirs = [proj_name, f'{proj_name}{OS_SEP}{proj_name}', 'media', 'templates', 'static']
 
         # default files of project sub folder, except `run` which is for project base dir
         fls_name = ['__init__', 'config', 'routes', 'secret', 'run']
@@ -392,7 +391,7 @@ class AppStructure(BaseStructure):
         create a directory tree where file will reserved as well as modules too
         """
         dirs = [proj_app_name]
-        self.validateProjectOrAppName(proj_app_name)
+        self.validate_project_or_app_name(proj_app_name)
 
         app_store_name = proj_app_name  # store our app name
         fls_name = ['__init__', 'views', 'models', 'forms', 'admin']
@@ -530,14 +529,14 @@ class Boot:
         elif sys.argv[1] == 'boot':
             parser = argparse.ArgumentParser(
                 prog='boot up server', description='This boot up the server')
-            parser.add_argument('--port', '-p', default=5000, required=False,
-                                type=int, metavar='', help='What is the port number?')
-            parser.add_argument('--host', '-H', default=self.h, required=False,
-                                type=str, metavar='', help='What is the host?')
-            parser.add_argument('--debug', '-d', default=False, required=False,
-                                type=bool, metavar='', help='Do you want debug?')
-            parser.add_argument(dest='boot', default='boot', type=str, metavar='',
-                                help='Put positional argument of `boot` to bring server up running')
+            parser.add_argument(
+                '--port', '-p', default=5000, required=False, type=int, metavar='', help='What is the port number?')
+            parser.add_argument(
+                '--host', '-H', default=self.h, required=False, type=str, metavar='', help='What is the host?')
+            parser.add_argument(
+                '--debug', '-d', default=False, required=False, type=bool, metavar='', help='Do you want debug?')
+            parser.add_argument(
+                dest='boot', default='boot', type=str, metavar='', help='Put positional argument of `boot` to bring server up running')
             args = parser.parse_args()
             self.p = args.port
             self.h = args.host
@@ -553,14 +552,14 @@ class Boot:
         elif sys.argv[1] == 'create_user':
             parser = argparse.ArgumentParser(
                 prog='create user', description='This create user')
-            parser.add_argument('--username', '-u', required=False,
-                                type=str, metavar='', help='What is the username?')
-            parser.add_argument('--email', '-e', required=False,
-                                type=str, metavar='', help='What is the email?')
-            parser.add_argument('--password', '-p', required=False,
-                                type=str, metavar='', help='What is the password?')
-            parser.add_argument(dest='create_user', default='create_user', type=str,
-                                metavar='', help='Put positional argument of `create_user` to create user')
+            parser.add_argument(
+                '--username', '-u', required=False, type=str, metavar='', help='What is the username?')
+            parser.add_argument(
+                '--email', '-e', required=False, type=str, metavar='', help='What is the email?')
+            parser.add_argument(
+                '--password', '-p', required=False, type=str, metavar='', help='What is the password?')
+            parser.add_argument(
+                dest='create_user', default='create_user', type=str, metavar='', help='Put positional argument of `create_user` to create user')
             args = parser.parse_args()
 
             from .utils import AuthCredentials
@@ -592,8 +591,8 @@ class Boot:
 
             hashed_password = self.pwd_hash.generate_password_hash(
                 raw_password).decode('utf-8')
-            user = self.model(username=username, email=email,
-                              password=hashed_password, is_admin=True)
+            user = self.model(
+                username=username, email=email, password=hashed_password, is_admin=True)
             self.db.session.add(user)
             self.db.session.commit()
             print()

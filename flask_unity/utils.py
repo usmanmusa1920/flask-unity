@@ -60,7 +60,7 @@ def style_page(name, version=False):
 
 # Style for flask_unity default pages:
     # ==================================
-    #  @ flask_unity software - v0.0.13
+    #  @ flask_unity software - v0.0.14
     # ==================================
 footer_style = style_page(__title__, version=__version__)
 
@@ -161,8 +161,7 @@ class AuthCredentials:
     @property
     def result(self):
         """user credentials in a list"""
-        auth_list = [self.validate_username,
-                     self.validate_email, self.validate_password]
+        auth_list = [self.validate_username, self.validate_email, self.validate_password]
         return auth_list
 
 
@@ -184,11 +183,11 @@ class Security:
     token_sum = token_sm_alpha + token_cap_alpha + token_num
 
     """
-  We times the above variable (token_sum) by 2 (total length is 124),
-  so that we will randomly select from it without any restriction,
-  since we make the minimum length of the salt to be 32 and the maximum to be 64,
-  and also it will randomly select from that range of (32 - 64)
-  """
+    We times the above variable (token_sum) by 2 (total length is 124),
+    so that we will randomly select from it without any restriction,
+    since we make the minimum length of the salt to be 32 and the maximum to be 64,
+    and also it will randomly select from that range of (32 - 64)
+    """
 
     token_times = token_sum * 2
     token_list = list(token_times)
@@ -236,12 +235,12 @@ class Security:
         )
 
         """
-    Base64 encoding convert the binary data (sequence of byte) into text format,
-    to avoid data corruption when transfer via only text channel.
-    It is Privacy enhanced Electronic Mail (PEM).
-    
-    We use ascii to encode the (key)
-    """
+        Base64 encoding convert the binary data (sequence of byte) into text format,
+        to avoid data corruption when transfer via only text channel.
+        It is Privacy enhanced Electronic Mail (PEM).
+        
+        We use ascii to encode the (key)
+        """
 
         # encodeing the key, type is string
         b64_encode = base64.b64encode(key).decode('ascii').strip()
