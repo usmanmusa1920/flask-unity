@@ -153,6 +153,7 @@ after importing it, append (register) the app blueprint in a function called `re
 .. code-block:: python
 
     reg_blueprints = reg_blueprints_func(
+        base,
         exam,
     )
 

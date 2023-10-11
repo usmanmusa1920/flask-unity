@@ -94,11 +94,19 @@ def create_app(reg_blueprints=False, conf=Config):
 
 
 def pro_routes_dummy(proj):
-    return f"""from flask_unity.utils import reg_blueprints_func
+    return f"""from flask import (Blueprint)
+from flask_unity.utils import template_dir, static_dir
+from flask_unity.utils import reg_blueprints_func
 # from <app_name>.views import <app_name>
 
 
+base = Blueprint(
+    'base', __name__, template_folder=template_dir(), static_folder=static_dir('{proj}')
+)
+
+
 reg_blueprints = reg_blueprints_func(
+    base,
     # <app_name>,
 )
 

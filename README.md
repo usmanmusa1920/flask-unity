@@ -76,7 +76,7 @@ registering blueprint
 
 ```py
     reg_blueprints = reg_blueprints_func(
-        schoolsite,
+        base,
         exam,
     )
 ```

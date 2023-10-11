@@ -12,6 +12,10 @@ Customise admin page
 
 A default directory in which you can customise admin page is created in the (templates/admin) directory with a default `index.html` file that contains some links. You can style it with different css and js file, but make sure it is extended from **{% extends 'admin/master.html' %}** and anything else wrap it within the body block **{% block body %}  {% endblock body %}** You can edit the default contents to match your need!
 
+Note, when you remove the default `base` blueprint inside the `reg_blueprints_func` function of your project, the admin index.html customisation won't populate, that mean making the function (reg_blueprints_func) with no param pass in it, will make it not to populate. But as you register any of your app, it will display even if you remove the default passed blueprint.
+
+The default `base` blueprint in your project routes.py file is just to make the admin page to display, but you can still use that blueprint for making some route.
+
 File system storage
 ===================
 
