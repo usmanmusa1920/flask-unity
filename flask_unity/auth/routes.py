@@ -70,6 +70,7 @@ def adminChangePassword():
     """
     The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
     """
+
     form = ChangePasswordForm()
     if request.method == 'POST':
         old_password = form.old_password.data
@@ -115,6 +116,7 @@ def profile_image(filename):
     This function help to show current user profile image, it won't download it
     like the `download_file` function below does
     """
+
     return send_file(UPLOAD_FOLDER + OS_SEP + filename)
 
 
@@ -125,6 +127,7 @@ def download_file(filename):
     If we use this to show current user profile image, it won't show instead it will download it,
     so it meant for downloading media file
     """
+    
     return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
 
 

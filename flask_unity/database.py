@@ -4,27 +4,33 @@ class DB:
     """This class handle mostly database management stuffs"""
 
     def __init__(self):
-        """init method for our database stuffs"""
+        """Init method for our database stuffs"""
+        
         pass
 
     def make_migrations(self):
-        """make migrations for database"""
+        """Make migrations for database"""
+
         pass
 
     def migrating_database(self):
-        """migrate database"""
+        """Migrate database"""
+
         pass
 
     def update_db(self):
-        """update database"""
+        """Update database"""
+
         pass
 
     def dump_db(self):
-        """dump database"""
+        """Dump database"""
+
         pass
 
     def cleaned_db(self):
-        """cleaned database"""
+        """Cleaned database"""
+
         pass
 
 

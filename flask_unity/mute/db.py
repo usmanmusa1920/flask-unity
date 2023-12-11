@@ -13,7 +13,8 @@ OS_SEP = os.path.sep # platform-specific path separator (for linux `/`, for wind
 
 
 def generate_ini(project_name):
-    """ `alembic.ini` file inside base project directory """
+    """The `alembic.ini` file inside base project directory"""
+
     sqlalchemy_db_url = 'sqlite:///'+str(ORIGIN_PATH)+OS_SEP+project_name+OS_SEP+'default.db'
     return f"""# A generic, single database configuration.
 
@@ -124,7 +125,8 @@ datefmt = %H:%M:%S
 
 
 def generate_env():
-    """ `env.py` file inside migrations """
+    """The `env.py` file inside migrations"""
+    
     return f"""from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -211,7 +213,8 @@ else:
 
 
 def generate_script_py_mako():
-    """ `script.py.mako` file inside migrations """
+    """The `script.py.mako` file inside migrations"""
+
     return f"""{long_comment}{DOLLAR_SIGN}{f1}message{l1}
 
 Revision ID: {DOLLAR_SIGN}{f1}up_revision{l1}
@@ -240,5 +243,6 @@ def downgrade() -> None:
 
 
 def generate_readme():
-    """ `README` file inside migrations """
+    """The `README` file inside migrations"""
+    
     return f"""Generic single-database configuration."""

@@ -14,6 +14,7 @@ LOGGER.setLevel(logging.DEBUG)
 
 def project(name):
     """create project"""
+    
     # we can use any of the below three variables to make our code compatible with
     # many OS, but we go with the first one which is `self.os_name`
     os_name = os.name  # nt or posix

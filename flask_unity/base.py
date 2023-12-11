@@ -33,12 +33,12 @@ from . import __title__
 from . import __version__
 
 """
-  NOTSET    ---  0
-  DEBUG     ---  10
-  INFO      ---  20
-  WARNING   ---  30  (default)
-  ERROR     ---  40
-  CRITICAL  ---  50
+    NOTSET    ---  0
+    DEBUG     ---  10
+    INFO      ---  20
+    WARNING   ---  30  (default)
+    ERROR     ---  40
+    CRITICAL  ---  50
 """
 
 FORMATTER = '[+] [%(asctime)s] [%(levelname)s] %(message)s'
@@ -48,6 +48,7 @@ LOGGER.setLevel(logging.DEBUG)
 
 # used for relative path to default image to copy for a project (only)
 ORIGIN = Path(__file__).resolve().parent
+
 # platform-specific path separator (for linux `/`, for windows `\\`)
 OS_SEP = os.path.sep
 
@@ -56,13 +57,17 @@ class BaseStructure:
     """base structure class"""
 
     def __init__(self, is_software=True):
-        """base structure class initializer"""
+        """Base structure class initializer"""
+
         self.is_software = is_software
 
         # we can use any of the below three variables to make our code compatible with
         # many OS, but we go with the first one which is `self.os_name`
-        self.os_name = os.name  # nt or posix
-        self.platform_name_1 = sys.platform  # win32 or linux or darwin or android
+        
+        # nt or posix
+        self.os_name = os.name
+        # win32 or linux or darwin or android
+        self.platform_name_1 = sys.platform
         # Windows, Darwin, Linux, etc.
         self.platform_name_2 = platform.system()
 
@@ -85,7 +90,7 @@ class BaseStructure:
 
     def append_exs_to_file(self, fls_name=False, _exs_='.py', name=None):
         """
-        append .py extension for files if _exs_ value is '.py' or type is str, else if _exs_ type is list, make list of static files `['index.html', 'index.js', 'style.css']`
+        Append .py extension for files if _exs_ value is '.py' or type is str, else if _exs_ type is list, make list of static files `['index.html', 'index.js', 'style.css']`
         """
 
         if type(_exs_) == list:
@@ -96,6 +101,7 @@ class BaseStructure:
                 if i == exst[1]:  # css
                     idx = name[1]
                     lst.append(f'{idx}{i}')
+
                 if i == exst[0] or i == exst[2]:  # html & js
                     for j in exst:
                         if j != exst[1]:
@@ -108,8 +114,16 @@ class BaseStructure:
         if type(_exs_) == str:
             return [i+f'{_exs_}' for i in fls_name]
 
-    def file_content(self, _exs=False, content=None, file_name='index', dir_togo=None, route_go=True):
-        """insert content in a file"""
+    def file_content(
+        self,
+        _exs=False,
+        content=None,
+        file_name='index',
+        dir_togo=None,
+        route_go=True
+    ):
+        """Insert content in a file"""
+
         if _exs:
             with open(f'{file_name}{_exs}', 'w') as pay_fls:
                 pay_fls.write(f'{content}')
@@ -120,7 +134,8 @@ class BaseStructure:
             os.chdir(dir_togo)
 
     def instanciate_default_img(self):
-        """instanciate user default image"""
+        """Instanciate user default image"""
+
         file_path = os.path.join(
             ORIGIN, 'static', 'default_style', 'media', 'default_img.png')
         with open(file_path, mode='rb') as img_read:
@@ -130,8 +145,9 @@ class BaseStructure:
 
     def file_opt(self, _dir, tree=True, _here=False, _where=False):
         """
-        make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True
+        Make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True
         """
+
         if tree:
             if self.os_name == 'nt':
                 os.makedirs(_dir, exist_ok=True)
@@ -151,12 +167,14 @@ class BaseStructure:
             os.chdir(_where)
 
     def validate_project_or_app_name(self, name, type_of=False):
-        """validate project or app name"""
+        """Validate project or app name"""
+
         if type_of:
             proj_or_app = 'project'
         else:
             proj_or_app = 'app'
         un_accept_char = '@-/\\^+#&*!=%$?.>\'<,"\';:`~|}{][)('
+
         for i in un_accept_char:
             if i in name:
                 name_err = f'[{un_accept_char}] are characters that are not allowed to be in your {proj_or_app} name, we found `{i}` in the name ({name})\n'
@@ -164,9 +182,18 @@ class BaseStructure:
                 LOGGER.error(name_err)
                 exit()
 
-    def into_file(self, fls, fls_cmd, file=None, app_default_dummy=None, is_static_file=False, is_app=False, proj_nm=None):
+    def into_file(
+        self,
+        fls,
+        fls_cmd,
+        file=None,
+        app_default_dummy=None,
+        is_static_file=False,
+        is_app=False,
+        proj_nm=None
+    ):
         """
-        create files within current directory of `self.file_opt()`
+        Create files within current directory of `self.file_opt()`
         is_app: if it is True, that mean it will do operation of making app files,
         else it will make for the entire project
         """
@@ -228,8 +255,9 @@ class BaseStructure:
 
     def dir_tree(self, proj_name=None):
         """
-        create a directory tree where file will reserved as well as modules too
+        Create a directory tree where file will reserved as well as modules too
         """
+
         self.validate_project_or_app_name(proj_name, type_of=True)
         dirs = [proj_name, f'{proj_name}{OS_SEP}{proj_name}', 'media', 'templates', 'static']
 
@@ -347,11 +375,21 @@ class BaseStructure:
 
 
 class AppStructure(BaseStructure):
-    """base structure class"""
+    """Base structure class"""
+
     app_store_name = None  # app name
     proj_store_name = None  # project name
 
-    def app_static_and_template(self, file_dummy, top_comment=False, _dir_=False, file=False, app=False, cmd=False, _here_=False):
+    def app_static_and_template(
+        self,
+        file_dummy,
+        top_comment=False,
+        _dir_=False,
+        file=False,
+        app=False,
+        cmd=False,
+        _here_=False
+    ):
         """
         #: _dir_ = 'template or static'
         #: file = ['index.html']
@@ -359,6 +397,7 @@ class AppStructure(BaseStructure):
         #: cmd = 'touch'
         #: _here_ = # initial `inside project folder` where the project was created
         """
+
         store_top_comment = top_comment
 
         if top_comment == 'html':
@@ -388,8 +427,9 @@ class AppStructure(BaseStructure):
 
     def dir_tree(self, proj_app_name=None):
         """
-        create a directory tree where file will reserved as well as modules too
+        Create a directory tree where file will reserved as well as modules too
         """
+
         dirs = [proj_app_name]
         self.validate_project_or_app_name(proj_app_name)
 
@@ -434,14 +474,15 @@ class AppStructure(BaseStructure):
 
 
 def app_init(app):
-    """initialize app in project"""
+    """Initialize app in project"""
+
     AppStructure().dir_tree(app)
     exit()
 
 
 class Boot:
     """
-    boot up project operation, app operation, and the server
+    Boot up project operation, app operation, and the server
     """
 
     def __init__(self, p=None, d=False, h=None, db=db, model=User, pwd_hash=bcrypt):
@@ -453,7 +494,7 @@ class Boot:
         self.pwd_hash = pwd_hash
 
     def run(self):
-        """run method for creating app and booting up server"""
+        """Run method for creating app and booting up server"""
 
         error_ref_1 = f'''\n Run the command with one of this positional arguments:\n\tcreate_app   ---   ( for creating an app within your project )\n\tboot  ---   ( for booting up your server )'''
 

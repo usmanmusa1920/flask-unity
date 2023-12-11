@@ -16,9 +16,11 @@ from .utils import footer_style, template_dir, static_dir
 default = Blueprint(
     'default', __name__, template_folder=template_dir(temp_from_pkg='default_page'), static_folder=static_dir('default_style', static_from_pkg=True)
 )
+
 errors = Blueprint(
     'errors', __name__, template_folder=template_dir(temp_from_pkg='default_errors')
 )
+
 auth = Blueprint(
     'auth', __name__, template_folder=template_dir(temp_from_pkg='default_page')
 )
@@ -45,7 +47,8 @@ other default authentication system (route) of your project, which will let you 
 
 @default.route('/', methods=['POST', 'GET'])
 def index():
-    """if there is no route like this in a project, then it will use this as default"""
+    """If there is no route like this in a project, then it will use this as default"""
+
     context = {
         'footer_style': footer_style,
     }
@@ -53,13 +56,16 @@ def index():
 
 
 def adminModelRegister(admin, reg_models, db):
-    """function that will register a direct model (not model view)"""
+    """Function that will register a direct model (not model view)"""
+
     for reg_model in reg_models:
         admin.add_view(ModelView(reg_model, db.session))
 
 
 @errors.app_errorhandler(400)
 def error_400(error):
+    """Error page of 400"""
+
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -69,6 +75,8 @@ def error_400(error):
 
 @errors.app_errorhandler(401)
 def error_401(error):
+    """Error page of 401"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -78,6 +86,8 @@ def error_401(error):
 
 @errors.app_errorhandler(403)
 def error_403(error):
+    """Error page of 403"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -87,6 +97,8 @@ def error_403(error):
 
 @errors.app_errorhandler(404)
 def error_404(error):
+    """Error page of 404"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -96,6 +108,8 @@ def error_404(error):
 
 @errors.app_errorhandler(406)
 def error_406(error):
+    """Error page of 406"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -105,6 +119,8 @@ def error_406(error):
 
 @errors.app_errorhandler(415)
 def error_415(error):
+    """Error page of 415"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -114,6 +130,8 @@ def error_415(error):
 
 @errors.app_errorhandler(429)
 def error_429(error):
+    """Error page of 429"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -123,6 +141,8 @@ def error_429(error):
 
 @errors.app_errorhandler(500)
 def error_500(error):
+    """Error page of 500"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -132,6 +152,8 @@ def error_500(error):
 
 @errors.app_errorhandler(501)
 def error_501(error):
+    """Error page of 501"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -141,6 +163,8 @@ def error_501(error):
 
 @errors.app_errorhandler(502)
 def error_502(error):
+    """Error page of 502"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -150,6 +174,8 @@ def error_502(error):
 
 @errors.app_errorhandler(503)
 def error_503(error):
+    """Error page of 503"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,
@@ -159,6 +185,8 @@ def error_503(error):
 
 @errors.app_errorhandler(504)
 def error_504(error):
+    """Error page of 504"""
+    
     context = {
         'head_title': 'error page',
         'footer_style': footer_style,

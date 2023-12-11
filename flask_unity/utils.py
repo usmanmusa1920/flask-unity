@@ -14,13 +14,14 @@ from . import __version__
 
 # relative path to the package folder (flask_unity)
 REL_PATH = Path(__file__).resolve().parent
+
 # platform-specific path separator (for linux `/`, for windows `\\`)
 OS_SEP = os.path.sep
 
 
 def static_dir(app, static_from_pkg=False, os_name: 'nt or posix' = os.name):
     """
-    relative path to static files
+    Relative path to static files
     if `static_from_pkg` is not false, it will use the directory name that is in the library package which is `static`, else it will use for project `static` directory
     """
 
@@ -31,7 +32,7 @@ def static_dir(app, static_from_pkg=False, os_name: 'nt or posix' = os.name):
 
 def template_dir(temp_from_pkg=False, os_name=os.name):
     """
-    relative path to html page
+    Relative path to html page
     if `temp_from_pkg` is not false, it will use the directory name that is in the library package which is `templates`, else it will use for project `templates` directory
     """
 
@@ -41,7 +42,8 @@ def template_dir(temp_from_pkg=False, os_name=os.name):
 
 
 def style_page(name, version=False):
-    """function for styling project/app description default pages"""
+    """Function for styling project/app description default pages"""
+
     if version:
         # it will style the description in the footer
         desc = '@ ' + name + ' software - v' + version
@@ -58,18 +60,20 @@ def style_page(name, version=False):
     return [desc_center, border]
 
 
-# Style for flask_unity default pages:
+# Style for flask_unity default pages footer:
     # ==================================
-    #  @ flask_unity software - v0.0.14
+    #  @ flask_unity software - v*.*.*
     # ==================================
 footer_style = style_page(__title__, version=__version__)
 
 
 def reg_blueprints_func(*args):
-    """function that implement blueprint registration"""
+    """Function that implement blueprint registration"""
+
     from . import blueprint
     reg_blueprints = list(args)
     default_blueprints = [blueprint.default, blueprint.errors, blueprint.auth]
+
     for d_blue in default_blueprints:
         reg_blueprints.append(d_blue)
     return reg_blueprints
@@ -78,7 +82,15 @@ def reg_blueprints_func(*args):
 class AuthCredentials:
     """Authenticate new user credentials"""
 
-    def __init__(self, username=None, email=None, password=None, u_args=True, e_args=True, p_args=True):
+    def __init__(
+        self,
+        username=None,
+        email=None,
+        password=None,
+        u_args=True,
+        e_args=True,
+        p_args=True
+    ):
         self.username = username
         self.email = email
         self.password = password
@@ -126,7 +138,8 @@ class AuthCredentials:
 
     @property
     def validate_username(self):
-        """validate username"""
+        """Validate username"""
+
         # the below while is included to check data validation
         # when user uses flags `-u` or `--username`
         while len(self.username) < 3:
@@ -137,7 +150,8 @@ class AuthCredentials:
 
     @property
     def validate_email(self):
-        """email validator"""
+        """Email validator"""
+
         pattern = re.compile(r'^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+')
         if re.match(pattern, self.email):
             return self.email
@@ -149,7 +163,8 @@ class AuthCredentials:
 
     @property
     def validate_password(self):
-        """validate password"""
+        """Validate password"""
+
         # the below while is included to chech data validation
         # when user uses flags `-p` or `--password`
         while len(self.password) < 6:
@@ -160,7 +175,8 @@ class AuthCredentials:
 
     @property
     def result(self):
-        """user credentials in a list"""
+        """User credentials in a list"""
+
         auth_list = [self.validate_username, self.validate_email, self.validate_password]
         return auth_list
 
@@ -182,12 +198,12 @@ class Security:
     token_char = '/+='
     token_sum = token_sm_alpha + token_cap_alpha + token_num
 
-    """
-    We times the above variable (token_sum) by 2 (total length is 124),
-    so that we will randomly select from it without any restriction,
-    since we make the minimum length of the salt to be 32 and the maximum to be 64,
-    and also it will randomly select from that range of (32 - 64)
-    """
+    # """
+    # We times the above variable (token_sum) by 2 (total length is 124),
+    # so that we will randomly select from it without any restriction,
+    # since we make the minimum length of the salt to be 32 and the maximum to be 64,
+    # and also it will randomly select from that range of (32 - 64)
+    # """
 
     token_times = token_sum * 2
     token_list = list(token_times)
@@ -200,7 +216,7 @@ class Security:
     @property
     def passcode_salt(self):
         """
-        salting our passcode with this class method
+        Salting our passcode with this class method
 
         By using the random sample method, where we make:
           population = self.token_generate
@@ -223,7 +239,7 @@ class Security:
 
     def get_hash(self, salt: str, itter: int, passwd: str) -> str:
         """
-        generating our key using this class method, and also
+        Generating our key using this class method, and also
         the return type of the key is bytes
         """
         key = hashlib.pbkdf2_hmac(
@@ -234,13 +250,13 @@ class Security:
             dklen=128  # Get a 128 byte key
         )
 
-        """
-        Base64 encoding convert the binary data (sequence of byte) into text format,
-        to avoid data corruption when transfer via only text channel.
-        It is Privacy enhanced Electronic Mail (PEM).
+        # """
+        # Base64 encoding convert the binary data (sequence of byte) into text format,
+        # to avoid data corruption when transfer via only text channel.
+        # It is Privacy enhanced Electronic Mail (PEM).
         
-        We use ascii to encode the (key)
-        """
+        # We use ascii to encode the (key)
+        # """
 
         # encodeing the key, type is string
         b64_encode = base64.b64encode(key).decode('ascii').strip()
@@ -255,6 +271,8 @@ class Security:
         return [hash_result, secure_ingredient]
 
     def secret(self):
+        """Random hexadecimal secret token"""
+
         r = random.randint(32, 52)
         secret = secrets.token_hex(r)
         return secret

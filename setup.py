@@ -6,7 +6,8 @@ from setuptools import find_packages
 
 
 def grep(attrname):
-    """get package info from __init__.py file"""
+    """Get package info from __init__.py file"""
+    
     file_path = os.path.join(os.path.dirname(__file__), 'flask_unity/__init__.py')
 
     # content of the file

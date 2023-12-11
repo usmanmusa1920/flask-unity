@@ -10,7 +10,8 @@ def app_init_dummy():
 
 
 def app_views_dummy(app):
-    """app is the application name of your project"""
+    """App is the application name of your project"""
+    
     return f"""from flask import (render_template, Blueprint)
 from flask_unity.utils import footer_style, template_dir, static_dir
 from flask_unity.contrib import db
