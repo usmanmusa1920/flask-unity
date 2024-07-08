@@ -8,6 +8,7 @@ There are basically two ways in which you can create admin user. One is by using
 Let say you start a project, and an app inside the project by the following command
 
 .. code-block:: bash
+
     flask_unity -p schoolsite && cd schoolsite && python run.py create_app -a exam
     .. or
     flask_unity --project schoolsite && cd schoolsite && python run.py create_app -a exam
@@ -17,6 +18,7 @@ Let say you start a project, and an app inside the project by the following comm
 To start creating user in your database, you have to makemigrations and migrate the migration, if you haven't do it, like so
 
 .. code-block:: bash
+    
     flask_unity db makemigrations
     flask_unity db migrate
 

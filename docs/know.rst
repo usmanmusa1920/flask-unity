@@ -78,6 +78,7 @@ When using flask_unity, don't be confuse with the the concept of **project** and
 **Project** is the entire folder that contain your flask application, when you create project with the command:
 
 .. code-block:: bash
+    
     flask_unity -p schoolsite
     .. or
     flask_unity --project schoolsite

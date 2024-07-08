@@ -80,6 +80,7 @@ Go into the python **shell** ( python interpreter ), make sure you are within th
     from exam.models import ExamQuestionModel, ExamChoiceModel
 
 .. note::
+    
     Don't call the `create_all()` method of **db** which will try to create the tables of our models and database (if it doesn't create db file). by running `db.create_all()`. This already populated with alembic (alembic take care).
 
 After that let us create three users instance, that will be able to create question and choice of the **ExamQuestionModel** and **ExamChoiceModel** model::

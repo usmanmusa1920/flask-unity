@@ -266,10 +266,12 @@ This will overwrite the default auth system for those routes. You can open the d
 Even the **User** model can be overwrite, to make your own custom user model, define your models in the `custom_auth/models.py` file and go to `schoolsite/config.py` file, replace default model import with your custome model, then make migrations and apply the migrations.
 
 .. code-block:: python
-    .. from flask_unity.auth.models import User
+
+    from flask_unity.auth.models import User
     from custom_auth.models import User
 
 .. note::
+    
     The creation of a user using the `python run.py create_user` command won't work for the custom model. For that you have to do such manualy in the terminal (interpretter)
 
 **Source code** for the `custom auth` is available at official `github <https://github.com/usmanmusa1920/flask-unity/tree/master/example/custom_auth>`_ repository of the project.

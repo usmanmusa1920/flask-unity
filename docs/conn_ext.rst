@@ -26,6 +26,7 @@ The place (module) to put such is in your project sub-folder config.py file (<PR
 **Example using Flask-Mail**
 
 .. code-block:: python
+    
     from flask_mail import Mail
 
     mail = Mail()

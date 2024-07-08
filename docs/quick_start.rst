@@ -19,6 +19,7 @@ Create flask project using flask_unity
 Now after the installation, let create a project called **schoolsite** to do so paste either (one) of the following command on your termianl:
 
 .. code-block:: bash
+
     flask_unity -p schoolsite
     .. or
     flask_unity --project schoolsite
@@ -54,11 +55,13 @@ Tree structure of the project using **tree .** command look like:
 Next make migrations by:
 
 .. code-block:: bash
+
     flask_unity db makemigrations
 
 If you do **ls** after making the migrations you will see it initiate a **default.db** file (an sqlite file) which is our default database. Apply the migrations:
 
 .. code-block:: bash
+    
     flask_unity db migrate
 
 .. note::
