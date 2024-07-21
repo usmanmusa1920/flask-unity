@@ -10,10 +10,6 @@ Release v\ |version|
 .. image:: https://static.pepy.tech/badge/flask-unity/month
     :target: https://pepy.tech/project/flask-unity
     :alt: Flask-Unity Downloads Per Month Badge
-
-.. image:: https://static.pepy.tech/badge/flask-unity/week
-    :target: https://pepy.tech/project/flask-unity
-    :alt: Flask-Unity Downloads Per Week Badge
     
 .. image:: https://img.shields.io/pypi/l/flask-unity.svg
     :target: https://pypi.org/project/flask-unity/
@@ -26,10 +22,6 @@ Release v\ |version|
 .. image:: https://img.shields.io/pypi/pyversions/flask-unity.svg
     :target: https://pypi.org/project/flask-unity/
     :alt: Python Version Support Badge
-
-.. image:: https://img.shields.io/github/contributors/usmanmusa1920/flask-unity.svg
-    :target: https://github.com/usmanmusa1920/flask-unity/graphs/contributors
-    :alt: Contributors Badge
     
 -------------------
 
