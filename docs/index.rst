@@ -29,13 +29,13 @@ Release v\ |version|
 
     pip install --upgrade flask_unity # install the library
 
-    flask_unity -p schoolsite # create project
+    flaskunity -p schoolsite # create project
 
     cd schoolsite # cd into project directory
 
-    flask_unity db makemigrations # make migrations
+    flaskunity db makemigrations # make migrations
 
-    flask_unity db migrate # apply migrations
+    flaskunity db migrate # apply migrations
 
     python run.py boot # run development server
 

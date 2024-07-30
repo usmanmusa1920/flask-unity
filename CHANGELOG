@@ -1,6 +1,11 @@
 # Change Log
 
-## 0.0.15 (11/october/2023)
+## 0.0.16 (11/august/2024)
+
+- Sixteen Release
+
+    - Make single page for error pages
+    - Change run command from `flask_unity` to `flaskunity`
 
 - Fifteen Release
 

@@ -1,18 +1,19 @@
 <!-- default admin user change profile image page -->
 {% extends 'default.html' %}
 
+
 {% block auth %}
-  <div class="pkg_desc">
-    <h1>Change user profile image</h1>
-  </div>
-  <div class="admin_auth_form">
-    <form method=post enctype=multipart/form-data>
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-      <input type=file name=file required>
-      <button type="submit">Upload</button>
-      <p>
-        <a href="{{ url_for('auth.download_file', filename=current_user.user_img) }}" class="a_links">Download your current profile image</a>
-      </p>
-    </form>
-  </div>
+    <div class="pkg_desc">
+        <h1>Change user profile image</h1>
+    </div>
+    <div class="admin_auth_form">
+        <form method=post enctype=multipart/form-data>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input type=file name=file required>
+            <button type="submit">Upload</button>
+            <p>
+                <a href="{{ url_for('auth.download_file', filename=current_user.user_img) }}" class="a_links">Download your current profile image</a>
+            </p>
+        </form>
+    </div>
 {% endblock auth %}

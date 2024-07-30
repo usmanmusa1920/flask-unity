@@ -49,10 +49,7 @@ def app_models_dummy():
 from flask_unity.contrib import db
 
 
-{long_comment}
-when ever you create a model, make sure you import it in your project config.py
-file and register it to the admin page in other to see it in admin page
-{long_comment}
+{long_comment}When ever you create a model, make sure you import it in your project config.py file and register it to the admin page in other to see it in admin page{long_comment}
 
 # write your app model here!
 """

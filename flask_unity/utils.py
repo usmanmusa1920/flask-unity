@@ -20,8 +20,7 @@ OS_SEP = os.path.sep
 
 
 def static_dir(app, static_from_pkg=False, os_name: 'nt or posix' = os.name):
-    """
-    Relative path to static files
+    """Relative path to static files
     if `static_from_pkg` is not false, it will use the directory name that is in the library package which is `static`, else it will use for project `static` directory
     """
 
@@ -31,8 +30,7 @@ def static_dir(app, static_from_pkg=False, os_name: 'nt or posix' = os.name):
 
 
 def template_dir(temp_from_pkg=False, os_name=os.name):
-    """
-    Relative path to html page
+    """Relative path to html page
     if `temp_from_pkg` is not false, it will use the directory name that is in the library package which is `templates`, else it will use for project `templates` directory
     """
 
@@ -44,9 +42,13 @@ def template_dir(temp_from_pkg=False, os_name=os.name):
 def style_page(name, version=False):
     """Function for styling project/app description default pages"""
 
+    split_nm = name.split('_')
+    lst_nm = [i.capitalize() for i in split_nm]
+    name = '-'.join(lst_nm)
+
     if version:
         # it will style the description in the footer
-        desc = '@ ' + name + ' software - v' + version
+        desc = '@ ' + name + ' Software - v' + version
         desc_center = desc.center(len(desc) + 2)
         border = '=' * len(desc_center)
         return [desc_center, border]
@@ -62,7 +64,7 @@ def style_page(name, version=False):
 
 # Style for flask_unity default pages footer:
     # ==================================
-    #  @ flask_unity software - v*.*.*
+    #  @ Flask-Unity Software - v*.*.*
     # ==================================
 footer_style = style_page(__title__, version=__version__)
 
@@ -182,8 +184,7 @@ class AuthCredentials:
 
 
 class Security:
-    """
-    Passcode class for suggesting user passcode iteration,
+    """Passcode class for suggesting user passcode iteration,
     generating salt, and creating secure passcode for every user
 
     A reqular expression that matches any character that
@@ -215,8 +216,7 @@ class Security:
 
     @property
     def passcode_salt(self):
-        """
-        Salting our passcode with this class method
+        """Salting our passcode with this class method
 
         By using the random sample method, where we make:
           population = self.token_generate
@@ -228,8 +228,7 @@ class Security:
         return salt  # return type is string
 
     def passcode_iteration(self, r_min, r_max, r_step):
-        """
-        Generating a random iteration. The iterations is not static,
+        """Generating a random iteration. The iterations is not static,
         it is dynamic (every user's iteration is randomly choosen),
         by using the random method of randrange
         """
@@ -238,8 +237,7 @@ class Security:
         return itter  # return type is integer
 
     def get_hash(self, salt: str, itter: int, passwd: str) -> str:
-        """
-        Generating our key using this class method, and also
+        """Generating our key using this class method, and also
         the return type of the key is bytes
         """
         key = hashlib.pbkdf2_hmac(

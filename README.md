@@ -9,20 +9,20 @@ An extension of flask web framework that erase the complexity of structuring fla
 
 ## Installation
 
-Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>, we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask_unity, this is just a recomendation, it still work even if you install it without using virtual environment. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) is compatible and also tested with `windows OS`, `linux`, `macOS` and possibly can be compabible with others too!.
+Install and update the latest release from <a href="https://pypi.org/project/flask-unity">pypi</a>, we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask-unity, this is just a recomendation, it still work even if you install it without using virtual environment. Basically the library was uploaded using `sdist` (Source Distribution) and `bdist_wheel` (Built Distribution), this software (library) is compatible and also tested with `windows OS`, `linux`, `macOS` and possibly can be compabible with others too!.
 
 ```sh
     pip install --upgrade flask_unity
 ```
 
-## Create flask project using flask_unity
+## Create flask project
 
 After the installation paste either (one) of the following command on your termianl
 
 ```sh
-    flask_unity -p schoolsite
+    flaskunity -p schoolsite
     # or
-    flask_unity --project schoolsite
+    flaskunity --project schoolsite
 ```
 
 This will create a project called `schoolsite` now cd into the `schoolsite` directory, if you do `ls` within the directory you just enter you will see a module called `run.py`, `alembic.ini` and some directories (some in the form of package) `media`, `static`, `templates`, `migrations` and a directory with the same name of your base directory name, in our case it is `schoolsite`.
@@ -30,13 +30,13 @@ This will create a project called `schoolsite` now cd into the `schoolsite` dire
 Next make migrations by:
 
 ```sh
-    flask_unity db makemigrations
+    flaskunity db makemigrations
 ```
 
 If you do **ls** after making the migrations you will see it initiate a **default.db** file (an sqlite file) which is our default database. Apply the migrations:
 
 ```sh
-    flask_unity db migrate
+    flaskunity db migrate
 ```
 
 > **Note**

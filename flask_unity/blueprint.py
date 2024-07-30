@@ -68,9 +68,10 @@ def error_400(error):
 
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 400, "status": "bad request"},
         'footer_style': footer_style,
     }
-    return render_template('400.html', context=context), 400
+    return render_template('error_page.html', context=context), 400
 
 
 @errors.app_errorhandler(401)
@@ -79,9 +80,10 @@ def error_401(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 401, "status": "unauthorized"},
         'footer_style': footer_style,
     }
-    return render_template('401.html', context=context), 401
+    return render_template('error_page.html', context=context), 401
 
 
 @errors.app_errorhandler(403)
@@ -90,9 +92,10 @@ def error_403(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 403, "status": "forbidden"},
         'footer_style': footer_style,
     }
-    return render_template('403.html', context=context), 403
+    return render_template('error_page.html', context=context), 403
 
 
 @errors.app_errorhandler(404)
@@ -101,9 +104,10 @@ def error_404(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 404, "status": "not found"},
         'footer_style': footer_style,
     }
-    return render_template('404.html', context=context), 404
+    return render_template('error_page.html', context=context), 404
 
 
 @errors.app_errorhandler(406)
@@ -112,9 +116,10 @@ def error_406(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 406, "status": "not acceptable"},
         'footer_style': footer_style,
     }
-    return render_template('406.html', context=context), 406
+    return render_template('error_page.html', context=context), 406
 
 
 @errors.app_errorhandler(415)
@@ -123,9 +128,10 @@ def error_415(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 415, "status": "unsupported media type"},
         'footer_style': footer_style,
     }
-    return render_template('415.html', context=context), 415
+    return render_template('error_page.html', context=context), 415
 
 
 @errors.app_errorhandler(429)
@@ -134,9 +140,10 @@ def error_429(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 429, "status": "too many requests"},
         'footer_style': footer_style,
     }
-    return render_template('429.html', context=context), 429
+    return render_template('error_page.html', context=context), 429
 
 
 @errors.app_errorhandler(500)
@@ -145,9 +152,10 @@ def error_500(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 500, "status": "internal server error"},
         'footer_style': footer_style,
     }
-    return render_template('500.html', context=context), 500
+    return render_template('error_page.html', context=context), 500
 
 
 @errors.app_errorhandler(501)
@@ -156,9 +164,10 @@ def error_501(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 501, "status": "not implemented"},
         'footer_style': footer_style,
     }
-    return render_template('501.html', context=context), 501
+    return render_template('error_page.html', context=context), 501
 
 
 @errors.app_errorhandler(502)
@@ -167,9 +176,10 @@ def error_502(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 502, "status": "bad gateway"},
         'footer_style': footer_style,
     }
-    return render_template('502.html', context=context), 502
+    return render_template('error_page.html', context=context), 502
 
 
 @errors.app_errorhandler(503)
@@ -178,9 +188,10 @@ def error_503(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 503, "status": "service unavailable"},
         'footer_style': footer_style,
     }
-    return render_template('503.html', context=context), 503
+    return render_template('error_page.html', context=context), 503
 
 
 @errors.app_errorhandler(504)
@@ -189,6 +200,7 @@ def error_504(error):
     
     context = {
         'head_title': 'error page',
+        'err_msg': {"code": 504, "status": "gateway timeout"},
         'footer_style': footer_style,
     }
-    return render_template('504.html', context=context), 504
+    return render_template('error_page.html', context=context), 504

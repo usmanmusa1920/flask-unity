@@ -1,16 +1,17 @@
 <!-- default index page for your project and app (they `app and project` will inherite it) -->
 {% extends 'default.html' %}
 
+
 {% block logo %}
-  <div class="mini">
-    <div class="mini_column">
-      <h1 class="fu_style">Flask-Unity</h1>
-      {% if current_user.is_authenticated %}
-        <img src="{{ url_for('auth.profile_image', filename=current_user.user_img) }}" alt="" class="user_default_img_sm">
-      {% endif  %}
-      {% block short_info %}
-        <!-- short_info -->
-      {% endblock short_info %}
+    <div class="mini">
+        <div class="mini_column">
+            <h1 class="fu_style">Flask-Unity</h1>
+            {% if current_user.is_authenticated %}
+                <img src="{{ url_for('auth.profile_image', filename=current_user.user_img) }}" alt="" class="user_default_img_sm">
+            {% endif  %}
+            {% block short_info %}
+                <!-- short_info -->
+            {% endblock short_info %}
+        </div>
     </div>
-  </div>
 {% endblock logo %}

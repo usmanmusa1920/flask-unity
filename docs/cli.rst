@@ -5,21 +5,21 @@ Flags & CLI
 
 Some useful flags and CLI that you can use along side, when your are running your application (project) along side with `run.py` file are as follows:
 
-**CLI associated with `flask_unity`**:
+**CLI associated with `flask-unity`**:
 
 To initialize a project use `-p` or `--project` as::
 
-    flask_unity -p schoolsite
+    flaskunity -p schoolsite
     .. or
-    flask_unity --project schoolsite
+    flaskunity --project schoolsite
 
 To make migrations::
 
-    flask_unity db makemigrations
+    flaskunity db makemigrations
 
 To apply the migrations::
 
-    flask_unity db migrate
+    flaskunity db migrate
 
 **Flags associated with `create_app` positional argument**:
 
