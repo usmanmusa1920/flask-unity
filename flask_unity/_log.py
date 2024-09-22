@@ -4,8 +4,7 @@ from werkzeug.serving import _ansi_style
 
 
 def log_style(msg, *args, log='info', col=None):
-    """
-    logging style
+    """Logging style
     
     usage:
         >>> log_style('I am info log', log='info')

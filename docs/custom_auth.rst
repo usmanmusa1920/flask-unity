@@ -5,7 +5,7 @@ Custom auth
 
 Custom authentication for users
 
-In this chapter we are going to see how we can write a custom authentication for users which will replace the default route for our `auth` pages and instead of rendering the `wtforms` views, we are to use html form. To do so, flask_unity already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is to create an app (`custom_auth`) just like the way we create the exam app::
+In this chapter we are going to see how we can write a custom authentication for users which will replace the default route for our `auth` pages and instead of rendering the `wtforms` views, we are to use html form. To do so, flask-unity already have html form for that available in the **[admin_register.html, admin_login.html, admin_change_password.html]**, now what remain for us is to create an app (`custom_auth`) just like the way we create the exam app::
 
     python run.py create_app -a custom_auth
 
@@ -35,8 +35,7 @@ First we are to replace the top import with the following::
     @custom_auth.route('/admin/register/', methods=['POST', 'GET'])
     @login_required
     def adminRegister():
-        """
-        The `admin_register.html` below is located in the flask_unity package (templates/default_page/admin_register.html)
+        """The `admin_register.html` below is located in the flask_unity package (templates/default_page/admin_register.html)
         """
         if request.method == 'POST':
             username  = request.form['username']
@@ -82,8 +81,7 @@ First we are to replace the top import with the following::
 
     @custom_auth.route('/admin/login/', methods=['POST', 'GET'])
     def adminLogin():
-        """
-        The `admin_login.html` below is located in the flask_unity package (templates/default_page/admin_login.html)
+        """The `admin_login.html` below is located in the flask_unity package (templates/default_page/admin_login.html)
         """
         if current_user.is_authenticated:
             return redirect(url_for('base.index'))
@@ -122,8 +120,7 @@ First we are to replace the top import with the following::
     @custom_auth.route('/admin/change/password/', methods=['POST', 'GET'])
     @fresh_login_required
     def adminChangePassword():
-        """
-        The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
+        """The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
         """
         if request.method == 'POST':
             old_password = request.form['old_password']
@@ -171,8 +168,7 @@ First we are to replace the top import with the following::
     @custom_auth.route('/profile_image/<path:filename>')
     @login_required
     def profile_image(filename):
-        """
-        This function help to show current user profile image, it won't download it
+        """This function help to show current user profile image, it won't download it
         like the `download_file` function below does
         """
         return send_file(UPLOAD_FOLDER + '/' + filename)
@@ -181,8 +177,7 @@ First we are to replace the top import with the following::
     @custom_auth.route('/media/<path:filename>')
     @login_required
     def download_file(filename):
-        """
-        If we use this to show current user profile image, it won't show instead it will download it,
+        """If we use this to show current user profile image, it won't show instead it will download it,
         so it meant for downloading media file
         """
         return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
@@ -244,23 +239,23 @@ then pass it into the reg_blueprints list in other to register it by::
 
 This will overwrite the default auth system for those routes. You can open the default admin page within your project (templates/admin/index.html) and overite it with::
 
-  <!-- @flask_unity, schoolsite (project) admin index.html page -->
-  {% extends 'admin/master.html' %}
-  {% block body %}
-    <a href="/">Go to schoolsite home page</a>
-    <br>
-    {% if current_user.is_authenticated %}
-      <a href="{{ url_for('custom_auth.adminLogout') }}">logout</a>
-      <br>
-      <a href="{{ url_for('custom_auth.adminChangePassword') }}">change password</a>
-      <br>
-      <a href="{{ url_for('custom_auth.adminRegister') }}">register</a>
-      <br>
-      <a href="{{ url_for('custom_auth.changeProfileImage') }}">change image</a>
-    {% else %}
-      <a href="{{ url_for('custom_auth.adminLogin') }}">login</a>
-    {% endif %}
-  {% endblock body %}
+    <!-- @flask_unity, schoolsite (project) admin index.html page -->
+    {% extends 'admin/master.html' %}
+    {% block body %}
+        <a href="/">Go to schoolsite home page</a>
+        <br>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('custom_auth.adminLogout') }}">logout</a>
+            <br>
+            <a href="{{ url_for('custom_auth.adminChangePassword') }}">change password</a>
+            <br>
+            <a href="{{ url_for('custom_auth.adminRegister') }}">register</a>
+            <br>
+            <a href="{{ url_for('custom_auth.changeProfileImage') }}">change image</a>
+        {% else %}
+            <a href="{{ url_for('custom_auth.adminLogin') }}">login</a>
+        {% endif %}
+    {% endblock body %}
 
 
 Even the **User** model can be overwrite, to make your own custom user model, define your models in the `custom_auth/models.py` file and go to `schoolsite/config.py` file, replace default model import with your custome model, then make migrations and apply the migrations.

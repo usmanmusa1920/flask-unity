@@ -54,7 +54,7 @@ OS_SEP = os.path.sep
 
 
 class BaseStructure:
-    """base structure class"""
+    """Base structure class"""
 
     def __init__(self, is_software=True):
         """Base structure class initializer"""
@@ -89,8 +89,7 @@ class BaseStructure:
         self._exs_last = ['.html', '.css', '.js']
 
     def append_exs_to_file(self, fls_name=False, _exs_='.py', name=None):
-        """
-        Append .py extension for files if _exs_ value is '.py' or type is str, else if _exs_ type is list, make list of static files `['index.html', 'index.js', 'style.css']`
+        """Append .py extension for files if _exs_ value is '.py' or type is str, else if _exs_ type is list, make list of static files `['index.html', 'index.js', 'style.css']`
         """
 
         if type(_exs_) == list:
@@ -144,9 +143,7 @@ class BaseStructure:
             img_write.write(img_read_data)
 
     def file_opt(self, _dir, tree=True, _here=False, _where=False):
-        """
-        Make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True
-        """
+        """Make dir tree if `tree=True` and get into it, if `_here` or `_where` is equal to True"""
 
         if tree:
             if self.os_name == 'nt':
@@ -192,8 +189,7 @@ class BaseStructure:
         is_app=False,
         proj_nm=None
     ):
-        """
-        Create files within current directory of `self.file_opt()`
+        """Create files within current directory of `self.file_opt()`
         is_app: if it is True, that mean it will do operation of making app files,
         else it will make for the entire project
         """
@@ -254,9 +250,7 @@ class BaseStructure:
                     )  # building the run module `run.py`
 
     def dir_tree(self, proj_name=None):
-        """
-        Create a directory tree where file will reserved as well as modules too
-        """
+        """Create a directory tree where file will reserved as well as modules too"""
 
         self.validate_project_or_app_name(proj_name, type_of=True)
         dirs = [proj_name, f'{proj_name}{OS_SEP}{proj_name}', 'media', 'templates', 'static']
@@ -426,9 +420,7 @@ class AppStructure(BaseStructure):
             )
 
     def dir_tree(self, proj_app_name=None):
-        """
-        Create a directory tree where file will reserved as well as modules too
-        """
+        """Create a directory tree where file will reserved as well as modules too"""
 
         dirs = [proj_app_name]
         self.validate_project_or_app_name(proj_app_name)
@@ -481,9 +473,7 @@ def app_init(app):
 
 
 class Boot:
-    """
-    Boot up project operation, app operation, and the server
-    """
+    """Boot up project operation, app operation, and the server"""
 
     def __init__(self, p=None, d=False, h=None, db=db, model=User, pwd_hash=bcrypt):
         self.p = p  # port
@@ -641,6 +631,5 @@ class Boot:
             exit()
         else:
             print()
-            LOGGER.error(
-                f'use a valid positional argument and flag if needed\n{error_ref_2}')
+            LOGGER.error(f'use a valid positional argument and flag if needed\n{error_ref_2}')
             exit()

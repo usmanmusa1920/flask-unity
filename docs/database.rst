@@ -3,7 +3,7 @@
 Database migration
 ##################
 
-Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (flask_unity) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
+Welcome to the chapter that will talk about how to do database migration with `alembic`. By default the database that it (flask-unity) come with is an sqlite database with naming convention of **default.db** located in the parent folder of your project. The main talk here is to show how we can make database migrations and stuffs like that.
 
 **Migrations** are very powerful and let you change your models over time, as you develop your project, without the need to delete your database or tables and make new ones - it specializes in upgrading your database live, without losing data. More will be gist later.
 
@@ -48,7 +48,7 @@ For Autogenerating Multiple MetaData collections, you can pass a list of models 
 
 Next is to make the migrations (Create a Migration Script) by runnig the following command::
 
-    flask_unity db makemigrations
+    flaskunity db makemigrations
 
 Before, in the `migrations/versions` directory there is nothing inside, but now after running the above command, alembic generate our first migration commit file in versions folder `(migrations/versions)`, you can see the version file now in the versions folder, for simplicity the structure look like::
 
@@ -67,7 +67,7 @@ Before, in the `migrations/versions` directory there is nothing inside, but now 
 
 Every commit we did, it will generate the migration file in the `(migrations/versions)` directory. Once this file generates we are ready for database migration. To migrate we are to run::
 
-    flask_unity db migrate
+    flaskunity db migrate
 
 Once you run the above command your tables will be generated in your database. This is how to use alembic for your database, there are many you can do so, hit to the `alembic <https://alembic.sqlalchemy.org>`_ website for more clarification.
 
@@ -77,7 +77,7 @@ Each time the database models change, repeat the `makemigrations` and `migrate` 
 
   - To make migrations (Create a Migration Script)::
 
-    flask_unity db makemigrations
+    flaskunity db makemigrations
 
     or
 
@@ -85,7 +85,7 @@ Each time the database models change, repeat the `makemigrations` and `migrate` 
 
   - To migrate (Running our Migration)::
 
-    flask_unity db migrate
+    flaskunity db migrate
 
     or
 

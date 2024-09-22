@@ -33,7 +33,7 @@ setup(
     
     # Use console_scripts to hook to a specific Python method (not a whole executable),
     entry_points = {
-        'console_scripts': [f'{grep("__title__")}={grep("__title__")}.cli:cli'],
+        'console_scripts': [f'{grep("__title__").replace("_", "")}={grep("__title__")}.cli:cli'],
     },
     
     url = grep('__url__'),

@@ -9,9 +9,9 @@ Let say you start a project, and an app inside the project by the following comm
 
 .. code-block:: bash
 
-    flask_unity -p schoolsite && cd schoolsite && python run.py create_app -a exam
+    flaskunity -p schoolsite && cd schoolsite && python run.py create_app -a exam
     .. or
-    flask_unity --project schoolsite && cd schoolsite && python run.py create_app -a exam
+    flaskunity --project schoolsite && cd schoolsite && python run.py create_app -a exam
 
 **Admin user using flags:**
 
@@ -19,8 +19,8 @@ To start creating user in your database, you have to makemigrations and migrate 
 
 .. code-block:: bash
     
-    flask_unity db makemigrations
-    flask_unity db migrate
+    flaskunity db makemigrations
+    flaskunity db migrate
 
 The first command will generate migration filee in the `migrations` directory and the initial database `default.db` file in our project base directory, instead of importing the db object from an interactive Python shell and run the `db.create_all()` or inserting `db.create_all()` below the import of our models in `schoolsite/config.py` file.
 

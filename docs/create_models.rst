@@ -5,7 +5,7 @@ App models
 
 This will be a continuation of the `quick start <https://flask-unity.readthedocs.io/en/latest/quick_start.html>`_. As we saw in the `quick start` we create a project called **schoolsite** and an app inside the project called **exam**. Taking from there let continue by creating models in our **exam** app.
 
-**Note** that, you can write your views or models like the way you usually write them when using flask without flask_unity. It work great, nothing change.
+**Note** that, you can write your views or models like the way you usually write them when using flask without flask-unity. It work great, nothing change.
 
 Now we are going to create models for our **exam** app, the models are going to be two `ExamQuestionModel` and `ExamChoiceModel`
 
@@ -62,8 +62,8 @@ After pasting them, save the file. Goto `env.py` file inside migration directory
     
 From here we can now create a migration for our `ExamQuestionModel and ExamChoiceModel` models by::
     
-    flask_unity db makemigrations
-    flask_unity db migrate
+    flaskunity db makemigrations
+    flaskunity db migrate
     
 Explore and check how to `create migration <https://flask-unity.readthedocs.io/en/latest/database.html>`_ in flask_unity, now let just play with `api`.
 

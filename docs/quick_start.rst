@@ -3,7 +3,7 @@
 Quick start
 ###########
 
-First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask_unity, this is just a recomendation, it still work even if you install it without using virtual environment
+First we recomend you to create a virtual environment to avoid conflict (upgrade/downgrade of some of your system libraries) when installing flask-unity, this is just a recomendation, it still work even if you install it without using virtual environment
 
 Install and update the latest release from `pypi <https://pypi.org/project/flask-unity>`_. Basically the library was uploaded using **sdist** (Source Distribution) and **bdist_wheel** (Built Distribution), this software (library) is compatible and also tested with **windows OS**, **linux**, **macOS** and possibly can be compabible with others too!.
 
@@ -11,18 +11,18 @@ You will notice we use **--upgrade** in the installation command, this will make
 
     pip install --upgrade flask_unity
 
-This **quick start** will walk you through creating project called **schoolsite** and a basic application called **exam** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `flask_unity`, you will be able to clone it on `github <https://github.com/usmanmusa1920/flask-unity>`_. it is located inside example directory of the base repository.
+This **quick start** will walk you through creating project called **schoolsite** and a basic application called **exam** in the project. User will be able to register, login/logout, create exam questions/choices, and edit or delete their own question/choices. All using `flask-unity`, you will be able to clone it on `github <https://github.com/usmanmusa1920/flask-unity>`_. it is located inside example directory of the base repository.
 
-Create flask project using flask_unity
-======================================
+Create flask project
+====================
 
 Now after the installation, let create a project called **schoolsite** to do so paste either (one) of the following command on your termianl:
 
 .. code-block:: bash
 
-    flask_unity -p schoolsite
+    flaskunity -p schoolsite
     .. or
-    flask_unity --project schoolsite
+    flaskunity --project schoolsite
 
 Both (either of) the command you type on terminal will create a project called **schoolsite** now cd into the **schoolsite** directory, if you do **ls** within the directory you just enter you will see a module called **run.py**, **alembic.ini** and some directories (some in the form of package) **media**, **static**, **migrations**, **templates** and a directory with thesame name of your parent directory which is **schoolsite**.
 
@@ -56,13 +56,13 @@ Next make migrations by:
 
 .. code-block:: bash
 
-    flask_unity db makemigrations
+    flaskunity db makemigrations
 
 If you do **ls** after making the migrations you will see it initiate a **default.db** file (an sqlite file) which is our default database. Apply the migrations:
 
 .. code-block:: bash
     
-    flask_unity db migrate
+    flaskunity db migrate
 
 .. note::
     
@@ -74,8 +74,8 @@ Now ready to boot up the flask server by running the below command::
 
 Visit the local url **http://127.0.0.1:5000** this will take you to the index page of your project with some links in the page.
 
-Create flask project app using flask_unity
-==========================================
+Create flask project app within your project (schoolsite)
+=========================================================
 
 Since we create a project, let create an app within the project. To start an app within the project (**schoolsite**) shutdown the flask development server by pressing `CTRL+C`. Run the following command in other to create an app, by giving the app name, you want your app to be, in our case we will call our app **exam**::
 

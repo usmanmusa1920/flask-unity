@@ -67,8 +67,7 @@ def adminLogin():
 @auth.route('/admin/change/password/', methods=['POST', 'GET'])
 @fresh_login_required
 def adminChangePassword():
-    """
-    The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
+    """The `admin_change_password.html` below is located in the flask_unity package (templates/default_page/admin_change_password.html)
     """
 
     form = ChangePasswordForm()
@@ -112,22 +111,18 @@ def allowed_file(filename):
 @auth.route('/profile_image/<path:filename>')
 @login_required
 def profile_image(filename):
-    """
-    This function help to show current user profile image, it won't download it
+    """This function help to show current user profile image, it won't download it
     like the `download_file` function below does
     """
-
     return send_file(UPLOAD_FOLDER + OS_SEP + filename)
 
 
 @auth.route('/media/<path:filename>')
 @login_required
 def download_file(filename):
-    """
-    If we use this to show current user profile image, it won't show instead it will download it,
+    """If we use this to show current user profile image, it won't show instead it will download it,
     so it meant for downloading media file
     """
-    
     return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
 
 
@@ -148,15 +143,18 @@ def changeProfileImage():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
+        
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file_name = picture_name(filename)
             file.save(os.path.join(UPLOAD_FOLDER, file_name))
+
             user = User.query.filter_by(username=current_user.username).first()
             if user:
                 if user.user_img != 'default_img.png':
@@ -167,6 +165,7 @@ def changeProfileImage():
                 user.user_img = file_name
                 db.session.commit()
             flash('Your profile image has been changed!', 'success')
+
             # it will redirect to the home page
             return redirect(url_for('default.index'))
     context = {
