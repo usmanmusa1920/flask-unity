@@ -16,7 +16,7 @@ from datetime import datetime
 
 
 __title__ = 'flask_unity'
-__version__ = '0.0.16'
+__version__ = '0.0.17'
 __author__ = 'Usman Musa'
 __author_email__ = 'usmanmusa1920@gmail.com'
 __author_website__ = 'https://usmanmusa1920.github.io'
