@@ -1,6 +1,6 @@
 # Flask-Unity
 
-An extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
+An extension of flask web framework that ease the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs.
 
 [![Downloads Month Badge](https://static.pepy.tech/badge/flask-unity/month)](https://pypi.org/project/flask-unity)
 [![License Badge](https://img.shields.io/pypi/l/flask-unity.svg)](https://pypi.org/project/flask-unity)

@@ -2,7 +2,7 @@
 Flask-Unity
 ###########
 
-**Flask-Unity** an extension of flask web framework that erase the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs. For more about visit this `page <https://flask-unity.readthedocs.io/en/latest/know.html>`_
+**Flask-Unity** an extension of flask web framework that ease the complexity of structuring flask project blueprint, packages, connecting other flask extensions, database migrations, and other annoying stuffs. For more about visit this `page <https://flask-unity.readthedocs.io/en/latest/know.html>`_
 
 Release v\ |version|
 
